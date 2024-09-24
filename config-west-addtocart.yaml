@@ -1,0 +1,16 @@
+clients:
+- cluster: west
+  headers:
+    x-slate-destination: west
+  method: POST
+  path: /cart?product_id=OLJCESPC7Z&quantity=5
+  retry:
+    base: 1s
+    count: 0
+    factor: 2
+    maxinterval: 5s
+  rq_timeout: 5s
+  workload:
+  - duration: 120s
+    rps: 1400
+stats_output_folder: profile-9-21-bg50-400m/addtocart-W1400/LOCAL
