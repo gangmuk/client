@@ -1,0 +1,10 @@
+index_col,src_svc,dst_svc,src_endpoint,dst_endpoint,src_cid,dst_cid,flow,total,weight
+"('metrics-fake-ingress@GET@/start', 'us-east-1', 'metrics-handler@GET@/detectAnomalies')",metrics-fake-ingress,metrics-handler,metrics-fake-ingress@GET@/start,metrics-handler@GET@/detectAnomalies,us-east-1,us-east-1,10,10,1.0
+"('metrics-fake-ingress@GET@/start', 'us-west-1', 'metrics-handler@GET@/detectAnomalies')",metrics-fake-ingress,metrics-handler,metrics-fake-ingress@GET@/start,metrics-handler@GET@/detectAnomalies,us-west-1,us-east-1,45,101,0.44554455445544555
+"('metrics-fake-ingress@GET@/start', 'us-west-1', 'metrics-handler@GET@/detectAnomalies')",metrics-fake-ingress,metrics-handler,metrics-fake-ingress@GET@/start,metrics-handler@GET@/detectAnomalies,us-west-1,us-west-1,56,101,0.5544554455445545
+"('metrics-processing@POST@/detectAnomalies', 'us-east-1', 'metrics-db@GET@/dbcall')",metrics-processing,metrics-db,metrics-processing@POST@/detectAnomalies,metrics-db@GET@/dbcall,us-east-1,us-east-1,55,55,1.0
+"('metrics-processing@POST@/detectAnomalies', 'us-west-1', 'metrics-db@GET@/dbcall')",metrics-processing,metrics-db,metrics-processing@POST@/detectAnomalies,metrics-db@GET@/dbcall,us-west-1,us-west-1,56,56,1.0
+"('metrics-handler@GET@/detectAnomalies', 'us-east-1', 'metrics-processing@POST@/detectAnomalies')",metrics-handler,metrics-processing,metrics-handler@GET@/detectAnomalies,metrics-processing@POST@/detectAnomalies,us-east-1,us-east-1,55,55,1.0
+"('metrics-handler@GET@/detectAnomalies', 'us-west-1', 'metrics-processing@POST@/detectAnomalies')",metrics-handler,metrics-processing,metrics-handler@GET@/detectAnomalies,metrics-processing@POST@/detectAnomalies,us-west-1,us-west-1,56,56,1.0
+"('SOURCE', 'XXXX', 'metrics-fake-ingress@GET@/start')",SOURCE,metrics-fake-ingress,SOURCE,metrics-fake-ingress@GET@/start,XXXX,us-east-1,10,110,0.09090909090909091
+"('SOURCE', 'XXXX', 'metrics-fake-ingress@GET@/start')",SOURCE,metrics-fake-ingress,SOURCE,metrics-fake-ingress@GET@/start,XXXX,us-west-1,100,110,0.9090909090909091

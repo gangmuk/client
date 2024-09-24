@@ -1,0 +1,8 @@
+digraph {
+	"frontendus-west-1us-west-1" [label=frontend fillcolor="#FFBF00" fixedsize=True fontname="times bold italic" fontsize=8 penwidth=1 shape=circle style=filled width=0.5]
+	"compute-nodeus-west-1us-west-1" [label="compute-node" fillcolor="#FFBF00" fixedsize=True fontname="times bold italic" fontsize=8 penwidth=1 shape=circle style=filled width=0.5]
+	"frontendus-west-1us-west-1" -> "compute-nodeus-west-1us-west-1" [label="100(1.0)" arrowsize=0.5 color=black fontcolor=black fontsize=10 minlen=1 penwidth=0.5 style=filled]
+	SOURCEXXXXXXXX [label=SOURCE fillcolor=gray fixedsize=True fontname="times bold italic" fontsize=8 penwidth=1 shape=circle style=filled width=0.5]
+	"frontendus-west-1us-west-1" [label=frontend fillcolor="#FFBF00" fixedsize=True fontname="times bold italic" fontsize=8 penwidth=1 shape=circle style=filled width=0.5]
+	SOURCEXXXXXXXX -> "frontendus-west-1us-west-1" [label="100(1.0)" arrowsize=0.5 color=black fontcolor=black fontsize=10 minlen=1 penwidth=0.5 style=filled]
+}
