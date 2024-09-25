@@ -157,7 +157,7 @@ func (c *Client) sendRequest(maxRetry int, numRetries int) (a bool) {
 	rqEnd := time.Now()
 	latency := rqEnd.Sub(rqStart).Milliseconds() // Convert latency to milliseconds
 	if err != nil {
-		fmt.Println("Error in sending request")
+		// fmt.Println("Error in sending request")
 		a = true
 		if err, ok := err.(net.Error); ok && err.Timeout() {
 			c.log.Warnw("request timed out", "client", c.tid)
@@ -285,7 +285,7 @@ func (c *Client) executeOneWorkloadStage_ratelimit(ws WorkloadStage) {
 					c.statsMgr.Set("client.rps", float64(ws.RPS), c.tid)
 					a := c.sendRequest(c.config.Retry.Count, numRetries)
 					if a {
-						fmt.Println("got failed request")
+						// fmt.Println("got failed request")
 					} 	
 				}()
 			}

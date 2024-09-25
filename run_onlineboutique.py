@@ -124,7 +124,54 @@ def set_resource_limit(resource_limit: str):
 
     print("Resource limits updated for all deployments in the default namespace (except 'slate-controller').")
 
-def savelogs(parentdir, services=[]):
+
+def remove_cpu_limits_from_deployments(namespace='default'):
+    # Load the kubeconfig file (make sure you have access to the cluster)
+    config.load_kube_config()
+
+    # Initialize the API client for interacting with deployments
+    v1_apps = client.AppsV1Api()
+
+    # List all deployments in the given namespace
+    deployments = v1_apps.list_namespaced_deployment(namespace=namespace)
+
+    for deployment in deployments.items:
+        updated = False  # Flag to check if we modified the deployment
+
+        # Iterate over each container in the deployment
+        for container in deployment.spec.template.spec.containers:
+            # Set the resources field to None regardless of its current value
+            if container.resources is not None:
+                container.resources = None
+                updated = True
+                print(f"Setting resources to None for container {container.name} in deployment {deployment.metadata.name}")
+
+        # Update the deployment if we modified the resources
+        if updated:
+            # Use a patch to update the deployment spec
+            body = {
+                "spec": {
+                    "template": {
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": container.name,
+                                    "resources": None
+                                } for container in deployment.spec.template.spec.containers
+                            ]
+                        }
+                    }
+                }
+            }
+
+            v1_apps.patch_namespaced_deployment(
+                name=deployment.metadata.name, 
+                namespace=namespace, 
+                body=body
+            )
+            print(f"Updated deployment {deployment.metadata.name}")
+
+def savelogs(parentdir, services=[], regions=["us-west-1"]):
     # Directory to store the logs
 
     logs_directory = f"{parentdir}/proxy-logs"
@@ -142,6 +189,9 @@ def savelogs(parentdir, services=[]):
         for pod_name in pod_list:
             # if pod_name STARTS WITH any of the     services, then save the logs
             if not any(pod_name.startswith(service) for service in services):
+                continue
+
+            if not any(region in pod_name for region in regions):
                 continue
             # Retrieve logs of the istio-proxy container from the pod
             try:
@@ -297,11 +347,15 @@ def main():
         print("Usage: python run_wrk.py <dir_name>\nexit...")
         exit()
     
-    limit = "200m"
+    limit = "0m"
     if len(sys.argv) == 4:
         limit = sys.argv[3]
-    utils.check_all_pods_are_ready()
-    set_resource_limit(limit)
+    # utils.check_all_pods_are_ready()  
+    
+    if limit == "0m":
+        remove_cpu_limits_from_deployments()
+    else:
+        set_resource_limit(limit)
     print(f"Resource limit set to {limit} for all deployments in the default namespace.")
     CONFIG = {}
     CONFIG['background_noise'] =  background_noise
@@ -375,13 +429,13 @@ def main():
     #             experiment.set_injected_delay(injected_delay)
     #             experiment_list.append(experiment)
 
-    for west_rps in range(100, 1500, 100):
+    for west_rps in range(800, 1500, 150):
         method = "POST"
         experiment = utils.Experiment()
-        req_type = "addtocart"
+        req_type = "checkoutcart"
         east_rps = 0
         # duration = 60 * 60 * 2
-        duration = 60 * 2
+        duration = 60 * 3
         
         if west_rps > 0:
             experiment.add_workload(utils.Workload(cluster="west", req_type=req_type, rps=[west_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
@@ -397,7 +451,7 @@ def main():
     
     region_to_node = {
         "us-west-1": ["node1"],
-        "us-east-1": ["node2"],
+        "us-east-1": ["node5"],
         # "us-central-1": ["node3"],
         # "us-south-1": ["node4"]
     }
@@ -436,15 +490,16 @@ def main():
     print("inter_cluster_latency")
     pprint(inter_cluster_latency)
     
+    utils.pkill_background_noise(node_dict)
+
+
     if mode == "runtime":
-        utils.pkill_background_noise(node_dict)
         utils.delete_tc_rule_in_client(node_dict)
         network_interface = "eno1"
         if mode == "runtime":
             utils.apply_all_tc_rule(network_interface, inter_cluster_latency, node_dict)
         else:
             print("Skip apply_all_tc_rule in profile mode")
-    utils.start_background_noise(node_dict, CONFIG['background_noise'], victimize_node="node1", victimize_cpu=50)
 
     CONFIG["mode"] = mode
     for src_node in inter_cluster_latency:
@@ -459,6 +514,7 @@ def main():
     CONFIG["load_coef_flag"] = 1
     for experiment in experiment_list:
         for routing_rule in routing_rule_list:
+            utils.start_background_noise(node_dict, CONFIG['background_noise'], victimize_node="node1", victimize_cpu=CONFIG['background_noise'])
             if mode == "runtime":
                 if routing_rule == "SLATE-with-jumping-global" or routing_rule == "SLATE-with-jumping-local":
                     update_hillclimbing_value("default", "slate-wasm-plugin", "HILLCLIMBING", "true")
@@ -474,7 +530,10 @@ def main():
                 update_virtualservice_latency_k8s("frontend-vs", "default", f"{experiment.injected_delay}ms")
             else:
                 change_jumping_mode(local=False) # just use the latest stuff
-            utils.restart_deploy(deploy=["slate-controller", "sslateingress-us-west-1", "sslateingress-us-east-1", "frontend-us-west-1", "frontend-us-east-1", "productcatalogservice-us-west-1", "productcatalogservice-us-east-1", "cartservice-us-west-1", "cartservice-us-east-1"])
+            # todo this should be restarting all regions
+            # utils.restart_deploy(deploy=["slate-controller", "sslateingress-us-west-1", "sslateingress-us-east-1", "frontend-us-west-1", "frontend-us-east-1", "productcatalogservice-us-west-1", "productcatalogservice-us-east-1", "cartservice-us-west-1", "cartservice-us-east-1"])
+            utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-west-1"])
+
 
             for capacity in waterfall_capacity_set:
                 print(f"mode: {mode}")
@@ -550,7 +609,7 @@ def main():
                     print(f"mode: {mode} is not supported")
                     assert False
                 
-                savelogs(output_dir, services=["sslateingress", "frontend", "productcatalogservice", "cartservice"])
+                savelogs(output_dir, services=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'])
 
                 # utils.run_command(f"mkdir -p {output_dir}/client-all")
                 # utils.run_command(f"touch {output_dir}/client-all/client.req.latency.0.csv")
@@ -583,8 +642,10 @@ def main():
                 
                 '''end of one set of experiment'''
   
-                utils.run_command("kubectl rollout restart deploy slate-controller")
-                utils.restart_deploy(deploy=["slate-controller", "sslateingress-us-west-1", "sslateingress-us-east-1", "frontend-us-west-1", "frontend-us-east-1", "productcatalogservice-us-west-1", "productcatalogservice-us-east-1", "cartservice-us-west-1", "cartservice-us-east-1"])
+                # utils.run_command("kubectl rollout restart deploy slate-controller")
+                # todo this should be restarting all regions
+                utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=["sslateingress", "frontend", "productcatalogservice", "cartservice"], regions=["us-west-1"])
+                # utils.restart_deploy(deploy=["slate-controller", "sslateingress-us-west-1", "sslateingress-us-east-1", "frontend-us-west-1", "frontend-us-east-1", "productcatalogservice-us-west-1", "productcatalogservice-us-east-1", "cartservice-us-west-1", "cartservice-us-east-1"])
                 # utils.run_command("kubectl rollout restart deploy -l=region=us-west-1", required=True)
                 utils.pkill_background_noise(node_dict)
                 

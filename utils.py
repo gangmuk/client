@@ -405,11 +405,14 @@ def check_all_pods_are_ready():
         time.sleep(sl)
     print("All pods are ready")
 
-def restart_deploy(deploy=[], exclude=[]):
+def restart_deploy(deploy=[], replicated_deploy=[], exclude=[], regions=[]):
     print("start restart deploy")
     ts = time.time()
     config.load_kube_config()
     api_instance = client.AppsV1Api()
+    for d in replicated_deploy:
+        for r in regions:
+            deploy.append(d + "-" + r)
     try:
         deployments = api_instance.list_namespaced_deployment(namespace="default")
         for deployment in deployments.items:
@@ -434,7 +437,7 @@ def add_latency_rules(src_host, interface, dst_node_ip, delay):
 
 def start_background_noise(node_dict, cpu_noise=30, victimize_node="", victimize_cpu=0):
     for node in node_dict:
-        if node == "node0" or node == "node5":
+        if node == "node0":
             print("skip start_background_noise in node0. node0 is control plane node")
             continue
         nodenoise = cpu_noise
