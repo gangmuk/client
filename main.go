@@ -116,6 +116,9 @@ func (c *Client) Start_old(wg *sync.WaitGroup, statsOutputFolder string, clientI
 	for _, stage := range c.config.Workload {
 		c.log.Infow("processing new client workload stage", "stage", stage, "client", c.tid)
 		c.executeOneWorkloadStage_ratelimit(stage)
+		// c.new_executeOneWorkloadStage_ratelimit(stage)
+		// c.workerpool_executeOneWorkloadStage_ratelimit(stage)
+		// c.unbounded_executeOneWorkloadStage_ratelimit(stage)
 	}
 	// Dump stats to folder for client after workload is done
 	err := c.statsMgr.DumpStatsToFolder(statsOutputFolder + "/client-" + c.config.Cluster)
@@ -130,7 +133,7 @@ func (c *Client) generateRequestID() string {
 	return fmt.Sprintf("%d-%d", c.tid, atomic.AddUint64(&requestCounter, 1))
 }
 
-func (c *Client) sendRequest(maxRetry int, numRetries int) (a bool) {
+func (c *Client) sendRequest(requestID int, maxRetry int, numRetries int) (a bool) {
 	remainingRetry := maxRetry - numRetries
 	if remainingRetry < 0 {
 		return
@@ -148,7 +151,7 @@ func (c *Client) sendRequest(maxRetry int, numRetries int) (a bool) {
 		return
 	}
 	// c.log.Infof("sending request %s", requestID)
-	req.Header.Set("X-Request-Id", strconv.Itoa(c.requestID))
+	req.Header.Set("X-Request-Id", strconv.Itoa(requestID))
 	for key, value := range c.config.Headers {
 		req.Header.Set(key, value)
 	}
@@ -171,18 +174,18 @@ func (c *Client) sendRequest(maxRetry int, numRetries int) (a bool) {
 		if remainingRetry > 0 {
 			fmt.Println("Retrying request")
 			// go func() {
-				numRetries++
-				waitTime := c.config.Retry.Base * time.Duration(math.Pow(float64(c.config.Retry.Factor), float64(numRetries-1)))
-				jitter := 0.5
-				jitterTime := time.Duration(rand.Float64() * jitter * float64(waitTime))
-				waitTime += jitterTime
-				waitTime = time.Duration(math.Min(float64(waitTime), float64(c.config.Retry.MaxInterval)))
-				time.Sleep(waitTime)
+			numRetries++
+			waitTime := c.config.Retry.Base * time.Duration(math.Pow(float64(c.config.Retry.Factor), float64(numRetries-1)))
+			jitter := 0.5
+			jitterTime := time.Duration(rand.Float64() * jitter * float64(waitTime))
+			waitTime += jitterTime
+			waitTime = time.Duration(math.Min(float64(waitTime), float64(c.config.Retry.MaxInterval)))
+			time.Sleep(waitTime)
 
-				c.log.Warnw("backoff done, send retry", "requestID", c.requestID, "numRetries", numRetries, "waitTime", waitTime)
-				c.statsMgr.Incr("client.req.retry.count", c.tid)
-				// c.log.Infof("retrying request %s", requestID)
-				c.sendRequest(maxRetry, numRetries)
+			c.log.Warnw("backoff done, send retry", "requestID", c.requestID, "numRetries", numRetries, "waitTime", waitTime)
+			c.statsMgr.Incr("client.req.retry.count", c.tid)
+			// c.log.Infof("retrying request %s", requestID)
+			c.sendRequest(requestID, maxRetry, numRetries)
 			// }()
 		}
 		return
@@ -201,16 +204,17 @@ func (c *Client) sendRequest(maxRetry int, numRetries int) (a bool) {
 			fmt.Println("Retrying request")
 
 			// go func() {
-				numRetries++
-				waitTime := c.config.Retry.Base * time.Duration(math.Pow(float64(c.config.Retry.Factor), float64(numRetries-1)))
-				jitter := 0.5
-				jitterTime := time.Duration(rand.Float64() * jitter * float64(waitTime))
-				waitTime += jitterTime
-				waitTime = time.Duration(math.Min(float64(waitTime), float64(c.config.Retry.MaxInterval)))
-				time.Sleep(waitTime)
-				c.log.Warnw("backoff done, send retry", "requestID", c.requestID, "numRetries", numRetries, "waitTime", waitTime)
-				c.statsMgr.Incr("client.req.retry.count", c.tid)
-				c.sendRequest(maxRetry, numRetries)
+			numRetries++
+			waitTime := c.config.Retry.Base * time.Duration(math.Pow(float64(c.config.Retry.Factor), float64(numRetries-1)))
+			jitter := 0.5
+			jitterTime := time.Duration(rand.Float64() * jitter * float64(waitTime))
+			waitTime += jitterTime
+			waitTime = time.Duration(math.Min(float64(waitTime), float64(c.config.Retry.MaxInterval)))
+			time.Sleep(waitTime)
+			c.log.Warnw("backoff done, send retry", "requestID", c.requestID, "numRetries", numRetries, "waitTime", waitTime)
+			c.statsMgr.Incr("client.req.retry.count", c.tid)
+			requestID++
+			c.sendRequest(requestID, maxRetry, numRetries)
 			// }()
 		}
 	case http.StatusRequestTimeout, http.StatusGatewayTimeout:
@@ -221,16 +225,17 @@ func (c *Client) sendRequest(maxRetry int, numRetries int) (a bool) {
 			fmt.Println("Retrying request")
 
 			// go func() {
-				numRetries++
-				waitTime := c.config.Retry.Base * time.Duration(math.Pow(float64(c.config.Retry.Factor), float64(numRetries-1)))
-				jitter := 0.5
-				jitterTime := time.Duration(rand.Float64() * jitter * float64(waitTime))
-				waitTime += jitterTime
-				waitTime = time.Duration(math.Min(float64(waitTime), float64(c.config.Retry.MaxInterval)))
-				time.Sleep(waitTime)
-				c.log.Warnw("backoff done, send retry", "requestID", c.requestID, "numRetries", numRetries, "waitTime", waitTime)
-				c.statsMgr.Incr("client.req.retry.count", c.tid)
-				c.sendRequest(maxRetry, numRetries)
+			numRetries++
+			waitTime := c.config.Retry.Base * time.Duration(math.Pow(float64(c.config.Retry.Factor), float64(numRetries-1)))
+			jitter := 0.5
+			jitterTime := time.Duration(rand.Float64() * jitter * float64(waitTime))
+			waitTime += jitterTime
+			waitTime = time.Duration(math.Min(float64(waitTime), float64(c.config.Retry.MaxInterval)))
+			time.Sleep(waitTime)
+			c.log.Warnw("backoff done, send retry", "requestID", requestID, "numRetries", numRetries, "waitTime", waitTime)
+			c.statsMgr.Incr("client.req.retry.count", c.tid)
+			requestID++
+			c.sendRequest(requestID, maxRetry, numRetries)
 			// }()
 		}
 	default:
@@ -238,6 +243,162 @@ func (c *Client) sendRequest(maxRetry int, numRetries int) (a bool) {
 		c.statsMgr.Incr("client.req.failure.count", c.tid)
 	}
 	return
+}
+
+func (c *Client) unbounded_executeOneWorkloadStage_ratelimit(ws WorkloadStage) {
+	requestInterval := time.Second / time.Duration(ws.RPS)
+	c.log.Infow("Client workload stage started", "client", c.tid, "rps", ws.RPS, "duration", ws.Duration, "interval", requestInterval)
+
+	// Create a ticker to schedule requests at fixed intervals
+	ticker := time.NewTicker(requestInterval)
+	defer ticker.Stop()
+
+	// Channel to signal when the workload duration has passed
+	workloadDone := time.After(ws.Duration)
+
+	var wg sync.WaitGroup
+
+	requestID := 0
+	for {
+		select {
+		case <-workloadDone:
+			// Workload duration has passed, wait for ongoing requests
+			c.log.Infow("Workload duration completed, waiting for ongoing requests")
+			wg.Wait()
+			c.log.Infow("All requests completed for client", "client", c.tid)
+			return
+		case <-ticker.C:
+			// Send request at each tick
+			numRetries := 0
+			requestID++
+			wg.Add(1)
+			go func(reqID int) {
+				defer wg.Done()
+				c.sendRequest(requestID, c.config.Retry.Count, numRetries)
+			}(requestID)
+		}
+	}
+}
+
+func (c *Client) workerpool_executeOneWorkloadStage_ratelimit(ws WorkloadStage) {
+	requestInterval := time.Second / time.Duration(ws.RPS)
+	c.log.Infow("Client workload stage started", "client", c.tid, "rps", ws.RPS, "duration", ws.Duration, "interval", requestInterval)
+
+	// Create a ticker to schedule requests at fixed intervals
+	ticker := time.NewTicker(requestInterval)
+	defer ticker.Stop()
+
+	// Channel to signal when the workload duration has passed
+	workloadDone := time.After(ws.Duration)
+
+	// Create a buffered channel as a task queue
+	taskQueueSize := int(ws.RPS) // Buffer size can be adjusted based on requirements
+	requestChan := make(chan int, taskQueueSize)
+
+	var wg sync.WaitGroup
+
+	// Start a fixed number of worker goroutines
+	// Adjust based on your system's capacity
+	// numWorkers := int(ws.RPS) / 10
+	numWorkers := int(ws.RPS)
+	if numWorkers < 1 {
+		numWorkers = 1
+	}
+	c.log.Infow("Starting worker pool", "numWorkers", numWorkers)
+	for i := 0; i < numWorkers; i++ {
+		wg.Add(1)
+		go func(workerID int) {
+			defer wg.Done()
+			for requestID := range requestChan {
+				// Process the request
+				numRetries := 0
+				c.log.Debugw("Worker processing request", "workerID", workerID, "requestID", requestID, "client", c.tid)
+				c.sendRequest(requestID, c.config.Retry.Count, numRetries)
+			}
+		}(i)
+	}
+
+	// Generate requests at fixed intervals
+	requestID := 0
+	for {
+		select {
+		case <-workloadDone:
+			// Workload duration has passed, stop generating requests
+			c.log.Infow("Workload duration completed, stopping request generation")
+			close(requestChan)
+			wg.Wait() // Wait for all workers to finish processing
+			c.log.Infow("All requests completed for client", "client", c.tid)
+			return
+		case <-ticker.C:
+			requestID++
+			select {
+			case requestChan <- requestID:
+				// Request queued successfully
+				c.statsMgr.Set("client.rps", float64(ws.RPS), c.tid)
+			default:
+				// Task queue is full, log or handle as needed
+				c.log.Warnw("Task queue is full, dropping request", "requestID", requestID)
+			}
+		}
+	}
+}
+
+func (c *Client) new_executeOneWorkloadStage_ratelimit(ws WorkloadStage) {
+	requestSpacing := time.Second / time.Duration(ws.RPS)
+	c.log.Infow("client workload stage started", "client", c.tid, "rps", ws.RPS, "duration", ws.Duration, "spacing", requestSpacing)
+
+	// Create a rate limiter with the given RPS
+	limiter := rate.NewLimiter(rate.Every(requestSpacing), 1)
+
+	// Create a cancellable context to control the rate limiter
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	// Channel to signal when the workload duration has passed
+	workloadDone := make(chan struct{})
+
+	// Start a goroutine to stop the workload after the specified duration
+	go func() {
+		time.Sleep(ws.Duration)
+		close(workloadDone)
+	}()
+
+	var wg sync.WaitGroup // WaitGroup to wait for all request goroutines
+
+	for {
+		select {
+		case <-workloadDone:
+			// Workload duration has passed, exit the loop
+			fmt.Println("Workload duration completed, waiting for ongoing requests to finish")
+			wg.Wait() // Wait for all request goroutines to finish
+			fmt.Println("All requests completed")
+			return
+		default:
+			// Wait until we are allowed to send the next request
+			err := limiter.Wait(ctx)
+			if err != nil {
+				if ctx.Err() != nil {
+					fmt.Println("Context canceled, exiting loop")
+					wg.Wait() // Wait for all request goroutines to finish
+					return
+				}
+				c.log.Errorw("rate limiter error", "err", err)
+				wg.Wait() // Wait for all request goroutines to finish
+				return
+			}
+
+			wg.Add(1) // Increment WaitGroup counter
+			go func(requestID int) {
+				defer wg.Done() // Decrement WaitGroup counter when done
+				c.log.Infow("sending request", "requestID", requestID, "client", c.tid)
+				c.statsMgr.Set("client.rps", float64(ws.RPS), c.tid)
+				numRetries := 0
+				c.sendRequest(requestID, c.config.Retry.Count, numRetries)
+			}(c.requestID)
+
+			c.requestID++ // Increment requestID safely outside the goroutine
+		}
+	}
 }
 
 // // Rate limiter implementation
@@ -249,7 +410,6 @@ func (c *Client) executeOneWorkloadStage_ratelimit(ws WorkloadStage) {
 	// Create a rate limiter with the given RPS
 	limiter := rate.NewLimiter(rate.Every(requestSpacing), 1)
 
-	
 	wg := &sync.WaitGroup{}
 	counter := uint64(0)
 	done := make(chan struct{})
@@ -283,10 +443,10 @@ func (c *Client) executeOneWorkloadStage_ratelimit(ws WorkloadStage) {
 					c.requestID++
 					c.log.Infow("sending request", "requestID", c.requestID, "client", c.tid)
 					c.statsMgr.Set("client.rps", float64(ws.RPS), c.tid)
-					a := c.sendRequest(c.config.Retry.Count, numRetries)
-					if a {
-						// fmt.Println("got failed request")
-					} 	
+					c.sendRequest(c.requestID, c.config.Retry.Count, numRetries)
+					// if a {
+					// 	fmt.Println("got failed request")
+					// }
 				}()
 			}
 		}
@@ -295,7 +455,7 @@ func (c *Client) executeOneWorkloadStage_ratelimit(ws WorkloadStage) {
 	// Let the workload run for the specified duration
 	time.Sleep(ws.Duration)
 	fmt.Println("Waiting for requests to finish...")
-	done <- struct{}{}
+	close(done)
 	c2 := make(chan struct{})
 	// close(done)
 	go func() {
@@ -338,7 +498,7 @@ func (c *Client) executeOneWorkloadStage(ws WorkloadStage, requestWg *sync.WaitG
 					numRetries := 0
 					c.requestID++
 					c.statsMgr.Set("client.rps", float64(ws.RPS), c.tid)
-					c.sendRequest(0, numRetries)
+					c.sendRequest(c.requestID, c.config.Retry.Count, numRetries)
 				}()
 			}
 		}
@@ -469,7 +629,6 @@ func main() {
 			fmt.Println("Waiting for clientWg to finish...")
 			clientWg.Wait()
 			fmt.Println("clientWg finished")
-
 
 			c_.log.Info("Periodic stats collection done", "client ", clientID)
 			close(statsDone)
