@@ -1136,7 +1136,7 @@ def svc_to_cid(svc_order, unique_service):
     return svc_to_placement
 
 
-def find_root_node(cg):
+def find_root_node(cg, tid):
     temp = dict()
     root_node = list()
     for parent_node in cg:
@@ -1150,16 +1150,14 @@ def find_root_node(cg):
         print(f'ERROR: cannot find root node in callgraph')
         assert False
     if len(root_node) > 1:
-        # print(f"{cg}")
+        print(f'ERROR: too many root node in callgraph')
+        print(f"tid: {tid}")
+        print(f"{cg}")
+        for rn in root_node:
+            print(f'root_node: {rn}')
         # for key in cg:
         #     for sp in cg[key]:
         #         print(f'{key} -> {sp.endpoint_str}')
-        # return False
-        # assert False
-        
-        for rn in root_node:
-            print(f'root_node: {rn}')
-        print(f'ERROR: too many root node in callgraph')
         return False
     # print(cg)
     return root_node[0]

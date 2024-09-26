@@ -438,8 +438,17 @@ def add_latency_rules(src_host, interface, dst_node_ip, delay):
 def start_background_noise(node_dict, cpu_noise=30, victimize_node="", victimize_cpu=0):
     for node in node_dict:
         if node == "node0":
-            print("skip start_background_noise in node0. node0 is control plane node")
+            print("[NOTE]SKIP start_background_noise in node0. node0 is control plane node")
+            print("[NOTE]SKIP start_background_noise in node0. node0 is control plane node")
+            print("[NOTE]SKIP start_background_noise in node0. node0 is control plane node")
             continue
+        
+        if node == "node6":
+            print("[NOTE]SKIP start_background_noise in node6. node6 is running slate-controller")
+            print("[NOTE] SKIP start_background_noise in node6. node6 is control slate-controller")
+            print("[NOTE] SKIP start_background_noise in node6. node6 is control slate-controller")
+            continue
+        
         nodenoise = cpu_noise
         if node == victimize_node:
             nodenoise = victimize_cpu
@@ -537,7 +546,7 @@ def file_write_env_file(CONFIG):
 
 def file_write_config_file(CONFIG, config_file_path):
     with open(config_file_path, "w") as file:
-        file.write("-- start of config --")
+        file.write("-- start of config --\n")
         for key, value in CONFIG.items():
             file.write(f"{key},{value}\n")
         file.write("-- end of config --")

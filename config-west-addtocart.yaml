@@ -12,5 +12,5 @@ clients:
   rq_timeout: 5s
   workload:
   - duration: 120s
-    rps: 1400
-stats_output_folder: profile-9-21-bg50-400m/addtocart-W1400/LOCAL
+    rps: 300
+stats_output_folder: gangmuk-test-bg0/addtocart-W300/LOCAL

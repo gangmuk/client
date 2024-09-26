@@ -1,0 +1,5 @@
+,cluster_id,svc_name,method,path,trace_id,span_id,parent_span_id,st,et,rt,xt,ct,call_size,inflight_dict,rps_dict
+0,us-west-1,productcatalogservice,POST,/hipstershop.ProductCatalogService/GetProduct,1f567c3eb5ec2ef8f9acaffa3754084e,34a124d7ba4f9ced,79ed300c2a64d77f,99.0,100.0,1.0,1.0,1.0,-1,productcatalogservice@POST@/hipstershop.ProductCatalogService/GetProduct:18446744073709549196|,productcatalogservice@POST@/hipstershop.ProductCatalogService/GetProduct:416|
+1,us-west-1,cartservice,POST,/hipstershop.CartService/AddItem,1f567c3eb5ec2ef8f9acaffa3754084e,7b8a776fdc64cbef,79ed300c2a64d77f,117.0,243.0,126.0,126.0,126.0,-1,cartservice@POST@/hipstershop.CartService/AddItem:9|,cartservice@POST@/hipstershop.CartService/AddItem:404|
+2,us-west-1,sslateingress,POST,/cart,1f567c3eb5ec2ef8f9acaffa3754084e,f9acaffa3754084e,nan,0.0,334.0,334.0,127.0,334.0,-1,sslateingress@POST@/cart:18|,sslateingress@POST@/cart:496|
+3,us-west-1,frontend,POST,/cart,1f567c3eb5ec2ef8f9acaffa3754084e,79ed300c2a64d77f,f9acaffa3754084e,55.0,262.0,207.0,80.0,207.0,-1,frontend@POST@/cart:18|,frontend@POST@/cart:408|

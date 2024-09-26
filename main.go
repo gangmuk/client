@@ -161,6 +161,7 @@ func (c *Client) sendRequest(maxRetry int, numRetries int) (a bool) {
 		a = true
 		if err, ok := err.(net.Error); ok && err.Timeout() {
 			c.log.Warnw("request timed out", "client", c.tid)
+			c.log.Warnw("Error msg", "error", err)
 			c.statsMgr.DirectMeasurement("client.req.timeout_origin", rqStart, 1.0, c.tid)
 			c.statsMgr.DirectMeasurement("client.req.timeout", rqEnd, 1.0, c.tid)
 			c.statsMgr.Incr("client.req.timeout.count", c.tid)
@@ -171,18 +172,18 @@ func (c *Client) sendRequest(maxRetry int, numRetries int) (a bool) {
 		if remainingRetry > 0 {
 			fmt.Println("Retrying request")
 			// go func() {
-				numRetries++
-				waitTime := c.config.Retry.Base * time.Duration(math.Pow(float64(c.config.Retry.Factor), float64(numRetries-1)))
-				jitter := 0.5
-				jitterTime := time.Duration(rand.Float64() * jitter * float64(waitTime))
-				waitTime += jitterTime
-				waitTime = time.Duration(math.Min(float64(waitTime), float64(c.config.Retry.MaxInterval)))
-				time.Sleep(waitTime)
+			numRetries++
+			waitTime := c.config.Retry.Base * time.Duration(math.Pow(float64(c.config.Retry.Factor), float64(numRetries-1)))
+			jitter := 0.5
+			jitterTime := time.Duration(rand.Float64() * jitter * float64(waitTime))
+			waitTime += jitterTime
+			waitTime = time.Duration(math.Min(float64(waitTime), float64(c.config.Retry.MaxInterval)))
+			time.Sleep(waitTime)
 
-				c.log.Warnw("backoff done, send retry", "requestID", c.requestID, "numRetries", numRetries, "waitTime", waitTime)
-				c.statsMgr.Incr("client.req.retry.count", c.tid)
-				// c.log.Infof("retrying request %s", requestID)
-				c.sendRequest(maxRetry, numRetries)
+			c.log.Warnw("backoff done, send retry", "requestID", c.requestID, "numRetries", numRetries, "waitTime", waitTime)
+			c.statsMgr.Incr("client.req.retry.count", c.tid)
+			// c.log.Infof("retrying request %s", requestID)
+			c.sendRequest(maxRetry, numRetries)
 			// }()
 		}
 		return
@@ -201,16 +202,16 @@ func (c *Client) sendRequest(maxRetry int, numRetries int) (a bool) {
 			fmt.Println("Retrying request")
 
 			// go func() {
-				numRetries++
-				waitTime := c.config.Retry.Base * time.Duration(math.Pow(float64(c.config.Retry.Factor), float64(numRetries-1)))
-				jitter := 0.5
-				jitterTime := time.Duration(rand.Float64() * jitter * float64(waitTime))
-				waitTime += jitterTime
-				waitTime = time.Duration(math.Min(float64(waitTime), float64(c.config.Retry.MaxInterval)))
-				time.Sleep(waitTime)
-				c.log.Warnw("backoff done, send retry", "requestID", c.requestID, "numRetries", numRetries, "waitTime", waitTime)
-				c.statsMgr.Incr("client.req.retry.count", c.tid)
-				c.sendRequest(maxRetry, numRetries)
+			numRetries++
+			waitTime := c.config.Retry.Base * time.Duration(math.Pow(float64(c.config.Retry.Factor), float64(numRetries-1)))
+			jitter := 0.5
+			jitterTime := time.Duration(rand.Float64() * jitter * float64(waitTime))
+			waitTime += jitterTime
+			waitTime = time.Duration(math.Min(float64(waitTime), float64(c.config.Retry.MaxInterval)))
+			time.Sleep(waitTime)
+			c.log.Warnw("backoff done, send retry", "requestID", c.requestID, "numRetries", numRetries, "waitTime", waitTime)
+			c.statsMgr.Incr("client.req.retry.count", c.tid)
+			c.sendRequest(maxRetry, numRetries)
 			// }()
 		}
 	case http.StatusRequestTimeout, http.StatusGatewayTimeout:
@@ -221,16 +222,16 @@ func (c *Client) sendRequest(maxRetry int, numRetries int) (a bool) {
 			fmt.Println("Retrying request")
 
 			// go func() {
-				numRetries++
-				waitTime := c.config.Retry.Base * time.Duration(math.Pow(float64(c.config.Retry.Factor), float64(numRetries-1)))
-				jitter := 0.5
-				jitterTime := time.Duration(rand.Float64() * jitter * float64(waitTime))
-				waitTime += jitterTime
-				waitTime = time.Duration(math.Min(float64(waitTime), float64(c.config.Retry.MaxInterval)))
-				time.Sleep(waitTime)
-				c.log.Warnw("backoff done, send retry", "requestID", c.requestID, "numRetries", numRetries, "waitTime", waitTime)
-				c.statsMgr.Incr("client.req.retry.count", c.tid)
-				c.sendRequest(maxRetry, numRetries)
+			numRetries++
+			waitTime := c.config.Retry.Base * time.Duration(math.Pow(float64(c.config.Retry.Factor), float64(numRetries-1)))
+			jitter := 0.5
+			jitterTime := time.Duration(rand.Float64() * jitter * float64(waitTime))
+			waitTime += jitterTime
+			waitTime = time.Duration(math.Min(float64(waitTime), float64(c.config.Retry.MaxInterval)))
+			time.Sleep(waitTime)
+			c.log.Warnw("backoff done, send retry", "requestID", c.requestID, "numRetries", numRetries, "waitTime", waitTime)
+			c.statsMgr.Incr("client.req.retry.count", c.tid)
+			c.sendRequest(maxRetry, numRetries)
 			// }()
 		}
 	default:
@@ -249,7 +250,6 @@ func (c *Client) executeOneWorkloadStage_ratelimit(ws WorkloadStage) {
 	// Create a rate limiter with the given RPS
 	limiter := rate.NewLimiter(rate.Every(requestSpacing), 1)
 
-	
 	wg := &sync.WaitGroup{}
 	counter := uint64(0)
 	done := make(chan struct{})
@@ -286,7 +286,7 @@ func (c *Client) executeOneWorkloadStage_ratelimit(ws WorkloadStage) {
 					a := c.sendRequest(c.config.Retry.Count, numRetries)
 					if a {
 						// fmt.Println("got failed request")
-					} 	
+					}
 				}()
 			}
 		}
@@ -469,7 +469,6 @@ func main() {
 			fmt.Println("Waiting for clientWg to finish...")
 			clientWg.Wait()
 			fmt.Println("clientWg finished")
-
 
 			c_.log.Info("Periodic stats collection done", "client ", clientID)
 			close(statsDone)

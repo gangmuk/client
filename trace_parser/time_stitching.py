@@ -254,10 +254,10 @@ def remove_incomplete_trace_in_bookinfo(traces_):
     return ret_traces_
 
 
-def change_to_relative_time(single_trace):
+def change_to_relative_time(single_trace, tid):
     try:
         sp_cg = single_trace_to_span_callgraph(single_trace)
-        root_span = opt_func.find_root_node(sp_cg)
+        root_span = opt_func.find_root_node(sp_cg, tid)
         if root_span == False:
             return False
         base_t = root_span.st
@@ -656,7 +656,7 @@ def stitch_time(traces):
     ret_traces = dict()
     for cid in traces:
         for tid in traces[cid]:
-            ret = stitch_trace(traces[cid][tid])
+            ret = stitch_trace(traces[cid][tid], tid)
             if ret == True:
                 if cid not in ret_traces:
                     ret_traces[cid] = dict()
@@ -670,18 +670,20 @@ def stitch_time(traces):
     return ret_traces
 
 
-def stitch_trace(trace):
+def stitch_trace(trace, tid):
     ep_str_cg, tot_num_node_in_topology = single_trace_to_endpoint_str_callgraph(trace)
     # print(f"tot_num_node_in_topology: {tot_num_node_in_topology}")
-    root_ep_str = opt_func.find_root_node(ep_str_cg)
+    root_ep_str = opt_func.find_root_node(ep_str_cg, tid)
     if root_ep_str == False:
         print(trace[0])
-        assert False
-        return False
+        
+        # assert False ## FAIL!
+        return False ## Just skip
+    
     # print(f"root_ep: {root_ep_str}")
     # pprint(f"ep_str_cg: {ep_str_cg}")
     # exit()
-    relative_time_ret = change_to_relative_time(trace)
+    relative_time_ret = change_to_relative_time(trace, tid)
     if relative_time_ret == False:
         return False
     xt_ret = calc_exclusive_time(trace)

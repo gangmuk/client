@@ -267,14 +267,22 @@ def trace_string_file_to_trace_data_structure_with_df(df, required_num_endpoint,
     print(f"after negative rt filter, len(df): {len(df)}")
     num_filter_rps_datapoint = 0
     list_of_span = list()
+    excluded_traces = set()  # To track trace_ids with RPS > 6000
+
     for index, row in df.iterrows():
+        if row["trace_id"] in excluded_traces:
+            print(f"Part of invalid trace, {row['trace_id']}, {row['svc_name']}, {row['method']}, {row['path']} row")
+            continue    
+        
         if row["cluster_id"] == "SLATE_UNKNOWN_REGION" or row["svc_name"] == "consul":
+            excluded_traces.add(row["trace_id"])  # Mark the trace_id for exclusion
             continue
         if "ListProducts" in row["path"]:
             print(f"asdf asdf {row}")
         if "checkoutcart" in directory:
             if "/hipstershop.CurrencyService/Convert" in row["path"] or "/hipstershop.ProductCatalogService/GetProduct" in row["path"]:
                 print(f"Skip this span, {row['svc_name']}, {row['method']}, {row['path']} row")
+                excluded_traces.add(row["trace_id"])  # Mark the trace_id for exclusion
                 continue
         num_inflight_dict = dict()
         rps_dict = dict()
@@ -286,6 +294,7 @@ def trace_string_file_to_trace_data_structure_with_df(df, required_num_endpoint,
             if "checkoutcart" in directory:
                 if "hipstershop.CurrencyService/Convert" in ep or "/hipstershop.ProductCatalogService/GetProduct" in ep:
                     print(f"Skip inflight_dict, {ep} endpoint, {row['svc_name']}, {row['method']}, {row['path']} row")
+                    excluded_traces.add(row["trace_id"])  # Mark the trace_id for exclusion
                     continue
             inflight = int(temp[1])
             num_inflight_dict[ep] = inflight
@@ -297,23 +306,27 @@ def trace_string_file_to_trace_data_structure_with_df(df, required_num_endpoint,
             if "checkoutcart" in directory:
                 if "hipstershop.CurrencyService/Convert" in ep or "/hipstershop.ProductCatalogService/GetProduct" in ep:
                     print(f"Skip rps_dict, {ep} endpoint, {row['svc_name']}, {row['method']}, {row['path']} row")
+                    excluded_traces.add(row["trace_id"])  # Mark the trace_id for exclusion
                     continue
             rps = int(temp[1]) * num_replica # 335 * 3
             ''' NOTE: HARDCODED, RPS FILTER'''
             if rps > 6000:
-                print(f"Skip {ep} endpoint, rps: {rps}")
+                excluded_traces.add(row["trace_id"])  # Mark the trace_id for exclusion
+                print(f"Skip UNREASONABLE RPS: {rps/num_replica} or {rps}, {row['trace_id']}, {row['svc_name']}, {row['method']}, {row['path']} row")
                 continue
             rps_dict[ep] = rps
         # ''' NOTE: HARDCODED, RPS FILTER'''
         if rps > 6000:
             num_filter_rps_datapoint += 1
+            excluded_traces.add(row["trace_id"])  # Mark the trace_id for exclusion
             continue
         if len(rps_dict) == 0:
             print(row)
             assert False
         span = sp.Span(row["method"], row["path"], row["svc_name"], row["cluster_id"], row["trace_id"], row["span_id"], row["parent_span_id"], st=float(row["st"]), et=float(row["et"]), callsize=int(row["call_size"]), rps_dict=rps_dict, num_inflight_dict=num_inflight_dict)
         list_of_span.append(span)
-    print(f"-- num_filter_rps_datapoint: {num_filter_rps_datapoint}")  
+    print(f"-- num_filter_rps_datapoint: {num_filter_rps_datapoint}")
+    
     all_traces = dict()
     for span in list_of_span:
         if span.cluster_id not in all_traces:
@@ -336,7 +349,7 @@ def merge_files(directory, postfix ,columns):
     slatelog_files = glob.glob(os.path.join(directory, '**', f'*{postfix}'), recursive=True)
     for slate_log_file in slatelog_files:
         print(f"slate_log_file: {slate_log_file}")
-    output_filename = f"merged{postfix}"
+    output_filename = f"merged-{postfix}"
     with open(output_filename, 'w') as outfile:
         for fname in slatelog_files:
             with open(fname) as infile:
@@ -378,41 +391,40 @@ if __name__ == "__main__":
         
     df = pd.read_csv(merged_trace_file_name, header=None, names=columns)
     df['endpoint'] = df['svc_name'] + "@" + df['method'] + "@" + df['path']
-    # if "checkoutcart" in subdir:
-    #     df = df[df["path"] != "/hipstershop.CurrencyService/Convert"]
+    
+    df = df[df["rt"] > 0]
+    # df['rps'] = df['rps_dict'].apply(lambda x: int(x.split(':')[1]))
+    # df = df[df['rps'] <= 6000]
+    
     ss = df["svc_name"].unique()
     pp = df["endpoint"].unique()
     print(f"svc len(service): {len(ss)}, {ss}")
     print(f"endpoint len(endpoint): {len(pp)}, {pp}")
     
-    trace_span_counts = df.groupby('trace_id').size()
-    # print(f"trace_span_counts: {trace_span_counts}")
-    print(f"max(trace_span_counts): {max(trace_span_counts)}")
-    trace_ids_with_four_spans = trace_span_counts[trace_span_counts == required_num_endpoint].index
-    
-    filtered_df = df[df['trace_id'].isin(trace_ids_with_four_spans)]
-    # print(filtered_df[filtered_df['trace_id'] == "03fb07ee7606435911b54fa7f64d6894"])
-    print(f"len(filtered_df): {len(filtered_df)}")
-    
-    # filtered_df.to_csv("filtered_df.csv")
-    # print("Output filtered_df.csv")
-    
-    trace_id = filtered_df['trace_id'].unique().tolist()
+    trace_id = df['trace_id'].unique().tolist()
     sample_size = int(len(trace_id) * sample_ratio)
     sampled_trace_id = sample(trace_id, sample_size)
     
-    sampled_filtered_df = filtered_df[filtered_df['trace_id'].isin(sampled_trace_id)]
-    # sampled_filtered_df.to_csv("sampled_filtered_df.csv")
-    # print("Output sampled_filtered_df.csv")
+    sampled_df = df[df['trace_id'].isin(sampled_trace_id)]
+    sampled_df.to_csv("sampled_df.csv")
+    print("Output sampled_df.csv")
     
-    service_list = sampled_filtered_df['svc_name'].unique().tolist()
-    endpoint_list = sampled_filtered_df['endpoint'].unique().tolist()
+    trace_span_counts = sampled_df.groupby('trace_id').size()
+    print(f"trace_span_counts: {trace_span_counts}")
+    print(f"max(trace_span_counts): {max(trace_span_counts)}")
+    trace_ids_with_four_spans = trace_span_counts[trace_span_counts == required_num_endpoint].index
+    filtered_df = sampled_df[sampled_df['trace_id'].isin(trace_ids_with_four_spans)]
+    filtered_df.to_csv("filtered_df.csv")
+    print(f"len(filtered_df): {len(filtered_df)}")
+    print("Output filtered_df.csv")
+    service_list = filtered_df['svc_name'].unique().tolist()
+    endpoint_list = filtered_df['endpoint'].unique().tolist()
     print(f"service_list: {service_list}")
     print(f"len(service_list): {len(service_list)}")
     print(f"endpoint_list: {endpoint_list}")
     print(f"len(endpoint_list): {len(endpoint_list)}")
-    complete_traces = trace_string_file_to_trace_data_structure_with_df(sampled_filtered_df, required_num_endpoint, num_replica)
-
+    
+    complete_traces = trace_string_file_to_trace_data_structure_with_df(filtered_df, required_num_endpoint, num_replica)
     for cid in complete_traces:
         print(f"len(complete_traces[{cid}]): {len(complete_traces[cid])}")
         
@@ -454,8 +466,9 @@ if __name__ == "__main__":
     print(f"Output: {multiplied_by_one_fn}")
     
     print("num all trace ", len(df['trace_id'].unique()))
-    print("num complete trace", len(filtered_df['trace_id'].unique()))
-    print("num sampled trace", len(sampled_filtered_df['trace_id'].unique()))
+    print("num sampled trace", len(sampled_df['trace_id'].unique()))
+    print("num filtered trace", len(filtered_df['trace_id'].unique()))
+    print("num stitched trace", len(stitched_df['trace_id'].unique()))
     
     
     ''' Define how you want to replicate '''
@@ -466,12 +479,12 @@ if __name__ == "__main__":
         new_cluster_dict[cluster] = service_list
     new_df_dict = dict()
     for nc in new_cluster_dict:
-        copy_df = sampled_filtered_df.copy() # copy orignal trace log df
+        copy_df = stitched_df.copy() # copy orignal trace log df
         copy_df['cluster_id'] = nc # set 'cluster_id' column to a new cluster name
         copy_df = copy_df[copy_df['svc_name'].isin(new_cluster_dict[nc])] # filter out services that you don't want to replicate
         new_df_dict[nc] = copy_df.copy()
         print(f"Replicated {nc}")
-    df_all = sampled_filtered_df.copy()
+    df_all = stitched_df.copy()
     for cluster_id, new_df in new_df_dict.items():
         df_all = pd.concat([df_all, new_df])
     df_all.sort_values(by=['cluster_id', 'trace_id'], inplace=True)

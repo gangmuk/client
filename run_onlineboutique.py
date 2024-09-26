@@ -27,30 +27,30 @@ CLOUDLAB_CONFIG_XML="/users/gangmuk/projects/slate-benchmark/config.xml"
 ########################################################################################
 ########################################################################################
 # # Execute this function to clean up resources in case of a crash
-# def cleanup_on_crash():
-#     print("Cleaning up resources...")
-#     utils.delete_tc_rule_in_client(node_dict)
-#     utils.pkill_background_noise(node_dict)
+def cleanup_on_crash():
+    print("Cleaning up resources...")
+    utils.delete_tc_rule_in_client(node_dict)
+    utils.pkill_background_noise(node_dict)
     
-# # Signal handler
-# def signal_handler(signum, frame):
-#     print(f"Received signal: {signum}")
-#     # cleanup_on_crash()
-#     sys.exit(1)
+# Signal handler
+def signal_handler(signum, frame):
+    print(f"Received signal: {signum}")
+    # cleanup_on_crash()
+    sys.exit(1)
     
-# # Exception handler
-# def handle_exception(exc_type, exc_value, exc_traceback):
-#     # Print exception details manually using traceback
-#     print("Unhandled exception:")
-#     traceback.print_exception(exc_type, exc_value, exc_traceback)
-#     # Call cleanup function on crash if necessary
-#     # cleanup_on_crash()
-#     if issubclass(exc_type, KeyboardInterrupt):
-#         sys.__excepthook__(exc_type, exc_value, exc_traceback)
-#         return
-# # register this function to be called upon normal termination or unhandled exceptions. But it will not handle termination signals like SIGKILL or SIGTERM.
-# atexit.register(cleanup_on_crash)
-# sys.excepthook = handle_exception # Override the default exception hook
+# Exception handler
+def handle_exception(exc_type, exc_value, exc_traceback):
+    # Print exception details manually using traceback
+    print("Unhandled exception:")
+    traceback.print_exception(exc_type, exc_value, exc_traceback)
+    # Call cleanup function on crash if necessary
+    # cleanup_on_crash()
+    if issubclass(exc_type, KeyboardInterrupt):
+        sys.__excepthook__(exc_type, exc_value, exc_traceback)
+        return
+# register this function to be called upon normal termination or unhandled exceptions. But it will not handle termination signals like SIGKILL or SIGTERM.
+atexit.register(cleanup_on_crash)
+sys.excepthook = handle_exception # Override the default exception hook
 ########################################################################################
 ########################################################################################
 def calculate_latency_statistics(data_file, output_file):
@@ -350,12 +350,16 @@ def main():
     limit = "0m"
     if len(sys.argv) == 4:
         limit = sys.argv[3]
-    # utils.check_all_pods_are_ready()  
+    utils.check_all_pods_are_ready()  
+    
+    
     
     if limit == "0m":
         remove_cpu_limits_from_deployments()
     else:
         set_resource_limit(limit)
+    
+    
     print(f"Resource limit set to {limit} for all deployments in the default namespace.")
     CONFIG = {}
     CONFIG['background_noise'] =  background_noise
@@ -429,13 +433,22 @@ def main():
     #             experiment.set_injected_delay(injected_delay)
     #             experiment_list.append(experiment)
 
-    for west_rps in range(800, 1500, 150):
+    # for west_rps in range(100, 800, 100):
+    # 250rps checkoutcart -> 190mc for each replica -> 760mc for 4 replicas
+    # try until 350/400, 350 is when it starts hitting 270mc max
+    # 300mc upper bound: 350-400rps ish
+    
+    # for west_rps in range(100, 1000, 50):
+    # for west_rps in range(100, 500, 100):
+    for west_rps in [300]:
         method = "POST"
         experiment = utils.Experiment()
         req_type = "checkoutcart"
+        # req_type = "addtocart"
         east_rps = 0
         # duration = 60 * 60 * 2
-        duration = 60 * 3
+        # duration = 60 * 3
+        duration = 60 * 2
         
         if west_rps > 0:
             experiment.add_workload(utils.Workload(cluster="west", req_type=req_type, rps=[west_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
@@ -512,8 +525,14 @@ def main():
     CONFIG["total_num_services"] = total_num_services
     CONFIG["degree"] = degree
     CONFIG["load_coef_flag"] = 1
+    
+    
+    # utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-west-1"])
+    
+    
     for experiment in experiment_list:
         for routing_rule in routing_rule_list:
+            output_dir = f"{sys_arg_dir_name}/{experiment.name}/{routing_rule}"
             utils.start_background_noise(node_dict, CONFIG['background_noise'], victimize_node="node1", victimize_cpu=CONFIG['background_noise'])
             if mode == "runtime":
                 if routing_rule == "SLATE-with-jumping-global" or routing_rule == "SLATE-with-jumping-local":
@@ -530,16 +549,18 @@ def main():
                 update_virtualservice_latency_k8s("frontend-vs", "default", f"{experiment.injected_delay}ms")
             else:
                 change_jumping_mode(local=False) # just use the latest stuff
+                
             # todo this should be restarting all regions
+            
             # utils.restart_deploy(deploy=["slate-controller", "sslateingress-us-west-1", "sslateingress-us-east-1", "frontend-us-west-1", "frontend-us-east-1", "productcatalogservice-us-west-1", "productcatalogservice-us-east-1", "cartservice-us-west-1", "cartservice-us-east-1"])
-            utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-west-1"])
+            
+            # utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-west-1"])
 
 
             for capacity in waterfall_capacity_set:
                 print(f"mode: {mode}")
                 print(f"routing_rule: {routing_rule}")
                 print(f"capacity: {capacity}")
-                output_dir = f"{sys_arg_dir_name}/{experiment.name}/{routing_rule}"
                 utils.check_all_pods_are_ready()
                 if "WATERFALL" in routing_rule:
                     output_dir += f"-cap{capacity}"
@@ -570,11 +591,9 @@ def main():
                 CONFIG['method'] = workload.method
                 CONFIG["req_type"] = workload.req_type
                 CONFIG["cluster"] = workload.cluster
-                CONFIG["RPS"] = workload.rps
                 CONFIG["duration"] = workload.duration
                 CONFIG["output_dir"] = output_dir
                 utils.file_write_config_file(CONFIG, f"{output_dir}/experiment-config.txt")
-                utils.file_write_experiment_config
                 
                 ############################################################################
                 ############################################################################
@@ -609,7 +628,6 @@ def main():
                     print(f"mode: {mode} is not supported")
                     assert False
                 
-                savelogs(output_dir, services=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'])
 
                 # utils.run_command(f"mkdir -p {output_dir}/client-all")
                 # utils.run_command(f"touch {output_dir}/client-all/client.req.latency.0.csv")
@@ -643,8 +661,15 @@ def main():
                 '''end of one set of experiment'''
   
                 # utils.run_command("kubectl rollout restart deploy slate-controller")
-                # todo this should be restarting all regions
-                utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=["sslateingress", "frontend", "productcatalogservice", "cartservice"], regions=["us-west-1"])
+
+                ## add to cart restart
+                # utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=["sslateingress", "frontend", "productcatalogservice", "cartservice"], regions=["us-west-1"])
+                
+                
+                    ## checkout cart restart
+                # utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-west-1"])
+                print("SKIP RESTART")
+                
                 # utils.restart_deploy(deploy=["slate-controller", "sslateingress-us-west-1", "sslateingress-us-east-1", "frontend-us-west-1", "frontend-us-east-1", "productcatalogservice-us-west-1", "productcatalogservice-us-east-1", "cartservice-us-west-1", "cartservice-us-east-1"])
                 # utils.run_command("kubectl rollout restart deploy -l=region=us-west-1", required=True)
                 utils.pkill_background_noise(node_dict)
@@ -654,6 +679,9 @@ def main():
                     print(f"NOTE: BREAK {routing_rule} for capacity setting (last run with capacity {capacity})")
                     print("NOTE: BREAK")
                     break
+        utils.restart_deploy(deploy=["slate-controller"])
+    savelogs(output_dir, services=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'])
+
 
     for node in node_dict:
         utils.run_command(f"ssh gangmuk@{node_dict[node]['hostname']} sudo tc qdisc del dev eno1 root", required=False, print_error=False)
