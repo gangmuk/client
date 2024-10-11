@@ -1,0 +1,692 @@
+__main__ - training_phase(line:2701) - ERROR - [ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+
+__main__ - optimizer_entrypoint(line:1836) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0
+__main__ - optimizer_entrypoint(line:1836) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0
+__main__ - optimizer_entrypoint(line:1836) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0
+__main__ - optimizer_entrypoint(line:1836) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(2) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,1 -> new_capacity, 1
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,1 -> new_capacity, 1
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,1 -> new_capacity, 1
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,1 -> new_capacity, 1
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(49) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,13 -> new_capacity, 13
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,13 -> new_capacity, 13
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,13 -> new_capacity, 13
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,13 -> new_capacity, 13
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(583) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,146 -> new_capacity, 146
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,146 -> new_capacity, 146
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,146 -> new_capacity, 146
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,146 -> new_capacity, 146
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(730) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(714) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(737) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,185 -> new_capacity, 185
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,185 -> new_capacity, 185
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,185 -> new_capacity, 185
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,185 -> new_capacity, 185
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(709) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(696) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,175 -> new_capacity, 175
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,175 -> new_capacity, 175
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,175 -> new_capacity, 175
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,175 -> new_capacity, 175
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(722) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(717) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(700) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(734) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(708) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(715) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(706) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(726) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(729) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(708) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(725) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(714) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(745) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,187 -> new_capacity, 187
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,187 -> new_capacity, 187
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,187 -> new_capacity, 187
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,187 -> new_capacity, 187
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(728) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(707) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(700) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(695) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(720) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(738) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,185 -> new_capacity, 185
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,185 -> new_capacity, 185
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,185 -> new_capacity, 185
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,185 -> new_capacity, 185
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(717) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(720) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(734) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(712) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(702) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(695) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(715) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(734) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(719) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(720) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(722) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(717) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(706) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(727) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(711) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(705) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(705) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(685) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,172 -> new_capacity, 172
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,172 -> new_capacity, 172
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,172 -> new_capacity, 172
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,172 -> new_capacity, 172
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(715) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(714) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(736) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,185 -> new_capacity, 185
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,185 -> new_capacity, 185
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,185 -> new_capacity, 185
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,185 -> new_capacity, 185
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(732) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(728) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(725) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(710) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(732) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(710) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(693) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(718) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(714) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(721) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(684) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,172 -> new_capacity, 172
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,172 -> new_capacity, 172
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,172 -> new_capacity, 172
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,172 -> new_capacity, 172
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(719) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(743) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,186 -> new_capacity, 186
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,186 -> new_capacity, 186
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,186 -> new_capacity, 186
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,186 -> new_capacity, 186
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(692) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(712) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(810) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,203 -> new_capacity, 203
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,203 -> new_capacity, 203
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,203 -> new_capacity, 203
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,203 -> new_capacity, 203
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1294) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,324 -> new_capacity, 324
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,324 -> new_capacity, 324
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,324 -> new_capacity, 324
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,324 -> new_capacity, 324
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1334) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,334 -> new_capacity, 334
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,334 -> new_capacity, 334
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,334 -> new_capacity, 334
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,334 -> new_capacity, 334
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1326) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1343) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,336 -> new_capacity, 336
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,336 -> new_capacity, 336
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,336 -> new_capacity, 336
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,336 -> new_capacity, 336
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1325) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1312) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,329 -> new_capacity, 329
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,329 -> new_capacity, 329
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,329 -> new_capacity, 329
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,329 -> new_capacity, 329
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1319) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1302) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,326 -> new_capacity, 326
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,326 -> new_capacity, 326
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,326 -> new_capacity, 326
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,326 -> new_capacity, 326
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1323) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1330) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,333 -> new_capacity, 333
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,333 -> new_capacity, 333
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,333 -> new_capacity, 333
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,333 -> new_capacity, 333
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1334) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,334 -> new_capacity, 334
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,334 -> new_capacity, 334
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,334 -> new_capacity, 334
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,334 -> new_capacity, 334
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1306) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1322) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1326) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1329) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,333 -> new_capacity, 333
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,333 -> new_capacity, 333
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,333 -> new_capacity, 333
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,333 -> new_capacity, 333
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1305) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1340) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,336 -> new_capacity, 336
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,336 -> new_capacity, 336
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,336 -> new_capacity, 336
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,336 -> new_capacity, 336
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1279) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,320 -> new_capacity, 320
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,320 -> new_capacity, 320
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,320 -> new_capacity, 320
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,320 -> new_capacity, 320
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1318) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1335) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,334 -> new_capacity, 334
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,334 -> new_capacity, 334
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,334 -> new_capacity, 334
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,334 -> new_capacity, 334
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1327) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1296) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,325 -> new_capacity, 325
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,325 -> new_capacity, 325
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,325 -> new_capacity, 325
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,325 -> new_capacity, 325
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1318) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1323) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1317) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1315) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,329 -> new_capacity, 329
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,329 -> new_capacity, 329
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,329 -> new_capacity, 329
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,329 -> new_capacity, 329
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1311) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,328 -> new_capacity, 328
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,328 -> new_capacity, 328
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,328 -> new_capacity, 328
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,328 -> new_capacity, 328
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1315) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,329 -> new_capacity, 329
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,329 -> new_capacity, 329
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,329 -> new_capacity, 329
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,329 -> new_capacity, 329
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1335) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,334 -> new_capacity, 334
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,334 -> new_capacity, 334
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,334 -> new_capacity, 334
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,334 -> new_capacity, 334
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1324) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1303) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,326 -> new_capacity, 326
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,326 -> new_capacity, 326
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,326 -> new_capacity, 326
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,326 -> new_capacity, 326
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1326) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1339) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,335 -> new_capacity, 335
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,335 -> new_capacity, 335
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,335 -> new_capacity, 335
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,335 -> new_capacity, 335
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1327) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1322) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1274) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,319 -> new_capacity, 319
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,319 -> new_capacity, 319
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,319 -> new_capacity, 319
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,319 -> new_capacity, 319
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1326) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1340) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,336 -> new_capacity, 336
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,336 -> new_capacity, 336
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,336 -> new_capacity, 336
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,336 -> new_capacity, 336
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1319) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1275) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,319 -> new_capacity, 319
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,319 -> new_capacity, 319
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,319 -> new_capacity, 319
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,319 -> new_capacity, 319
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1326) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1333) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,334 -> new_capacity, 334
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,334 -> new_capacity, 334
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,334 -> new_capacity, 334
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,334 -> new_capacity, 334
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1325) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1358) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,340 -> new_capacity, 340
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,340 -> new_capacity, 340
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,340 -> new_capacity, 340
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,340 -> new_capacity, 340
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1311) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,328 -> new_capacity, 328
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,328 -> new_capacity, 328
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,328 -> new_capacity, 328
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,328 -> new_capacity, 328
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1319) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1315) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,329 -> new_capacity, 329
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,329 -> new_capacity, 329
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,329 -> new_capacity, 329
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,329 -> new_capacity, 329
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1321) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1305) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1317) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1316) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,330 -> new_capacity, 330
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1297) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,325 -> new_capacity, 325
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,325 -> new_capacity, 325
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,325 -> new_capacity, 325
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,325 -> new_capacity, 325
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1327) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1306) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1323) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,331 -> new_capacity, 331
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1330) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,333 -> new_capacity, 333
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,333 -> new_capacity, 333
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,333 -> new_capacity, 333
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,333 -> new_capacity, 333
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1296) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,325 -> new_capacity, 325
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,325 -> new_capacity, 325
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,325 -> new_capacity, 325
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,325 -> new_capacity, 325
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1310) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,328 -> new_capacity, 328
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,328 -> new_capacity, 328
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,328 -> new_capacity, 328
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,328 -> new_capacity, 328
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1296) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,325 -> new_capacity, 325
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,325 -> new_capacity, 325
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,325 -> new_capacity, 325
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,325 -> new_capacity, 325
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1306) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1305) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,327 -> new_capacity, 327
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1351) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,338 -> new_capacity, 338
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,338 -> new_capacity, 338
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,338 -> new_capacity, 338
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,338 -> new_capacity, 338
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1287) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,322 -> new_capacity, 322
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,322 -> new_capacity, 322
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,322 -> new_capacity, 322
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,322 -> new_capacity, 322
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1255) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,314 -> new_capacity, 314
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,314 -> new_capacity, 314
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,314 -> new_capacity, 314
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,314 -> new_capacity, 314
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1312) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,329 -> new_capacity, 329
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,329 -> new_capacity, 329
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,329 -> new_capacity, 329
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,329 -> new_capacity, 329
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1289) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,323 -> new_capacity, 323
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,323 -> new_capacity, 323
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,323 -> new_capacity, 323
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,323 -> new_capacity, 323
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1325) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,332 -> new_capacity, 332
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1291) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,323 -> new_capacity, 323
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,323 -> new_capacity, 323
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,323 -> new_capacity, 323
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,323 -> new_capacity, 323
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(1348) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,338 -> new_capacity, 338
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,338 -> new_capacity, 338
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,338 -> new_capacity, 338
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,338 -> new_capacity, 338
+__main__ - optimizer_entrypoint(line:1849) - ERROR - !!! ERROR !!! Total demand(256) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,65 -> new_capacity, 65
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,65 -> new_capacity, 65
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,65 -> new_capacity, 65
+__main__ - optimizer_entrypoint(line:1853) - ERROR - recalc capacity: frontend, old_capacity,65 -> new_capacity, 65
+__main__ - optimizer_entrypoint(line:1836) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0
+__main__ - optimizer_entrypoint(line:1836) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0
+__main__ - optimizer_entrypoint(line:1836) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0
+__main__ - optimizer_entrypoint(line:1836) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0
+__main__ - optimizer_entrypoint(line:1836) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0
+__main__ - optimizer_entrypoint(line:1836) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0
+__main__ - optimizer_entrypoint(line:1836) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0
