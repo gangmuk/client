@@ -439,14 +439,13 @@ def start_background_noise(node_dict, cpu_noise=30, victimize_node="", victimize
     for node in node_dict:
         if node == "node0":
             print("[NOTE]SKIP start_background_noise in node0. node0 is control plane node")
-            print("[NOTE]SKIP start_background_noise in node0. node0 is control plane node")
-            print("[NOTE]SKIP start_background_noise in node0. node0 is control plane node")
             continue
         
+        if node == "node5":
+            print("[NOTE]SKIP start_background_noise in node5. node5 is running slate-controller")
+            continue
         if node == "node6":
-            print("[NOTE]SKIP start_background_noise in node6. node6 is running slate-controller")
-            print("[NOTE] SKIP start_background_noise in node6. node6 is control slate-controller")
-            print("[NOTE] SKIP start_background_noise in node6. node6 is control slate-controller")
+            print("[NOTE]SKIP start_background_noise in node6. node6 is running igw")
             continue
         
         nodenoise = cpu_noise
@@ -510,7 +509,8 @@ class Experiment:
         self.workloads = list()
         self.workload_names = set()
         self.hillclimb_interval = 0
-        self.injected_delay = 0
+        self.injected_delay = []
+        self.delay_injection_point =0 
         self.limit_val = ""
         
     def set_name(self, name):
@@ -521,6 +521,9 @@ class Experiment:
     
     def set_injected_delay(self, delay):
         self.injected_delay = delay
+    
+    def set_delay_injection_point(self, delay_injection_point):
+        self.delay_injection_point = delay_injection_point
 
     def set_limit_val(self, limit_val):
         self.limit_val = limit_val

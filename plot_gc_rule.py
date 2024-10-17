@@ -14,22 +14,22 @@ def plot_csv(csv_file, output_file):
 
     # Filter the data for the secondary y-axis (flow) where dst_cid is 'us-west-1'
     filtered_df_flow_west = df[(df['src_svc'] == 'SOURCE') & 
-                               (df['dst_svc'] == 'sslateingress') & 
-                               (df['dst_cid'] == 'us-west-1')]
+                            (df['dst_svc'] == 'sslateingress') & 
+                            (df['dst_cid'] == 'us-west-1')]
 
     # Filter the data for the secondary y-axis (flow) where dst_cid is 'us-east-1'
     filtered_df_flow_east = df[(df['src_svc'] == 'SOURCE') & 
-                               (df['dst_svc'] == 'sslateingress') & 
-                               (df['dst_cid'] == 'us-east-1')]
+                            (df['dst_svc'] == 'sslateingress') & 
+                            (df['dst_cid'] == 'us-east-1')]
 
     # Merge the filtered DataFrames on the 'counter' column to align the data
     merged_df = pd.merge(filtered_df_weight[['counter', 'weight']],
-                         filtered_df_flow_west[['counter', 'flow']],
-                         on='counter', suffixes=('', '_west'))
+                        filtered_df_flow_west[['counter', 'flow']],
+                        on='counter', suffixes=('', '_west'))
 
     merged_df = pd.merge(merged_df,
-                         filtered_df_flow_east[['counter', 'flow']],
-                         on='counter', suffixes=('', '_east'))
+                        filtered_df_flow_east[['counter', 'flow']],
+                        on='counter', suffixes=('', '_east'))
 
     # Plotting
     fig, ax1 = plt.subplots()

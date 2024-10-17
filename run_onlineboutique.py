@@ -10,11 +10,12 @@ import requests
 import sys
 import os
 import concurrent.futures
-from datetime import datetime
+from datetime import datetime, timedelta
 import copy
 import xml.etree.ElementTree as ET
 from pprint import pprint
 import numpy as np
+import threading
 import atexit
 import signal
 import traceback
@@ -171,6 +172,25 @@ def remove_cpu_limits_from_deployments(namespace='default'):
             )
             print(f"Updated deployment {deployment.metadata.name}")
 
+def save_controller_logs(dir: str):
+    # Ensure the directory exists
+    os.makedirs(dir, exist_ok=True)
+
+    # Define the file path
+    log_file_path = os.path.join(dir, 'slate-controller.txt')
+
+    # Run the kubectl command to get logs of the slate-controller deployment
+    try:
+        with open(log_file_path, 'w') as log_file:
+            subprocess.run([
+                'kubectl', 'logs', 'deployment/slate-controller'
+            ], stdout=log_file, stderr=subprocess.PIPE, check=True)
+        print(f"Logs saved to {log_file_path}")
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to save logs: {e.stderr.decode().strip()}")
+    except FileNotFoundError:
+        print("Error: kubectl command not found. Make sure it is installed and configured correctly.")
+
 def savelogs(parentdir, services=[], regions=["us-west-1"]):
     # Directory to store the logs
 
@@ -206,14 +226,14 @@ def savelogs(parentdir, services=[], regions=["us-west-1"]):
                 print(f"Error retrieving logs for {pod_name}: {e}")
                 
     except subprocess.CalledProcessError as e:
-        print(f"Error fetching pod list: {e}")
+        print(f"Error fetching pod list: s{e}")
 
 node_dict = utils.get_nodename_and_ipaddr(CLOUDLAB_CONFIG_XML)
 for node in node_dict:
     print(f"node: {node}, hostname: {node_dict[node]['hostname']}, ipaddr: {node_dict[node]['ipaddr']}")
 assert len(node_dict) > 0
 
-def update_virtualservice_latency_k8s(virtualservice_name: str, namespace: str, new_latency: str):
+def update_virtualservice_latency_k8s(virtualservice_name: str, namespace: str, new_latency: str, region: str):
     # Load the Kubernetes config (make sure kubeconfig is set)
     config.load_kube_config()
 
@@ -233,9 +253,12 @@ def update_virtualservice_latency_k8s(virtualservice_name: str, namespace: str, 
     updated = False
     for http_route in virtualservice['spec'].get('http', []):
         if 'fault' in http_route and 'delay' in http_route['fault']:
-            # Update the fixedDelay field with the new latency value
-            http_route['fault']['delay']['fixedDelay'] = new_latency
-            updated = True
+            # Check if the route destination subset matches the specified region
+            for route in http_route.get('route', []):
+                if route['destination'].get('subset') == region:
+                    # Update the fixedDelay field with the new latency value
+                    http_route['fault']['delay']['fixedDelay'] = new_latency
+                    updated = True
 
     if not updated:
         print(f"No latency settings found in the VirtualService '{virtualservice_name}' to update.")
@@ -339,7 +362,14 @@ def get_sha256_of_file(url):
     else:
         raise Exception(f"Failed to download file: {response.status_code}")
 
- 
+def call_with_delay(delay, func, *args, **kwargs):
+    def wrapper():
+        time.sleep(delay)
+        func(*args, **kwargs)
+    t = threading.Thread(target=wrapper)
+    t.daemon = True
+    t.start()
+
 def main():
     background_noise = int(sys.argv[1])
     sys_arg_dir_name = sys.argv[2]
@@ -364,8 +394,7 @@ def main():
     CONFIG = {}
     CONFIG['background_noise'] =  background_noise
     CONFIG['traffic_segmentation'] = 1
-    benchmark_name="onlineboutique" # a,b, 1MB and c 2MB file write
-    total_num_services=4
+    
     
     '''
     # Three replicas
@@ -392,11 +421,12 @@ def main():
     # waterfall_capacity_set = {700, 1000}
     degree = 2
     
-    mode = "profile"
-    # mode = "runtime"
-    routing_rule_list = ["LOCAL"]
+    # mode = "profile"
+    mode = "runtime"
+    # routing_rule_list = ["LOCAL"]
     # routing_rule_list = ["SLATE-without-jumping", "SLATE-with-jumping-global", "SLATE-with-jumping-local"]
-    # routing_rule_list = ["SLATE-with-jumping-local"]
+    # routing_rule_list = ["SLATE-with-jumping-global"]
+    routing_rule_list = ["SLATE-with-jumping-global"]
     # routing_rule_list = ["WATERFALL2"]
     
     onlineboutique_path = {
@@ -438,37 +468,139 @@ def main():
     # try until 350/400, 350 is when it starts hitting 270mc max
     # 300mc upper bound: 350-400rps ish
     
-    # for west_rps in range(100, 1000, 50):
-    # for west_rps in range(100, 500, 100):
-    for west_rps in [300]:
-        method = "POST"
-        experiment = utils.Experiment()
-        req_type = "checkoutcart"
-        # req_type = "addtocart"
-        east_rps = 0
-        # duration = 60 * 60 * 2
-        # duration = 60 * 3
-        duration = 60 * 2
+    # benchmark_name="onlineboutique" # a,b, 1MB and c 2MB file write
+    # for west_rps in [800]:
+    # # for west_rps in range(200, 4000, 500):
+    # # for west_rps in [300]:
+    #     method = "POST"
+    #     experiment = utils.Experiment()
+    #     req_type = "checkoutcart"
+    #     # req_type = "addtocart"
         
-        if west_rps > 0:
-            experiment.add_workload(utils.Workload(cluster="west", req_type=req_type, rps=[west_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
-        if east_rps > 0:
-            experiment.add_workload(utils.Workload(cluster="east", req_type=req_type, rps=[east_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
+    #     if req_type == "checkoutcart":
+    #         total_num_services = 8
+    #     elif req_type == "addtocart":
+    #         total_num_services = 4
+    #     else:
+    #         print(f"req_type: {req_type} is not supported")
+    #         assert False
         
-        experiment_name = f"{req_type}-W{west_rps}"
-        experiment.set_name(experiment_name)
-        experiment_list.append(experiment)
+    #     east_rps = 300
+    #     hillclimb_interval = 30
+    #     duration = 60 * 5
+    #     experiment.set_hillclimb_interval(hillclimb_interval)
+        
+    #     if west_rps > 0:
+    #         experiment.add_workload(utils.Workload(cluster="west", req_type=req_type, rps=[west_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
+    #     if east_rps > 0:
+    #         experiment.add_workload(utils.Workload(cluster="east", req_type=req_type, rps=[east_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
+        
+    #     experiment_name = f"{req_type}-W{west_rps}"
+    #     experiment.set_name(experiment_name)
+    #     experiment_list.append(experiment)
+
+    
+    # for west_rps in range(100, 1200, 150):
+    # # for west_rps in [300]:
+    #     method = "POST"
+    #     experiment = utils.Experiment()
+    #     req_type = "addtocart"
+    #     # req_type = "addtocart"
+    #     east_rps = 0
+    #     # duration = 60 * 60 * 2
+    #     # duration = 60 * 3
+    #     duration = 60 * 2
+        
+    #     if west_rps > 0:
+    #         experiment.add_workload(utils.Workload(cluster="west", req_type=req_type, rps=[west_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
+    #     if east_rps > 0:
+    #         experiment.add_workload(utils.Workload(cluster="east", req_type=req_type, rps=[east_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
+        
+    #     experiment_name = f"{req_type}-W{west_rps}"
+    #     experiment.set_name(experiment_name)
+    #     experiment_list.append(experiment)
+    
+    benchmark_name="onlineboutique" # a,b, 1MB and c 2MB file write
+    # for west_rps in range(200, 4000, 500):
+    # for west_rps in [300]:
+    method = "POST"
+    experiment = utils.Experiment()
+    req_type = "checkoutcart"
+    # req_type = "addtocart"
+    
+    if req_type == "checkoutcart":
+        total_num_services = 8
+    elif req_type == "addtocart":
+        total_num_services = 4
+    else:
+        print(f"req_type: {req_type} is not supported")
+        assert False
+    
+    west_rps = 100
+    central_rps = 800
+    south_rps = 100
+    east_rps = 400
+    hillclimb_interval = 30
+    duration = 60 * 20
+    experiment.set_hillclimb_interval(hillclimb_interval)
+    experiment.set_delay_injection_point(30)
+    experiment.set_injected_delay([(60 * 6, 200, "us-central-1"), (60 * 11, 1, "us-central-1"), (60 * 15, 200, "us-south-1")])
+    # experiment.set_injected_delay([])
+    if west_rps > 0:
+        experiment.add_workload(utils.Workload(cluster="west", req_type=req_type, rps=[west_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
+    if east_rps > 0:
+        experiment.add_workload(utils.Workload(cluster="east", req_type=req_type, rps=[east_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
+    if central_rps > 0:
+        experiment.add_workload(utils.Workload(cluster="central", req_type=req_type, rps=[100, central_rps], duration=[60*2, 60*18], method=method, path=onlineboutique_path[req_type]))
+    if south_rps > 0:
+        experiment.add_workload(utils.Workload(cluster="south", req_type=req_type, rps=[south_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
+
+    experiment_name = f"{req_type}-W{west_rps}"
+    experiment.set_name(experiment_name)
+    experiment_list.append(experiment)
     ####################################################################
     ####################################################################
     
     
+    #####################################
+    #### Four clusters
     region_to_node = {
         "us-west-1": ["node1"],
-        "us-east-1": ["node5"],
-        # "us-central-1": ["node3"],
-        # "us-south-1": ["node4"]
+        "us-east-1": ["node2"],
+        "us-central-1": ["node3"],
+        "us-south-1": ["node4"]
     }
-    region_latencies = {"us-west-1": { "us-east-1": 33} }
+    
+    region_latencies = {
+        "us-west-1": {
+            "us-central-1": 15,
+            "us-south-1": 20,
+            "us-east-1": 33,
+        },
+        "us-east-1": {
+            "us-south-1": 15,
+            "us-central-1": 20,
+        },
+        "us-central-1": {
+            "us-south-1": 10,
+        }
+    }
+    #####################################
+    
+    #####################################
+    #### Two clusters
+    # region_to_node = {
+    #     "us-west-1": ["node1"],
+    #     "us-east-1": ["node2"],
+    # }
+    
+    # region_latencies = {
+    #     "us-west-1": {
+    #         "us-east-1": 33,
+    #     }
+    # }
+    #####################################
+    
     node_to_region = {}
     for region, nodes in region_to_node.items():
         for n in nodes:
@@ -527,6 +659,8 @@ def main():
     CONFIG["load_coef_flag"] = 1
     
     
+    utils.restart_deploy(deploy=["slate-controller"])
+    
     # utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-west-1"])
     
     
@@ -534,155 +668,147 @@ def main():
         for routing_rule in routing_rule_list:
             output_dir = f"{sys_arg_dir_name}/{experiment.name}/{routing_rule}"
             utils.start_background_noise(node_dict, CONFIG['background_noise'], victimize_node="node1", victimize_cpu=CONFIG['background_noise'])
+
+            update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-central-1")
+            update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-south-1")   
+            print(f"mode: {mode}")
+            print(f"routing_rule: {routing_rule}")
+            utils.check_all_pods_are_ready()
+            utils.create_dir(output_dir)
+            utils.create_dir(f"{output_dir}/resource_alloc")
+            utils.create_dir(f"{output_dir}/resource_usage")
+            print(f"**** output_dir: {output_dir}")
+            for workload in experiment.workloads:
+                CONFIG[f"RPS,{workload.cluster},{workload.req_type}"] = ",".join(map(str, workload.rps))
+            CONFIG["routing_rule"] = routing_rule
+            CONFIG["capacity"] = 0
+            CONFIG["hillclimb_interval"] = experiment.hillclimb_interval
+            CONFIG['path'] = workload.path
+            CONFIG['method'] = workload.method
+            CONFIG["req_type"] = workload.req_type
+            CONFIG["cluster"] = workload.cluster
+            CONFIG["duration"] = workload.duration
+            CONFIG["output_dir"] = output_dir
+            utils.file_write_env_file(CONFIG)
+            utils.file_write_config_file(CONFIG, f"{output_dir}/experiment-config.txt")
+            # update env.txt and scp to slate-controller pod
+            utils.kubectl_cp_from_host_to_slate_controller_pod("env.txt", "/app/env.txt")
             if mode == "runtime":
-                if routing_rule == "SLATE-with-jumping-global" or routing_rule == "SLATE-with-jumping-local":
-                    update_hillclimbing_value("default", "slate-wasm-plugin", "HILLCLIMBING", "true")
-                    if routing_rule == "SLATE-with-jumping-global":
-                        change_jumping_mode(local=False)
-                    else:
-                        change_jumping_mode(local=True)
-                else:
-                    update_hillclimbing_value("default", "slate-wasm-plugin", "HILLCLIMBING", "false")
-                    change_jumping_mode(local=True)
-                update_hillclimbing_value("default", "slate-wasm-plugin", "HILLCLIMB_INTERVAL", str(experiment.hillclimb_interval))
-                print(f"injecting delay: {experiment.injected_delay}ms")
-                update_virtualservice_latency_k8s("frontend-vs", "default", f"{experiment.injected_delay}ms")
-            else:
-                change_jumping_mode(local=False) # just use the latest stuff
-                
-            # todo this should be restarting all regions
+                utils.kubectl_cp_from_host_to_slate_controller_pod("poly-coef_multiplied_by_one-checkout-profile-30bg.csv", "/app/coef.csv")
+                utils.kubectl_cp_from_host_to_slate_controller_pod("e2e-poly-coef_multiplied_by_one-checkout-profile-30bg.csv", "/app/e2e-coef.csv")
+                slatelog = f"{benchmark_name}-trace.csv"
+                utils.kubectl_cp_from_host_to_slate_controller_pod(slatelog, "/app/trace.csv")
+                t=5
+                print(f"sleep for {t} seconds to wait for the training to be done in global controller")
+                for i in range(t):
+                    time.sleep(1)
+                    print(f"start in {t-i} seconds")
             
-            # utils.restart_deploy(deploy=["slate-controller", "sslateingress-us-west-1", "sslateingress-us-east-1", "frontend-us-west-1", "frontend-us-east-1", "productcatalogservice-us-west-1", "productcatalogservice-us-east-1", "cartservice-us-west-1", "cartservice-us-east-1"])
             
-            # utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-west-1"])
-
-
-            for capacity in waterfall_capacity_set:
-                print(f"mode: {mode}")
-                print(f"routing_rule: {routing_rule}")
-                print(f"capacity: {capacity}")
-                utils.check_all_pods_are_ready()
-                if "WATERFALL" in routing_rule:
-                    output_dir += f"-cap{capacity}"
-                utils.create_dir(output_dir)
-                utils.create_dir(f"{output_dir}/resource_alloc")
-                utils.create_dir(f"{output_dir}/resource_usage")
-                print(f"**** output_dir: {output_dir}")
-                recalculated_capacity = capacity
-                # update env.txt and scp to slate-controller pod
-                utils.kubectl_cp_from_host_to_slate_controller_pod("env.txt", "/app/env.txt")
-                if mode == "runtime":
-                    utils.kubectl_cp_from_host_to_slate_controller_pod("poly-coef_multiplied_by_one-resilience.csv", "/app/coef.csv")
-                    slatelog = f"{benchmark_name}-trace.csv"
-                    utils.kubectl_cp_from_host_to_slate_controller_pod(slatelog, "/app/trace.csv")
-                    t=5
-                    print(f"sleep for {t} seconds to wait for the training to be done in global controller")
-                    for i in range(t):
-                        time.sleep(1)
-                        print(f"start in {t-i} seconds")
-                
+            ############################################################################
+            ############################################################################
+            print(f"starting experiment at {datetime.now()}, expected to finish at {datetime.now() + timedelta(seconds=sum(workload.duration))}")
+            for (point, delay, targetregion) in experiment.injected_delay:
+                call_with_delay(point, update_virtualservice_latency_k8s, "checkoutservice-vs", "default", f"{delay}ms", targetregion)
+                print(f"injecting delay: {delay}ms at {point} seconds")
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                future_list = list()
                 for workload in experiment.workloads:
-                    CONFIG[f"RPS,{workload.cluster},{workload.req_type}"] = ",".join(map(str, workload.rps))
-                CONFIG["routing_rule"] = routing_rule
-                CONFIG["capacity"] = recalculated_capacity
-                CONFIG["hillclimb_interval"] = experiment.hillclimb_interval
-                utils.file_write_env_file(CONFIG)
-                CONFIG['path'] = workload.path
-                CONFIG['method'] = workload.method
-                CONFIG["req_type"] = workload.req_type
-                CONFIG["cluster"] = workload.cluster
-                CONFIG["duration"] = workload.duration
-                CONFIG["output_dir"] = output_dir
-                utils.file_write_config_file(CONFIG, f"{output_dir}/experiment-config.txt")
-                
-                ############################################################################
-                ############################################################################
-                with concurrent.futures.ThreadPoolExecutor() as executor:
-                    future_list = list()
-                    for workload in experiment.workloads:
-                        future_list.append(executor.submit(utils.run_newer_generation_client, workload, output_dir))
-                        time.sleep(0.1)
-                    for future in concurrent.futures.as_completed(future_list):
-                        print(future.result())
-                print("All clients have completed.")
-                ############################################################################
-                ############################################################################
-                
-                flist = ["/app/env.txt", "/app/endpoint_rps_history.csv", "/app/error.log", "/app/hillclimbing_distribution_history.csv", "/app/global_hillclimbing_distribution_history.csv"]
-                for src_in_pod in flist:
-                    dst_in_host = f'{output_dir}/{routing_rule}-{src_in_pod.split("/")[-1]}'
-                    utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
-                    # utils.run_command(f"python plot_rps.py {dst_in_host}")
-                if mode == "profile":
-                    src_in_pod = "/app/trace_string.csv"
-                    dst_in_host = f"{output_dir}/trace.slatelog"
-                    utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
-                elif mode == "runtime":
-                    if "WATERFALL" in routing_rule or "SLATE" in routing_rule:
-                        other_file_list = ["coefficient.csv", "routing_history.csv"] # "constraint.csv", "variable.csv", "network_df.csv", "compute_df.csv"
-                        for file in other_file_list:
-                            src_in_pod = f"/app/{file}"
-                            dst_in_host = f"{output_dir}/{routing_rule}-{file}"
-                            utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
-                else:
-                    print(f"mode: {mode} is not supported")
-                    assert False
-                
+                    future_list.append(executor.submit(utils.run_newer_generation_client, workload, output_dir))
+                    time.sleep(0.1)
+                for future in concurrent.futures.as_completed(future_list):
+                    print(future.result())
+            print("All clients have completed.")
+            ############################################################################
+            ############################################################################
+            
+            flist = ["/app/env.txt", "/app/endpoint_rps_history.csv", "/app/error.log", "/app/hillclimbing_distribution_history.csv", "/app/global_hillclimbing_distribution_history.csv"]
+            for src_in_pod in flist:
+                dst_in_host = f'{output_dir}/{routing_rule}-{src_in_pod.split("/")[-1]}'
+                utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
+                # utils.run_command(f"python plot_rps.py {dst_in_host}")
+            if mode == "profile":
+                src_in_pod = "/app/trace_string.csv"
+                dst_in_host = f"{output_dir}/trace.slatelog"
+                utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
+            elif mode == "runtime":
+                if "WATERFALL" in routing_rule or "SLATE" in routing_rule:
+                    other_file_list = ["coefficient.csv", "routing_history.csv", "jumping_routing_history.csv", "jumping_latency.csv", "region_jumping_latency.csv"] # "constraint.csv", "variable.csv", "network_df.csv", "compute_df.csv"
+                    for file in other_file_list:
+                        src_in_pod = f"/app/{file}"
+                        dst_in_host = f"{output_dir}/{routing_rule}-{file}"
+                        utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
+            else:
+                print(f"mode: {mode} is not supported")
+                assert False
+            
 
-                # utils.run_command(f"mkdir -p {output_dir}/client-all")
-                # utils.run_command(f"touch {output_dir}/client-all/client.req.latency.0.csv")
-                # utils.run_command(f"touch {output_dir}/client-all/client.req.count.0.csv")
-                # utils.run_command(f"touch {output_dir}/client-all/client.req.failure.count.0.csv")
-                # utils.run_command(f"touch {output_dir}/client-all/client.req.client.req.success.count.0.csv")
+            utils.run_command(f"mkdir -p {output_dir}/client-all")
+            utils.run_command(f"touch {output_dir}/client-all/client.req.latency.0.csv")
+            utils.run_command(f"touch {output_dir}/client-all/client.req.count.0.csv")
+            utils.run_command(f"touch {output_dir}/client-all/client.req.failure.count.0.csv")
+            utils.run_command(f"touch {output_dir}/client-all/client.req.client.req.success.count.0.csv")
+            
+            if os.path.isdir(f"/users/gangmuk/projects/client/{output_dir}/client-west"):
+                utils.run_command(f"cat {output_dir}/client-west/client.req.latency.0.csv >> {output_dir}/client-all/client.req.latency.0.csv")
+                utils.run_command(f"cat {output_dir}/client-west/client.req.latency.0.csv >> {output_dir}/client-all/client.req.count.0.csv")
+                utils.run_command(f"cat {output_dir}/client-west/client.req.latency.0.csv >> {output_dir}/client-all/client.req.failure.count.0.csv")
+                utils.run_command(f"cat {output_dir}/client-west/client.req.latency.0.csv >> {output_dir}/client-all/client.req.success.count.0.csv")
+            else:
+                print(f"client-west does not exist in {output_dir}. skip plotting")
                 
-                # if os.path.isdir(f"/users/gangmuk/projects/client/{output_dir}/client-west"):
-                #     utils.run_command(f"python fast_plot.py --data_dir {output_dir}/client-west")
-                    
-                #     utils.run_command(f"cat {output_dir}/client-west/client.req.latency.0.csv >> {output_dir}/client-all/client.req.latency.0.csv")
-                #     utils.run_command(f"cat {output_dir}/client-west/client.req.latency.0.csv >> {output_dir}/client-all/client.req.count.0.csv")
-                #     utils.run_command(f"cat {output_dir}/client-west/client.req.latency.0.csv >> {output_dir}/client-all/client.req.failure.count.0.csv")
-                #     utils.run_command(f"cat {output_dir}/client-west/client.req.latency.0.csv >> {output_dir}/client-all/client.req.success.count.0.csv")
-                # else:
-                #     print(f"client-west does not exist in {output_dir}. skip plotting")
-                    
-                # if os.path.isdir(f"/users/gangmuk/projects/client/{output_dir}/client-east"):
-                #     utils.run_command(f"python fast_plot.py --data_dir {output_dir}/client-east")
-                    
-                #     utils.run_command(f"cat {output_dir}/client-east/client.req.latency.0.csv >> {output_dir}/client-all/client.req.latency.0.csv")
-                #     utils.run_command(f"cat {output_dir}/client-east/client.req.latency.0.csv >> {output_dir}/client-all/client.req.count.0.csv")
-                #     utils.run_command(f"cat {output_dir}/client-east/client.req.latency.0.csv >> {output_dir}/client-all/client.req.failure.count.0.csv")
-                #     utils.run_command(f"cat {output_dir}/client-east/client.req.latency.0.csv >> {output_dir}/client-all/client.req.success.count.0.csv")
-                # else:
-                #     print(f"client-east does not exist in {output_dir}. skip plotting")
-                    
-                if routing_rule == "SLATE-with-jumping" and os.path.exists(f"{output_dir}/SLATE-hillclimbing_distribution_history.csv"):
-                    utils.run_command(f"python plot_hillclimb.py {output_dir}/SLATE-hillclimbing_distribution_history.csv {output_dir}/hillclimb.pdf")     
-                
-                '''end of one set of experiment'''
-  
-                # utils.run_command("kubectl rollout restart deploy slate-controller")
+            if os.path.isdir(f"/users/gangmuk/projects/client/{output_dir}/client-east"):
+                utils.run_command(f"cat {output_dir}/client-east/client.req.latency.0.csv >> {output_dir}/client-all/client.req.latency.0.csv")
+                utils.run_command(f"cat {output_dir}/client-east/client.req.latency.0.csv >> {output_dir}/client-all/client.req.count.0.csv")
+                utils.run_command(f"cat {output_dir}/client-east/client.req.latency.0.csv >> {output_dir}/client-all/client.req.failure.count.0.csv")
+                utils.run_command(f"cat {output_dir}/client-east/client.req.latency.0.csv >> {output_dir}/client-all/client.req.success.count.0.csv")
+            else:
+                print(f"client-east does not exist in {output_dir}. skip plotting")
+            
+            if os.path.isdir(f"/users/gangmuk/projects/client/{output_dir}/client-south"):
+                utils.run_command(f"cat {output_dir}/client-south/client.req.latency.0.csv >> {output_dir}/client-all/client.req.latency.0.csv")
+                utils.run_command(f"cat {output_dir}/client-south/client.req.latency.0.csv >> {output_dir}/client-all/client.req.count.0.csv")
+                utils.run_command(f"cat {output_dir}/client-south/client.req.latency.0.csv >> {output_dir}/client-all/client.req.failure.count.0.csv")
+                utils.run_command(f"cat {output_dir}/client-south/client.req.latency.0.csv >> {output_dir}/client-all/client.req.success.count.0.csv")
+            else:
+                print(f"client-east south not exist in {output_dir}. skip plotting")
 
-                ## add to cart restart
-                # utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=["sslateingress", "frontend", "productcatalogservice", "cartservice"], regions=["us-west-1"])
+            if os.path.isdir(f"/users/gangmuk/projects/client/{output_dir}/client-central"):
+                utils.run_command(f"cat {output_dir}/client-central/client.req.latency.0.csv >> {output_dir}/client-all/client.req.latency.0.csv")
+                utils.run_command(f"cat {output_dir}/client-central/client.req.latency.0.csv >> {output_dir}/client-all/client.req.count.0.csv")
+                utils.run_command(f"cat {output_dir}/client-central/client.req.latency.0.csv >> {output_dir}/client-all/client.req.failure.count.0.csv")
+                utils.run_command(f"cat {output_dir}/client-central/client.req.latency.0.csv >> {output_dir}/client-all/client.req.success.count.0.csv")
+            else:
+                print(f"client-central does not exist in {output_dir}. skip plotting")
                 
+            # utils.run_command(f"python fast_plot.py --data_dir {output_dir}")
                 
-                    ## checkout cart restart
-                # utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-west-1"])
-                print("SKIP RESTART")
-                
-                # utils.restart_deploy(deploy=["slate-controller", "sslateingress-us-west-1", "sslateingress-us-east-1", "frontend-us-west-1", "frontend-us-east-1", "productcatalogservice-us-west-1", "productcatalogservice-us-east-1", "cartservice-us-west-1", "cartservice-us-east-1"])
-                # utils.run_command("kubectl rollout restart deploy -l=region=us-west-1", required=True)
-                utils.pkill_background_noise(node_dict)
-                
-                if "WATERFALL" not in routing_rule:
-                    print("NOTE: BREAK")
-                    print(f"NOTE: BREAK {routing_rule} for capacity setting (last run with capacity {capacity})")
-                    print("NOTE: BREAK")
-                    break
-        utils.restart_deploy(deploy=["slate-controller"])
-    savelogs(output_dir, services=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'])
+            # if routing_rule.startswith("SLATE-with-jumping") and os.path.exists(f"{output_dir}/SLATE-with-jumping-global-jumping_routing_history.csv"):
+            utils.run_command(f"python plot_gc_jumping.py {output_dir}/{routing_rule}-jumping_routing_history.csv {output_dir}/{routing_rule}-jumping_latency.csv {output_dir}/central-ruleset-jumping.pdf {output_dir}/south-ruleset-jumping.pdf",required=False)
+            utils.run_command(f"python plot_region_latency.py {output_dir}/{routing_rule}-region_jumping_latency.csv {output_dir}/region_jumping_latency.pdf",required=False)
+            utils.run_command(f"python fast_plot_all.py --data_dir {output_dir}",required=False)
+                # utils.run_command(f"python plot_gc_jumping ")
+            
+            '''end of one set of experiment'''
+            
+            ## restart slate-controller            
+            ## add to cart restart
+            # utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=["sslateingress", "frontend", "productcatalogservice", "cartservice"], regions=["us-west-1"])
+            
+            ## checkout cart restart
+            # utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-west-1"])
+            
+            utils.pkill_background_noise(node_dict)
+            
+            
+        # if experiment_name.startswith("addtocart"):
+        #     utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=["sslateingress", "frontend", "productcatalogservice", "cartservice"], regions=["us-west-1"])
+        # else:
+        #     utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-west-1"])  
 
-
+            # savelogs(output_dir, services=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-central-1"])
+            save_controller_logs(output_dir)
+            utils.restart_deploy(deploy=["slate-controller"])
     for node in node_dict:
         utils.run_command(f"ssh gangmuk@{node_dict[node]['hostname']} sudo tc qdisc del dev eno1 root", required=False, print_error=False)
         print(f"delete tc qdisc rule in {node_dict[node]['hostname']}")

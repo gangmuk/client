@@ -1,3 +1,3 @@
-python run_onlineboutique.py 15 profiletest-100m 100m
-python run_onlineboutique.py 15 profiletest-200m 200m
-python run_onlineboutique.py 15 profiletest-400m 400m
+python run_onlineboutique.py 0 addtocart-profile-0bg
+python run_onlineboutique.py 30 addtocart-profile-30bg
+python run_onlineboutique.py 50 addtocart-profile-50bg

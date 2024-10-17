@@ -1,10 +1,7 @@
-#!/usr/bin/python
-
 import matplotlib.pyplot as plt
 import csv
 import sys
 import os
-from collections import Counter
 import numpy as np
 import pandas as pd
 import argparse
@@ -39,10 +36,9 @@ def preprocess_data(args, x_, y_, xstart, total_duration):
 
 # Main plotting function
 def plot_data(cluster_data_dir, cluster, ax1, ax2, plt):
-    
     # Stats dump interval so we can calculate rates.
     stats_dump_interval = 1.0
-    
+
     # Read data from CSV files
     in_rq_rate_x, in_rq_rate_y = xy_from_csv("client.rps.0.csv", cluster_data_dir)
     out_rq_rate_x, out_rq_rate_y = xy_from_csv("client.req.count.0.csv", cluster_data_dir)
@@ -50,12 +46,9 @@ def plot_data(cluster_data_dir, cluster, ax1, ax2, plt):
     rq_latency_x, rq_latency_y = xy_from_csv("client.req.latency.0.csv", cluster_data_dir)
     success_x, _ = xy_from_csv("client.req.success_hist.0.csv", cluster_data_dir)
     goodput_x, goodput_y = xy_from_csv("client.req.success.count.0.csv", cluster_data_dir)
-    # goodput_y = [y / stats_dump_interval for y in goodput_y]
     failure_x, failure_y = xy_from_csv("client.req.failure.count.0.csv", cluster_data_dir)
     timeout_x, timeout_y = xy_from_csv("client.req.timeout.0.csv", cluster_data_dir)
     timeout_origin_x, timeout_origin_y = xy_from_csv("client.req.timeout_origin.0.csv", cluster_data_dir)
-    
-   
 
     # Determine x-axis limits
     all_x_values = in_rq_rate_x + out_rq_rate_x + rq_latency_x + goodput_x + failure_x + timeout_x + timeout_origin_x
@@ -63,45 +56,14 @@ def plot_data(cluster_data_dir, cluster, ax1, ax2, plt):
     xend = max(all_x_values)
     total_duration = (xend - xstart) / 1e9  # Convert to seconds
     xend = (total_duration - args.clip_end)
-    
+
     # Adjust the x-values
-    # adjusted_latency_x = adjust(rq_latency_x, xstart)
-    # adjusted_in_rq_rate_x = adjust(in_rq_rate_x, xstart)
-    # adjusted_goodput_x = adjust(goodput_x, xstart)
-    # adjusted_failure_x = adjust(failure_x, xstart)
-    # adjusted_retry_rate_x = adjust(retry_rate_x, xstart)
-    # adjusted_timeout_x = adjust(timeout_x, xstart)
-    
-    ## Filter latency data
-    # latency_mask = [(args.clip_front <= t <= (total_duration - args.clip_end)) for t in adjusted_latency_x]
-    # adjusted_latency_x = np.array(adjusted_latency_x)[latency_mask]
-    # rq_latency_y = np.array(rq_latency_y[latency_mask])
     adjusted_latency_x, rq_latency_y = preprocess_data(args, rq_latency_x, rq_latency_y, xstart, total_duration)
-
-    ## Filter other datasets similarly if they are used in plotting
-    # in_rq_rate_mask = [(args.clip_front <= t <= (total_duration - args.clip_end)) for t in adjusted_in_rq_rate_x]
-    # adjusted_in_rq_rate_x = np.array(adjusted_in_rq_rate_x)[in_rq_rate_mask]
-    # in_rq_rate_y = np.array(in_rq_rate_y)[in_rq_rate_mask]
     adjusted_in_rq_rate_x, in_rq_rate_y = preprocess_data(args, in_rq_rate_x, in_rq_rate_y, xstart, total_duration)
-
-    # goodput_mask = [(args.clip_front <= t <= (total_duration - args.clip_end)) for t in adjusted_goodput_x]
-    # adjusted_goodput_x = np.array(adjusted_goodput_x)[goodput_mask]
-    # goodput_y = np.array(goodput_y)[goodput_mask]
     adjusted_goodput_x, goodput_y = preprocess_data(args, goodput_x, goodput_y, xstart, total_duration)
-
-    # failure_mask = [(args.clip_front <= t <= (total_duration - args.clip_end)) for t in adjusted_failure_x]
-    # adjusted_failure_x = np.array(adjusted_failure_x)[failure_mask]
-    # failure_y = np.array(failure_y)[failure_mask]
     adjusted_failure_x, failure_y = preprocess_data(args, failure_x, failure_y, xstart, total_duration)
-
-    # retry_rate_mask = [(args.clip_front <= t <= (total_duration - args.clip_end)) for t in adjusted_retry_rate_x]
-    # adjusted_retry_rate_x = np.array(adjusted_retry_rate_x)[retry_rate_mask]
-    # retry_rate_y = np.array(retry_rate_y)[retry_rate_mask]
     adjusted_retry_rate_x, retry_rate_y = preprocess_data(args, retry_rate_x, retry_rate_y, xstart, total_duration)
-    
-    failure_and_success_y = [failure_y[i] + goodput_y[i] for i in range(len(failure_y))]
-    failure_and_success_x = adjusted_failure_x
-    
+
     # Plot request latency with binning to improve performance
     ax1.set_xlabel('Time (s)', fontsize=22)
     ax1.set_ylabel('Latency (ms)', fontsize=22)
@@ -111,15 +73,13 @@ def plot_data(cluster_data_dir, cluster, ax1, ax2, plt):
         sample_fraction = 0.1
         sample_size = max(int(len(rq_latency_y) * sample_fraction), 1)
         if sample_size < len(rq_latency_y):
-            # Use numpy to randomly select indices
             indices = np.random.choice(len(rq_latency_y), size=sample_size, replace=False)
             sampled_adjusted_latency_x = adjusted_latency_x[indices]
             sampled_rq_latency_y = rq_latency_y[indices]
         else:
             sampled_adjusted_latency_x = adjusted_latency_x
             sampled_rq_latency_y = rq_latency_y
-        ax1.scatter(sampled_adjusted_latency_x, sampled_rq_latency_y,
-                    label=f"Observed Latency-{cluster} (Sampled {sample_fraction*100}%)", marker='.', alpha=0.2)
+        ax1.scatter(sampled_adjusted_latency_x, sampled_rq_latency_y, label=f"Observed Latency-{cluster} (Sampled {sample_fraction*100}%)", marker='.', alpha=0.2)
     elif latency_trend_plot_scheme == "all":
         ax1.scatter(adjusted_latency_x, rq_latency_y, label="Observed Latency", marker='.', alpha=0.2)
     elif latency_trend_plot_scheme == "average":
@@ -137,47 +97,22 @@ def plot_data(cluster_data_dir, cluster, ax1, ax2, plt):
     ax1.tick_params(axis='y', labelsize=20)
     ax1.set_xlim([args.clip_front, (total_duration - args.clip_end)])
     ax1.set_ylim(bottom=0)
-    # ax1.set_ylim([0, max(rq_latency_y) * 1.05])
     ax1.legend(fontsize=10, loc='upper right')
 
     # Plot offered load, goodput, failure, and retries
     ax2.set_xlabel('Time (s)', fontsize=22)
     ax2.set_ylabel('Load', fontsize=22)
-    if cluster == "west":
-        linestyle = "-"
-    else:
-        linestyle = "--"
+    linestyle = "-"
     ax2.plot(adjusted_goodput_x, goodput_y, color="green", label=f"Goodput-{cluster}", linestyle=linestyle)
     ax2.plot(adjusted_failure_x, failure_y, color="black", label=f"Failure-{cluster}", linestyle=linestyle)
-    # ax2.plot(adjusted_retry_rate_x, retry_rate_y, color="cyan", label=f"Retries-{cluster}", marker='x', linestyle=linestyle)
     ax2.plot(adjusted_in_rq_rate_x, in_rq_rate_y, label=f"Load-{cluster}", linestyle=linestyle)
-    
-    # ax2.plot(adjusted_failure_x, failure_and_success_y, label=f"success + failure-{cluster}", linestyle=linestyle)
 
-    # # Update statistics after clipping
-    # num_timeout = len([t for t in adjusted_timeout_x if args.clip_front <= t <= (total_duration - args.clip_end)])
-    # num_failure = len(adjusted_failure_x)
-
-    # stats_text = (
-    #     f"Timeouts: {num_timeout}\n"
-    #     f"Failures: {num_failure}"
-    # )
-    # plt.text(
-    #     0.95, 0.05, stats_text,
-    #     horizontalalignment='right',
-    #     verticalalignment='bottom',
-    #     transform=plt.gcf().transFigure,
-    #     fontsize=16,
-    #     bbox=dict(facecolor='white', alpha=0.5)
-    # )
     ax2.tick_params(axis='x', labelsize=20)
     ax2.tick_params(axis='y', labelsize=20)
     ax2.set_xlim([args.clip_front, (total_duration - args.clip_end)])
-    # ax2_ylim = max([max(seq) for seq in [in_rq_rate_y, goodput_y, failure_y] if len(seq) > 0])
-    # ax2.set_ylim([0, ax2_ylim*1.05])
     ax2.grid(True)
     ax2.legend(fontsize=8, ncol=4, loc='upper center', bbox_to_anchor=(0.5, 1.20), borderaxespad=0)
-    
+
 
 def plot_cdf(cluster_data_dir, cluster, plt):
     # Read latency data along with timestamps
@@ -218,12 +153,11 @@ def plot_cdf(cluster_data_dir, cluster, plt):
         f"Max: {max_latency:.2f} ms ({cluster})\n"
         "---------------------\n"
     )
-    
+    print(stats_text)
+
     return stats_text
 
 # Main function to run the script
-
-    
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data_dir", type=str, help="Path to the data directory", required=True)
@@ -236,32 +170,24 @@ if __name__ == "__main__":
     if not os.path.exists(args.data_dir):
         print(f"No data directory provided or found: {args.data_dir}")
         sys.exit(1)
-    
-    if not os.path.exists(f"{args.data_dir}/client-west") and not os.path.exists(f"{args.data_dir}/client-east"):
-        print(f"Data directory {args.data_dir} does not contain client-west or client-east subdirectories.")
-        print(f"You need at least one to plot")
+
+    if not os.path.exists(f"{args.data_dir}/client-all"):
+        print(f"Data directory {args.data_dir} does not contain client-all subdirectory.")
         sys.exit(1)
-    
-    ## Plot timelinen graph
-    fig, (ax1, ax2) = plt.subplots(2, figsize=(10, 8)) # This is for plotting all cluster in the same graph
-    if os.path.exists(f"{args.data_dir}/client-west"):
-        plot_data(f"{args.data_dir}/client-central", "central", ax1, ax2, plt)
-    if os.path.exists(f"{args.data_dir}/client-east"):
-        plot_data(f"{args.data_dir}/client-south", "south", ax1, ax2, plt)
+
+    # Plot timeline graph
+    fig, (ax1, ax2) = plt.subplots(2, figsize=(10, 8))  # This is for plotting all clusters in the same graph
+    plot_data(f"{args.data_dir}/client-all", "all", ax1, ax2, plt)
     plt.tight_layout()
     result_path = f"{args.data_dir}/new-result.pdf"
     plt.savefig(result_path)
     print(f"Plot latency timeline saved to ./{result_path}")
     plt.show()
-        
-    ## Plot CDF
+
+    # Plot CDF
     plt.figure(figsize=(6, 5))
-    stats_text = ""
-    if os.path.exists(f"{args.data_dir}/client-east"):
-        stats_text += plot_cdf(f"{args.data_dir}/client-east", "east", plt)
-    if os.path.exists(f"{args.data_dir}/client-west"):
-        stats_text += plot_cdf(f"{args.data_dir}/client-west", "west", plt)
-    
+    stats_text = plot_cdf(f"{args.data_dir}/client-all", "all", plt)
+
     plt.text(
         0.95, 0.05, stats_text,
         horizontalalignment='right',
@@ -270,7 +196,7 @@ if __name__ == "__main__":
         fontsize=8,
         bbox=dict(facecolor='white', alpha=0.5)
     )
-    
+
     plt.xlabel('Latency (ms)', fontsize=20)
     plt.ylabel('Cumulative Probability', fontsize=20)
     plt.title('CDF of Request Latency', fontsize=20)
@@ -279,8 +205,8 @@ if __name__ == "__main__":
     plt.xlim(left=0)
     plt.ylim([0, 1.01])
     plt.legend(fontsize=12, loc='upper right')
-    plt.tight_layout()    
-    
+    plt.tight_layout()
+
     result_path = f"{args.data_dir}/new-cdf.pdf"
     plt.savefig(result_path)
     print(f"Plot CDF saved to ./{result_path}")

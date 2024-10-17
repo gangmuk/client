@@ -1,5 +1,6 @@
 from kubernetes import client, config
 import yaml
+import os, subprocess
 replMap = {
     "gcr.io/google-samples/microservices-demo/frontend:v0.10.1": "docker.io/adiprerepa/boutique-frontend:latest",
     "gcr.io/google-samples/microservices-demo/checkoutservice:v0.10.1": "docker.io/adiprerepa/boutique-checkout:latest",
@@ -212,5 +213,89 @@ def update_image_pull_policy():
             )
             print(f"Updated imagePullPolicy to IfNotPresent for deployment: {deployment.metadata.name}")
 
+
+def set_retries_to_zero(namespace="default"):
+    # Load Kubernetes configuration (assuming you have access via kubectl)
+    config.load_kube_config()
+
+    # Create an API client for Custom Objects and Networking API
+    api_instance = client.CustomObjectsApi()
+    networking_v1beta1 = client.NetworkingV1beta1Api()
+
+    # List all DestinationRule resources in the specified namespace
+    destination_rules = api_instance.list_namespaced_custom_object(
+        group="networking.istio.io",
+        version="v1beta1",
+        namespace=namespace,
+        plural="destinationrules"
+    )
+
+    for rule in destination_rules.get('items', []):
+        spec = rule.get('spec', {})
+        traffic_policy = spec.get('trafficPolicy', {})
+        
+        # Set retries attempts to 0 if 'retries' exists in the traffic policy
+        if 'retries' in traffic_policy:
+            traffic_policy['retries']['attempts'] = 0
+        else:
+            # Add retry policy if it doesn't exist
+            traffic_policy['retries'] = {
+                'attempts': 0,
+                'perTryTimeout': '2s'  # Optionally set a timeout, adjust as necessary
+            }
+
+        # Update the destination rule with the modified spec
+        rule_name = rule['metadata']['name']
+        print(f"Updating {rule_name}...")
+
+        # Apply the modified trafficPolicy back to the DestinationRule
+        rule['spec']['trafficPolicy'] = traffic_policy
+        api_instance.replace_namespaced_custom_object(
+            group="networking.istio.io",
+            version="v1beta1",
+            namespace=namespace,
+            plural="destinationrules",
+            name=rule_name,
+            body=rule
+        )
+
+    print("Updated all DestinationRules in namespace:", namespace)
 # update_image_pull_policy()
-remove_cpu_limits_from_deployments()
+def savelogs(parentdir, services=[], regions=["us-west-1"]):
+    # Directory to store the logs
+
+    logs_directory = f"{parentdir}/proxy-logs"
+
+    # Create the directory if it doesn't exist
+    if not os.path.exists(logs_directory):
+        os.makedirs(logs_directory)
+
+    # Get the list of all pods in the default namespace
+    try:
+        pod_list_output = subprocess.check_output(['kubectl', 'get', 'pods', '-n', 'default', '-o', 'jsonpath={.items[*].metadata.name}'])
+        pod_list = pod_list_output.decode('utf-8').split()
+        
+        # Loop through each pod
+        for pod_name in pod_list:
+            # if pod_name STARTS WITH any of the     services, then save the logs
+            if not any(pod_name.startswith(service) for service in services):
+                continue
+
+            if not any(region in pod_name for region in regions):
+                continue
+            # Retrieve logs of the istio-proxy container from the pod
+            try:
+                log_output = subprocess.check_output(['kubectl', 'logs', pod_name, '-c', 'istio-proxy', '-n', 'default'])
+                
+                # Save the logs to a file in the proxy-logs directory
+                with open(f"{logs_directory}/{pod_name}.txt", "w") as log_file:
+                    log_file.write(log_output.decode('utf-8'))
+                print(f"Logs for {pod_name} saved successfully.")
+            
+            except subprocess.CalledProcessError as e:
+                print(f"Error retrieving logs for {pod_name}: {e}")
+                
+    except subprocess.CalledProcessError as e:
+        print(f"Error fetching pod list: {e}")
+
+savelogs("tout", services=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'])
