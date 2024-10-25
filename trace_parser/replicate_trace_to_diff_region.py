@@ -44,7 +44,8 @@ profiling = True
 trace_str = list()
 # x_feature = "num_inflight_dict"
 x_feature = "rps_dict"
-target_y = "xt" # rt
+target_y = "xt" # exclusive time
+# target_y = "rt" # response time
 
 '''
 cluster_to_cid and cid_to_cluster should be deprecated
@@ -93,13 +94,13 @@ def fit_mm1_model(data, y_col_name, svc_name, ep_str, cid, directory):
     #plt.plot(norm_u_plot, y_plot, 'r-', label=f'MM1 Fit: $\\frac{{a}}{{c-u}}+b$,a={popt[0]}, c={u_.max()*constant}, b={popt[1]}')
     plt.plot(norm_u_plot, y_plot, 'r-', label=f'MM1 Fit: $\\frac{{a}}{{c-u}}+b$\n$a={popt[0]:.2f}, c={(u_.max()*constant):.2f}, b={popt[1]:.2f}$')
     # plt.plot(u_plot, y_plot, 'r-', label=f'MM1 Fit: $\\frac{{a}}{{1-u}}$, a={popt[0]:.2f}')
-    plt.ylim(0, 200)
+    plt.ylim(0, 500)
     plt.xlabel('Utilization (u_)')
     plt.ylabel(y_col_name + " ms")
     plt.title(f'{ep_str} in {cid}')
     plt.legend()
     plt.ylim(0, max(y_)*1.1)
-    pdf_fn = f"{directory}/latency-{svc_name}-mm1-model.pdf"
+    pdf_fn = f"{directory}/latency-{svc_name}-mm1-{target_y}.pdf"
     plt.savefig(pdf_fn)
     plt.show()
     # Output the model parameters and where the plot was saved
@@ -111,6 +112,7 @@ def fit_mm1_model(data, y_col_name, svc_name, ep_str, cid, directory):
 
 
 def fit_polynomial_regression(data, y_col_name, svc_name, ep_str, cid, directory, degree):
+    global target_y
     degree_list = [degree]
     plt.figure()
     df = pd.DataFrame(data)
@@ -131,12 +133,13 @@ def fit_polynomial_regression(data, y_col_name, svc_name, ep_str, cid, directory
         label = f'${model.coef_[0]} \cdot x^{degree} + {model.coef_[1]}$'
         plt.plot(X_plot, y_plot, linewidth=1, label=label)
         print(f"plt.plot, degree: {degree}")
-    plt.ylim(0, 200)
+    plt.ylim(0, 500)
     plt.xlabel(x_feature)
     plt.ylabel(y_col_name +" ms")
     plt.title(f'{ep_str} in {cid}')
     plt.legend()
-    pdf_fn = f"{directory}/latency-{x_feature}-{svc_name}.pdf"
+    # pdf_fn = f"{directory}/latency-{x_feature}-{svc_name}.pdf"
+    pdf_fn = f"{directory}/latency-{svc_name}-poly-{target_y}.pdf"
     plt.savefig(pdf_fn)
     print(f"**output: {pdf_fn}")
     plt.show()
@@ -178,6 +181,10 @@ def train_latency_function_with_trace(model, traces, directory, degree):
                             
                         if len(row[x_feature]) == 1:
                             data["latency"].append(row[target_y])
+                            # if xt:
+                            #     data["latency"].append(row["xt"])
+                            # else:
+                            #     data["latency"].append(row["rt"])
                         else:
                             print(f"ERROR: len(row[{x_feature}]) != 1: {len(row[x_feature])}")
                             print(f"row[{x_feature}]: {row[x_feature]}")
@@ -389,7 +396,7 @@ if __name__ == "__main__":
     #             file.writelines(lines)  # Write the updated list of lines
     #             print(f"Output, removed line {removed_line}")
         
-    df = pd.read_csv(merged_trace_file_name, header=None, names=columns)
+    df = pd.read_csv(merged_trace_file_name, header=None, names=columns, on_bad_lines='skip')
     df['endpoint'] = df['svc_name'] + "@" + df['method'] + "@" + df['path']
     
     df = df[df["rt"] > 0]
@@ -473,8 +480,8 @@ if __name__ == "__main__":
     
     ''' Define how you want to replicate '''
     new_cluster_dict = dict()
-    # replicated_cluster_list = ["us-east-1", "us-central-1", "us-south-1"]
-    replicated_cluster_list = ["us-east-1"]
+    replicated_cluster_list = ["us-east-1", "us-central-1", "us-south-1"]
+    # replicated_cluster_list = ["us-east-1"]
     for cluster in replicated_cluster_list:
         new_cluster_dict[cluster] = service_list
     new_df_dict = dict()
@@ -494,6 +501,6 @@ if __name__ == "__main__":
         cluster_id_first_ch = nc.split('-')[1][0]
         output_fn += f"{cluster_id_first_ch}-"
     output_fn += "trace.csv"
-    output_path = directory + output_fn
+    output_path = directory + "/" + output_fn
     df_all.to_csv(output_path, index=False, header=False)
     print("Output file written: ", output_path)

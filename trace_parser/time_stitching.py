@@ -661,12 +661,8 @@ def stitch_time(traces):
                 if cid not in ret_traces:
                     ret_traces[cid] = dict()
                 ret_traces[cid][tid] = traces[cid][tid]
-            else:
-                # skip this trace
-                continue
     # df = trace_to_df(traces)
     # print_all_trace(traces)
-    
     return ret_traces
 
 

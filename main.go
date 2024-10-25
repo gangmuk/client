@@ -160,7 +160,7 @@ func (c *Client) sendRequest(maxRetry int, numRetries int) (a bool) {
 		// fmt.Println("Error in sending request")
 		a = true
 		if err, ok := err.(net.Error); ok && err.Timeout() {
-			c.log.Warnw("request timed out", "client", c.tid)
+			c.log.Warnw("request timeout", "client", c.tid)
 			c.log.Warnw("Error msg", "error", err)
 			c.statsMgr.DirectMeasurement("client.req.timeout_origin", rqStart, 1.0, c.tid)
 			c.statsMgr.DirectMeasurement("client.req.timeout", rqEnd, 1.0, c.tid)
@@ -195,8 +195,10 @@ func (c *Client) sendRequest(maxRetry int, numRetries int) (a bool) {
 		c.statsMgr.DirectMeasurement("client.req.latency", rqStart, float64(latency), c.tid)
 		c.statsMgr.DirectMeasurement("client.req.success_hist", rqStart, 1.0, c.tid)
 		c.statsMgr.Incr("client.req.success.count", c.tid)
+		c.log.Infow("request successful", "requestID", c.requestID, "latency", latency)
 	case http.StatusServiceUnavailable, http.StatusTooManyRequests:
 		c.statsMgr.DirectMeasurement("client.req.503", rqStart, 1.0, c.tid)
+		c.log.Infow("requset failed with 503", "requestID", c.requestID, "latency", latency)
 		c.statsMgr.Incr("client.req.failure.count", c.tid)
 		if remainingRetry > 0 {
 			fmt.Println("Retrying request")
@@ -215,6 +217,7 @@ func (c *Client) sendRequest(maxRetry int, numRetries int) (a bool) {
 			// }()
 		}
 	case http.StatusRequestTimeout, http.StatusGatewayTimeout:
+		c.log.Infow("requset failed with timeout", "requestID", c.requestID, "latency", latency)
 		c.statsMgr.DirectMeasurement("client.req.timeout_origin", rqStart, 1.0, c.tid)
 		c.statsMgr.DirectMeasurement("client.req.timeout", rqEnd, 1.0, c.tid)
 		c.statsMgr.Incr("client.req.failure.count", c.tid)
@@ -236,6 +239,7 @@ func (c *Client) sendRequest(maxRetry int, numRetries int) (a bool) {
 		}
 	default:
 		c.log.Warnw("unexpected status code", "status", resp.StatusCode, "resp", resp, "client", c.tid)
+		c.log.Infow("requset failed with unexpected code", "requestID", c.requestID, "latency", latency)
 		c.statsMgr.Incr("client.req.failure.count", c.tid)
 	}
 	return
@@ -420,7 +424,7 @@ func main() {
 	clientConfigs := appConfig.Clients
 	statsOutputFolder := appConfig.StatsOutputFolder
 
-	nodename, err := runCommand("kubectl get nodes | grep 'node3' | awk '{print $1}'")
+	nodename, err := runCommand("kubectl get nodes | grep 'node5' | awk '{print $1}'")
 	if err != nil {
 		log.Fatalf("error getting node name: %v", err)
 	}
