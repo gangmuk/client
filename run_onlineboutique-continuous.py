@@ -24,13 +24,14 @@ import utils as utils
 
 CLOUDLAB_CONFIG_XML="/users/gangmuk/projects/slate-benchmark/config.xml"
 
+network_interface = "enp24s0f0"
 
 ########################################################################################
 ########################################################################################
 # # Execute this function to clean up resources in case of a crash
 def cleanup_on_crash():
     print("Cleaning up resources...")
-    utils.delete_tc_rule_in_client(node_dict)
+    utils.delete_tc_rule_in_client(network_interface, node_dict)
     utils.pkill_background_noise(node_dict)
     
 # Signal handler
@@ -436,93 +437,8 @@ def main():
         "emptycart": "/cart/empty"
     }
     
-    ####################################################################
-    ###################### Workload ####################################
-    ####################################################################
     experiment_list = []
-
-    # for west_rps in [500, 600, 700]:
-    # for west_rps in [600]:
-    #     for hillclimb_interval in [45]:
-    #         for injected_delay in [66]:
-    #             method = "POST"
-    #             experiment = utils.Experiment()
-    #             req_type = "addtocart"
-    #             east_rps = 100
-    #             # duration = 60 * 60 * 2
-    #             duration = 60 * 30
-                
-    #             if west_rps > 0:
-    #                 experiment.add_workload(utils.Workload(cluster="west", req_type=req_type, rps=[west_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
-    #             if east_rps > 0:
-    #                 experiment.add_workload(utils.Workload(cluster="east", req_type=req_type, rps=[east_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
-                
-    #             experiment_name = f"{req_type}-W{west_rps}-E{east_rps}-bg{background_noise}-interval{hillclimb_interval}-delay{injected_delay}"
-    #             experiment.set_name(experiment_name)
-    #             experiment.set_hillclimb_interval(hillclimb_interval)
-    #             experiment.set_injected_delay(injected_delay)
-    #             experiment_list.append(experiment)
-
-    # for west_rps in range(100, 800, 100):
-    # 250rps checkoutcart -> 190mc for each replica -> 760mc for 4 replicas
-    # try until 350/400, 350 is when it starts hitting 270mc max
-    # 300mc upper bound: 350-400rps ish
-    
-    # benchmark_name="onlineboutique" # a,b, 1MB and c 2MB file write
-    # for west_rps in [800]:
-    # # for west_rps in range(200, 4000, 500):
-    # # for west_rps in [300]:
-    #     method = "POST"
-    #     experiment = utils.Experiment()
-    #     req_type = "checkoutcart"
-    #     # req_type = "addtocart"
-        
-    #     if req_type == "checkoutcart":
-    #         total_num_services = 8
-    #     elif req_type == "addtocart":
-    #         total_num_services = 4
-    #     else:
-    #         print(f"req_type: {req_type} is not supported")
-    #         assert False
-        
-    #     east_rps = 300
-    #     hillclimb_interval = 30
-    #     duration = 60 * 5
-    #     experiment.set_hillclimb_interval(hillclimb_interval)
-        
-    #     if west_rps > 0:
-    #         experiment.add_workload(utils.Workload(cluster="west", req_type=req_type, rps=[west_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
-    #     if east_rps > 0:
-    #         experiment.add_workload(utils.Workload(cluster="east", req_type=req_type, rps=[east_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
-        
-    #     experiment_name = f"{req_type}-W{west_rps}"
-    #     experiment.set_name(experiment_name)
-    #     experiment_list.append(experiment)
-
-    
-    # for west_rps in range(100, 1200, 150):
-    # # for west_rps in [300]:
-    #     method = "POST"
-    #     experiment = utils.Experiment()
-    #     req_type = "addtocart"
-    #     # req_type = "addtocart"
-    #     east_rps = 0
-    #     # duration = 60 * 60 * 2
-    #     # duration = 60 * 3
-    #     duration = 60 * 2
-        
-    #     if west_rps > 0:
-    #         experiment.add_workload(utils.Workload(cluster="west", req_type=req_type, rps=[west_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
-    #     if east_rps > 0:
-    #         experiment.add_workload(utils.Workload(cluster="east", req_type=req_type, rps=[east_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
-        
-    #     experiment_name = f"{req_type}-W{west_rps}"
-    #     experiment.set_name(experiment_name)
-    #     experiment_list.append(experiment)
-    
     benchmark_name="onlineboutique" # a,b, 1MB and c 2MB file write
-    # for west_rps in range(200, 4000, 500):
-    # for west_rps in [300]:
     method = "POST"
     experiment = utils.Experiment()
     req_type = "checkoutcart"
@@ -536,33 +452,30 @@ def main():
         print(f"req_type: {req_type} is not supported")
         assert False
     
-    west_rps = 200
-    central_rps = 50
-    south_rps = 0
-    east_rps = 0
+    west_rps = 100
+    central_rps = 80
+    south_rps = 60
+    east_rps = 40
     hillclimb_interval = 30
     duration = 60 * 1
     experiment.set_hillclimb_interval(hillclimb_interval)
     experiment.set_delay_injection_point(30)
-    experiment.set_injected_delay([(60 * 6, 200, "us-central-1"), (60 * 11, 1, "us-central-1"), (60 * 15, 200, "us-south-1")])
+    # experiment.set_injected_delay([(60 * 6, 200, "us-central-1"), (60 * 11, 1, "us-central-1"), (60 * 15, 200, "us-south-1")])
     # experiment.set_injected_delay([])
     if west_rps > 0:
         experiment.add_workload(utils.Workload(cluster="west", req_type=req_type, rps=[west_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
     if east_rps > 0:
         experiment.add_workload(utils.Workload(cluster="east", req_type=req_type, rps=[east_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
     if central_rps > 0:
-        experiment.add_workload(utils.Workload(cluster="central", req_type=req_type, rps=[100, central_rps], duration=[60*2, 60*18], method=method, path=onlineboutique_path[req_type]))
+        #experiment.add_workload(utils.Workload(cluster="central", req_type=req_type, rps=[100, central_rps], duration=[60*2, 60*18], method=method, path=onlineboutique_path[req_type]))
+        experiment.add_workload(utils.Workload(cluster="central", req_type=req_type, rps=[central_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
     if south_rps > 0:
         experiment.add_workload(utils.Workload(cluster="south", req_type=req_type, rps=[south_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
-
-    experiment_name = f"{req_type}-W{west_rps}"
+    experiment_name = f"{req_type}-W{west_rps}-E{east_rps}-C{central_rps}-S{south_rps}-{routing_rule}"
     experiment.set_name(experiment_name)
     experiment_list.append(experiment)
-    ####################################################################
-    ####################################################################
     
     
-    #####################################
     #### Four clusters
     region_to_node = {
         "us-west-1": ["node1"],
@@ -570,7 +483,6 @@ def main():
         "us-central-1": ["node3"],
         "us-south-1": ["node4"]
     }
-    
     region_latencies = {
         "us-west-1": {
             "us-central-1": 15,
@@ -585,9 +497,7 @@ def main():
             "us-south-1": 10,
         }
     }
-    #####################################
     
-    #####################################
     #### Two clusters
     # region_to_node = {
     #     "us-west-1": ["node1"],
@@ -599,7 +509,6 @@ def main():
     #         "us-east-1": 33,
     #     }
     # }
-    #####################################
     
     node_to_region = {}
     for region, nodes in region_to_node.items():
@@ -639,8 +548,7 @@ def main():
 
 
     # if mode == "runtime":
-        # utils.delete_tc_rule_in_client(node_dict)
-        # network_interface = "eno1"
+        # utils.delete_tc_rule_in_client(network_interface, node_dict)
         # if mode == "runtime":
         #     utils.apply_all_tc_rule(network_interface, inter_cluster_latency, node_dict)
         # else:
@@ -819,7 +727,7 @@ def main():
             save_controller_logs(output_dir)
             utils.restart_deploy(deploy=["slate-controller"])
     for node in node_dict:
-        utils.run_command(f"ssh gangmuk@{node_dict[node]['hostname']} sudo tc qdisc del dev eno1 root", required=False, print_error=False)
+        utils.run_command(f"ssh gangmuk@{node_dict[node]['hostname']} sudo tc qdisc del dev {network_interface} root", required=False, print_error=False)
         print(f"delete tc qdisc rule in {node_dict[node]['hostname']}")
             
 if __name__ == "__main__":

@@ -485,9 +485,9 @@ def apply_all_tc_rule(interface, inter_cluster_latency, node_dict):
                 add_latency_rules(src_host, interface, dst_node_ip, delay)
                 print(f"Added {delay}ms from {src_host}({src_node}) to {dst_node_ip}({dst_node})")
                 
-def delete_tc_rule_in_client(node_dict):
+def delete_tc_rule_in_client(nic, node_dict):
     for node in node_dict:
-        run_command(f"ssh gangmuk@{node_dict[node]['hostname']} sudo tc qdisc del dev eno1 root", required=False, print_error=False)
+        run_command(f"ssh gangmuk@{node_dict[node]['hostname']} sudo tc qdisc del dev {nic} root", required=False, print_error=False)
         print(f"delete tc qdisc rule in {node_dict[node]['hostname']}")
 
 def file_write_experiment_config(config_dict, config_file_path):

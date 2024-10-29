@@ -211,8 +211,8 @@ def plot_cdf(cluster_data_dir, cluster, plt):
 
     stats_text = (
         f"Average: {avg_latency:.2f} ms ({cluster})\n"
-        f"P50: {p50_latency:.2f} ms ({cluster})\n"
-        f"P90: {p90_latency:.2f} ms ({cluster})\n"
+        # f"P50: {p50_latency:.2f} ms ({cluster})\n"
+        # f"P90: {p90_latency:.2f} ms ({cluster})\n"
         f"P99: {p99_latency:.2f} ms ({cluster})\n"
         f"P99.9: {p999_latency:.2f} ms ({cluster})\n"
         f"Max: {max_latency:.2f} ms ({cluster})\n"
@@ -244,10 +244,11 @@ if __name__ == "__main__":
     
     ## Plot timelinen graph
     fig, (ax1, ax2) = plt.subplots(2, figsize=(10, 8)) # This is for plotting all cluster in the same graph
-    if os.path.exists(f"{args.data_dir}/client-west"):
-        plot_data(f"{args.data_dir}/client-central", "central", ax1, ax2, plt)
-    if os.path.exists(f"{args.data_dir}/client-east"):
-        plot_data(f"{args.data_dir}/client-south", "south", ax1, ax2, plt)
+    clusters = ["west", "east", "central", "south"]
+    for cluster in clusters:
+        if os.path.exists(f"{args.data_dir}/client-{cluster}"):
+            plot_data(f"{args.data_dir}/client-{cluster}", cluster, ax1, ax2, plt)
+    
     plt.tight_layout()
     result_path = f"{args.data_dir}/new-result.pdf"
     plt.savefig(result_path)
@@ -257,10 +258,9 @@ if __name__ == "__main__":
     ## Plot CDF
     plt.figure(figsize=(6, 5))
     stats_text = ""
-    if os.path.exists(f"{args.data_dir}/client-east"):
-        stats_text += plot_cdf(f"{args.data_dir}/client-east", "east", plt)
-    if os.path.exists(f"{args.data_dir}/client-west"):
-        stats_text += plot_cdf(f"{args.data_dir}/client-west", "west", plt)
+    for cluster in clusters:
+        if os.path.exists(f"{args.data_dir}/client-{cluster}"):
+            stats_text += plot_cdf(f"{args.data_dir}/client-{cluster}", cluster, plt)
     
     plt.text(
         0.95, 0.05, stats_text,
@@ -278,7 +278,7 @@ if __name__ == "__main__":
     plt.yticks(fontsize=18)
     plt.xlim(left=0)
     plt.ylim([0, 1.01])
-    plt.legend(fontsize=12, loc='upper right')
+    plt.legend(fontsize=12, loc='upper left')
     plt.tight_layout()    
     
     result_path = f"{args.data_dir}/new-cdf.pdf"
