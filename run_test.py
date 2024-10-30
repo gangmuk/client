@@ -23,6 +23,7 @@ import atexit
 import signal
 import traceback
 import utils as utils
+import argparse
 
 
 CLOUDLAB_CONFIG_XML="/users/gangmuk/projects/slate-benchmark/config.xml"
@@ -382,9 +383,20 @@ def call_with_delay(delay, func, *args, **kwargs):
     t.daemon = True
     t.start()
 
+
 def main():
-    background_noise = int(sys.argv[1])
-    sys_arg_dir_name = sys.argv[2]
+    argparser = argparse.ArgumentParser(description="Run a benchmark experiment")
+    argparser.add_argument("--dir_name", type=str, help="Directory name to store the experiment results", required=True)
+    argparser.add_argument("--background_noise", type=int, default=0, help="Background noise level (in %)")
+    argparser.add_argument("--mode", type=str, help="Mode of operation (profile or runtime)", required=True)
+    argparser.add_argument("--routing_rule", type=str, default="SLATE-with-jumping-global", help="Routing rule to apply", choices=["LOCAL", "SLATE-without-jumping", "SLATE-with-jumping-global", "SLATE-with-jumping-local", "WATERFALL2"])
+    argparser.add_argument("--west_rps", type=int, help="RPS for the west cluster", required=True)
+    argparser.add_argument("--east_rps", type=int, help="RPS for the east cluster", required=True)
+    argparser.add_argument("--central_rps", type=int, help="RPS for the central cluster", required=True)
+    argparser.add_argument("--south_rps", type=int, help="RPS for the south cluster", required=True)
+    argparser.add_argument("--req_type", type=str, default="checkoutcart", help="Request type to test")
+    argparser.add_argument("--duration", type=int, default=60, help="Duration of the experiment (in seconds)")
+    args = argparser.parse_args()
     if len(sys.argv) < 3:
         print("Usage: python run_wrk.py <dir_name>\nexit...")
         exit()
@@ -404,7 +416,7 @@ def main():
     
     print(f"Resource limit set to {limit} for all deployments in the default namespace.")
     CONFIG = {}
-    CONFIG['background_noise'] =  background_noise
+    CONFIG['background_noise'] =  args.background_noise
     CONFIG['traffic_segmentation'] = 1
     
     
@@ -455,60 +467,52 @@ def main():
     benchmark_name="onlineboutique" # a,b, 1MB and c 2MB file write
     method = "POST"
     experiment = utils.Experiment()
-    req_type = "checkoutcart"
-    # req_type = "addtocart"
-    if req_type == "checkoutcart":
+    if args.req_type == "checkoutcart":
         total_num_services = 8
-    elif req_type == "addtocart":
+    elif args.req_type == "addtocart":
         total_num_services = 4
     else:
-        print(f"req_type: {req_type} is not supported")
+        print(f"args.req_type: {args.req_type} is not supported")
         assert False
-    west_rps = 10
-    central_rps = 10
-    south_rps = 10
-    east_rps = 10
     hillclimb_interval = 30
-    duration = 60 * 3
     experiment.set_hillclimb_interval(hillclimb_interval)
     #experiment.set_delay_injection_point(30)
     # experiment.set_injected_delay([(60 * 6, 200, "us-central-1"), (60 * 11, 1, "us-central-1"), (60 * 15, 200, "us-south-1")])
     # experiment.set_injected_delay([])
-    if west_rps > 0:
-        experiment.add_workload(utils.Workload(cluster="west", req_type=req_type, rps=[west_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
-    if east_rps > 0:
-        experiment.add_workload(utils.Workload(cluster="east", req_type=req_type, rps=[east_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
-    if central_rps > 0:
-        # experiment.add_workload(utils.Workload(cluster="central", req_type=req_type, rps=[100, central_rps], duration=[60*2, 60*18], method=method, path=onlineboutique_path[req_type]))
-        experiment.add_workload(utils.Workload(cluster="central", req_type=req_type, rps=[central_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
-    if south_rps > 0:
-        experiment.add_workload(utils.Workload(cluster="south", req_type=req_type, rps=[south_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
-    experiment_name = f"{req_type}-W{west_rps}-E{east_rps}-C{central_rps}-S{south_rps}"
+    if args.west_rps > 0:
+        experiment.add_workload(utils.Workload(cluster="west", req_type=args.req_type, rps=[args.west_rps], duration=[args.duration], method=method, path=onlineboutique_path[args.req_type]))
+    if args.east_rps > 0:
+        experiment.add_workload(utils.Workload(cluster="east", req_type=args.req_type, rps=[args.east_rps], duration=[args.duration], method=method, path=onlineboutique_path[args.req_type]))
+    if args.central_rps > 0:
+        experiment.add_workload(utils.Workload(cluster="central", req_type=req_type, rps=[args.central_rps], duration=[args.duration], method=method, path=onlineboutique_path[args.req_type]))
+    if args.south_rps > 0:
+        experiment.add_workload(utils.Workload(cluster="south", req_type=args.req_type, rps=[args.south_rps], duration=[args.duration], method=method, path=onlineboutique_path[args.req_type]))
+    experiment_name = f"{args.req_type}-W{args.west_rps}-E{args.east_rps}-C{args.central_rps}-S{args.south_rps}"
     experiment.set_name(experiment_name)
     experiment_list.append(experiment)
     
     #### Four clusters
-    region_to_node = {
-        "us-west-1": ["node1"],
-        "us-east-1": ["node2"],
-        "us-central-1": ["node3"],
-        "us-south-1": ["node4"]
-    }
+    # region_to_node = {
+    #     "us-west-1": ["node1"],
+    #     "us-east-1": ["node2"],
+    #     "us-central-1": ["node3"],
+    #     "us-south-1": ["node4"]
+    # }
     
-    region_latencies = {
-        "us-west-1": {
-            "us-central-1": 15,
-            "us-south-1": 20,
-            "us-east-1": 33,
-        },
-        "us-east-1": {
-            "us-south-1": 15,
-            "us-central-1": 20,
-        },
-        "us-central-1": {
-            "us-south-1": 10,
-        }
-    }
+    # region_latencies = {
+    #     "us-west-1": {
+    #         "us-central-1": 15,
+    #         "us-south-1": 20,
+    #         "us-east-1": 33,
+    #     },
+    #     "us-east-1": {
+    #         "us-south-1": 15,
+    #         "us-central-1": 20,
+    #     },
+    #     "us-central-1": {
+    #         "us-south-1": 10,
+    #     }
+    # }
     
     #### Two clusters
     # region_to_node = {
@@ -521,7 +525,15 @@ def main():
     #         "us-east-1": 33,
     #     }
     # }
-    #####################################
+
+    ## One clusters
+    region_to_node = {
+        "us-west-1": ["node1"],
+    }
+    
+    region_latencies = {
+        "us-west-1": {}
+    }
     
     node_to_region = {}
     for region, nodes in region_to_node.items():
@@ -587,7 +599,7 @@ def main():
     
     for experiment in experiment_list:
         for routing_rule in routing_rule_list:
-            output_dir = f"{sys_arg_dir_name}/{experiment.name}/bg-{background_noise}/{routing_rule}"
+            output_dir = f"{args.dir_name}/{experiment.name}/bg-{args.background_noise}/{routing_rule}"
             utils.start_background_noise(node_dict, CONFIG['background_noise'], victimize_node="node1", victimize_cpu=CONFIG['background_noise'])
 
             update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-central-1")
