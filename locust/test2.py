@@ -50,8 +50,9 @@ class SmoothTransitionShape(LoadTestShape):
     stages = [
         # (stage_time, start_users, end_users, west_weight, east_weight, south_weight, central_weight)
         (30, 50, 400, 0.25, 0.25, 0.25, 0.25),
-        (30, 100, 800, 0.25, 0.25, 0.25, 0.25),
-        (30, 200, 2000, 0.25, 0.25, 0.25, 0.25),
+        (30, 400, 800, 0.25, 0.25, 0.25, 0.25),
+        (30, 800, 1200, 0.25, 0.25, 0.25, 0.25),
+        (30, 1200, 2000, 0.25, 0.25, 0.25, 0.25),
     ]
 
     def tick(self):
@@ -59,18 +60,20 @@ class SmoothTransitionShape(LoadTestShape):
 
         for stage_time, start_users, end_users, west_weight, east_weight, south_weight, central_weight in self.stages:
             if run_time < stage_time:
-                # Calculate the proportion of time elapsed in the current stage
+                
                 proportion = run_time / stage_time
+                steep_proportion = proportion ** 2  # Quadratic growth for steeper changes
 
-                # Smoothly transition from start_users to end_users based on the elapsed proportion
-                target_users = math.ceil(start_users + proportion * (end_users - start_users))
-
-                # Set dynamic weights for each user class
+                ## linear
+                # target_users = math.ceil(start_users + proportion * (end_users - start_users)) 
+                
+                ## quadratic
+                target_users = math.ceil(start_users + steep_proportion * (end_users - start_users)) 
+                
                 CheckoutUserWest.weight = int(west_weight * 100)
                 CheckoutUserEast.weight = int(east_weight * 100)
                 CheckoutUserSouth.weight = int(south_weight * 100)
                 CheckoutUserCentral.weight = int(central_weight * 100)
-                
                 return (target_users, target_users // 10)  # Adjust spawn rate as needed
             run_time -= stage_time
 
