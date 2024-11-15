@@ -453,9 +453,9 @@ def main():
         assert False
     
     west_rps = 100
-    central_rps = 80
-    south_rps = 60
-    east_rps = 40
+    central_rps = 100
+    south_rps = 100
+    east_rps = 100
     hillclimb_interval = 30
     duration = 60 * 1
     experiment.set_hillclimb_interval(hillclimb_interval)
@@ -471,7 +471,7 @@ def main():
         experiment.add_workload(utils.Workload(cluster="central", req_type=req_type, rps=[central_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
     if south_rps > 0:
         experiment.add_workload(utils.Workload(cluster="south", req_type=req_type, rps=[south_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
-    experiment_name = f"{req_type}-W{west_rps}-E{east_rps}-C{central_rps}-S{south_rps}-{routing_rule}"
+    experiment_name = f"{req_type}-W{west_rps}-E{east_rps}-C{central_rps}-S{south_rps}"
     experiment.set_name(experiment_name)
     experiment_list.append(experiment)
     
@@ -574,7 +574,7 @@ def main():
     
     for experiment in experiment_list:
         for routing_rule in routing_rule_list:
-            output_dir = f"{sys_arg_dir_name}/{experiment.name}/{routing_rule}"
+            output_dir = f"{sys_arg_dir_name}/{experiment.name}/bg-{background_noise}/{routing_rule}"
             # utils.start_background_noise(node_dict, CONFIG['background_noise'], victimize_node="node1", victimize_cpu=CONFIG['background_noise'])
 
             # update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-central-1")
@@ -639,7 +639,7 @@ def main():
             ############################################################################
             ############################################################################
             
-            flist = ["/app/env.txt", "/app/endpoint_rps_history.csv", "/app/error.log", "/app/hillclimbing_distribution_history.csv", "/app/global_hillclimbing_distribution_history.csv"]
+            flist = ["/app/env.txt", "/app/endpoint_rps_history.csv", "/app/error.log", "/app/hillclimbing_distribution_history.csv", "/app/global_hillclimbing_distribution_history.csv", "/app/continuous_coef_dict.csv"]
             for src_in_pod in flist:
                 dst_in_host = f'{output_dir}/{routing_rule}-{src_in_pod.split("/")[-1]}'
                 utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)

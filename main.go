@@ -96,14 +96,20 @@ func PrintConfig(config Config) {
 }
 
 func NewClient(tenantId uint, config ClientConfig, logger *zap.SugaredLogger, sm *stats.StatsMgr) *Client {
+	// print timeout config
+	logger.Infow("client timeout config", "timeout", config.RequestTimeout)
 	c := Client{
 		tid:      tenantId,
 		config:   config,
 		log:      logger,
 		statsMgr: sm,
 		httpClient: &http.Client{
-			Timeout:   config.RequestTimeout,
-			Transport: &http.Transport{},
+			Timeout: config.RequestTimeout,
+			// Transport: &http.Transport{
+			// 	MaxIdleConns:        1000,
+			// 	MaxIdleConnsPerHost: 1000,
+			// 	ForceAttemptHTTP2: true,
+			// },
 		},
 		requestID: 0,
 	}
@@ -432,7 +438,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("error getting node port: %v", err)
 	}
-
+	log.Printf("Node name: %s, Node port: %s\n", nodename, nodeport)
 	port, err := strconv.Atoi(nodeport)
 	if err != nil {
 		log.Fatalf("error converting node port to integer: %v", err)

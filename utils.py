@@ -132,7 +132,7 @@ def check_file_exists_in_pod(pod_name, namespace, file_path):
     success, ret = run_command(command, required=False)
     return success
 
-def kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host, required=True):
+def kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host, required=False):
     try:
         slate_controller_pod = get_pod_name_from_deploy("slate-controller")
         # if check_file_exists_in_pod(slate_controller_pod, "default", src_in_pod) == False:
@@ -157,7 +157,7 @@ def kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host, required=T
 
 def kubectl_cp_from_host_to_slate_controller_pod(src_in_host, dst_in_pod):
     success, slate_controller_pod = run_command("kubectl get pods -l app=slate-controller -o custom-columns=:metadata.name")
-    print(f"slate_controller_pod: {slate_controller_pod}")
+    # print(f"slate_controller_pod: {slate_controller_pod}")
     # if slate_controller_pod has more than one entry, get the start time of each pod and pick the newest one.
     if len(slate_controller_pod.split("\n")) > 1:
         config.load_kube_config()
@@ -181,7 +181,7 @@ def kubectl_cp_from_host_to_slate_controller_pod(src_in_host, dst_in_pod):
 
     # print(f"Try kubectl_cp_from_host_to_slate_controller_pod")
     print(f"- src_in_host: {src_in_host}")
-    print(f"- dst_in_pod: {slate_controller_pod}:{dst_in_pod}")
+    # print(f"- dst_in_pod: {slate_controller_pod}:{dst_in_pod}")
     tries = 0
     while tries < 3:
         success, ret = run_command(f"kubectl cp {src_in_host} {slate_controller_pod}:{dst_in_pod}", required=False)
@@ -306,16 +306,21 @@ def get_pod_resource_allocation(namespace='default'):
 #         f.write(resource_usage)
 #         f.write("-- end of resource usage --\n\n")
 
-def create_dir(dir):
-    if not os.path.isdir(dir):
+
+def create_dir(dir, temp=1):
+    # Check if directory already exists
+    if os.path.isdir(dir):
+        while True:
+            temp_dir = dir + "-" + str(temp)
+            if not os.path.isdir(temp_dir):
+                os.makedirs(temp_dir)
+                print(f"Created directory: {temp_dir}")
+                return temp_dir
+            temp += 1
+    else:
         os.makedirs(dir)
-        print(f"create dir {dir}")
+        print(f"Created directory: {dir}")
         return dir
-    # else:
-    #     print(f"ERROR: Directory {dir} already exists")
-    #     print("ERROR: Provide new dir name.")
-    #     print("exit...")
-    #     exit()
 
 def record_pod_resource_allocation(fn_prefix, resource_alloc_dir, target_cluster_rps):
     if target_cluster_rps == 0:
@@ -452,7 +457,7 @@ def start_background_noise(node_dict, cpu_noise=30, victimize_node="", victimize
         if node == victimize_node:
             nodenoise = victimize_cpu
         # print(f"Try to run background-noise -cpu={cpu_noise} in {node_dict[node]['hostname']}")
-        print("ADITYA: ", f"ssh gangmuk@{node_dict[node]['hostname']} 'nohup /users/gangmuk/projects/slate-benchmark/background-noise/background-noise -cpu={nodenoise} &'")
+        print(f"ssh gangmuk@{node_dict[node]['hostname']} 'nohup /users/gangmuk/projects/slate-benchmark/background-noise/background-noise -cpu={nodenoise} &'")
         run_command(f"ssh gangmuk@{node_dict[node]['hostname']} 'nohup /users/gangmuk/projects/slate-benchmark/background-noise/background-noise -cpu={nodenoise} > /dev/null 2>&1 &'", nonblock=False)
         # run_command(f"ssh gangmuk@{node_dict[node]['hostname']} '", nonblock=False)
 
@@ -510,7 +515,7 @@ class Experiment:
         self.workload_names = set()
         self.hillclimb_interval = 0
         self.injected_delay = []
-        self.delay_injection_point =0 
+        # self.delay_injection_point =0 
         self.limit_val = ""
         
     def set_name(self, name):
@@ -522,8 +527,8 @@ class Experiment:
     def set_injected_delay(self, delay):
         self.injected_delay = delay
     
-    def set_delay_injection_point(self, delay_injection_point):
-        self.delay_injection_point = delay_injection_point
+    # def set_delay_injection_point(self, delay_injection_point):
+    #     self.delay_injection_point = delay_injection_point
 
     def set_limit_val(self, limit_val):
         self.limit_val = limit_val
@@ -542,8 +547,8 @@ class Experiment:
         for workload in self.workloads:
             workload.print_workload()
 
-def file_write_env_file(CONFIG):
-    with open("env.txt", "w") as file:
+def file_write_env_file(CONFIG, env_file_path):
+    with open(env_file_path, "w") as file:
         for key, value in CONFIG.items():
             file.write(f"{key},{value}\n")
 
