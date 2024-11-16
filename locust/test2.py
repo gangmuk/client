@@ -1,8 +1,9 @@
-from locust import HttpUser, task, between, LoadTestShape
+from locust import HttpUser, task, between, LoadTestShape, constant_pacing
 import math
 
 class CheckoutUserWest(HttpUser):
-    wait_time = between(0.1, 0.5)
+    # wait_time = between(0.1, 0.5)
+    wait_time = constant_pacing(1)
 
     @task
     def checkout_cart(self):
@@ -13,7 +14,8 @@ class CheckoutUserWest(HttpUser):
         )
 
 class CheckoutUserEast(HttpUser):
-    wait_time = between(0.1, 0.5)
+    # wait_time = between(0.1, 0.5)
+    wait_time = constant_pacing(1)
 
     @task
     def checkout_cart(self):
@@ -24,7 +26,8 @@ class CheckoutUserEast(HttpUser):
         )
 
 class CheckoutUserSouth(HttpUser):
-    wait_time = between(0.1, 0.5)
+    # wait_time = between(0.1, 0.5)
+    wait_time = constant_pacing(1)
 
     @task
     def checkout_cart(self):
@@ -35,7 +38,8 @@ class CheckoutUserSouth(HttpUser):
         )
 
 class CheckoutUserCentral(HttpUser):
-    wait_time = between(0.1, 0.5)
+    # wait_time = between(0.1, 0.5)
+    wait_time = constant_pacing(1)
 
     @task
     def checkout_cart(self):
@@ -47,18 +51,38 @@ class CheckoutUserCentral(HttpUser):
 
 
 class SmoothTransitionShape(LoadTestShape):
+    # stages = [
+    #     # (stage_time, start_users, end_users, west_weight, east_weight, south_weight, central_weight)
+    #     (30, 50, 400, 0.25, 0.25, 0.25, 0.25),
+    #     (30, 400, 800, 0.25, 0.25, 0.25, 0.25),
+    #     (30, 800, 1200, 0.25, 0.25, 0.25, 0.25),
+    #     (30, 400, 800, 0.25, 0.25, 0.25, 0.25),
+    #     (30, 1200, 2000, 0.25, 0.25, 0.25, 0.25),
+    # ]
+    
+    # stages = [
+    #     # (stage_time, start_users, west_weight, east_weight, south_weight, central_weight)
+    #     (30, 50, 0.25, 0.25, 0.25, 0.25),
+    #     (30, 400, 0.25, 0.25, 0.25, 0.25),
+    #     (30, 800, 0.25, 0.25, 0.25, 0.25),
+    #     (30, 400, 0.25, 0.25, 0.25, 0.25),
+    #     (30, 1200, 0.25, 0.25, 0.25, 0.25),
+    # ]
+    
     stages = [
-        # (stage_time, start_users, end_users, west_weight, east_weight, south_weight, central_weight)
-        (30, 50, 400, 0.25, 0.25, 0.25, 0.25),
-        (30, 400, 800, 0.25, 0.25, 0.25, 0.25),
-        (30, 800, 1200, 0.25, 0.25, 0.25, 0.25),
-        (30, 1200, 2000, 0.25, 0.25, 0.25, 0.25),
+        # (stage_time, start_users, west_weight, east_weight, south_weight, central_weight)
+        (30, 50, 0.25, 0.25, 0.25, 0.25),
+        (30, 400, 0.25, 0.25, 0.25, 0.25),
+        (30, 50, 0.25, 0.25, 0.25, 0.25),
+        # (30, 800, 0.25, 0.25, 0.25, 0.25),
+        # (30, 400, 0.25, 0.25, 0.25, 0.25),
+        # (30, 1200, 0.25, 0.25, 0.25, 0.25),
     ]
-
+    
     def tick(self):
         run_time = self.get_run_time()
 
-        for stage_time, start_users, end_users, west_weight, east_weight, south_weight, central_weight in self.stages:
+        for stage_time, start_users, west_weight, east_weight, south_weight, central_weight in self.stages:
             if run_time < stage_time:
                 
                 proportion = run_time / stage_time
@@ -68,13 +92,14 @@ class SmoothTransitionShape(LoadTestShape):
                 # target_users = math.ceil(start_users + proportion * (end_users - start_users)) 
                 
                 ## quadratic
-                target_users = math.ceil(start_users + steep_proportion * (end_users - start_users)) 
+                # target_users = math.ceil(start_users + steep_proportion * (end_users - start_users)) 
                 
                 CheckoutUserWest.weight = int(west_weight * 100)
                 CheckoutUserEast.weight = int(east_weight * 100)
                 CheckoutUserSouth.weight = int(south_weight * 100)
                 CheckoutUserCentral.weight = int(central_weight * 100)
-                return (target_users, target_users // 10)  # Adjust spawn rate as needed
+                # return (target_users, target_users // 10)  # Adjust spawn rate as needed
+                return (start_users, start_users)
             run_time -= stage_time
 
         return None  # End test when stages are complete
