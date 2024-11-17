@@ -12,6 +12,6 @@ clients:
     maxinterval: 5s
   rq_timeout: 15s
   workload:
-  - duration: 180s
-    rps: 150
-stats_output_folder: corecontrast-reqtype-4/multicore-w50/SLATE-with-jumping-global
+  - duration: 600s
+    rps: 50
+stats_output_folder: corecontrast-test/multicore-w50/SLATE-with-jumping-global

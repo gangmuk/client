@@ -465,6 +465,10 @@ def main():
     ####################################################################
     ###################### Workload ####################################
     ####################################################################
+    
+    igw_host = utils.run_command("kubectl get nodes | grep 'node5' | awk '{print $1}'")[1]
+    igw_nodeport = utils.run_command("kubectl get svc istio-ingressgateway -n istio-system -o=json | jq '.spec.ports[] | select(.name==\"http2\") | .nodePort'")[1]
+    experiment_endpoint = f"http://{igw_host}:{igw_nodeport}"
     experiment_list = []
     def get_cores_hdrs(reqtype):
         return {"X-Slate-1mb-Writes": "4"} if reqtype == "singlecore" else {}
@@ -485,8 +489,8 @@ def main():
                 "multicore": [(0, 200)],
             },
             "east": {
-                "singlecore": [(0, 75)],
-                "multicore": [(0, 300)],
+                "singlecore": [(0, 50)],
+                "multicore": [(0, 200)],
             },
             "central": {
                 "singlecore": [(0, 50)],
@@ -515,7 +519,7 @@ def main():
 
     for name, w in workloads.items():
         hillclimb_interval = 30
-        experiment_dur = 60*3
+        experiment_dur = 60*2
         normalization_dict = {
             "sslateingress@POST@/singlecore": {
                 "sslateingress@POST@/multicore": 1,
@@ -541,7 +545,7 @@ def main():
                 # rps_list is the second element of the tuple in the list
                 rps_list = [rps for start, rps in w[region][req_type]]
                 experiment.add_workload(utils.Workload(cluster=region, req_type=req_type, rps=rps_list, duration=construct_dur_list(w[region][req_type], experiment_dur),
-                                                        method=method, path=core_path[req_type], hdrs=get_cores_hdrs(req_type)))
+                                                        method=method, path=core_path[req_type], hdrs=get_cores_hdrs(req_type), endpoint=experiment_endpoint))
 
         # hash mod is a function of rps (it is a value where 1 of every hash_mod requests are traced).
         # it needs to be a whole number, and the idea is to have a similar number of requests traced for every rps value.
@@ -710,12 +714,14 @@ def main():
                 r2n['ingress'] = ['node5']
                 start_node_cpu_monitoring(r2n, sum(workload.duration), f"{output_dir}/node_cpu_util.pdf")
                 start_pod_cpu_monitoring(["corecontrast"], ["us-west-1"], "default", sum(workload.duration), f"{output_dir}/pod_cpu_util.pdf")
-            locust_workload_file = f"{output_dir}/workload.json"
-            with open(locust_workload_file, "w") as f:
-                f.write(json.dumps(experiment.workload_raw, indent=4))
-            # utils.run_comm    and(f"STAGES_FILE={locust_workload_file} DURATION={sum(workload.duration)} locust -f corecontrast_locust.py --host=http://node5.slate1.istio-pg0.clemson.cloudlab.us:32468 --processes 160", nonblock=True)
-            # call curl to start test: curl -X POST   http://localhost:8089/swarm   -H 'content-type: application/x-www-form-urlencoded; charset=UTF-8'
-            a = input("press enter to continue")
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                future_list = list()
+                for workload in experiment.workloads:
+                    future_list.append(executor.submit(utils.run_vegeta, workload, output_dir))
+                    time.sleep(0.1)
+                for future in concurrent.futures.as_completed(future_list):
+                    print(future.result())
+            print("All clients have completed.")
 
             flist = ["/app/env.txt", "/app/endpoint_rps_history.csv", "/app/error.log", "/app/hillclimbing_distribution_history.csv", "/app/global_hillclimbing_distribution_history.csv"]
             for src_in_pod in flist:
@@ -784,6 +790,7 @@ def main():
                 utils.run_command(f"python plot_region_latency.py {output_dir}/{routing_rule}-region_jumping_latency.csv {output_dir}/region_jumping_latency.pdf",required=False)
             # utils.run_command(f"python fast_plot_all.py --data_dir {output_dir}",required=False)
             utils.run_command(f"python fast_plot.py --data_dir {output_dir}",required=False)
+            utils.run_command(f"python plot_endpoint_rps.py {output_dir}/endpoint_rps_history.csv {output_dir}/endpoint_rps.pdf",required=False)
                 # utils.run_command(f"python plot_gc_jumping ")
 
 

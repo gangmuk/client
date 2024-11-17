@@ -24,8 +24,8 @@ degree,2
 load_coef_flag,1
 RPS,west,singlecore,50
 RPS,west,multicore,200
-RPS,east,singlecore,150
-RPS,east,multicore,300
+RPS,east,singlecore,50
+RPS,east,multicore,200
 RPS,central,singlecore,50
 RPS,central,multicore,200
 RPS,south,singlecore,50
@@ -41,6 +41,6 @@ path,/multicore
 method,POST
 req_type,multicore
 cluster,south
-duration,[180]
+duration,[120]
 output_dir,corecontrast-reqtype-4/multicore-w50/SLATE-with-jumping-global
 -- end of config --

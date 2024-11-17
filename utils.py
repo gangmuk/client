@@ -582,7 +582,7 @@ def file_write_config_file(CONFIG, config_file_path):
                             
 # One workload means one client. One client means one request type and a list of RPS & Duration>.
 class Workload:
-    def __init__(self, cluster: str, req_type: str, rps: list, duration: list, method: str, path: str, hdrs: dict = {}):
+    def __init__(self, cluster: str, req_type: str, rps: list, duration: list, method: str, path: str, hdrs: dict = {}, endpoint=""):
         self.cluster = cluster
         self.req_type = req_type
         self.rps = rps
@@ -591,6 +591,7 @@ class Workload:
         self.path = path
         self.hdrs = hdrs
         self.name = f"{cluster}-{req_type}"
+        self.endpoint = endpoint
         if len(rps) != len(duration):
             print(f"ERROR: rps and duration length mismatch")
             print("exit...")
@@ -643,3 +644,15 @@ def run_newer_generation_client(workload, output_dir):
     write_client_yaml_with_config("./config.yaml", client_yaml_file, workload, output_dir)
     run_command(f'cp {client_yaml_file} {output_dir}/{client_yaml_file}')
     run_command(f"./client --config={client_yaml_file}")
+
+
+def run_vegeta(workload, output_dir):
+    for i in range(len(workload.rps)):
+        print(f"start {workload.req_type} RPS {workload.rps[i]} to {workload.cluster} cluster for {workload.duration[i]}s")
+        cmd = f"echo '{workload.method} {workload.endpoint}{workload.path}' | ./vegeta attack -rate={workload.rps[i]} -duration={workload.duration[i]}s"
+        for key, value in workload.hdrs.items():
+            cmd += f" -header='{key}: {value}'"
+        cmd += f" -header='x-slate-destination: {workload.cluster}'"
+        cmd += f" | ./vegeta report > {output_dir}/{workload.name}-{workload.rps[i]}-{workload.duration[i]}.txt"
+        print(f"cmd: {cmd}")
+        run_command(cmd)
