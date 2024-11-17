@@ -39,7 +39,6 @@ def collect_cpu_utilization(region_to_node, username, duration, filename):
     while datetime.now() < end_time:
         current_time = datetime.now().strftime("%H:%M:%S")
         timestamps.append(current_time)
-        # print(f"Collecting data at {current_time}")
 
         # Collect and aggregate data by region
         for region, nodes in region_to_node.items():
@@ -81,13 +80,26 @@ def collect_cpu_utilization(region_to_node, username, duration, filename):
     for region, data in cpu_data.items():
         plt.plot(timestamps, data, label=region)
     
+    # Remove duplicate labels in the legend
+    handles, labels = plt.gca().get_legend_handles_labels()
+    unique_labels = dict(zip(labels, handles))
+    plt.legend(unique_labels.values(), unique_labels.keys(), loc="upper left")
+
     plt.xlabel("Time")
     plt.ylabel("CPU Utilization (%)")
     plt.title("CPU Utilization by Region and Loadgen-Node Over Time")
-    plt.legend(loc="upper left")
     plt.xticks(rotation=45)
     plt.tight_layout()
 
     # Save the plot as a PDF
     plt.savefig(filename, format="pdf")
     print(f"CPU utilization graph saved as {filename}")
+
+# Example usage:
+# region_to_node = {
+#     'us-west-1': ['node1', 'node2'],
+#     'us-east-1': ['node3', 'node4'],
+#     'us-central-1': ['node5', 'node6'],
+#     'us-south-1': ['node7', 'node8']
+# }
+# collect_cpu_utilization(region_to_node, 'your_username', 60, 'cpu_utilization.pdf')

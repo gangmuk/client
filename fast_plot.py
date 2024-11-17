@@ -119,7 +119,7 @@ def plot_data(cluster_data_dir, cluster, ax1, ax2, plt):
             sampled_adjusted_latency_x = adjusted_latency_x
             sampled_rq_latency_y = rq_latency_y
         ax1.scatter(sampled_adjusted_latency_x, sampled_rq_latency_y,
-                    label=f"Observed Latency-{cluster} (Sampled {sample_fraction*100}%)", marker='.', alpha=0.2)
+                    label=f"Observed Latency-{cluster} (Sampled {sample_fraction*100}%)", marker='.', alpha=0.1)
     elif latency_trend_plot_scheme == "all":
         ax1.scatter(adjusted_latency_x, rq_latency_y, label="Observed Latency", marker='.', alpha=0.2)
     elif latency_trend_plot_scheme == "average":

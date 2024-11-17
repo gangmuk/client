@@ -40,12 +40,13 @@ sp_callgraph_table = {}
 all_endpoints = {}
 placement = {}
 coef_dict = {}
+ylim = 15000
 profiling = True
 trace_str = list()
 # x_feature = "num_inflight_dict"
 x_feature = "rps_dict"
-target_y = "xt" # exclusive time
-# target_y = "rt" # response time
+# target_y = "xt" # exclusive time
+target_y = "rt" # response time
 
 '''
 cluster_to_cid and cid_to_cluster should be deprecated
@@ -94,7 +95,7 @@ def fit_mm1_model(data, y_col_name, svc_name, ep_str, cid, directory):
     #plt.plot(norm_u_plot, y_plot, 'r-', label=f'MM1 Fit: $\\frac{{a}}{{c-u}}+b$,a={popt[0]}, c={u_.max()*constant}, b={popt[1]}')
     plt.plot(norm_u_plot, y_plot, 'r-', label=f'MM1 Fit: $\\frac{{a}}{{c-u}}+b$\n$a={popt[0]:.2f}, c={(u_.max()*constant):.2f}, b={popt[1]:.2f}$')
     # plt.plot(u_plot, y_plot, 'r-', label=f'MM1 Fit: $\\frac{{a}}{{1-u}}$, a={popt[0]:.2f}')
-    plt.ylim(0, 500)
+    plt.ylim(0, ylim)
     plt.xlabel('Utilization (u_)')
     plt.ylabel(y_col_name + " ms")
     plt.title(f'{ep_str} in {cid}')
@@ -133,7 +134,7 @@ def fit_polynomial_regression(data, y_col_name, svc_name, ep_str, cid, directory
         label = f'${model.coef_[0]} \cdot x^{degree} + {model.coef_[1]}$'
         plt.plot(X_plot, y_plot, linewidth=1, label=label)
         print(f"plt.plot, degree: {degree}")
-    plt.ylim(0, 500)
+    plt.ylim(0, ylim)
     plt.xlabel(x_feature)
     plt.ylabel(y_col_name +" ms")
     plt.title(f'{ep_str} in {cid}')

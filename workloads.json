@@ -1,0 +1,66 @@
+{
+    "west": {
+        "singlecore": [
+            [
+                0,
+                50
+            ]
+        ],
+        "multicore": [
+            [
+                0,
+                200
+            ]
+        ]
+    },
+    "east": {
+        "singlecore": [
+            [
+                0,
+                150
+            ]
+        ],
+        "multicore": [
+            [
+                0,
+                300
+            ],
+            [
+                60,
+                100
+            ]
+        ]
+    },
+    "central": {
+        "singlecore": [
+            [
+                0,
+                50
+            ],
+            [
+                30,
+                100
+            ]
+        ],
+        "multicore": [
+            [
+                0,
+                200
+            ]
+        ]
+    },
+    "south": {
+        "singlecore": [
+            [
+                0,
+                50
+            ]
+        ],
+        "multicore": [
+            [
+                0,
+                200
+            ]
+        ]
+    }
+}

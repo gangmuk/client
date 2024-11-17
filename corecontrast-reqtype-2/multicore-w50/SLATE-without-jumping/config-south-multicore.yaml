@@ -1,0 +1,16 @@
+clients:
+- cluster: south
+  headers:
+    x-slate-destination: south
+  method: POST
+  path: /multicore
+  retry:
+    base: 1s
+    count: 0
+    factor: 2
+    maxinterval: 5s
+  rq_timeout: 15s
+  workload:
+  - duration: 180s
+    rps: 200
+stats_output_folder: corecontrast-reqtype-2/multicore-w50/SLATE-without-jumping

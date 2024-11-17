@@ -1,0 +1,16 @@
+clients:
+- cluster: west
+  headers:
+    x-slate-destination: west
+  method: POST
+  path: /cart/checkout?email=fo%40bar.com&street_address=405&zip_code=945&city=Fremont&state=CA&country=USA&credit_card_number=5555555555554444&credit_card_expiration_month=12&credit_card_expiration_year=2025&credit_card_cvv=222
+  retry:
+    base: 1s
+    count: 0
+    factor: 2
+    maxinterval: 5s
+  rq_timeout: 5s
+  workload:
+  - duration: 180s
+    rps: 350
+stats_output_folder: profile-checkout-bg15/checkoutcart-W350/LOCAL

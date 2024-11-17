@@ -1,16 +1,23 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import sys
+import os
 
-def plot_weight_vs_counter(csv_file, latency_csv, output_pdf, src_cid, title_suffix):
-    # Read the CSV files
-    df = pd.read_csv(csv_file)
-    latency_df = pd.read_csv(latency_csv, names=['counter', 'latency'])
+def plot_weight_vs_counter(df, latency_df, output_pdf, src_cid, request_type, title_suffix):
+    """
+    Plots weight vs counter and latency for a specific region and request type.
+    """
+    # Filter the DataFrame based on the specified src_cid and request_type
+    filtered_df = df[
+        (df['src_svc'] == 'sslateingress') &
+        (df['dst_svc'] == 'corecontrast') &
+        (df['src_cid'] == src_cid) &
+        (df['request_type'] == request_type)
+    ]
 
-    # Filter the DataFrame based on the specified conditions
-    filtered_df = df[(df['src_svc'] == 'sslateingress') &
-                     (df['dst_svc'] == 'frontend') &
-                     (df['src_cid'] == src_cid)]
+    if filtered_df.empty:
+        print(f"No data for region '{src_cid}' with request type '{request_type}'. Skipping plot.")
+        return
 
     # Convert weight values to numeric and truncate to two decimal places
     filtered_df['weight'] = pd.to_numeric(filtered_df['weight'], errors='coerce').round(2)
@@ -50,23 +57,86 @@ def plot_weight_vs_counter(csv_file, latency_csv, output_pdf, src_cid, title_suf
     ax2.set_ylabel('Latency')
     ax2.legend(loc='upper right', bbox_to_anchor=(1.15, 1))
 
-    plt.title(f'Time vs Weight for different clusters and Latency (Ruleset {title_suffix})')
+    plt.title(f'Time vs Weight for {src_cid} [{request_type}] (Ruleset {title_suffix})')
     plt.tight_layout()
     plt.savefig(output_pdf, bbox_inches='tight')
     plt.close()
+    print(f"Plot saved to {output_pdf}")
 
-if __name__ == "__main__":
-    if len(sys.argv) != 5:
-        print("Usage: python plot_weight_vs_counter.py <input_csv> <latency_csv> <output_pdf_us_central_1> <output_pdf_us_east_1>")
+def extract_request_type(endpoint):
+    """
+    Extracts the request type from the endpoint string.
+    Example: 'corecontrast@POST@/singlecore' -> 'post-singlecore'
+    """
+    try:
+        parts = endpoint.split('@')
+        if len(parts) < 3:
+            return "unknown"
+        method = parts[1].lower()
+        path = parts[2].strip('/').replace('/', '-')
+        return f"{method}-{path}"
+    except Exception as e:
+        print(f"Error extracting request type from endpoint '{endpoint}': {e}")
+        return "unknown"
+
+def main():
+    if len(sys.argv) != 4:
+        print("Usage: python plot_weight_vs_counter.py <input_csv> <latency_csv> <output_directory>")
         sys.exit(1)
 
     csv_file = sys.argv[1]
     latency_csv = sys.argv[2]
-    output_pdf_us_central_1 = sys.argv[3]
-    output_pdf_us_east_1 = sys.argv[4]
+    output_directory = sys.argv[3]
 
-    # Plot for src_cid us-central-1
-    plot_weight_vs_counter(csv_file, latency_csv, output_pdf_us_central_1, 'us-central-1', 'us-central-1')
+    # Create output directory if it doesn't exist
+    os.makedirs(output_directory, exist_ok=True)
 
-    # Plot for src_cid us-east-1
-    plot_weight_vs_counter(csv_file, latency_csv, output_pdf_us_east_1, 'us-east-1', 'us-east-1')
+    # Read the CSV files
+    try:
+        df = pd.read_csv(csv_file)
+    except Exception as e:
+        print(f"Error reading input CSV file '{csv_file}': {e}")
+        sys.exit(1)
+
+    try:
+        latency_df = pd.read_csv(latency_csv, names=['counter', 'latency'])
+    except Exception as e:
+        print(f"Error reading latency CSV file '{latency_csv}': {e}")
+        sys.exit(1)
+
+    # Remove any rows where 'counter' is not numeric to eliminate repeated headers
+    df = df[pd.to_numeric(df['counter'], errors='coerce').notnull()].copy()
+
+    # Reset index after filtering
+    df.reset_index(drop=True, inplace=True)
+
+    # Extract request types from 'dst_endpoint'
+    df['request_type'] = df['dst_endpoint'].apply(extract_request_type)
+
+    # Detect unique regions from 'src_cid'
+    regions = df['src_cid'].unique()
+
+    # Detect unique request types from 'request_type' column, excluding 'unknown'
+    request_types = df['request_type'].unique()
+    request_types = [rt for rt in request_types if rt != "unknown"]
+
+    print(f"Detected regions: {regions}")
+    print(f"Detected request types: {request_types}")
+
+    # Iterate over each region and request type to generate plots
+    for region in regions:
+        for request_type in request_types:
+            # Generate a safe filename by replacing any problematic characters
+            safe_request_type = request_type.replace('/', '-').replace('@', '-')
+            output_pdf = os.path.join(
+                output_directory,
+                f"{region}-{safe_request_type}.pdf"
+            )
+
+            # Use the request_type as the title suffix
+            title_suffix = request_type.replace('-', ' ').title()
+
+            plot_weight_vs_counter(df, latency_df, output_pdf, region, request_type, title_suffix)
+
+if __name__ == "__main__":
+    main()

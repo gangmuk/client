@@ -1,0 +1,10 @@
+{
+    "SingleCoreWest": 50,
+    "MultiCoreWest": 200,
+    "SingleCoreEast": 75,
+    "MultiCoreEast": 25,
+    "SingleCoreCentral": 50,
+    "MultiCoreCentral": 200,
+    "SingleCoreSouth": 50,
+    "MultiCoreSouth": 200
+}

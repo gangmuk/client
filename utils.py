@@ -64,28 +64,51 @@ def run_command_and_print(command, required=True, print_error=True, nonblock=Fal
         else:
             return False, e.output.decode('utf-8').strip()
 
-def run_command(command, required=True, print_error=True, nonblock=False,):
-    """Run shell command and return its output"""
+import subprocess
+
+def run_command(command, required=True, print_error=True, nonblock=False):
+    """Run shell command and return its output or process handle.
+
+    Args:
+        command (str): The shell command to execute.
+        required (bool): If True, the function will assert on failure.
+        print_error (bool): If True, errors will be printed.
+        nonblock (bool): If True, run the command non-blocking.
+
+    Returns:
+        tuple: 
+            - If nonblock is False: (True, output) on success or (False, error) on failure.
+            - If nonblock is True: (True, process) on success or (False, error) on failure.
+    """
     try:
-        ''' Popen is asynchronous and non-blocking, while check_output is synchronous and blocking.'''
         if nonblock:
-            process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-            stdout, stderr = process.communicate()  # If you decide to wait and capture output for debugging
-            print("STDOUT:", stdout)
-            print("STDERR:", stderr)
-            return True, "NotOutput-this-is-nonblocking-execution"
+            # Start the process without waiting for it to complete
+            process = subprocess.Popen(
+                command,
+                shell=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True
+            )
+            return True, process
         else:
-            output = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT)
-            return True, output.decode('utf-8').strip()
+            # Run the command and wait for it to complete
+            output = subprocess.check_output(
+                command,
+                shell=True,
+                stderr=subprocess.STDOUT,
+                text=True
+            )
+            return True, output.strip()
     except subprocess.CalledProcessError as e:
         if print_error:
             print(f"ERROR command: {command}")
-            print(f"ERROR output: {e.output.decode('utf-8').strip()}")
+            print(f"ERROR output: {e.output.strip()}")
         if required:
-            print("Exit...")
-            assert False
+            print("Exiting due to required command failure...")
+            raise  # Instead of assert False, it's better to raise an exception
         else:
-            return False, e.output.decode('utf-8').strip()
+            return False, e.output.strip()
 
 def parse_xml(file_path):
     tree = ET.parse(file_path)
@@ -512,6 +535,9 @@ class Experiment:
         self.injected_delay = []
         self.delay_injection_point =0 
         self.limit_val = ""
+        self.hash_mod = 1
+        self.normalization = dict()
+        self.workload_raw = dict()
         
     def set_name(self, name):
         self.name = name
@@ -556,13 +582,14 @@ def file_write_config_file(CONFIG, config_file_path):
                             
 # One workload means one client. One client means one request type and a list of RPS & Duration>.
 class Workload:
-    def __init__(self, cluster: str, req_type: str, rps: list, duration: list, method: str, path: str):
+    def __init__(self, cluster: str, req_type: str, rps: list, duration: list, method: str, path: str, hdrs: dict = {}):
         self.cluster = cluster
         self.req_type = req_type
         self.rps = rps
         self.duration = duration
         self.method = method
         self.path = path
+        self.hdrs = hdrs
         self.name = f"{cluster}-{req_type}"
         if len(rps) != len(duration):
             print(f"ERROR: rps and duration length mismatch")
@@ -583,6 +610,8 @@ def write_client_yaml_with_config(default_yaml_file: str, yaml_file: str, worklo
     try:
         yaml_data['clients'][0]['cluster'] = workload.cluster
         yaml_data['clients'][0]['headers']['x-slate-destination'] = workload.cluster
+        for key, value in workload.hdrs.items():
+            yaml_data['clients'][0]['headers'][key] = value
         
         # Ensure 'workload' list is long enough, append entries if needed
         while len(yaml_data['clients'][0]['workload']) < len(workload.rps):
@@ -594,6 +623,7 @@ def write_client_yaml_with_config(default_yaml_file: str, yaml_file: str, worklo
 
         yaml_data['clients'][0]['method'] = workload.method
         yaml_data['clients'][0]['path'] = workload.path
+        yaml_data['clients'][0]['rq_timeout'] = '15s'
         yaml_data['stats_output_folder'] = output_dir
     except Exception as e:
         print(f"ERROR: {e}")

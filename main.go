@@ -103,7 +103,11 @@ func NewClient(tenantId uint, config ClientConfig, logger *zap.SugaredLogger, sm
 		statsMgr: sm,
 		httpClient: &http.Client{
 			Timeout:   config.RequestTimeout,
-			Transport: &http.Transport{},
+			Transport: &http.Transport{
+				MaxIdleConns:        200,
+				MaxIdleConnsPerHost: 200,
+				ForceAttemptHTTP2:   true,
+			},
 		},
 		requestID: 0,
 	}

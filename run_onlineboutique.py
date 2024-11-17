@@ -2,8 +2,10 @@ import os
 import subprocess
 from datetime import datetime
 from kubernetes import client, config
+import matplotlib.pyplot as plt
 import math
 import time
+import paramiko
 import concurrent.futures
 import hashlib
 import requests
@@ -20,17 +22,26 @@ import atexit
 import signal
 import traceback
 import utils as utils
-
+from node_cpu import collect_cpu_utilization
 
 CLOUDLAB_CONFIG_XML="/users/gangmuk/projects/slate-benchmark/config.xml"
+network_interface = "eno1"
 
+def start_node_cpu_monitoring(region_to_node, duration, filename, username="gangmuk"):
+    # Run the collect_cpu_utilization function in a separate thread
+    monitoring_thread = threading.Thread(
+        target=collect_cpu_utilization, args=(region_to_node, username, duration, filename)
+    )
+    monitoring_thread.daemon = True
+    monitoring_thread.start()
+    return monitoring_thread
 
 ########################################################################################
 ########################################################################################
 # # Execute this function to clean up resources in case of a crash
 def cleanup_on_crash():
     print("Cleaning up resources...")
-    utils.delete_tc_rule_in_client(node_dict)
+    utils.delete_tc_rule_in_client(network_interface, node_dict)
     utils.pkill_background_noise(node_dict)
     
 # Signal handler
@@ -425,14 +436,14 @@ def main():
     mode = "runtime"
     # routing_rule_list = ["LOCAL"]
     # routing_rule_list = ["SLATE-without-jumping", "SLATE-with-jumping-global", "SLATE-with-jumping-local"]
-    # routing_rule_list = ["SLATE-with-jumping-global"]
+    # routing_rule_list = ["SLATE-without-jumping"]
     routing_rule_list = ["SLATE-with-jumping-global"]
     # routing_rule_list = ["WATERFALL2"]
     
     onlineboutique_path = {
         "addtocart": "/cart?product_id=OLJCESPC7Z&quantity=5",
         "checkoutcart": "/cart/checkout?email=fo%40bar.com&street_address=405&zip_code=945&city=Fremont&state=CA&country=USA&credit_card_number=5555555555554444&credit_card_expiration_month=12&credit_card_expiration_year=2025&credit_card_cvv=222",
-        "setcurrency": "/setCurrency?currency_code=EUR",
+        "setcurrency": "/setCurrency?currency_code=EUR",    
         "emptycart": "/cart/empty"
     }
     
@@ -468,7 +479,7 @@ def main():
     # try until 350/400, 350 is when it starts hitting 270mc max
     # 300mc upper bound: 350-400rps ish
     
-    # benchmark_name="onlineboutique" # a,b, 1MB and c 2MB file write
+    benchmark_name="onlineboutique" # a,b, 1MB and c 2MB file write
     # for west_rps in [800]:
     # # for west_rps in range(200, 4000, 500):
     # # for west_rps in [300]:
@@ -500,62 +511,61 @@ def main():
     #     experiment_list.append(experiment)
 
     
-    # for west_rps in range(100, 1200, 150):
-    # # for west_rps in [300]:
+    # for west_rps in range(200, 1000, 150):
     #     method = "POST"
     #     experiment = utils.Experiment()
-    #     req_type = "addtocart"
+    #     req_type = "checkoutcart"
     #     # req_type = "addtocart"
     #     east_rps = 0
     #     # duration = 60 * 60 * 2
     #     # duration = 60 * 3
-    #     duration = 60 * 2
+    #     duration = 60 * 3
         
     #     if west_rps > 0:
+    #         # print(west_rps)
     #         experiment.add_workload(utils.Workload(cluster="west", req_type=req_type, rps=[west_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
-    #     if east_rps > 0:
-    #         experiment.add_workload(utils.Workload(cluster="east", req_type=req_type, rps=[east_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
         
     #     experiment_name = f"{req_type}-W{west_rps}"
     #     experiment.set_name(experiment_name)
     #     experiment_list.append(experiment)
     
-    benchmark_name="onlineboutique" # a,b, 1MB and c 2MB file write
-    # for west_rps in range(200, 4000, 500):
-    # for west_rps in [300]:
+    # benchmark_name="onlineboutique" # a,b, 1MB and c 2MB file write
+    # # for west_rps in range(200, 4000, 500):
+    # # for west_rps in [300]:
     method = "POST"
     experiment = utils.Experiment()
     req_type = "checkoutcart"
     # req_type = "addtocart"
     
-    if req_type == "checkoutcart":
-        total_num_services = 8
-    elif req_type == "addtocart":
-        total_num_services = 4
-    else:
-        print(f"req_type: {req_type} is not supported")
-        assert False
+    # if req_type == "checkoutcart":
+    total_num_services = 8
+    # elif req_type == "addtocart":
+    #     total_num_services = 4
+    # else:
+    #     print(f"req_type: {req_type} is not supported")
+    #     assert False
     
-    west_rps = 100
-    central_rps = 800
-    south_rps = 100
-    east_rps = 400
+    west_rps = [500]
+    central_rps = [100]
+    south_rps = [100]
+    east_rps = [800]
     hillclimb_interval = 30
-    duration = 60 * 20
+    dur_list = [60 * 10]
     experiment.set_hillclimb_interval(hillclimb_interval)
-    experiment.set_delay_injection_point(30)
-    experiment.set_injected_delay([(60 * 6, 200, "us-central-1"), (60 * 11, 1, "us-central-1"), (60 * 15, 200, "us-south-1")])
+    # experiment.set_delay_injection_point(30)
+    experiment.set_injected_delay([(60 * 2.5, 200, "us-east-1"), (60 * 5, 1, "us-east-1"), (60 * 5.5, 200, "us-south-1")])
     # experiment.set_injected_delay([])
-    if west_rps > 0:
-        experiment.add_workload(utils.Workload(cluster="west", req_type=req_type, rps=[west_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
-    if east_rps > 0:
-        experiment.add_workload(utils.Workload(cluster="east", req_type=req_type, rps=[east_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
-    if central_rps > 0:
-        experiment.add_workload(utils.Workload(cluster="central", req_type=req_type, rps=[100, central_rps], duration=[60*2, 60*18], method=method, path=onlineboutique_path[req_type]))
-    if south_rps > 0:
-        experiment.add_workload(utils.Workload(cluster="south", req_type=req_type, rps=[south_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
+    if len(west_rps) > 0:
+        experiment.add_workload(utils.Workload(cluster="west", req_type=req_type, rps=west_rps, duration=dur_list, method=method, path=onlineboutique_path[req_type]))
+    if len(east_rps) > 0:
+        experiment.add_workload(utils.Workload(cluster="east", req_type=req_type, rps=east_rps, duration=dur_list, method=method, path=onlineboutique_path[req_type]))
+    if len(central_rps) > 0:
+        # experiment.add_workload(utils.Workload(cluster="central", req_type=req_type, rps=[100, central_rps], duration=[60*2, 60*18], method=method, path=onlineboutique_path[req_type]))
+        experiment.add_workload(utils.Workload(cluster="central", req_type=req_type, rps=central_rps, duration=dur_list, method=method, path=onlineboutique_path[req_type]))
+    if len(south_rps) > 0:
+        experiment.add_workload(utils.Workload(cluster="south", req_type=req_type, rps=south_rps, duration=dur_list, method=method, path=onlineboutique_path[req_type]))
 
-    experiment_name = f"{req_type}-W{west_rps}"
+    experiment_name = f"{req_type}"
     experiment.set_name(experiment_name)
     experiment_list.append(experiment)
     ####################################################################
@@ -639,8 +649,7 @@ def main():
 
 
     if mode == "runtime":
-        utils.delete_tc_rule_in_client(node_dict)
-        network_interface = "eno1"
+        utils.delete_tc_rule_in_client(network_interface, node_dict)
         if mode == "runtime":
             utils.apply_all_tc_rule(network_interface, inter_cluster_latency, node_dict)
         else:
@@ -670,7 +679,9 @@ def main():
             utils.start_background_noise(node_dict, CONFIG['background_noise'], victimize_node="node1", victimize_cpu=CONFIG['background_noise'])
 
             update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-central-1")
-            update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-south-1")   
+            update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-south-1")
+            update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-east-1")
+            update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-west-1")
             print(f"mode: {mode}")
             print(f"routing_rule: {routing_rule}")
             utils.check_all_pods_are_ready()
@@ -708,9 +719,12 @@ def main():
             ############################################################################
             ############################################################################
             print(f"starting experiment at {datetime.now()}, expected to finish at {datetime.now() + timedelta(seconds=sum(workload.duration))}")
-            for (point, delay, targetregion) in experiment.injected_delay:
-                call_with_delay(point, update_virtualservice_latency_k8s, "checkoutservice-vs", "default", f"{delay}ms", targetregion)
-                print(f"injecting delay: {delay}ms at {point} seconds")
+            
+            if mode == "runtime":
+                for (point, delay, targetregion) in experiment.injected_delay:
+                    call_with_delay(point, update_virtualservice_latency_k8s, "checkoutservice-vs", "default", f"{delay}ms", targetregion)
+                    print(f"injecting delay: {delay}ms at {point} seconds")
+                start_node_cpu_monitoring(region_to_node, sum(workload.duration), f"{output_dir}/node_cpu_util.pdf")
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 future_list = list()
                 for workload in experiment.workloads:
@@ -784,11 +798,14 @@ def main():
             # utils.run_command(f"python fast_plot.py --data_dir {output_dir}")
                 
             # if routing_rule.startswith("SLATE-with-jumping") and os.path.exists(f"{output_dir}/SLATE-with-jumping-global-jumping_routing_history.csv"):
-            utils.run_command(f"python plot_gc_jumping.py {output_dir}/{routing_rule}-jumping_routing_history.csv {output_dir}/{routing_rule}-jumping_latency.csv {output_dir}/central-ruleset-jumping.pdf {output_dir}/south-ruleset-jumping.pdf",required=False)
-            utils.run_command(f"python plot_region_latency.py {output_dir}/{routing_rule}-region_jumping_latency.csv {output_dir}/region_jumping_latency.pdf",required=False)
-            utils.run_command(f"python fast_plot_all.py --data_dir {output_dir}",required=False)
+            if mode == "runtime":
+                utils.run_command(f"python plot_gc_jumping.py {output_dir}/{routing_rule}-jumping_routing_history.csv {output_dir}/{routing_rule}-jumping_latency.csv {output_dir}/central-ruleset-jumping.pdf {output_dir}/east-ruleset-jumping.pdf {output_dir}/west-ruleset-jumping.pdf {output_dir}/south-ruleset-jumping.pdf",required=False)
+                utils.run_command(f"python plot_region_latency.py {output_dir}/{routing_rule}-region_jumping_latency.csv {output_dir}/region_jumping_latency.pdf",required=False)
+            # utils.run_command(f"python fast_plot_all.py --data_dir {output_dir}",required=False)
+            utils.run_command(f"python fast_plot.py --data_dir {output_dir}",required=False)
                 # utils.run_command(f"python plot_gc_jumping ")
-            
+
+
             '''end of one set of experiment'''
             
             ## restart slate-controller            

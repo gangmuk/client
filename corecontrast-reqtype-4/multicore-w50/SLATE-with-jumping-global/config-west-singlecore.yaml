@@ -1,0 +1,17 @@
+clients:
+- cluster: west
+  headers:
+    X-Slate-1mb-Writes: '4'
+    x-slate-destination: west
+  method: POST
+  path: /singlecore
+  retry:
+    base: 1s
+    count: 0
+    factor: 2
+    maxinterval: 5s
+  rq_timeout: 15s
+  workload:
+  - duration: 180s
+    rps: 50
+stats_output_folder: corecontrast-reqtype-4/multicore-w50/SLATE-with-jumping-global

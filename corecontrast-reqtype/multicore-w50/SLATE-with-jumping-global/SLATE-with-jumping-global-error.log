@@ -1,0 +1,926 @@
+__main__ - training_phase(line:3271) - ERROR - [ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+
+__main__ - optimizer_entrypoint(line:2405) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0
+__main__ - optimizer_entrypoint(line:2405) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0
+__main__ - optimizer_entrypoint(line:2405) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0
+__main__ - optimizer_entrypoint(line:2405) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(32) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,9 -> new_capacity, 9
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,9 -> new_capacity, 9
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,9 -> new_capacity, 9
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,9 -> new_capacity, 9
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(557) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,140 -> new_capacity, 140
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,140 -> new_capacity, 140
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,140 -> new_capacity, 140
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,140 -> new_capacity, 140
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1034) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1021) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1019) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1031) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1035) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1025) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1031) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1017) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1038) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1035) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1032) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1026) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1043) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,261 -> new_capacity, 261
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,261 -> new_capacity, 261
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,261 -> new_capacity, 261
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,261 -> new_capacity, 261
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1027) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1023) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1054) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1019) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1026) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1045) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,262 -> new_capacity, 262
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,262 -> new_capacity, 262
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,262 -> new_capacity, 262
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,262 -> new_capacity, 262
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1021) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1050) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,263 -> new_capacity, 263
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,263 -> new_capacity, 263
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,263 -> new_capacity, 263
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,263 -> new_capacity, 263
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1018) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1015) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1040) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,261 -> new_capacity, 261
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,261 -> new_capacity, 261
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,261 -> new_capacity, 261
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,261 -> new_capacity, 261
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1029) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1015) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1048) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,263 -> new_capacity, 263
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,263 -> new_capacity, 263
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,263 -> new_capacity, 263
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,263 -> new_capacity, 263
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1007) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,252 -> new_capacity, 252
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,252 -> new_capacity, 252
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,252 -> new_capacity, 252
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,252 -> new_capacity, 252
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1022) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1036) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1036) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1029) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1034) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1014) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1039) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1017) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1037) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1011) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,253 -> new_capacity, 253
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,253 -> new_capacity, 253
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,253 -> new_capacity, 253
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,253 -> new_capacity, 253
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1053) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1010) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,253 -> new_capacity, 253
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,253 -> new_capacity, 253
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,253 -> new_capacity, 253
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,253 -> new_capacity, 253
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1035) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1024) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1025) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,257 -> new_capacity, 257
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1039) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1012) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1023) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1041) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,261 -> new_capacity, 261
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,261 -> new_capacity, 261
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,261 -> new_capacity, 261
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,261 -> new_capacity, 261
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1023) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,256 -> new_capacity, 256
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1019) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1039) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1034) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,259 -> new_capacity, 259
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1012) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1041) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,261 -> new_capacity, 261
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,261 -> new_capacity, 261
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,261 -> new_capacity, 261
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,261 -> new_capacity, 261
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1045) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,262 -> new_capacity, 262
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,262 -> new_capacity, 262
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,262 -> new_capacity, 262
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,262 -> new_capacity, 262
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1019) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,255 -> new_capacity, 255
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1037) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1028) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1028) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,258 -> new_capacity, 258
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1013) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,254 -> new_capacity, 254
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1037) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,260 -> new_capacity, 260
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1081) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1064) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1094) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,274 -> new_capacity, 274
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,274 -> new_capacity, 274
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,274 -> new_capacity, 274
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,274 -> new_capacity, 274
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1085) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1068) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1101) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,276 -> new_capacity, 276
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,276 -> new_capacity, 276
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,276 -> new_capacity, 276
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,276 -> new_capacity, 276
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1077) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1062) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1075) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1085) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1081) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1090) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1087) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1066) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1075) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1068) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1107) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,277 -> new_capacity, 277
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,277 -> new_capacity, 277
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,277 -> new_capacity, 277
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,277 -> new_capacity, 277
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1061) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1083) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1050) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,263 -> new_capacity, 263
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,263 -> new_capacity, 263
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,263 -> new_capacity, 263
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,263 -> new_capacity, 263
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1099) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1089) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1070) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1083) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1075) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1075) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1066) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1086) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1054) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1074) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1087) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1072) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1081) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1076) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1095) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,274 -> new_capacity, 274
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,274 -> new_capacity, 274
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,274 -> new_capacity, 274
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,274 -> new_capacity, 274
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1070) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1079) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1083) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1088) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1047) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,262 -> new_capacity, 262
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,262 -> new_capacity, 262
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,262 -> new_capacity, 262
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,262 -> new_capacity, 262
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1056) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,265 -> new_capacity, 265
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,265 -> new_capacity, 265
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,265 -> new_capacity, 265
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,265 -> new_capacity, 265
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1089) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1090) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1056) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,265 -> new_capacity, 265
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,265 -> new_capacity, 265
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,265 -> new_capacity, 265
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,265 -> new_capacity, 265
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1090) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1073) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1086) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1082) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1087) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1065) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1080) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1072) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1099) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1071) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1095) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,274 -> new_capacity, 274
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,274 -> new_capacity, 274
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,274 -> new_capacity, 274
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,274 -> new_capacity, 274
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1057) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,265 -> new_capacity, 265
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,265 -> new_capacity, 265
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,265 -> new_capacity, 265
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,265 -> new_capacity, 265
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1079) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1091) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1081) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1062) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1096) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1082) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1052) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1071) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1087) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1066) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1096) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1062) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1090) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1081) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1069) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1089) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1082) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1081) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1081) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1076) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1065) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1100) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,276 -> new_capacity, 276
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,276 -> new_capacity, 276
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,276 -> new_capacity, 276
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,276 -> new_capacity, 276
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1083) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1055) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1105) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,277 -> new_capacity, 277
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,277 -> new_capacity, 277
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,277 -> new_capacity, 277
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,277 -> new_capacity, 277
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1052) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1081) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1068) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1097) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1066) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1100) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,276 -> new_capacity, 276
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,276 -> new_capacity, 276
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,276 -> new_capacity, 276
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,276 -> new_capacity, 276
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1055) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,264 -> new_capacity, 264
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1094) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,274 -> new_capacity, 274
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,274 -> new_capacity, 274
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,274 -> new_capacity, 274
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,274 -> new_capacity, 274
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1063) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1060) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1089) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1083) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1073) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1069) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1077) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1077) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1102) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,276 -> new_capacity, 276
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,276 -> new_capacity, 276
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,276 -> new_capacity, 276
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,276 -> new_capacity, 276
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1067) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1090) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1088) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1086) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1087) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1058) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,265 -> new_capacity, 265
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,265 -> new_capacity, 265
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,265 -> new_capacity, 265
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,265 -> new_capacity, 265
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1097) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,275 -> new_capacity, 275
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1070) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1088) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1066) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1089) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1068) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,268 -> new_capacity, 268
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1084) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,272 -> new_capacity, 272
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1092) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,274 -> new_capacity, 274
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,274 -> new_capacity, 274
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,274 -> new_capacity, 274
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,274 -> new_capacity, 274
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1076) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,270 -> new_capacity, 270
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1061) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1073) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,269 -> new_capacity, 269
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1081) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1067) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,267 -> new_capacity, 267
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1089) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,273 -> new_capacity, 273
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1063) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,266 -> new_capacity, 266
+__main__ - optimizer_entrypoint(line:2418) - ERROR - !!! ERROR !!! Total demand(1080) at sslateingress > total capcity(0) at corecontrast
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2422) - ERROR - recalc capacity: corecontrast, old_capacity,271 -> new_capacity, 271
+__main__ - optimizer_entrypoint(line:2405) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0

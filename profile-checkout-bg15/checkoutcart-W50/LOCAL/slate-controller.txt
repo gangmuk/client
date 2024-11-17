@@ -1,0 +1,1077 @@
+apscheduler.scheduler - add_job(line:454) - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+apscheduler.scheduler - add_job(line:454) - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+apscheduler.scheduler - add_job(line:454) - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+apscheduler.scheduler - add_job(line:454) - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+apscheduler.scheduler - add_job(line:454) - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+apscheduler.scheduler - add_job(line:454) - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+apscheduler.scheduler - add_job(line:454) - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+apscheduler.scheduler - _real_add_job(line:895) - INFO - Added job "read_config_file" to job store "default"
+apscheduler.scheduler - _real_add_job(line:895) - INFO - Added job "write_spans_to_file" to job store "default"
+apscheduler.scheduler - _real_add_job(line:895) - INFO - Added job "training_phase" to job store "default"
+apscheduler.scheduler - _real_add_job(line:895) - INFO - Added job "aggregated_rps_routine" to job store "default"
+apscheduler.scheduler - _real_add_job(line:895) - INFO - Added job "optimizer_entrypoint" to job store "default"
+apscheduler.scheduler - _real_add_job(line:895) - INFO - Added job "perform_jumping" to job store "default"
+apscheduler.scheduler - _real_add_job(line:895) - INFO - Added job "state_check" to job store "default"
+apscheduler.scheduler - start(line:181) - INFO - Scheduler started
+ * Serving Flask app 'global_controller'
+ * Debug mode: off
+__main__ - read_config_file(line:2974) - INFO - Update benchmark_name:  -> not_init
+__main__ - read_config_file(line:2999) - INFO - parent_of_bottleneck_service: not_init, bottleneck_service: not_init
+__main__ - read_config_file(line:3004) - INFO - Update total_num_services: 0 -> -1
+__main__ - read_config_file(line:3012) - INFO - Update mode:  -> before_start
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-1, gap: 5.013586521148682
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-2, gap: 1.0012285709381104
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-3, gap: 0.9980888366699219
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-4, gap: 1.001086950302124
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-5, gap: 1.000098705291748
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-6, gap: 0.9990143775939941
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-7, gap: 0.9996151924133301
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-8, gap: 0.999751091003418
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-9, gap: 1.0007679462432861
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-10, gap: 0.9992671012878418
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-11, gap: 0.9997906684875488
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-12, gap: 1.0000693798065186
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - read_config_file(line:3012) - INFO - Update mode: before_start -> profile
+__main__ - read_config_file(line:3044) - INFO - Update inter_cluster_latency: us-west-1 -> us-west-1: 0
+__main__ - read_config_file(line:3044) - INFO - Update inter_cluster_latency: us-west-1 -> us-east-1: 33
+__main__ - read_config_file(line:3044) - INFO - Update inter_cluster_latency: us-west-1 -> us-central-1: 15
+__main__ - read_config_file(line:3044) - INFO - Update inter_cluster_latency: us-west-1 -> us-south-1: 20
+__main__ - read_config_file(line:3044) - INFO - Update inter_cluster_latency: us-east-1 -> us-east-1: 0
+__main__ - read_config_file(line:3044) - INFO - Update inter_cluster_latency: us-east-1 -> us-central-1: 20
+__main__ - read_config_file(line:3044) - INFO - Update inter_cluster_latency: us-east-1 -> us-south-1: 15
+__main__ - read_config_file(line:3044) - INFO - Update inter_cluster_latency: us-central-1 -> us-central-1: 0
+__main__ - read_config_file(line:3044) - INFO - Update inter_cluster_latency: us-central-1 -> us-south-1: 10
+__main__ - read_config_file(line:3044) - INFO - Update inter_cluster_latency: us-south-1 -> us-south-1: 0
+__main__ - read_config_file(line:2974) - INFO - Update benchmark_name: not_init -> onlineboutique
+__main__ - read_config_file(line:2999) - INFO - parent_of_bottleneck_service: sslateingress, bottleneck_service: frontend
+__main__ - read_config_file(line:3004) - INFO - Update total_num_services: -1 -> 8
+__main__ - read_config_file(line:3032) - INFO - Update degree: 0 -> 2
+__main__ - read_config_file(line:3051) - INFO - Update load_coef_flag: False -> 1
+__main__ - read_config_file(line:3064) - INFO - Update workload: west-checkoutcart: 50RPS
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-13, gap: 0.9998908042907715
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -6
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -6
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -6
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-14, gap: 0.9999043941497803
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-15, gap: 0.9999349117279053
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-16, gap: 1.001006841659546
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-17, gap: 0.9988679885864258
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-18, gap: 1.0000550746917725
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-19, gap: 1.0002074241638184
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-20, gap: 0.9994797706604004
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-21, gap: 1.0004241466522217
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-22, gap: 1.0003938674926758
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-23, gap: 0.9990901947021484
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-24, gap: 0.999993085861206
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-25, gap: 1.0000803470611572
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-26, gap: 1.000694751739502
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-27, gap: 0.9988336563110352
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-28, gap: 1.0000483989715576
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-29, gap: 1.0000934600830078
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-30, gap: 0.9994900226593018
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-31, gap: 1.0010490417480469
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-32, gap: 0.9993758201599121
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -4
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -4
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-33, gap: 1.0001425743103027
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-34, gap: 0.999394416809082
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-35, gap: 0.9997365474700928
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-36, gap: 1.0003516674041748
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-37, gap: 0.9995570182800293
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-38, gap: 1.0002288818359375
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-39, gap: 0.9998681545257568
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-40, gap: 0.9999821186065674
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-41, gap: 1.0005037784576416
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-42, gap: 0.999190092086792
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-43, gap: 0.999762773513794
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-44, gap: 0.999830961227417
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-45, gap: 1.0001158714294434
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-46, gap: 1.000765323638916
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -9
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -9
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-47, gap: 1.0060491561889648
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-48, gap: 0.992948055267334
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-49, gap: 0.9999427795410156
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-50, gap: 0.9998881816864014
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-51, gap: 1.0012900829315186
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-52, gap: 1.000504493713379
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-53, gap: 0.9994821548461914
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-54, gap: 0.9999351501464844
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-55, gap: 0.9988861083984375
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-56, gap: 1.0009493827819824
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-57, gap: 0.9983816146850586
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-58, gap: 1.0006930828094482
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-59, gap: 0.9993517398834229
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-60, gap: 1.0013434886932373
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -4
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -4
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-61, gap: 0.9985613822937012
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -10
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-62, gap: 0.9993033409118652
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-63, gap: 0.9999206066131592
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-64, gap: 0.9999485015869141
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-65, gap: 1.0000016689300537
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-66, gap: 1.0007190704345703
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-67, gap: 0.9992871284484863
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-68, gap: 1.0000171661376953
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-69, gap: 0.9999709129333496
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-70, gap: 0.9998700618743896
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-71, gap: 1.0002498626708984
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-72, gap: 0.9998979568481445
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-73, gap: 0.999544620513916
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-74, gap: 0.999713659286499
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-75, gap: 1.0000073909759521
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-76, gap: 1.000135898590088
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-77, gap: 0.9999384880065918
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-78, gap: 0.9995923042297363
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-79, gap: 1.0001294612884521
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-80, gap: 0.9997899532318115
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-81, gap: 1.0002999305725098
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-82, gap: 1.0004832744598389
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-83, gap: 0.999154806137085
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-84, gap: 1.0001347064971924
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-85, gap: 0.9995067119598389
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-86, gap: 1.0755784511566162
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-87, gap: 0.9248344898223877
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-88, gap: 0.9994490146636963
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-89, gap: 1.000023603439331
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-90, gap: 0.9998157024383545
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-91, gap: 1.0002121925354004
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-92, gap: 1.0023634433746338
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-93, gap: 0.9982061386108398
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-94, gap: 0.99969482421875
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -5
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -5
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -5
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -5
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-95, gap: 1.00058913230896
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-96, gap: 0.9994916915893555
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-97, gap: 1.001258373260498
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-98, gap: 0.9996774196624756
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-99, gap: 0.9978053569793701
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-100, gap: 1.0005481243133545
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-101, gap: 1.000098705291748
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-102, gap: 1.002408504486084
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-103, gap: 0.999394416809082
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-104, gap: 0.997105598449707
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -5
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -5
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -4
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -5
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-105, gap: 1.0009169578552246
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-106, gap: 0.9988012313842773
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-107, gap: 1.0030722618103027
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-108, gap: 0.9994690418243408
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-109, gap: 0.9988265037536621
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-110, gap: 0.9991824626922607
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-111, gap: 0.9993751049041748
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-112, gap: 1.0028791427612305
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-113, gap: 0.9991192817687988
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-114, gap: 0.9983971118927002
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-115, gap: 0.9991264343261719
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-116, gap: 1.0003600120544434
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-117, gap: 1.002929925918579
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-118, gap: 0.997187614440918
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-119, gap: 1.0002505779266357
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-120, gap: 0.9987313747406006
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-121, gap: 1.0007259845733643
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-122, gap: 1.0033979415893555
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-123, gap: 0.99796462059021
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-124, gap: 0.9989583492279053
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-125, gap: 1.000605583190918
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-126, gap: 1.001272201538086
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-127, gap: 1.00079345703125
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-128, gap: 0.9957218170166016
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-129, gap: 1.0006451606750488
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-130, gap: 1.0015361309051514
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-131, gap: 1.0000340938568115
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-132, gap: 0.9985485076904297
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-133, gap: 1.0025181770324707
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-134, gap: 0.9988794326782227
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-135, gap: 1.0003223419189453
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-136, gap: 1.0028722286224365
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-137, gap: 0.9996986389160156
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-138, gap: 0.9985823631286621
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-139, gap: 0.9983079433441162
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-140, gap: 0.9980039596557617
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -21
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-141, gap: 1.002526044845581
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-142, gap: 0.9965944290161133
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-143, gap: 1.0018305778503418
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-144, gap: 0.997974157333374
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-145, gap: 0.999932050704956
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-146, gap: 1.0000052452087402
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-147, gap: 1.003005027770996
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-148, gap: 0.9985744953155518
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-149, gap: 0.9983136653900146
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-150, gap: 1.0016427040100098
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-151, gap: 0.9977152347564697
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-152, gap: 1.004499912261963
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-153, gap: 0.9953067302703857
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-154, gap: 1.0010650157928467
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-155, gap: 0.9990160465240479
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-156, gap: 0.9996614456176758
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-157, gap: 1.0003690719604492
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-158, gap: 0.9997146129608154
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-159, gap: 1.000593900680542
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-160, gap: 1.0016283988952637
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-161, gap: 0.9989426136016846
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-162, gap: 1.001314640045166
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-163, gap: 0.9978091716766357
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-164, gap: 1.0004100799560547
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-165, gap: 1.0004551410675049
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-166, gap: 0.9980313777923584
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-167, gap: 0.9999568462371826
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-168, gap: 1.0015895366668701
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-169, gap: 0.9982647895812988
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-170, gap: 1.0001881122589111
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-171, gap: 1.0006277561187744
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -4
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-172, gap: 1.0024309158325195
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-173, gap: 0.9980006217956543
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-174, gap: 0.9981560707092285
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-175, gap: 1.0001106262207031
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-176, gap: 0.9998898506164551
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-177, gap: 1.0029902458190918
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-178, gap: 0.9986457824707031
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-179, gap: 0.998054027557373
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-180, gap: 0.9998114109039307
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-181, gap: 1.0005300045013428
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-182, gap: 1.0019407272338867
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-183, gap: 0.9982733726501465
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-184, gap: 1.000877857208252
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -13
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-185, gap: 0.9981157779693604
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-186, gap: 1.0026493072509766
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-187, gap: 1.0001513957977295
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-188, gap: 0.9989933967590332
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-189, gap: 0.998145580291748
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-190, gap: 0.9998767375946045
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-191, gap: 0.9995934963226318
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-192, gap: 1.0002381801605225
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-193, gap: 1.0011317729949951
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-194, gap: 0.9983837604522705
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-195, gap: 1.000082015991211
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-196, gap: 1.000598669052124
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-197, gap: 1.0019855499267578
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-198, gap: 0.9993526935577393
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-199, gap: 0.9997766017913818
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------

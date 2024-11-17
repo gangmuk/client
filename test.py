@@ -1,6 +1,9 @@
 from kubernetes import client, config
 import yaml
 import os, subprocess
+from collections import defaultdict
+import json
+
 replMap = {
     "gcr.io/google-samples/microservices-demo/frontend:v0.10.1": "docker.io/adiprerepa/boutique-frontend:latest",
     "gcr.io/google-samples/microservices-demo/checkoutservice:v0.10.1": "docker.io/adiprerepa/boutique-checkout:latest",
@@ -298,4 +301,304 @@ def savelogs(parentdir, services=[], regions=["us-west-1"]):
     except subprocess.CalledProcessError as e:
         print(f"Error fetching pod list: {e}")
 
-savelogs("tout", services=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'])
+import pandas as pd
+import logging
+
+# Configure logging
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
+
+def compute_traffic_matrix(df, src_service, dst_service):
+    """
+    Computes the traffic matrix for the specified source and destination services.
+
+    Args:
+        df (pd.DataFrame): Input DataFrame containing traffic data.
+        src_service (str): Source service name to filter.
+        dst_service (str): Destination service name to filter.
+
+    Returns:
+        pd.DataFrame: Pivot table representing the traffic matrix.
+    """
+    # Ensure necessary columns are present
+    required_columns = {'src_svc', 'dst_svc', 'dst_cid', 'dst_endpoint', 'weight', 'src_cid'}
+    if not required_columns.issubset(df.columns):
+        raise ValueError(f"DataFrame must contain the following columns: {required_columns}, but has columns: {df.columns}")
+
+    # Filter the DataFrame for the specified source and destination services
+    filtered = df[
+        (df['src_svc'] == src_service) & 
+        (df['dst_svc'] == dst_service)
+    ]
+
+    # Create a MultiIndex for the columns using dst_cid and dst_endpoint
+    traffic_matrix = filtered.pivot_table(
+        index=['src_cid', 'src_endpoint'],    
+        columns=['dst_cid', 'dst_endpoint'],
+        values='weight',
+        aggfunc='sum',
+        fill_value=0
+    )
+
+    return traffic_matrix
+
+def jump_towards_optimizer_desired(starting_df: pd.DataFrame, desired_df: pd.DataFrame, 
+                                   src_service: str, dst_service: str, 
+                                   cur_convex_comb_value: float) -> pd.DataFrame:
+    """
+    Computes the convex combination of two traffic matrices based on the given combination value.
+
+    Args:
+        starting_df (pd.DataFrame): The starting traffic matrix DataFrame.
+        desired_df (pd.DataFrame): The desired traffic matrix DataFrame.
+        src_service (str): Source service name to filter.
+        dst_service (str): Destination service name to filter.
+        cur_convex_comb_value (float): The convex combination factor (between 0 and 1).
+
+    Returns:
+        pd.DataFrame: The new traffic matrix as a DataFrame in the same format as the inputs.
+    """
+    # Validate cur_convex_comb_value
+    if not (0 <= cur_convex_comb_value <= 1):
+        raise ValueError("cur_convex_comb_value must be between 0 and 1.")
+
+    required_columns = {'src_svc', 'dst_svc'}
+    for df_name, df in zip(['starting_df', 'desired_df'], [starting_df, desired_df]):
+        if not required_columns.issubset(df.columns):
+            raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+
+    # Compute traffic matrices for starting and desired DataFrames
+    starting_matrix = compute_traffic_matrix(starting_df, src_service, dst_service)
+    desired_matrix = compute_traffic_matrix(desired_df, src_service, dst_service)
+    
+    # Identify all unique (src_cid, src_endpoint) and (dst_cid, dst_endpoint) across both matrices
+    all_src = starting_matrix.index.union(desired_matrix.index)
+    all_dst = starting_matrix.columns.union(desired_matrix.columns)
+    
+    # Reindex both matrices to include all sources and destinations
+    starting_matrix = starting_matrix.reindex(index=all_src, columns=all_dst, fill_value=0)
+    desired_matrix = desired_matrix.reindex(index=all_src, columns=all_dst, fill_value=0)
+    
+    # Compute the convex combination
+    combined_matrix = (1 - cur_convex_comb_value) * starting_matrix + cur_convex_comb_value * desired_matrix
+    combined_matrix = combined_matrix.round(6)
+    logger.info(f"Combined traffic matrix:\n{combined_matrix}\nStarting matrix:\n{starting_matrix}\nDesired matrix:\n{desired_matrix}")
+    
+    # Transform the combined matrix back into a DataFrame
+    combined_df = combined_matrix.reset_index().melt(id_vars=['src_cid', 'src_endpoint'], 
+                                                   var_name=['dst_cid', 'dst_endpoint'], 
+                                                   value_name='weight')
+    combined_df = combined_df[combined_df['weight'] > 0].reset_index(drop=True)
+    
+    # Merge with starting_df and desired_df to get 'total' and 'flow' information
+    # **Important Correction**: Include 'src_endpoint' and 'dst_endpoint' in the merge keys
+    starting_totals = starting_df[
+        (starting_df['src_svc'] == src_service) & 
+        (starting_df['dst_svc'] == dst_service)
+    ][['src_cid', 'src_endpoint', 'dst_cid', 'dst_endpoint', 'total']].drop_duplicates()
+    
+    desired_totals = desired_df[
+        (desired_df['src_svc'] == src_service) & 
+        (desired_df['dst_svc'] == dst_service)
+    ][['src_cid', 'src_endpoint', 'dst_cid', 'dst_endpoint', 'total']].drop_duplicates()
+    
+    # Merge combined_df with starting_totals
+    combined_df = combined_df.merge(
+        starting_totals,
+        on=['src_cid', 'src_endpoint', 'dst_cid', 'dst_endpoint'],
+        how='left',
+        suffixes=('', '_start')
+    )
+    
+    # Merge combined_df with desired_totals
+    combined_df = combined_df.merge(
+        desired_totals,
+        on=['src_cid', 'src_endpoint', 'dst_cid', 'dst_endpoint'],
+        how='left',
+        suffixes=('', '_desired')
+    )
+    
+    # Fill 'total' from starting_df; if missing, use desired_df's 'total'; else set to 1 to avoid division by zero
+    combined_df['total'] = combined_df['total'].fillna(combined_df['total_desired']).fillna(1)
+    
+    # Compute 'flow' as weight * total
+    combined_df['flow'] = combined_df['weight'] * combined_df['total']
+    
+    # Add 'src_svc' and 'dst_svc' columns
+    combined_df['src_svc'] = src_service
+    combined_df['dst_svc'] = dst_service
+    
+    # Optional: Enforce weight limits if necessary
+    # Here, we clip weights to ensure they stay within [0, 1]
+    combined_df['weight'] = combined_df['weight'].clip(lower=0, upper=1.0)
+    
+    # Reorder and select columns to match the original format
+    final_df = combined_df[
+        ['src_svc', 'dst_svc', 'src_endpoint', 'dst_endpoint',
+         'src_cid', 'dst_cid', 'flow', 'total', 'weight']
+    ]
+    
+    # Sort and reset index
+    final_df = final_df.sort_values(by=['src_cid', 'dst_cid']).reset_index(drop=True)
+    
+    return final_df
+
+def process_workloads_to_stages(workloads, total_duration):
+    """
+    Transforms the workloads dict into a list of stages.
+    Each stage is a tuple:
+    (stage_duration, west_singlecore_rps, west_multicore_rps,
+     east_singlecore_rps, east_multicore_rps,
+     central_singlecore_rps, central_multicore_rps,
+     south_singlecore_rps, south_multicore_rps)
+    
+    Parameters:
+    - workloads: Dict containing per-region, per-request-type RPS configurations.
+    - total_duration: Total duration of the experiment in seconds.
+    
+    Returns:
+    - final_stages: List of 9-tuples representing each stage.
+    """
+    # Collect all unique start times
+    unique_times = set()
+    for region, req_types in workloads.items():
+        for req_type, timings in req_types.items():
+            for timing in timings:
+                unique_times.add(timing[0])
+
+    sorted_times = sorted(unique_times)
+
+    # Ensure that the first start time is 0
+    if sorted_times[0] != 0:
+        sorted_times = [0] + sorted_times
+
+    # Initialize current RPS for all regions and request types
+    regions = ["west", "east", "central", "south"]
+    request_types = ["singlecore", "multicore"]
+    current_rps = {region: {req_type: 0 for req_type in request_types} for region in regions}
+
+    stages = []
+
+    # Iterate through each start time and update RPS accordingly
+    for time in sorted_times:
+        for region, req_types in workloads.items():
+            for req_type, timings in req_types.items():
+                for timing in timings:
+                    if timing[0] == time:
+                        current_rps[region][req_type] = timing[1]
+
+        # Create a snapshot of current RPS
+        snapshot = {
+            "west_singlecore": current_rps["west"]["singlecore"],
+            "west_multicore": current_rps["west"]["multicore"],
+            "east_singlecore": current_rps["east"]["singlecore"],
+            "east_multicore": current_rps["east"]["multicore"],
+            "central_singlecore": current_rps["central"]["singlecore"],
+            "central_multicore": current_rps["central"]["multicore"],
+            "south_singlecore": current_rps["south"]["singlecore"],
+            "south_multicore": current_rps["south"]["multicore"],
+        }
+
+        stages.append((time, snapshot))
+
+    # Sort stages by start_time
+    stages = sorted(stages, key=lambda x: x[0])
+
+    # Merge stages with the same configuration
+    merged_stages = []
+    previous_snapshot = None
+    for stage in stages:
+        if previous_snapshot and stage[1] == previous_snapshot:
+            continue  # Skip if the configuration hasn't changed
+        merged_stages.append(stage)
+        previous_snapshot = stage[1]
+
+    # Convert to list of 9-tuples with duration
+    final_stages = []
+    for i in range(len(merged_stages)):
+        stage_time = merged_stages[i][0]
+        # Determine the duration of the stage
+        if i + 1 < len(merged_stages):
+            next_stage_time = merged_stages[i + 1][0]
+            duration = next_stage_time - stage_time
+        else:
+            duration = total_duration - stage_time  # Last stage duration
+
+        # Ensure that duration is positive
+        if duration <= 0:
+            raise ValueError(f"Invalid stage duration at stage {i}: duration={duration}")
+
+        # Create the 9-tuple (duration, 8 rps)
+        stage = (
+            duration,
+            merged_stages[i][1]["west_singlecore"],
+            merged_stages[i][1]["west_multicore"],
+            merged_stages[i][1]["east_singlecore"],
+            merged_stages[i][1]["east_multicore"],
+            merged_stages[i][1]["central_singlecore"],
+            merged_stages[i][1]["central_multicore"],
+            merged_stages[i][1]["south_singlecore"],
+            merged_stages[i][1]["south_multicore"],
+        )
+        final_stages.append(stage)
+
+    # Validate total duration
+    calculated_total = sum(stage[0] for stage in final_stages)
+    if calculated_total > total_duration:
+        raise ValueError(f"Calculated total duration {calculated_total} exceeds the specified total_duration {total_duration}.")
+    elif calculated_total < total_duration:
+        # Add a final stage to fill the remaining duration with the last configuration
+        last_stage = final_stages[-1]
+        remaining_duration = total_duration - calculated_total
+        final_stages.append((
+            remaining_duration,
+            last_stage[1],
+            last_stage[2],
+            last_stage[3],
+            last_stage[4],
+            last_stage[5],
+            last_stage[6],
+            last_stage[7],
+            last_stage[8],
+        ))
+
+    return final_stages
+
+print(process_workloads_to_stages({
+            "west": {
+                "singlecore": [(0, 50)],
+                "multicore": [(0, 200)],
+            },
+            "east": {
+                "singlecore": [(0, 150)],
+                "multicore": [(0, 300), (10, 100)],
+            },
+            "central": {
+                "singlecore": [(0, 50), (5, 7000000)],
+                "multicore": [(0, 200)],
+            },
+            "south": {
+                "singlecore": [(0, 50)],
+                "multicore": [(0, 200)],
+            },
+        }, 120))
+
+with open("workloads.json", "w") as f:
+    f.write(json.dumps({
+                "west": {
+                    "singlecore": [(0, 50)],
+                    "multicore": [(0, 200)],
+                },
+                "east": {
+                    "singlecore": [(0, 150)],
+                    "multicore": [(0, 300), (60, 100)],
+                },
+                "central": {
+                    "singlecore": [(0, 50), (30, 100)],
+                    "multicore": [(0, 200)],
+                },
+                "south": {
+                    "singlecore": [(0, 50)],
+                    "multicore": [(0, 200)],
+                },
+            }, indent=4))

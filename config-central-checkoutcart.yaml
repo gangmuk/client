@@ -11,8 +11,6 @@ clients:
     maxinterval: 5s
   rq_timeout: 5s
   workload:
-  - duration: 120s
+  - duration: 600s
     rps: 100
-  - duration: 1080s
-    rps: 50
-stats_output_folder: gangmuk-test/checkoutcart-W200/SLATE-with-jumping-global
+stats_output_folder: jumping-test-0/checkoutcart/SLATE-with-jumping-global

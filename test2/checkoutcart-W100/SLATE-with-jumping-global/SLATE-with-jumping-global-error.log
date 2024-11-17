@@ -1,0 +1,958 @@
+__main__ - training_phase(line:2810) - ERROR - [ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+[ERROR] trace.csv does not exist.
+
+__main__ - optimizer_entrypoint(line:1944) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0
+__main__ - optimizer_entrypoint(line:1944) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0
+__main__ - optimizer_entrypoint(line:1944) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0
+__main__ - optimizer_entrypoint(line:1944) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0
+__main__ - optimizer_entrypoint(line:1944) - ERROR - !!! Skip optimizer !!! all root_node_rps all regions are 0
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(180) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,46 -> new_capacity, 46
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,46 -> new_capacity, 46
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,46 -> new_capacity, 46
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,46 -> new_capacity, 46
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(495) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,124 -> new_capacity, 124
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,124 -> new_capacity, 124
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,124 -> new_capacity, 124
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,124 -> new_capacity, 124
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(654) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,164 -> new_capacity, 164
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,164 -> new_capacity, 164
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,164 -> new_capacity, 164
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,164 -> new_capacity, 164
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(736) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,185 -> new_capacity, 185
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,185 -> new_capacity, 185
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,185 -> new_capacity, 185
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,185 -> new_capacity, 185
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(713) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(712) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(720) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(733) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(705) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(717) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:39:41 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(728) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(731) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(709) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(724) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(719) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:39:51 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(702) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(706) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(701) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(714) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(713) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:40:01 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(704) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(716) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(729) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(725) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:40:11 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(727) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(720) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(708) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(702) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:40:21 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(717) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(712) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(721) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(724) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:40:31 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(731) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(732) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(730) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(719) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(729) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:40:41 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(734) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(727) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(717) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(722) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:40:51 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(711) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(705) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(708) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(707) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:41:01 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(723) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(706) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(705) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(702) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(733) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:41:11 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(702) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(722) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(722) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(734) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:41:21 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(709) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(703) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(719) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(719) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:41:31 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(708) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(715) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(707) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(715) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:41:41 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(717) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(730) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(714) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(712) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:41:51 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(724) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(715) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(713) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(724) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(721) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:42:01 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(715) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(705) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(724) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(712) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(713) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:42:11 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(712) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(722) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(734) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,184 -> new_capacity, 184
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(725) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(723) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:42:21 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(719) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(713) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(710) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(720) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:42:31 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(714) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(706) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(708) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(722) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(726) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:42:41 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(697) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,175 -> new_capacity, 175
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,175 -> new_capacity, 175
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,175 -> new_capacity, 175
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,175 -> new_capacity, 175
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(700) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(687) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,172 -> new_capacity, 172
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,172 -> new_capacity, 172
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,172 -> new_capacity, 172
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,172 -> new_capacity, 172
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(705) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(712) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:42:51 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(717) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(724) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(731) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(723) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:43:01 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(731) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,183 -> new_capacity, 183
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(714) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(689) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,173 -> new_capacity, 173
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,173 -> new_capacity, 173
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,173 -> new_capacity, 173
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,173 -> new_capacity, 173
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(721) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(708) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:43:11 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(723) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(712) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(692) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(698) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,175 -> new_capacity, 175
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,175 -> new_capacity, 175
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,175 -> new_capacity, 175
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,175 -> new_capacity, 175
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:43:21 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(702) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(710) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(681) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,171 -> new_capacity, 171
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,171 -> new_capacity, 171
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,171 -> new_capacity, 171
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,171 -> new_capacity, 171
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(702) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(700) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:43:31 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(719) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(704) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(697) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,175 -> new_capacity, 175
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,175 -> new_capacity, 175
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,175 -> new_capacity, 175
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,175 -> new_capacity, 175
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(727) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,182 -> new_capacity, 182
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(714) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,179 -> new_capacity, 179
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:43:41 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(705) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(720) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(708) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(709) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:43:51 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(722) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(709) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(716) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(707) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(708) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:44:01 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(705) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(692) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,174 -> new_capacity, 174
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(705) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,177 -> new_capacity, 177
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(719) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,180 -> new_capacity, 180
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(711) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+apscheduler.executors.default - run_job(line:131) - ERROR - Job "perform_jumping (trigger: interval[0:00:10], next run at: 2024-10-28 03:44:11 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "/app/global_controller.py", line 396, in perform_jumping
+    jumping_df = jump_towards_optimizer_desired(starting_df, desired_df, cur_convex_comb_value).copy()
+  File "/app/global_controller.py", line 548, in jump_towards_optimizer_desired
+    raise ValueError(f"{df_name} must contain columns: {required_columns} (has columns: {df.columns})")
+ValueError: desired_df must contain columns: {'src_svc', 'dst_svc'} (has columns: RangeIndex(start=0, stop=0, step=1))
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(720) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,181 -> new_capacity, 181
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(703) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,176 -> new_capacity, 176
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(710) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(711) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,178 -> new_capacity, 178
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(603) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,151 -> new_capacity, 151
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,151 -> new_capacity, 151
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,151 -> new_capacity, 151
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,151 -> new_capacity, 151
+__main__ - optimizer_entrypoint(line:1957) - ERROR - !!! ERROR !!! Total demand(310) at sslateingress > total capcity(0) at frontend
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,78 -> new_capacity, 78
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,78 -> new_capacity, 78
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,78 -> new_capacity, 78
+__main__ - optimizer_entrypoint(line:1961) - ERROR - recalc capacity: frontend, old_capacity,78 -> new_capacity, 78

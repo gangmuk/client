@@ -1,0 +1,1371 @@
+apscheduler.scheduler - add_job(line:454) - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+apscheduler.scheduler - add_job(line:454) - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+apscheduler.scheduler - add_job(line:454) - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+apscheduler.scheduler - add_job(line:454) - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+apscheduler.scheduler - add_job(line:454) - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+apscheduler.scheduler - add_job(line:454) - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+apscheduler.scheduler - add_job(line:454) - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+apscheduler.scheduler - _real_add_job(line:895) - INFO - Added job "read_config_file" to job store "default"
+apscheduler.scheduler - _real_add_job(line:895) - INFO - Added job "write_spans_to_file" to job store "default"
+apscheduler.scheduler - _real_add_job(line:895) - INFO - Added job "training_phase" to job store "default"
+apscheduler.scheduler - _real_add_job(line:895) - INFO - Added job "aggregated_rps_routine" to job store "default"
+apscheduler.scheduler - _real_add_job(line:895) - INFO - Added job "optimizer_entrypoint" to job store "default"
+apscheduler.scheduler - _real_add_job(line:895) - INFO - Added job "perform_jumping" to job store "default"
+apscheduler.scheduler - _real_add_job(line:895) - INFO - Added job "state_check" to job store "default"
+apscheduler.scheduler - start(line:181) - INFO - Scheduler started
+ * Serving Flask app 'global_controller'
+ * Debug mode: off
+__main__ - read_config_file(line:2974) - INFO - Update benchmark_name:  -> not_init
+__main__ - read_config_file(line:2999) - INFO - parent_of_bottleneck_service: not_init, bottleneck_service: not_init
+__main__ - read_config_file(line:3004) - INFO - Update total_num_services: 0 -> -1
+__main__ - read_config_file(line:3012) - INFO - Update mode:  -> before_start
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-1, gap: 5.019854307174683
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-2, gap: 0.9966285228729248
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-3, gap: 1.0026578903198242
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-4, gap: 0.9971671104431152
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-5, gap: 1.0004487037658691
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-6, gap: 1.0002379417419434
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-7, gap: 0.9997644424438477
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-8, gap: 0.9994227886199951
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-9, gap: 1.0687236785888672
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-10, gap: 0.9295520782470703
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: before_start. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: before_start.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-11, gap: 0.9998645782470703
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - read_config_file(line:3012) - INFO - Update mode: before_start -> profile
+__main__ - read_config_file(line:3044) - INFO - Update inter_cluster_latency: us-west-1 -> us-west-1: 0
+__main__ - read_config_file(line:3044) - INFO - Update inter_cluster_latency: us-west-1 -> us-east-1: 33
+__main__ - read_config_file(line:3044) - INFO - Update inter_cluster_latency: us-west-1 -> us-central-1: 15
+__main__ - read_config_file(line:3044) - INFO - Update inter_cluster_latency: us-west-1 -> us-south-1: 20
+__main__ - read_config_file(line:3044) - INFO - Update inter_cluster_latency: us-east-1 -> us-east-1: 0
+__main__ - read_config_file(line:3044) - INFO - Update inter_cluster_latency: us-east-1 -> us-central-1: 20
+__main__ - read_config_file(line:3044) - INFO - Update inter_cluster_latency: us-east-1 -> us-south-1: 15
+__main__ - read_config_file(line:3044) - INFO - Update inter_cluster_latency: us-central-1 -> us-central-1: 0
+__main__ - read_config_file(line:3044) - INFO - Update inter_cluster_latency: us-central-1 -> us-south-1: 10
+__main__ - read_config_file(line:3044) - INFO - Update inter_cluster_latency: us-south-1 -> us-south-1: 0
+__main__ - read_config_file(line:2974) - INFO - Update benchmark_name: not_init -> onlineboutique
+__main__ - read_config_file(line:2999) - INFO - parent_of_bottleneck_service: sslateingress, bottleneck_service: frontend
+__main__ - read_config_file(line:3004) - INFO - Update total_num_services: -1 -> 8
+__main__ - read_config_file(line:3032) - INFO - Update degree: 0 -> 2
+__main__ - read_config_file(line:3051) - INFO - Update load_coef_flag: False -> 1
+__main__ - read_config_file(line:3064) - INFO - Update workload: west-checkoutcart: 250RPS
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-12, gap: 1.0028910636901855
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-13, gap: 0.9988887310028076
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-14, gap: 1.0038385391235352
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -19
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-15, gap: 1.0028226375579834
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-16, gap: 0.993474006652832
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-17, gap: 1.0021274089813232
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -38
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -61
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -61
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -61
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-18, gap: 1.001070499420166
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -38
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -16
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -16
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -16
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -16
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -16
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-19, gap: 0.9959158897399902
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -13
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -13
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -41
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -41
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -30
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -41
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -30
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-20, gap: 1.0061695575714111
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-21, gap: 0.9943051338195801
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-22, gap: 0.9983649253845215
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-23, gap: 0.9998257160186768
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -49
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-24, gap: 1.004636526107788
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -19
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -82
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-25, gap: 0.9972484111785889
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-26, gap: 1.0047686100006104
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-27, gap: 0.988903284072876
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-28, gap: 1.1058497428894043
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-29, gap: 0.8964023590087891
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -40
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -40
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -16
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-30, gap: 1.0034081935882568
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -26
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -26
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-31, gap: 1.000124454498291
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -63
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -63
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-32, gap: 1.0023362636566162
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-33, gap: 0.9917089939117432
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-34, gap: 1.002607822418213
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -9
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-35, gap: 0.9973363876342773
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-36, gap: 1.0007262229919434
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-37, gap: 0.9996747970581055
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-38, gap: 1.0001635551452637
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-39, gap: 1.0003509521484375
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-40, gap: 0.9969251155853271
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-41, gap: 1.0008435249328613
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -105
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-42, gap: 0.9978704452514648
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -57
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -57
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -10
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -10
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-43, gap: 1.0003161430358887
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-44, gap: 1.0004081726074219
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-45, gap: 0.9989655017852783
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -30
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-46, gap: 1.002260684967041
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-47, gap: 0.9996979236602783
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-48, gap: 0.9988725185394287
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -36
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -36
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-49, gap: 1.0050773620605469
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-50, gap: 0.9957869052886963
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -17
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -17
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -17
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -17
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-51, gap: 1.0014524459838867
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-52, gap: 0.9999308586120605
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -143
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -143
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-53, gap: 1.000533103942871
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-54, gap: 1.002990961074829
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -34
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -34
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -34
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -34
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-55, gap: 0.9979372024536133
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -33
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-56, gap: 0.998845100402832
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-57, gap: 0.9962847232818604
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -94
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-58, gap: 1.0005896091461182
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -49
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -85
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -35
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -49
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -35
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -21
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-59, gap: 1.002284288406372
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -14
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-60, gap: 1.0010912418365479
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-61, gap: 0.9991371631622314
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -49
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -49
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-62, gap: 0.9981217384338379
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-63, gap: 1.0012469291687012
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -36
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -15
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-64, gap: 1.0003881454467773
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-65, gap: 1.0000698566436768
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-66, gap: 0.9994485378265381
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -13
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -13
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -13
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -13
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-67, gap: 1.0035715103149414
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-68, gap: 0.999459981918335
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-69, gap: 0.9958662986755371
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-70, gap: 1.0031960010528564
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-71, gap: 0.9935581684112549
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-72, gap: 1.0000064373016357
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-73, gap: 1.0035760402679443
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -55
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-74, gap: 0.9996297359466553
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -98
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -121
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -121
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -98
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -121
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -98
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-75, gap: 0.998870849609375
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -142
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -142
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-76, gap: 0.9984452724456787
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-77, gap: 1.0006389617919922
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -18
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-78, gap: 0.9946093559265137
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-79, gap: 1.0035924911499023
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -72
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -35
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-80, gap: 0.9960315227508545
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -72
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-81, gap: 1.0080413818359375
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -32
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-82, gap: 1.0067625045776367
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-83, gap: 0.9932143688201904
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -93
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -93
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-84, gap: 0.9918484687805176
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-85, gap: 1.0037379264831543
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-86, gap: 0.9972963333129883
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -42
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -42
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-87, gap: 1.0070712566375732
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-88, gap: 1.0040905475616455
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -30
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-89, gap: 0.992621898651123
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-90, gap: 0.9940676689147949
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-91, gap: 0.9998064041137695
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-92, gap: 1.0048725605010986
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -55
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-93, gap: 0.9951274394989014
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -19
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -19
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-94, gap: 1.0016472339630127
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-95, gap: 0.9979944229125977
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -66
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -66
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-96, gap: 0.9997851848602295
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -14
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -14
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-97, gap: 1.0009944438934326
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-98, gap: 0.9994337558746338
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-99, gap: 1.0025806427001953
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-100, gap: 0.9982514381408691
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-101, gap: 1.0010781288146973
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -53
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -53
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -53
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -30
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -10
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -30
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -10
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -30
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-102, gap: 1.0008878707885742
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -62
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-103, gap: 0.9968035221099854
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -23
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -23
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-104, gap: 0.9999687671661377
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-105, gap: 1.0003395080566406
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-106, gap: 0.999730110168457
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-107, gap: 1.003342628479004
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -38
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -38
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-108, gap: 0.9961962699890137
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-109, gap: 1.0047764778137207
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-110, gap: 0.9989662170410156
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -42
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -52
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -52
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-111, gap: 0.9953830242156982
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -14
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -14
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-112, gap: 1.0042312145233154
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-113, gap: 0.9960324764251709
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -16
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-114, gap: 1.004486322402954
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -67
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -67
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-115, gap: 0.9941749572753906
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -57
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -57
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -57
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-116, gap: 0.998293399810791
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-117, gap: 1.0043330192565918
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-118, gap: 0.999300479888916
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -14
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -14
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-119, gap: 0.9967794418334961
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-120, gap: 0.9995870590209961
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-121, gap: 1.0011506080627441
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-122, gap: 0.9995014667510986
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-123, gap: 0.9987161159515381
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -19
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-124, gap: 0.9996979236602783
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-125, gap: 0.9997677803039551
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-126, gap: 1.00002121925354
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-127, gap: 1.0018370151519775
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -22
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -55
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -55
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -55
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -55
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-128, gap: 0.999985933303833
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -20
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -17
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-129, gap: 0.9981179237365723
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -42
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -10
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-130, gap: 0.9999909400939941
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -36
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -36
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -36
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-131, gap: 0.9996159076690674
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-132, gap: 1.0017290115356445
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-133, gap: 0.99959397315979
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-134, gap: 0.9984250068664551
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-135, gap: 1.0003612041473389
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-136, gap: 0.9999825954437256
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-137, gap: 1.0015523433685303
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-138, gap: 0.9993546009063721
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-139, gap: 1.000230312347412
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-140, gap: 0.9979441165924072
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -16
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -39
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-141, gap: 0.9999845027923584
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-142, gap: 1.0031847953796387
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-143, gap: 1.001067876815796
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-144, gap: 1.0007717609405518
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -84
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -84
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-145, gap: 0.9948489665985107
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-146, gap: 0.9997267723083496
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -45
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -45
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -45
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-147, gap: 1.0032627582550049
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-148, gap: 0.9970450401306152
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -20
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -20
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-149, gap: 1.0005154609680176
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -22
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -22
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -22
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-150, gap: 0.9994513988494873
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -128
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-151, gap: 0.99955153465271
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -15
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-152, gap: 1.001274824142456
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-153, gap: 1.004636526107788
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -48
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -48
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-154, gap: 0.9942841529846191
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-155, gap: 0.9992344379425049
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-156, gap: 0.9999909400939941
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -39
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-157, gap: 1.0034103393554688
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-158, gap: 1.0010223388671875
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-159, gap: 0.9954054355621338
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-160, gap: 1.0016002655029297
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-161, gap: 0.998427152633667
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-162, gap: 1.0006067752838135
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-163, gap: 1.0028343200683594
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -46
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -11
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-164, gap: 0.9961822032928467
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -20
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-165, gap: 0.9994690418243408
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-166, gap: 1.0002467632293701
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-167, gap: 1.0030698776245117
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -22
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-168, gap: 0.9985113143920898
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-169, gap: 1.0017499923706055
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-170, gap: 0.9961323738098145
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-171, gap: 1.0018086433410645
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-172, gap: 1.0028822422027588
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-173, gap: 0.9968125820159912
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-174, gap: 0.9978961944580078
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -60
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -60
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-175, gap: 1.0001919269561768
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-176, gap: 1.0020852088928223
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-177, gap: 0.9988524913787842
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-178, gap: 0.9998998641967773
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-179, gap: 0.9989328384399414
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-180, gap: 0.9996428489685059
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-181, gap: 1.6041162014007568
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -39
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-182, gap: 0.3991243839263916
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -69
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/GetProduct, -69
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -141
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -28
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-183, gap: 0.9976315498352051
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -37
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-184, gap: 0.9997518062591553
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -21
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-185, gap: 0.9986836910247803
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-186, gap: 1.0011518001556396
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-187, gap: 0.9992477893829346
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-188, gap: 1.000002145767212
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -70
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-189, gap: 0.9993515014648438
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-190, gap: 0.9998908042907715
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -32
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -32
+__main__ - parse_stats_into_spans(line:1278) - INFO - response time is negative
+__main__ - parse_stats_into_spans(line:1279) - INFO - Skip this span: productcatalogservice, POST, /hipstershop.ProductCatalogService/ListProducts, -33
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-191, gap: 1.0001251697540283
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-192, gap: 1.0006780624389648
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-193, gap: 1.0001578330993652
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-194, gap: 0.9991710186004639
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-195, gap: 0.9997856616973877
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-196, gap: 0.9996304512023926
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-197, gap: 1.0006859302520752
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-198, gap: 0.9998185634613037
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-199, gap: 0.9992382526397705
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-200, gap: 0.9999048709869385
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
+__main__ - training_phase(line:2811) - INFO - mode: profile. Skip training.
+__main__ - optimizer_entrypoint(line:1912) - WARNING - run optimizer only in runtime mode. current mode: profile.
+__main__ - aggregated_rps_routine(line:3150) - INFO - --------------------------------------------------------------------------------
+__main__ - aggregated_rps_routine(line:3151) - INFO - aggregated_rps_routine, temp_counter-201, gap: 0.9997808933258057
+__main__ - aggregated_rps_routine(line:3157) - WARNING - --------------------------------------------------------------------------------
