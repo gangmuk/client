@@ -447,7 +447,9 @@ def main():
     # routing_rule_list = ["LOCAL"]
     # routing_rule_list = ["SLATE-without-jumping", "SLATE-with-jumping-global", "SLATE-with-jumping-local"]
     # routing_rule_list = ["SLATE-without-jumping"]
-    routing_rule_list = ["SLATE-with-jumping-global"]
+    # routing_rule_list = ["SLATE-with-jumping-global"]
+    routing_rule_list = ["SLATE-with-jumping-global", "SLATE-without-jumping"]
+
     # routing_rule_list = ["WATERFALL2"]
     
     onlineboutique_path = {
@@ -489,8 +491,8 @@ def main():
                 "multicore": [(0, 200)],
             },
             "east": {
-                "singlecore": [(0, 50)],
-                "multicore": [(0, 200)],
+                "singlecore": [(0, 75)],
+                "multicore": [(0, 400)],
             },
             "central": {
                 "singlecore": [(0, 50)],
@@ -519,7 +521,7 @@ def main():
 
     for name, w in workloads.items():
         hillclimb_interval = 30
-        experiment_dur = 60*2
+        experiment_dur = 60*5
         normalization_dict = {
             "sslateingress@POST@/singlecore": {
                 "sslateingress@POST@/multicore": 1,
@@ -528,10 +530,10 @@ def main():
                 "sslateingress@POST@/singlecore": 1,
             },
             "corecontrast@POST@/singlecore": {
-                "corecontrast@POST@/multicore": 0.2,
+                "corecontrast@POST@/multicore": 1,
             },
             "corecontrast@POST@/multicore": {
-                "corecontrast@POST@/singlecore": 5,
+                "corecontrast@POST@/singlecore": 1,
             },
         }
         
@@ -789,8 +791,12 @@ def main():
                 utils.run_command(f"python plot_gc_jumping.py {output_dir}/{routing_rule}-jumping_routing_history.csv {output_dir}/{routing_rule}-jumping_latency.csv {output_dir}/routing_rule_plots",required=False)
                 utils.run_command(f"python plot_region_latency.py {output_dir}/{routing_rule}-region_jumping_latency.csv {output_dir}/region_jumping_latency.pdf",required=False)
             # utils.run_command(f"python fast_plot_all.py --data_dir {output_dir}",required=False)
-            utils.run_command(f"python fast_plot.py --data_dir {output_dir}",required=False)
-            utils.run_command(f"python plot_endpoint_rps.py {output_dir}/endpoint_rps_history.csv {output_dir}/endpoint_rps.pdf",required=False)
+            # utils.run_command(f"python fast_plot.py --data_dir {output_dir}",required=False)
+            utils.run_command(f"python plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/endpoint_rps.pdf",required=False)
+            utils.run_command(f"python plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/endpoint_rps_sslateingress.pdf sslateingress",required=False)
+            utils.run_command(f"python plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/endpoint_rps_corecontrast.pdf corecontrast",required=False)
+            utils.run_command(f"python plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/endpoint_rps_corecontrast-singlecore.pdf corecontrast corecontrast@POST@/singlecore",required=False)
+            utils.run_command(f"python plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/endpoint_rps_corecontrast-multicore.pdf corecontrast corecontrast@POST@/multicore",required=False)
                 # utils.run_command(f"python plot_gc_jumping ")
 
 

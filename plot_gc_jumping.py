@@ -127,6 +127,7 @@ def main():
     for region in regions:
         for request_type in request_types:
             # Generate a safe filename by replacing any problematic characters
+            print(f"Generating plot for region '{region}' with request type '{request_type}'")
             safe_request_type = request_type.replace('/', '-').replace('@', '-')
             output_pdf = os.path.join(
                 output_directory,
