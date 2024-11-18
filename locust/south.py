@@ -4,12 +4,13 @@ from locust.exception import RescheduleTask
 class CheckoutUser(HttpUser):
     # wait_time = between(0.1, 0.5)
     wait_time = constant_pacing(1)
+
     @task
     def checkout_cart(self):
         try:
             with self.client.post(
                 "/cart/checkout?email=fo%40bar.com&street_address=405&zip_code=945&city=Fremont&state=CA&country=USA&credit_card_number=5555555555554444&credit_card_expiration_month=12&credit_card_expiration_year=2025&credit_card_cvv=222",
-                headers={"x-slate-destination": "west"},
+                headers={"x-slate-destination": "south"},
                 timeout=2,
                 catch_response=True
             ) as response:
@@ -29,9 +30,9 @@ class CustomShape(LoadTestShape):
     """
 
     stages = [
-        (30, 50),   # Ramp up to 100 users over 1 minute
-        (30, 100),  # Hold 200 users for 2 minutes
-        (30, 150),   # Ramp up to 300 users over 1 minute
+        (30, 150),   # Ramp up to 100 users over 1 minute
+        (30, 200),  # Hold 200 users for 2 minutes
+        (30, 250),   # Ramp up to 300 users over 1 minute
     ]
 
     def tick(self):

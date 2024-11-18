@@ -71,9 +71,10 @@ class SmoothTransitionShape(LoadTestShape):
     
     stages = [
         # (stage_time, start_users, west_weight, east_weight, south_weight, central_weight)
-        (30, 50, 0.25, 0.25, 0.25, 0.25),
+        # (30, 50, 0.25, 0.25, 0.25, 0.25),
         (30, 400, 0.25, 0.25, 0.25, 0.25),
-        (30, 50, 0.25, 0.25, 0.25, 0.25),
+        (30, 400, 0.50, 0.30, 0.10, 0.10),
+        # (30, 50, 0.25, 0.25, 0.25, 0.25),
         # (30, 800, 0.25, 0.25, 0.25, 0.25),
         # (30, 400, 0.25, 0.25, 0.25, 0.25),
         # (30, 1200, 0.25, 0.25, 0.25, 0.25),
@@ -94,10 +95,10 @@ class SmoothTransitionShape(LoadTestShape):
                 ## quadratic
                 # target_users = math.ceil(start_users + steep_proportion * (end_users - start_users)) 
                 
-                CheckoutUserWest.weight = int(west_weight * 100)
-                CheckoutUserEast.weight = int(east_weight * 100)
-                CheckoutUserSouth.weight = int(south_weight * 100)
-                CheckoutUserCentral.weight = int(central_weight * 100)
+                CheckoutUserWest.weight = west_weight
+                CheckoutUserEast.weight = east_weight
+                CheckoutUserSouth.weight = south_weight
+                CheckoutUserCentral.weight = central_weight
                 # return (target_users, target_users // 10)  # Adjust spawn rate as needed
                 return (start_users, start_users)
             run_time -= stage_time

@@ -1,8 +1,9 @@
-from locust import HttpUser, task, between, LoadTestShape
+from locust import HttpUser, task, between, LoadTestShape, constant_pacing
 from locust.exception import RescheduleTask
 
-class CheckoutUserEast(HttpUser):
-    wait_time = between(0.1, 0.5)
+class CheckoutUser(HttpUser):
+    # wait_time = between(0.1, 0.5)
+    wait_time = constant_pacing(1)
 
     @task
     def checkout_cart(self):
@@ -29,17 +30,15 @@ class CustomShape(LoadTestShape):
     """
 
     stages = [
-        (30, 100, 10),   # Ramp up to 100 users over 1 minute
-        (30, 200, 20),  # Hold 200 users for 2 minutes
-        (30, 300, 30),   # Ramp up to 300 users over 1 minute
-        (30, 200, 10),   # Ramp down to 200 users over 1 minute
-        (30, 100, 10),   # Ramp down to 100 users over 1 minute
+        (30, 100),   # Ramp up to 100 users over 1 minute
+        (30, 150),  # Hold 200 users for 2 minutes
+        (30, 200),   # Ramp up to 300 users over 1 minute
     ]
 
     def tick(self):
         run_time = self.get_run_time()
-        for stage_time, user_count, spawn_rate in self.stages:
+        for stage_time, user_count in self.stages:
             if run_time < stage_time:
-                return (user_count, spawn_rate)
+                return (user_count, user_count)
             run_time -= stage_time
         return None  # End test when stages are complete
