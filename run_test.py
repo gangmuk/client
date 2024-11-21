@@ -44,6 +44,7 @@ def cleanup_on_crash():
     print("Cleaning up resources...")
     utils.delete_tc_rule_in_client(network_interface, node_dict)
     utils.pkill_background_noise(node_dict)
+    utils.restart_deploy(deploy=["slate-controller"])
     
 # Signal handler
 def signal_handler(signum, frame):
@@ -454,7 +455,6 @@ def main():
     experiment_list = []
     benchmark_name="onlineboutique" # a,b, 1MB and c 2MB file write
     method = "POST"
-    experiment = utils.Experiment()
     req_type = "checkoutcart"
     # req_type = "addtocart"
     if req_type == "checkoutcart":
@@ -464,28 +464,35 @@ def main():
     else:
         print(f"req_type: {req_type} is not supported")
         assert False
-    west_rps = 10
-    central_rps = 10
-    south_rps = 10
-    east_rps = 10
+    # west_rps = [100,200,300,400,500,600,700,800,900,1000]
+    west_rps = [1100, 1200, 1300, 1400, 1500]
+    central_rps = [0]
+    south_rps = [0]
+    east_rps = [0]
     hillclimb_interval = 30
-    duration = 60 * 3
-    experiment.set_hillclimb_interval(hillclimb_interval)
-    #experiment.set_delay_injection_point(30)
-    # experiment.set_injected_delay([(60 * 6, 200, "us-central-1"), (60 * 11, 1, "us-central-1"), (60 * 15, 200, "us-south-1")])
-    # experiment.set_injected_delay([])
-    if west_rps > 0:
-        experiment.add_workload(utils.Workload(cluster="west", req_type=req_type, rps=[west_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
-    if east_rps > 0:
-        experiment.add_workload(utils.Workload(cluster="east", req_type=req_type, rps=[east_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
-    if central_rps > 0:
-        # experiment.add_workload(utils.Workload(cluster="central", req_type=req_type, rps=[100, central_rps], duration=[60*2, 60*18], method=method, path=onlineboutique_path[req_type]))
-        experiment.add_workload(utils.Workload(cluster="central", req_type=req_type, rps=[central_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
-    if south_rps > 0:
-        experiment.add_workload(utils.Workload(cluster="south", req_type=req_type, rps=[south_rps], duration=[duration], method=method, path=onlineboutique_path[req_type]))
-    experiment_name = f"{req_type}-W{west_rps}-E{east_rps}-C{central_rps}-S{south_rps}"
-    experiment.set_name(experiment_name)
-    experiment_list.append(experiment)
+    duration = [100] * len(west_rps)
+
+    for w_rps, dur in zip(west_rps, duration):
+        experiment = utils.Experiment()
+        experiment.set_hillclimb_interval(hillclimb_interval)
+        #experiment.set_delay_injection_point(30)
+        # experiment.set_injected_delay([(60 * 6, 200, "us-central-1"), (60 * 11, 1, "us-central-1"), (60 * 15, 200, "us-south-1")])
+        # experiment.set_injected_delay([])
+        experiment.add_workload(utils.Workload(cluster="west", req_type=req_type, rps=[w_rps], duration=[dur], method=method, path=onlineboutique_path[req_type]))
+        experiment_name = f"{req_type}-W{w_rps}"
+        experiment.set_name(experiment_name)
+        experiment.hash_mod = w_rps // 10
+        experiment_list.append(experiment)
+        # if west_rps > 0:
+        #     experiment.add_workload(utils.Workload(cluster="west", req_type=req_type, rps=west_rps, duration=[duration], method=method, path=onlineboutique_path[req_type]))
+        # if east_rps > 0:
+        #     experiment.add_workload(utils.Workload(cluster="east", req_type=req_type, rps=east_rps, duration=[duration], method=method, path=onlineboutique_path[req_type]))
+        # if central_rps > 0:
+        #     experiment.add_workload(utils.Workload(cluster="central", req_type=req_type, rps=central_rps, duration=[duration], method=method, path=onlineboutique_path[req_type]))
+        # if south_rps > 0:
+        #     experiment.add_workload(utils.Workload(cluster="south", req_type=req_type, rps=south_rps, duration=[duration], method=method, path=onlineboutique_path[req_type]))
+        
+        # experiment_name = f"{req_type}-W{west_rps}-E{east_rps}-C{central_rps}-S{south_rps}"
     
     #### Four clusters
     region_to_node = {
@@ -580,7 +587,7 @@ def main():
     CONFIG["load_coef_flag"] = 1
     
     
-    utils.restart_deploy(deploy=["slate-controller"])
+    # utils.restart_deploy(deploy=["slate-controller"])
     
     # utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-west-1"])
     
@@ -589,9 +596,11 @@ def main():
         for routing_rule in routing_rule_list:
             output_dir = f"{sys_arg_dir_name}/{experiment.name}/bg-{background_noise}/{routing_rule}"
             utils.start_background_noise(node_dict, CONFIG['background_noise'], victimize_node="node1", victimize_cpu=CONFIG['background_noise'])
-
-            update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-central-1")
-            update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-south-1")   
+            
+            # utils.update_wasm_env_var("default", "slate-wasm-plugin", "TRACING_HASH_MOD", str(experiment.hash_mod))
+            # utils.run_command("krrd")
+            # update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-central-1")
+            # update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-south-1") 
             print(f"mode: {mode}")
             print(f"routing_rule: {routing_rule}")
             utils.check_all_pods_are_ready()
@@ -639,6 +648,7 @@ def main():
                 future_list = list()
                 for workload in experiment.workloads:
                     future_list.append(executor.submit(utils.run_newer_generation_client, workload, output_dir))
+                    # future_list.append(executor.submit(utils.run_vegeta, workload, output_dir))
                     time.sleep(0.1)
                 for future in concurrent.futures.as_completed(future_list):
                     print(future.result())

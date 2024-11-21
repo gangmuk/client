@@ -579,7 +579,32 @@ def file_write_config_file(CONFIG, config_file_path):
         for key, value in CONFIG.items():
             file.write(f"{key},{value}\n")
         file.write("-- end of config --")
-                            
+
+
+def update_wasm_env_var(namespace, plugin_name, hillclimbing_key, hillclimbing_value):
+    config.load_kube_config()
+    api_instance = client.CustomObjectsApi()
+    group = 'extensions.istio.io'
+    version = 'v1alpha1'
+    plural = 'wasmplugins'
+
+    wasm_plugin = api_instance.get_namespaced_custom_object(
+        group=group, version=version, namespace=namespace, plural=plural, name=plugin_name
+    )
+    for env_var in wasm_plugin['spec']['vmConfig']['env']:
+        if env_var['name'] == hillclimbing_key:
+            env_var['value'] = hillclimbing_value
+            break
+    api_instance.patch_namespaced_custom_object(
+        group=group,
+        version=version,
+        namespace=namespace,
+        plural=plural,
+        name=plugin_name,
+        body=wasm_plugin
+    )
+    print(f"WASM key {hillclimbing_key} value updated to {hillclimbing_value} in WasmPlugin '{plugin_name}'.")
+                   
 # One workload means one client. One client means one request type and a list of RPS & Duration>.
 class Workload:
     def __init__(self, cluster: str, req_type: str, rps: list, duration: list, method: str, path: str, hdrs: dict = {}, endpoint=""):
@@ -591,9 +616,12 @@ class Workload:
         self.path = path
         self.hdrs = hdrs
         self.name = f"{cluster}-{req_type}"
+        # self.name = f"{cluster}-{req_type}-{rps}"
         self.endpoint = endpoint
         if len(rps) != len(duration):
             print(f"ERROR: rps and duration length mismatch")
+            print(f"rps: {rps}")
+            print(f"duration: {duration}")
             print("exit...")
             assert False
     

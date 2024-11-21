@@ -40,13 +40,14 @@ sp_callgraph_table = {}
 all_endpoints = {}
 placement = {}
 coef_dict = {}
-ylim = 15000
+# ylim = 15000
+ylim = 1000
 profiling = True
 trace_str = list()
 # x_feature = "num_inflight_dict"
 x_feature = "rps_dict"
-# target_y = "xt" # exclusive time
-target_y = "rt" # response time
+target_y = "xt" # exclusive time
+# target_y = "rt" # response time
 
 '''
 cluster_to_cid and cid_to_cluster should be deprecated
@@ -93,15 +94,15 @@ def fit_mm1_model(data, y_col_name, svc_name, ep_str, cid, directory):
     # print(f"y_plot: {y_plot}")
     norm_u_plot = u_plot*max_rps
     #plt.plot(norm_u_plot, y_plot, 'r-', label=f'MM1 Fit: $\\frac{{a}}{{c-u}}+b$,a={popt[0]}, c={u_.max()*constant}, b={popt[1]}')
-    plt.plot(norm_u_plot, y_plot, 'r-', label=f'MM1 Fit: $\\frac{{a}}{{c-u}}+b$\n$a={popt[0]:.2f}, c={(u_.max()*constant):.2f}, b={popt[1]:.2f}$')
+    plt.plot(norm_u_plot, y_plot, 'b-', label=f'MM1 Fit: $\\frac{{a}}{{c-u}}+b$\n$a={popt[0]:.2f}, c={(u_.max()*constant):.2f}, b={popt[1]:.2f}$')
     # plt.plot(u_plot, y_plot, 'r-', label=f'MM1 Fit: $\\frac{{a}}{{1-u}}$, a={popt[0]:.2f}')
-    plt.ylim(0, ylim)
     plt.xlabel('Utilization (u_)')
     plt.ylabel(y_col_name + " ms")
     plt.title(f'{ep_str} in {cid}')
     plt.legend()
-    plt.ylim(0, max(y_)*1.1)
-    pdf_fn = f"{directory}/latency-{svc_name}-mm1-{target_y}.pdf"
+    plt.ylim(0, ylim)
+    # plt.ylim(0, max(y_)*1.1)
+    pdf_fn = f"{directory}/mm1-{svc_name}-{target_y}.pdf"
     plt.savefig(pdf_fn)
     plt.show()
     # Output the model parameters and where the plot was saved
@@ -140,7 +141,7 @@ def fit_polynomial_regression(data, y_col_name, svc_name, ep_str, cid, directory
     plt.title(f'{ep_str} in {cid}')
     plt.legend()
     # pdf_fn = f"{directory}/latency-{x_feature}-{svc_name}.pdf"
-    pdf_fn = f"{directory}/latency-{svc_name}-poly-{target_y}.pdf"
+    pdf_fn = f"{directory}/poly-{svc_name}-{target_y}.pdf"
     plt.savefig(pdf_fn)
     print(f"**output: {pdf_fn}")
     plt.show()
@@ -161,10 +162,10 @@ def train_latency_function_with_trace(model, traces, directory, degree):
             if svc_name not in coef_dict:
                 coef_dict[svc_name] = dict()
             for ep_str in cid_svc_df["endpoint_str"].unique():
-                if "checkoutcart" in directory:
-                    if "hipstershop.CurrencyService/Convert" in ep_str or "/hipstershop.ProductCatalogService/GetProduct" in ep_str:
-                        print(row)
-                        assert False
+                if "hipstershop.CurrencyService/Convert" in ep_str or "/hipstershop.ProductCatalogService/GetProduct" in ep_str:
+                    # print(row)
+                    # assert False
+                    continue
                 ep_df = cid_svc_df[cid_svc_df["endpoint_str"]==ep_str]
                 # Data preparation: load(X) and latency(y) 
                 data = dict()
@@ -277,7 +278,7 @@ def trace_string_file_to_trace_data_structure_with_df(df, required_num_endpoint,
     list_of_span = list()
     excluded_traces = set()  # To track trace_ids with RPS > 6000
 
-    for index, row in df.iterrows():
+    for _, row in df.iterrows():
         if row["trace_id"] in excluded_traces:
             print(f"Part of invalid trace, {row['trace_id']}, {row['svc_name']}, {row['method']}, {row['path']} row")
             continue    
@@ -287,11 +288,10 @@ def trace_string_file_to_trace_data_structure_with_df(df, required_num_endpoint,
             continue
         if "ListProducts" in row["path"]:
             print(f"asdf asdf {row}")
-        if "checkoutcart" in directory:
-            if "/hipstershop.CurrencyService/Convert" in row["path"] or "/hipstershop.ProductCatalogService/GetProduct" in row["path"]:
-                print(f"Skip this span, {row['svc_name']}, {row['method']}, {row['path']} row")
-                excluded_traces.add(row["trace_id"])  # Mark the trace_id for exclusion
-                continue
+        if "/hipstershop.CurrencyService/Convert" in row["path"] or "/hipstershop.ProductCatalogService/GetProduct" in row["path"]:
+            print(f"Skip this span, {row['svc_name']}, {row['method']}, {row['path']} row")
+            excluded_traces.add(row["trace_id"])  # Mark the trace_id for exclusion
+            continue
         num_inflight_dict = dict()
         rps_dict = dict()
         inflight_list = row["inflight_dict"].split("|")[:-1]
@@ -299,11 +299,10 @@ def trace_string_file_to_trace_data_structure_with_df(df, required_num_endpoint,
             temp = ep_inflight.split(":")
             assert len(temp) == 2
             ep = temp[0]
-            if "checkoutcart" in directory:
-                if "hipstershop.CurrencyService/Convert" in ep or "/hipstershop.ProductCatalogService/GetProduct" in ep:
-                    print(f"Skip inflight_dict, {ep} endpoint, {row['svc_name']}, {row['method']}, {row['path']} row")
-                    excluded_traces.add(row["trace_id"])  # Mark the trace_id for exclusion
-                    continue
+            if "hipstershop.CurrencyService/Convert" in ep or "/hipstershop.ProductCatalogService/GetProduct" in ep:
+                print(f"Skip inflight_dict, {ep} endpoint, {row['svc_name']}, {row['method']}, {row['path']} row")
+                excluded_traces.add(row["trace_id"])  # Mark the trace_id for exclusion
+                continue
             inflight = int(temp[1])
             num_inflight_dict[ep] = inflight
         rps_list = row["rps_dict"].split("|")[:-1] # sd03b@POST@/heavy:335|
@@ -311,11 +310,10 @@ def trace_string_file_to_trace_data_structure_with_df(df, required_num_endpoint,
             temp = ep_rps.split(":") # ["sd03b@POST@/heavy", "335"]
             assert len(temp) == 2
             ep = temp[0] # "sd03b@POST@/heavy"
-            if "checkoutcart" in directory:
-                if "hipstershop.CurrencyService/Convert" in ep or "/hipstershop.ProductCatalogService/GetProduct" in ep:
-                    print(f"Skip rps_dict, {ep} endpoint, {row['svc_name']}, {row['method']}, {row['path']} row")
-                    excluded_traces.add(row["trace_id"])  # Mark the trace_id for exclusion
-                    continue
+            if "hipstershop.CurrencyService/Convert" in ep or "/hipstershop.ProductCatalogService/GetProduct" in ep:
+                print(f"Skip rps_dict, {ep} endpoint, {row['svc_name']}, {row['method']}, {row['path']} row")
+                excluded_traces.add(row["trace_id"])  # Mark the trace_id for exclusion
+                continue
             rps = int(temp[1]) * num_replica # 335 * 3
             ''' NOTE: HARDCODED, RPS FILTER'''
             if rps > 6000:
