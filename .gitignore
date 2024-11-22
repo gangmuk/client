@@ -1,2 +1,3 @@
 proxy-logs/
-
+__pycache__/
+*.pyc
