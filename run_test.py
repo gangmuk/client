@@ -27,7 +27,7 @@ import argparse
 
 
 CLOUDLAB_CONFIG_XML="/users/gangmuk/projects/slate-benchmark/config.xml"
-network_interface = "enp24s0f0"
+network_interface = "eno1"
 
 def start_node_cpu_monitoring(region_to_node, duration, filename, username="gangmuk"):
     # Run the collect_cpu_utilization function in a separate thread
@@ -664,6 +664,10 @@ def main():
                 utils.kubectl_cp_from_host_to_slate_controller_pod(args.slatelog, "/app/trace.csv")
                 
             print(f"starting experiment at {datetime.now()}, expected to finish at {datetime.now() + timedelta(seconds=sum(workload.duration))}")
+            
+            ## init only
+            # return
+            # time.sleep(120)
             
             if mode == "runtime":
                 for (point, delay, targetregion) in inject_delay:

@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# python run_test.py --dir_name "gangmuk-test" \
-python run_locust.py --dir_name "gangmuk-locust-test" \
-    --background_noise 0 \
+# python run_locust.py --dir_name "gangmuk-test" \
+python run_test.py --dir_name "gangmuk-test" \
+    --background_noise 30 \
     --mode "runtime" \
     --routing_rule "SLATE-with-jumping-global" \
     --req_type "checkoutcart" \
-    --slatelog "replicated-e-c-s-trace-sample1.csv" \
+    --slatelog "exclusivetime-0.1-replicated-e-c-s-trace.csv" \
     --load_config 0 \
     --max_num_trace 100 \
     --load_bucket_size 100 \
@@ -16,6 +16,8 @@ python run_locust.py --dir_name "gangmuk-locust-test" \
     --east_rps 100 100 100 \
     --central_rps 100 100 100 \
     --south_rps 100 100 100 \
+
+    # --slatelog "exclusivetime-0.05-replicated-e-c-s-trace.csv" \
 
     # --duration 60 \
     # --west_rps 600 \

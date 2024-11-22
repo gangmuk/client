@@ -160,10 +160,9 @@ def train_latency_function_with_trace(model, traces, directory, degree):
             if svc_name not in coef_dict:
                 coef_dict[svc_name] = dict()
             for ep_str in cid_svc_df["endpoint_str"].unique():
-                if "checkoutcart" in directory:
-                    if "hipstershop.CurrencyService/Convert" in ep_str or "/hipstershop.ProductCatalogService/GetProduct" in ep_str:
-                        print(row)
-                        assert False
+                if "hipstershop.CurrencyService/GetSupportedCurrencies" in ep_str or "hipstershop.CurrencyService/Convert" in ep_str or "/hipstershop.ProductCatalogService/GetProduct" in ep_str:
+                    print(row)
+                    assert False
                 ep_df = cid_svc_df[cid_svc_df["endpoint_str"]==ep_str]
                 # Data preparation: load(X) and latency(y) 
                 data = dict()
@@ -286,11 +285,10 @@ def trace_string_file_to_trace_data_structure_with_df(df, required_num_endpoint,
             continue
         if "ListProducts" in row["path"]:
             print(f"asdf asdf {row}")
-        if "checkoutcart" in directory:
-            if "/hipstershop.CurrencyService/Convert" in row["path"] or "/hipstershop.ProductCatalogService/GetProduct" in row["path"]:
-                print(f"Skip this span, {row['svc_name']}, {row['method']}, {row['path']} row")
-                excluded_traces.add(row["trace_id"])  # Mark the trace_id for exclusion
-                continue
+        if "hipstershop.CurrencyService/GetSupportedCurrencies" in row["path"] or "/hipstershop.CurrencyService/Convert" in row["path"] or "/hipstershop.ProductCatalogService/GetProduct" in row["path"]:
+            print(f"Skip this span, {row['svc_name']}, {row['method']}, {row['path']} row")
+            excluded_traces.add(row["trace_id"])  # Mark the trace_id for exclusion
+            continue
         num_inflight_dict = dict()
         rps_dict = dict()
         inflight_list = row["inflight_dict"].split("|")[:-1]
@@ -298,11 +296,10 @@ def trace_string_file_to_trace_data_structure_with_df(df, required_num_endpoint,
             temp = ep_inflight.split(":")
             assert len(temp) == 2
             ep = temp[0]
-            if "checkoutcart" in directory:
-                if "hipstershop.CurrencyService/Convert" in ep or "/hipstershop.ProductCatalogService/GetProduct" in ep:
-                    print(f"Skip inflight_dict, {ep} endpoint, {row['svc_name']}, {row['method']}, {row['path']} row")
-                    excluded_traces.add(row["trace_id"])  # Mark the trace_id for exclusion
-                    continue
+            if "hipstershop.CurrencyService/GetSupportedCurrencies" in ep or "hipstershop.CurrencyService/Convert" in ep or "/hipstershop.ProductCatalogService/GetProduct" in ep:
+                print(f"Skip inflight_dict, {ep} endpoint, {row['svc_name']}, {row['method']}, {row['path']} row")
+                excluded_traces.add(row["trace_id"])  # Mark the trace_id for exclusion
+                continue
             inflight = int(temp[1])
             num_inflight_dict[ep] = inflight
         rps_list = row["rps_dict"].split("|")[:-1] # sd03b@POST@/heavy:335|
@@ -310,11 +307,10 @@ def trace_string_file_to_trace_data_structure_with_df(df, required_num_endpoint,
             temp = ep_rps.split(":") # ["sd03b@POST@/heavy", "335"]
             assert len(temp) == 2
             ep = temp[0] # "sd03b@POST@/heavy"
-            if "checkoutcart" in directory:
-                if "hipstershop.CurrencyService/Convert" in ep or "/hipstershop.ProductCatalogService/GetProduct" in ep:
-                    print(f"Skip rps_dict, {ep} endpoint, {row['svc_name']}, {row['method']}, {row['path']} row")
-                    excluded_traces.add(row["trace_id"])  # Mark the trace_id for exclusion
-                    continue
+            if "hipstershop.CurrencyService/GetSupportedCurrencies" in ep or "hipstershop.CurrencyService/Convert" in ep or "/hipstershop.ProductCatalogService/GetProduct" in ep:
+                print(f"Skip rps_dict, {ep} endpoint, {row['svc_name']}, {row['method']}, {row['path']} row")
+                excluded_traces.add(row["trace_id"])  # Mark the trace_id for exclusion
+                continue
             rps = int(temp[1]) * num_replica # 335 * 3
             ''' NOTE: HARDCODED, RPS FILTER'''
             if rps > 6000:
