@@ -1,3 +1,4 @@
 proxy-logs/
 __pycache__/
 *.pyc
+env.txt

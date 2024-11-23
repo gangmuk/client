@@ -479,7 +479,7 @@ def main():
     # waterfall_capacity_set = {700, 1000, 1500} # assuming workload is mix of different request types
     waterfall_capacity_set = {700}
     # waterfall_capacity_set = {700, 1000}
-    degree = 2
+    degree = 1
     
     mode = args.mode
     routing_rule_list = [args.routing_rule]
@@ -514,14 +514,18 @@ def main():
     print(f"args.south_rps: {args.south_rps}")
     print(f"args.duration: {args.duration}")
     
+    igw_host = utils.run_command("kubectl get nodes | grep 'node5' | awk '{print $1}'")[1]
+    igw_nodeport = utils.run_command("kubectl get svc istio-ingressgateway -n istio-system -o=json | jq '.spec.ports[] | select(.name==\"http2\") | .nodePort'")[1]
+    experiment_endpoint = f"http://{igw_host}:{igw_nodeport}"
+    
     if sum(args.west_rps) > 0:
-        experiment.add_workload(utils.Workload(cluster="west", req_type=args.req_type, rps=args.west_rps, duration=args.duration, method=method, path=onlineboutique_path[args.req_type]))
+        experiment.add_workload(utils.Workload(cluster="west", req_type=args.req_type, rps=args.west_rps, duration=args.duration, method=method, path=onlineboutique_path[args.req_type], endpoint=experiment_endpoint))
     if sum(args.east_rps) > 0:
-        experiment.add_workload(utils.Workload(cluster="east", req_type=args.req_type, rps=args.east_rps, duration=args.duration, method=method, path=onlineboutique_path[args.req_type]))
+        experiment.add_workload(utils.Workload(cluster="east", req_type=args.req_type, rps=args.east_rps, duration=args.duration, method=method, path=onlineboutique_path[args.req_type], endpoint=experiment_endpoint))
     if sum(args.central_rps) > 0:
-        experiment.add_workload(utils.Workload(cluster="central", req_type=args.req_type, rps=args.central_rps, duration=args.duration, method=method, path=onlineboutique_path[args.req_type]))
+        experiment.add_workload(utils.Workload(cluster="central", req_type=args.req_type, rps=args.central_rps, duration=args.duration, method=method, path=onlineboutique_path[args.req_type], endpoint=experiment_endpoint))
     if sum(args.south_rps) > 0:
-        experiment.add_workload(utils.Workload(cluster="south", req_type=args.req_type, rps=args.south_rps, duration=args.duration, method=method, path=onlineboutique_path[args.req_type]))
+        experiment.add_workload(utils.Workload(cluster="south", req_type=args.req_type, rps=args.south_rps, duration=args.duration, method=method, path=onlineboutique_path[args.req_type], endpoint=experiment_endpoint))
     west_rps_str = ",".join(map(str, args.west_rps))
     east_rps_str = ",".join(map(str, args.east_rps))
     central_rps_str = ",".join(map(str, args.central_rps))
@@ -655,7 +659,7 @@ def main():
             CONFIG["output_dir"] = output_dir
             CONFIG["max_num_trace"] = args.max_num_trace
             CONFIG["load_bucket_size"] = args.load_bucket_size
-            utils.file_write_env_file(CONFIG, "env.txt")
+            utils.file_write_env_file(CONFIG)
             utils.file_write_config_file(CONFIG, f"{output_dir}/experiment-config.txt")
             utils.kubectl_cp_from_host_to_slate_controller_pod("env.txt", "/app/env.txt")
             if mode == "runtime":
@@ -678,7 +682,8 @@ def main():
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 future_list = list()
                 for workload in experiment.workloads:
-                    future_list.append(executor.submit(utils.run_newer_generation_client, workload, output_dir))
+                    future_list.append(executor.submit(utils.run_vegeta, workload, output_dir))
+                    # future_list.append(executor.submit(utils.run_newer_generation_client, workload, output_dir))
                     time.sleep(0.1)
                 for future in concurrent.futures.as_completed(future_list):
                     print(future.result())

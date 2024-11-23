@@ -64,28 +64,51 @@ def run_command_and_print(command, required=True, print_error=True, nonblock=Fal
         else:
             return False, e.output.decode('utf-8').strip()
 
-def run_command(command, required=True, print_error=True, nonblock=False,):
-    """Run shell command and return its output"""
+import subprocess
+
+def run_command(command, required=True, print_error=True, nonblock=False):
+    """Run shell command and return its output or process handle.
+
+    Args:
+        command (str): The shell command to execute.
+        required (bool): If True, the function will assert on failure.
+        print_error (bool): If True, errors will be printed.
+        nonblock (bool): If True, run the command non-blocking.
+
+    Returns:
+        tuple: 
+            - If nonblock is False: (True, output) on success or (False, error) on failure.
+            - If nonblock is True: (True, process) on success or (False, error) on failure.
+    """
     try:
-        ''' Popen is asynchronous and non-blocking, while check_output is synchronous and blocking.'''
         if nonblock:
-            process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-            stdout, stderr = process.communicate()  # If you decide to wait and capture output for debugging
-            print("STDOUT:", stdout)
-            print("STDERR:", stderr)
-            return True, "NotOutput-this-is-nonblocking-execution"
+            # Start the process without waiting for it to complete
+            process = subprocess.Popen(
+                command,
+                shell=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True
+            )
+            return True, process
         else:
-            output = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT)
-            return True, output.decode('utf-8').strip()
+            # Run the command and wait for it to complete
+            output = subprocess.check_output(
+                command,
+                shell=True,
+                stderr=subprocess.STDOUT,
+                text=True
+            )
+            return True, output.strip()
     except subprocess.CalledProcessError as e:
         if print_error:
             print(f"ERROR command: {command}")
-            print(f"ERROR output: {e.output.decode('utf-8').strip()}")
+            print(f"ERROR output: {e.output.strip()}")
         if required:
-            print("Exit...")
-            assert False
+            print("Exiting due to required command failure...")
+            raise  # Instead of assert False, it's better to raise an exception
         else:
-            return False, e.output.decode('utf-8').strip()
+            return False, e.output.strip()
 
 def parse_xml(file_path):
     tree = ET.parse(file_path)
@@ -132,7 +155,7 @@ def check_file_exists_in_pod(pod_name, namespace, file_path):
     success, ret = run_command(command, required=False)
     return success
 
-def kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host, required=False):
+def kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host, required=True):
     try:
         slate_controller_pod = get_pod_name_from_deploy("slate-controller")
         # if check_file_exists_in_pod(slate_controller_pod, "default", src_in_pod) == False:
@@ -157,7 +180,7 @@ def kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host, required=F
 
 def kubectl_cp_from_host_to_slate_controller_pod(src_in_host, dst_in_pod):
     success, slate_controller_pod = run_command("kubectl get pods -l app=slate-controller -o custom-columns=:metadata.name")
-    # print(f"slate_controller_pod: {slate_controller_pod}")
+    print(f"slate_controller_pod: {slate_controller_pod}")
     # if slate_controller_pod has more than one entry, get the start time of each pod and pick the newest one.
     if len(slate_controller_pod.split("\n")) > 1:
         config.load_kube_config()
@@ -181,7 +204,7 @@ def kubectl_cp_from_host_to_slate_controller_pod(src_in_host, dst_in_pod):
 
     # print(f"Try kubectl_cp_from_host_to_slate_controller_pod")
     print(f"- src_in_host: {src_in_host}")
-    # print(f"- dst_in_pod: {slate_controller_pod}:{dst_in_pod}")
+    print(f"- dst_in_pod: {slate_controller_pod}:{dst_in_pod}")
     tries = 0
     while tries < 3:
         success, ret = run_command(f"kubectl cp {src_in_host} {slate_controller_pod}:{dst_in_pod}", required=False)
@@ -306,21 +329,16 @@ def get_pod_resource_allocation(namespace='default'):
 #         f.write(resource_usage)
 #         f.write("-- end of resource usage --\n\n")
 
-
-def create_dir(dir, temp=1):
-    # Check if directory already exists
-    if os.path.isdir(dir):
-        while True:
-            temp_dir = dir + "-" + str(temp)
-            if not os.path.isdir(temp_dir):
-                os.makedirs(temp_dir)
-                print(f"Created directory: {temp_dir}")
-                return temp_dir
-            temp += 1
-    else:
+def create_dir(dir):
+    if not os.path.isdir(dir):
         os.makedirs(dir)
-        print(f"Created directory: {dir}")
+        print(f"create dir {dir}")
         return dir
+    # else:
+    #     print(f"ERROR: Directory {dir} already exists")
+    #     print("ERROR: Provide new dir name.")
+    #     print("exit...")
+    #     exit()
 
 def record_pod_resource_allocation(fn_prefix, resource_alloc_dir, target_cluster_rps):
     if target_cluster_rps == 0:
@@ -457,7 +475,7 @@ def start_background_noise(node_dict, cpu_noise=30, victimize_node="", victimize
         if node == victimize_node:
             nodenoise = victimize_cpu
         # print(f"Try to run background-noise -cpu={cpu_noise} in {node_dict[node]['hostname']}")
-        print(f"ssh gangmuk@{node_dict[node]['hostname']} 'nohup /users/gangmuk/projects/slate-benchmark/background-noise/background-noise -cpu={nodenoise} &'")
+        print("ADITYA: ", f"ssh gangmuk@{node_dict[node]['hostname']} 'nohup /users/gangmuk/projects/slate-benchmark/background-noise/background-noise -cpu={nodenoise} &'")
         run_command(f"ssh gangmuk@{node_dict[node]['hostname']} 'nohup /users/gangmuk/projects/slate-benchmark/background-noise/background-noise -cpu={nodenoise} > /dev/null 2>&1 &'", nonblock=False)
         # run_command(f"ssh gangmuk@{node_dict[node]['hostname']} '", nonblock=False)
 
@@ -515,8 +533,11 @@ class Experiment:
         self.workload_names = set()
         self.hillclimb_interval = 0
         self.injected_delay = []
-        # self.delay_injection_point =0 
+        self.delay_injection_point =0 
         self.limit_val = ""
+        self.hash_mod = 1
+        self.normalization = dict()
+        self.workload_raw = dict()
         
     def set_name(self, name):
         self.name = name
@@ -527,8 +548,8 @@ class Experiment:
     def set_injected_delay(self, delay):
         self.injected_delay = delay
     
-    # def set_delay_injection_point(self, delay_injection_point):
-    #     self.delay_injection_point = delay_injection_point
+    def set_delay_injection_point(self, delay_injection_point):
+        self.delay_injection_point = delay_injection_point
 
     def set_limit_val(self, limit_val):
         self.limit_val = limit_val
@@ -547,8 +568,8 @@ class Experiment:
         for workload in self.workloads:
             workload.print_workload()
 
-def file_write_env_file(CONFIG, env_file_path):
-    with open(env_file_path, "w") as file:
+def file_write_env_file(CONFIG):
+    with open("env.txt", "w") as file:
         for key, value in CONFIG.items():
             file.write(f"{key},{value}\n")
 
@@ -558,19 +579,49 @@ def file_write_config_file(CONFIG, config_file_path):
         for key, value in CONFIG.items():
             file.write(f"{key},{value}\n")
         file.write("-- end of config --")
-                            
+
+
+def update_wasm_env_var(namespace, plugin_name, hillclimbing_key, hillclimbing_value):
+    config.load_kube_config()
+    api_instance = client.CustomObjectsApi()
+    group = 'extensions.istio.io'
+    version = 'v1alpha1'
+    plural = 'wasmplugins'
+
+    wasm_plugin = api_instance.get_namespaced_custom_object(
+        group=group, version=version, namespace=namespace, plural=plural, name=plugin_name
+    )
+    for env_var in wasm_plugin['spec']['vmConfig']['env']:
+        if env_var['name'] == hillclimbing_key:
+            env_var['value'] = hillclimbing_value
+            break
+    api_instance.patch_namespaced_custom_object(
+        group=group,
+        version=version,
+        namespace=namespace,
+        plural=plural,
+        name=plugin_name,
+        body=wasm_plugin
+    )
+    print(f"WASM key {hillclimbing_key} value updated to {hillclimbing_value} in WasmPlugin '{plugin_name}'.")
+                   
 # One workload means one client. One client means one request type and a list of RPS & Duration>.
 class Workload:
-    def __init__(self, cluster: str, req_type: str, rps: list, duration: list, method: str, path: str):
+    def __init__(self, cluster: str, req_type: str, rps: list, duration: list, method: str, path: str, hdrs: dict = {}, endpoint=""):
         self.cluster = cluster
         self.req_type = req_type
         self.rps = rps
         self.duration = duration
         self.method = method
         self.path = path
+        self.hdrs = hdrs
         self.name = f"{cluster}-{req_type}"
+        # self.name = f"{cluster}-{req_type}-{rps}"
+        self.endpoint = endpoint
         if len(rps) != len(duration):
             print(f"ERROR: rps and duration length mismatch")
+            print(f"rps: {rps}")
+            print(f"duration: {duration}")
             print("exit...")
             assert False
     
@@ -588,6 +639,8 @@ def write_client_yaml_with_config(default_yaml_file: str, yaml_file: str, worklo
     try:
         yaml_data['clients'][0]['cluster'] = workload.cluster
         yaml_data['clients'][0]['headers']['x-slate-destination'] = workload.cluster
+        for key, value in workload.hdrs.items():
+            yaml_data['clients'][0]['headers'][key] = value
         
         # Ensure 'workload' list is long enough, append entries if needed
         while len(yaml_data['clients'][0]['workload']) < len(workload.rps):
@@ -599,6 +652,7 @@ def write_client_yaml_with_config(default_yaml_file: str, yaml_file: str, worklo
 
         yaml_data['clients'][0]['method'] = workload.method
         yaml_data['clients'][0]['path'] = workload.path
+        yaml_data['clients'][0]['rq_timeout'] = '15s'
         yaml_data['stats_output_folder'] = output_dir
     except Exception as e:
         print(f"ERROR: {e}")
@@ -618,3 +672,15 @@ def run_newer_generation_client(workload, output_dir):
     write_client_yaml_with_config("./config.yaml", client_yaml_file, workload, output_dir)
     run_command(f'cp {client_yaml_file} {output_dir}/{client_yaml_file}')
     run_command(f"./client --config={client_yaml_file}")
+
+
+def run_vegeta(workload, output_dir):
+    for i in range(len(workload.rps)):
+        print(f"start {workload.req_type} RPS {workload.rps[i]} to {workload.cluster} cluster for {workload.duration[i]}s")
+        cmd = f"echo '{workload.method} {workload.endpoint}{workload.path}' | ./vegeta attack -rate={workload.rps[i]} -duration={workload.duration[i]}s"
+        for key, value in workload.hdrs.items():
+            cmd += f" -header='{key}: {value}'"
+        cmd += f" -header='x-slate-destination: {workload.cluster}'"
+        cmd += f" | ./vegeta report > {output_dir}/{workload.name}-{workload.rps[i]}-{workload.duration[i]}.txt"
+        print(f"cmd: {cmd}")
+        run_command(cmd)
