@@ -668,8 +668,8 @@ def write_client_yaml_with_config(default_yaml_file: str, yaml_file: str, worklo
             
 def run_newer_generation_client(workload, output_dir):
     print(f"start {workload.req_type} RPS {workload.rps} to {workload.cluster} cluster for {workload.duration}s")
-    client_yaml_file = f'./config-{workload.name}.yaml'
-    write_client_yaml_with_config("./config.yaml", client_yaml_file, workload, output_dir)
+    client_yaml_file = f'./client_config/config-{workload.name}.yaml'
+    write_client_yaml_with_config("./client_config/config.yaml", client_yaml_file, workload, output_dir)
     run_command(f'cp {client_yaml_file} {output_dir}/{client_yaml_file}')
     run_command(f"./client --config={client_yaml_file}")
 

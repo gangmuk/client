@@ -18,12 +18,4 @@ python run_test.py --dir_name "gangmuk-test" \
     --south_rps 100 300 600 \
 
     # --slatelog "exclusivetime-0.05-replicated-e-c-s-trace.csv" \
-
-    # --duration 60 \
-    # --west_rps 600 \
-    # --east_rps 600 \
-    # --central_rps 600 \
-    # --south_rps 600 \
-    
-    # --inject_delay "[(1, 1, 'us-south-1')]" \
-    # (timepoint, delay, region)
+    # --inject_delay "[(timepoint, delay, region)]" \
