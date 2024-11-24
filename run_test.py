@@ -24,7 +24,10 @@ import signal
 import traceback
 import utils as utils
 import argparse
+import csv
+import random
 
+random.seed(1234)
 
 CLOUDLAB_CONFIG_XML="/users/gangmuk/projects/slate-benchmark/config.xml"
 network_interface = "eno1"
@@ -390,7 +393,19 @@ def restart_add_to_cart():
 ## checkout cart restart
 def restart_checkout_cart():
     utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-west-1"])
-    
+
+# Manually parse inject_delay
+def parse_inject_delay(inject_delay_str):
+    inject_delay_str = inject_delay_str.strip("[]")  # Remove outer brackets
+    tuples = inject_delay_str.split("), (")  # Split into individual tuples
+
+    # Clean up and convert each tuple string to actual tuple elements
+    result = []
+    for t in tuples:
+        t = t.strip("()")  # Remove surrounding parentheses
+        parts = t.split(", ")
+        result.append((int(parts[0]), int(parts[1]), parts[2].strip("'\"")))
+    return result
 
 
 def main():
@@ -399,101 +414,67 @@ def main():
     argparser.add_argument("--background_noise", type=int, default=0, help="Background noise level (in %)")
     argparser.add_argument("--mode", type=str, help="Mode of operation (profile or runtime)", required=True)
     argparser.add_argument("--routing_rule", type=str, default="SLATE-with-jumping-global", help="Routing rule to apply", choices=["LOCAL", "SLATE-without-jumping", "SLATE-with-jumping-global", "SLATE-with-jumping-local", "WATERFALL2"])
-    
     argparser.add_argument("--duration",    type=int, nargs='+', required=True)
     argparser.add_argument("--west_rps",    type=int, nargs='+', help="RPS for the west cluster", required=True)
     argparser.add_argument("--east_rps",    type=int, nargs='+', help="RPS for the east cluster", required=True)
     argparser.add_argument("--central_rps", type=int, nargs='+', help="RPS for the central cluster", required=True)
     argparser.add_argument("--south_rps",   type=int, nargs='+', help="RPS for the south cluster", required=True)
-    
     argparser.add_argument("--req_type", type=str, default="checkoutcart", help="Request type to test")
     argparser.add_argument("--slatelog", type=str, help="Path to the slatelog file", required=True)
+    argparser.add_argument("--coefficient_file", type=str, help="Path to the coefficient_file", required=True)
+    argparser.add_argument("--rps_file", type=str, help="Path to the rps_file", default="")
+    argparser.add_argument("--e2e_coef_file", type=str, help="Path to the e2e_coef_file", required=True)
     argparser.add_argument("--load_config", type=int, default=0, help="Load coefficient flag")
     argparser.add_argument("--max_num_trace", type=int, default=0, help="max number of traces per each load bucket")
     argparser.add_argument("--load_bucket_size", type=int, default=0, help="the size of each load bucket. 'load_bucket = (rps*num_pod-(load_bucket_size//2))//(load_bucket_size) + 1'")
     argparser.add_argument("--inject_delay", type=str, help="List of tuples for injection delays (delay, time, region).")
     args = argparser.parse_args()
     
-    
-    # Manually parse inject_delay
-    def parse_inject_delay(inject_delay_str):
-        inject_delay_str = inject_delay_str.strip("[]")  # Remove outer brackets
-        tuples = inject_delay_str.split("), (")  # Split into individual tuples
-
-        # Clean up and convert each tuple string to actual tuple elements
-        result = []
-        for t in tuples:
-            t = t.strip("()")  # Remove surrounding parentheses
-            parts = t.split(", ")
-            result.append((int(parts[0]), int(parts[1]), parts[2].strip("'\"")))
-        return result
-
-    # Use the custom function to parse inject_delay
     inject_delay = parse_inject_delay(args.inject_delay)
     print("Parsed inject_delay:", inject_delay)
-    
-    
     if len(sys.argv) < 3:
-        print("Usage: python run_wrk.py <dir_name>\nexit...")
+        print("Usage: python run_test.py <dir_name>\nexit...")
         exit()
-    
     limit = "0m"
     if len(sys.argv) == 4:
         limit = sys.argv[3]
     utils.check_all_pods_are_ready()  
-    
-    
-    
     if limit == "0m":
         remove_cpu_limits_from_deployments()
     else:
         set_resource_limit(limit)
-    
-    
     print(f"Resource limit set to {limit} for all deployments in the default namespace.")
     CONFIG = {}
     CONFIG['background_noise'] =  args.background_noise
     CONFIG['traffic_segmentation'] = 1
-    
-    
     '''
     # Three replicas
     # CPU: Intel(R) Xeon(R) CPU E5-2660 v2 @ 2.20GHz
-
     ## Based on average latency
     # checkoutcart: 800
     # addtocart: 2400
     # setcurrency: 2700
     # emptycart: 2400
-
     ## Based on average latency
     # checkoutcart: 700
     # addtocart: 2000
     # setcurrency: 2700
     # emptycart: 2400
-
     '''
-    
     # capacity_list = [700, 1000, 1500] # assuming workload is mix of different request types
     # waterfall_capacity_set = {700, 1500} # assuming workload is mix of different request types
     # waterfall_capacity_set = {700, 1000, 1500} # assuming workload is mix of different request types
     waterfall_capacity_set = {700}
     # waterfall_capacity_set = {700, 1000}
     degree = 1
-    
     mode = args.mode
     routing_rule_list = [args.routing_rule]
-    
     onlineboutique_path = {
         "addtocart": "/cart?product_id=OLJCESPC7Z&quantity=5",
         "checkoutcart": "/cart/checkout?email=fo%40bar.com&street_address=405&zip_code=945&city=Fremont&state=CA&country=USA&credit_card_number=5555555555554444&credit_card_expiration_month=12&credit_card_expiration_year=2025&credit_card_cvv=222",
         "setcurrency": "/setCurrency?currency_code=EUR",    
         "emptycart": "/cart/empty"
     }
-    
-    ####################################################################
-    ###################### Workload ####################################
-    ####################################################################
     experiment_list = []
     benchmark_name="onlineboutique" # a,b, 1MB and c 2MB file write
     method = "POST"
@@ -508,12 +489,48 @@ def main():
     hillclimb_interval = 30
     experiment.set_hillclimb_interval(hillclimb_interval)
     
+
+    if os.path.exists(args.rps_file):
+        with open(args.rps_file, 'r') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                values = list(map(int, row))  # Convert values to integers
+                rps_list = values  # Assuming a single row
+        rps_list = [x*3 for x in rps_list]
+        args.west_rps = rps_list
+        args.east_rps = random.sample(rps_list, len(rps_list))
+        args.south_rps = random.sample(rps_list, len(rps_list))
+        args.central_rps = random.sample(rps_list, len(rps_list))
+        max_rps_threshold = 2000
+        for i in range(len(args.west_rps)):
+            total_rps = args.west_rps[i] + args.east_rps[i] + args.central_rps[i] + args.south_rps[i]
+            if total_rps > max_rps_threshold:
+                print(f"total_rps: {total_rps} > {max_rps_threshold}, args.west_rps[{i}]: {args.west_rps[i]}, args.east_rps[{i}]: {args.east_rps[i]}, args.central_rps[{i}]: {args.central_rps[i]}, args.south_rps[{i}]: {args.south_rps[i]}")
+                args.west_rps[i] = args.west_rps[i] * max_rps_threshold // total_rps
+                args.east_rps[i] = args.east_rps[i] * max_rps_threshold // total_rps
+                args.central_rps[i] = args.central_rps[i] * max_rps_threshold // total_rps
+                args.south_rps[i] = args.south_rps[i] * max_rps_threshold // total_rps
+                new_total_rps = args.west_rps[i] + args.east_rps[i] + args.central_rps[i] + args.south_rps[i]
+                print(f"new_total_rps: {new_total_rps}, new_rps: args.west_rps[{i}]: {args.west_rps[i]}, args.east_rps[{i}]: {args.east_rps[i]}, args.central_rps[{i}]: {args.central_rps[i]}, args.south_rps[{i}]: {args.south_rps[i]}")
+        args.duration = [10] * len(rps_list)
+    total_rps = 0
+    total_rps = [args.west_rps[i] + args.east_rps[i] + args.central_rps[i] + args.south_rps[i] for i in range(len(args.west_rps))]
+    max_total_rps = max(total_rps)
+    min_total_rps = min(total_rps)
+    print(f"args.rps_file: {args.rps_file}")
     print(f"args.west_rps: {args.west_rps}")
     print(f"args.east_rps: {args.east_rps}")
     print(f"args.central_rps: {args.central_rps}")
     print(f"args.south_rps: {args.south_rps}")
     print(f"args.duration: {args.duration}")
-    
+    print(f"mean rps: {sum(args.west_rps)/len(args.west_rps)}")
+    print(f"max rps: {max(args.west_rps)}")
+    print(f"min rps: {min(args.west_rps)}")
+    print(f"median rps: {np.median(args.west_rps)}")
+    print(f"min_total_rps: {min_total_rps}")
+    print(f"max_total_rps: {max_total_rps}")
+    # return
+
     igw_host = utils.run_command("kubectl get nodes | grep 'node5' | awk '{print $1}'")[1]
     igw_nodeport = utils.run_command("kubectl get svc istio-ingressgateway -n istio-system -o=json | jq '.spec.ports[] | select(.name==\"http2\") | .nodePort'")[1]
     experiment_endpoint = f"http://{igw_host}:{igw_nodeport}"
@@ -526,16 +543,17 @@ def main():
         experiment.add_workload(utils.Workload(cluster="central", req_type=args.req_type, rps=args.central_rps, duration=args.duration, method=method, path=onlineboutique_path[args.req_type], endpoint=experiment_endpoint))
     if sum(args.south_rps) > 0:
         experiment.add_workload(utils.Workload(cluster="south", req_type=args.req_type, rps=args.south_rps, duration=args.duration, method=method, path=onlineboutique_path[args.req_type], endpoint=experiment_endpoint))
-    west_rps_str = ",".join(map(str, args.west_rps))
-    east_rps_str = ",".join(map(str, args.east_rps))
-    central_rps_str = ",".join(map(str, args.central_rps))
-    south_rps_str = ",".join(map(str, args.south_rps))
-    experiment_name = f"{args.req_type}-W{west_rps_str}-E{east_rps_str}-C{central_rps_str}-S{south_rps_str}"
+        
+        
+    # west_rps_str = ",".join(map(str, args.west_rps))
+    # east_rps_str = ",".join(map(str, args.east_rps))
+    # central_rps_str = ",".join(map(str, args.central_rps))
+    # south_rps_str = ",".join(map(str, args.south_rps))
+    # experiment_name = f"{args.req_type}-W{west_rps_str}-E{east_rps_str}-C{central_rps_str}-S{south_rps_str}"
     
-    
+    experiment_name = f"exp-{args.req_type}"
     experiment.set_name(experiment_name)
     experiment_list.append(experiment)
-    
     #### Four clusters
     region_to_node = {
         "us-west-1": ["node1"],
@@ -543,7 +561,6 @@ def main():
         "us-central-1": ["node3"],
         "us-south-1": ["node4"]
     }
-    
     region_latencies = {
         "us-west-1": {
             "us-central-1": 15,
@@ -643,9 +660,9 @@ def main():
             print(f"routing_rule: {routing_rule}")
             utils.check_all_pods_are_ready()
             output_dir = utils.create_dir(output_dir)
+            print(f"**** output_dir: {output_dir}")
             utils.create_dir(f"{output_dir}/resource_alloc")
             utils.create_dir(f"{output_dir}/resource_usage")
-            print(f"**** output_dir: {output_dir}")
             for workload in experiment.workloads:
                 CONFIG[f"RPS,{workload.cluster},{workload.req_type}"] = ",".join(map(str, workload.rps))
             CONFIG["routing_rule"] = routing_rule
@@ -663,8 +680,8 @@ def main():
             utils.file_write_config_file(CONFIG, f"{output_dir}/experiment-config.txt")
             utils.kubectl_cp_from_host_to_slate_controller_pod("env.txt", "/app/env.txt")
             if mode == "runtime":
-                utils.kubectl_cp_from_host_to_slate_controller_pod("poly-coef_multiplied_by_one-checkout-profile-30bg.csv", "/app/coef.csv")
-                utils.kubectl_cp_from_host_to_slate_controller_pod("e2e-poly-coef_multiplied_by_one-checkout-profile-30bg.csv", "/app/e2e-coef.csv")
+                utils.kubectl_cp_from_host_to_slate_controller_pod(args.coefficient_file, "/app/coef.csv")
+                utils.kubectl_cp_from_host_to_slate_controller_pod(args.e2e_coef_file, "/app/e2e-coef.csv")
                 utils.kubectl_cp_from_host_to_slate_controller_pod(args.slatelog, "/app/trace.csv")
                 
             print(f"starting experiment at {datetime.now()}, expected to finish at {datetime.now() + timedelta(seconds=sum(workload.duration))}")
@@ -682,8 +699,8 @@ def main():
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 future_list = list()
                 for workload in experiment.workloads:
-                    future_list.append(executor.submit(utils.run_vegeta, workload, output_dir))
-                    # future_list.append(executor.submit(utils.run_newer_generation_client, workload, output_dir))
+                    # future_list.append(executor.submit(utils.run_vegeta, workload, output_dir))
+                    future_list.append(executor.submit(utils.run_newer_generation_client, workload, output_dir))
                     time.sleep(0.1)
                 for future in concurrent.futures.as_completed(future_list):
                     print(future.result())
@@ -695,6 +712,7 @@ def main():
                 utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host, required=False)
                 # utils.run_command(f"python plot_rps.py {dst_in_host}")
             
+            print(f"output_dir: {output_dir}")
             if os.path.exists(os.path.join(output_dir, "latency_curve")):
                 utils.run_command(f"rm -r {output_dir}/latency_curve", required=False)
             src_directory_in_pod = "/app/poly"
@@ -721,16 +739,16 @@ def main():
                             utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
                             
                             if f"{output_dir}/jumping_latency.csv" in os.listdir(output_dir):
-                                utils.run_command(f"python plot_gc_jumping.py {output_dir}/jumping_routing_history.csv {output_dir}/jumping_latency.csv {output_dir}/central-ruleset-jumping.pdf {output_dir}/south-ruleset-jumping.pdf",required=False)
+                                utils.run_command(f"python plot_script/plot_gc_jumping.py {output_dir}/jumping_routing_history.csv {output_dir}/jumping_latency.csv {output_dir}/central-ruleset-jumping.pdf {output_dir}/south-ruleset-jumping.pdf",required=False)
                             if f"{output_dir}/region_jumping_latency.csv" in os.listdir(output_dir):
-                                utils.run_command(f"python plot_region_latency.py {output_dir}/region_jumping_latency.csv {output_dir}/region_jumping_latency.pdf",required=False)
+                                utils.run_command(f"python plot_script/plot_region_latency.py {output_dir}/region_jumping_latency.csv {output_dir}/region_jumping_latency.pdf",required=False)
                             else:
-                                print(f"python plot_region_latency")
+                                print(f"python plot_script/plot_region_latency")
             else:
                 print(f"mode: {mode} is not supported")
                 assert False
             # if routing_rule.startswith("SLATE-with-jumping") and os.path.exists(f"{output_dir}/SLATE-with-jumping-global-jumping_routing_history.csv"):
-            utils.run_command(f"python fast_plot.py --data_dir {output_dir}", required=False)
+            utils.run_command(f"python plot_script/fast_plot.py --data_dir {output_dir}", required=False)
             # utils.pkill_background_noise(node_dict)
             # savelogs(output_dir, services=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-central-1"])
             save_controller_logs(output_dir)

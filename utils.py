@@ -329,16 +329,15 @@ def get_pod_resource_allocation(namespace='default'):
 #         f.write(resource_usage)
 #         f.write("-- end of resource usage --\n\n")
 
-def create_dir(dir):
-    if not os.path.isdir(dir):
-        os.makedirs(dir)
-        print(f"create dir {dir}")
-        return dir
-    # else:
-    #     print(f"ERROR: Directory {dir} already exists")
-    #     print("ERROR: Provide new dir name.")
-    #     print("exit...")
-    #     exit()
+def create_dir(directory):
+    temp = 1
+    original_dir = directory  # Preserve the original directory name
+    while os.path.isdir(directory):
+        directory = f"{original_dir}-{temp}"
+        temp += 1
+    os.makedirs(directory)
+    print(f"Created directory: {directory}")
+    return directory
 
 def record_pod_resource_allocation(fn_prefix, resource_alloc_dir, target_cluster_rps):
     if target_cluster_rps == 0:
@@ -652,7 +651,7 @@ def write_client_yaml_with_config(default_yaml_file: str, yaml_file: str, worklo
 
         yaml_data['clients'][0]['method'] = workload.method
         yaml_data['clients'][0]['path'] = workload.path
-        yaml_data['clients'][0]['rq_timeout'] = '15s'
+        yaml_data['clients'][0]['rq_timeout'] = '5s'
         yaml_data['stats_output_folder'] = output_dir
     except Exception as e:
         print(f"ERROR: {e}")
@@ -668,8 +667,8 @@ def write_client_yaml_with_config(default_yaml_file: str, yaml_file: str, worklo
             
 def run_newer_generation_client(workload, output_dir):
     print(f"start {workload.req_type} RPS {workload.rps} to {workload.cluster} cluster for {workload.duration}s")
-    client_yaml_file = f'./client_config/config-{workload.name}.yaml'
-    write_client_yaml_with_config("./client_config/config.yaml", client_yaml_file, workload, output_dir)
+    client_yaml_file = f'config-{workload.name}.yaml'
+    write_client_yaml_with_config("config.yaml", client_yaml_file, workload, output_dir)
     run_command(f'cp {client_yaml_file} {output_dir}/{client_yaml_file}')
     run_command(f"./client --config={client_yaml_file}")
 
@@ -682,5 +681,6 @@ def run_vegeta(workload, output_dir):
             cmd += f" -header='{key}: {value}'"
         cmd += f" -header='x-slate-destination: {workload.cluster}'"
         cmd += f" | ./vegeta report > {output_dir}/{workload.name}-{workload.rps[i]}-{workload.duration[i]}.txt"
-        print(f"cmd: {cmd}")
+        # print(f"cmd: {cmd}")
+        print(f"Vegeta cluster: {workload.cluster}, req_type: {workload.req_type}, rps: {workload.rps[i]}, duration: {workload.duration[i]}s")
         run_command(cmd)

@@ -1,0 +1,106 @@
+clients:
+- cluster: east
+  headers:
+    x-slate-destination: east
+  method: POST
+  path: /cart/checkout?email=fo%40bar.com&street_address=405&zip_code=945&city=Fremont&state=CA&country=USA&credit_card_number=5555555555554444&credit_card_expiration_month=12&credit_card_expiration_year=2025&credit_card_cvv=222
+  retry:
+    base: 1s
+    count: 0
+    factor: 2
+    maxinterval: 5s
+  rq_timeout: 5s
+  workload:
+  - duration: 10s
+    rps: 585
+  - duration: 10s
+    rps: 324
+  - duration: 10s
+    rps: 36
+  - duration: 10s
+    rps: 153
+  - duration: 10s
+    rps: 297
+  - duration: 10s
+    rps: 603
+  - duration: 10s
+    rps: 66
+  - duration: 10s
+    rps: 126
+  - duration: 10s
+    rps: 639
+  - duration: 10s
+    rps: 1197
+  - duration: 10s
+    rps: 109
+  - duration: 10s
+    rps: 390
+  - duration: 10s
+    rps: 459
+  - duration: 10s
+    rps: 411
+  - duration: 10s
+    rps: 282
+  - duration: 10s
+    rps: 1222
+  - duration: 10s
+    rps: 651
+  - duration: 10s
+    rps: 660
+  - duration: 10s
+    rps: 225
+  - duration: 10s
+    rps: 291
+  - duration: 10s
+    rps: 916
+  - duration: 10s
+    rps: 676
+  - duration: 10s
+    rps: 186
+  - duration: 10s
+    rps: 126
+  - duration: 10s
+    rps: 984
+  - duration: 10s
+    rps: 249
+  - duration: 10s
+    rps: 897
+  - duration: 10s
+    rps: 384
+  - duration: 10s
+    rps: 300
+  - duration: 10s
+    rps: 581
+  - duration: 10s
+    rps: 210
+  - duration: 10s
+    rps: 1883
+  - duration: 10s
+    rps: 534
+  - duration: 10s
+    rps: 597
+  - duration: 10s
+    rps: 729
+  - duration: 10s
+    rps: 876
+  - duration: 10s
+    rps: 114
+  - duration: 10s
+    rps: 1170
+  - duration: 10s
+    rps: 411
+  - duration: 10s
+    rps: 96
+  - duration: 10s
+    rps: 717
+  - duration: 10s
+    rps: 297
+  - duration: 10s
+    rps: 693
+  - duration: 10s
+    rps: 1266
+  - duration: 10s
+    rps: 198
+  - duration: 10s
+    rps: 840
+stats_output_folder: gangmuk-test/exp-checkoutcart/bg30/SLATE-with-jumping-global-1
