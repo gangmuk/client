@@ -675,12 +675,13 @@ def run_newer_generation_client(workload, output_dir):
 
 
 def run_vegeta(workload, output_dir):
+    run_command(f"mkdir -p {output_dir}/latency_results")
     for i in range(len(workload.rps)):
         print(f"start {workload.req_type} RPS {workload.rps[i]} to {workload.cluster} cluster for {workload.duration[i]}s")
-        cmd = f"echo '{workload.method} {workload.endpoint}{workload.path}' | ./vegeta attack -rate={workload.rps[i]} -duration={workload.duration[i]}s"
+        cmd = f"echo '{workload.method} {workload.endpoint}{workload.path}' | ./vegeta attack -connections 1000000 -workers 10000 -max-connections 10000000000 -rate={workload.rps[i]} -duration={workload.duration[i]}s"
         for key, value in workload.hdrs.items():
             cmd += f" -header='{key}: {value}'"
         cmd += f" -header='x-slate-destination: {workload.cluster}'"
-        cmd += f" | ./vegeta report > {output_dir}/{workload.name}-{workload.rps[i]}-{workload.duration[i]}.txt"
+        cmd += f" | tee {output_dir}/latency_results/{workload.name}-{workload.rps[i]}-{workload.duration[i]}.bin | ./vegeta report > {output_dir}/latency_results/{workload.name}-{workload.rps[i]}-{workload.duration[i]}.txt"
         print(f"cmd: {cmd}")
         run_command(cmd)

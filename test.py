@@ -564,41 +564,49 @@ def process_workloads_to_stages(workloads, total_duration):
 
     return final_stages
 
-print(process_workloads_to_stages({
-            "west": {
-                "singlecore": [(0, 50)],
-                "multicore": [(0, 200)],
-            },
-            "east": {
-                "singlecore": [(0, 150)],
-                "multicore": [(0, 300), (10, 100)],
-            },
-            "central": {
-                "singlecore": [(0, 50), (5, 7000000)],
-                "multicore": [(0, 200)],
-            },
-            "south": {
-                "singlecore": [(0, 50)],
-                "multicore": [(0, 200)],
-            },
-        }, 120))
 
-with open("workloads.json", "w") as f:
-    f.write(json.dumps({
-                "west": {
-                    "singlecore": [(0, 50)],
-                    "multicore": [(0, 200)],
-                },
-                "east": {
-                    "singlecore": [(0, 150)],
-                    "multicore": [(0, 300), (60, 100)],
-                },
-                "central": {
-                    "singlecore": [(0, 50), (30, 100)],
-                    "multicore": [(0, 200)],
-                },
-                "south": {
-                    "singlecore": [(0, 50)],
-                    "multicore": [(0, 200)],
-                },
-            }, indent=4))
+from kubernetes import client, config
+
+# Load Kubernetes configuration
+config.load_kube_config()
+
+# Kubernetes API client for deployments
+apps_v1 = client.AppsV1Api()
+
+# Define the namespace
+namespace = "default"
+
+# Define the image replacements
+image_map = {
+    "frontend": "docker.io/adiprerepa/boutique-frontend:latest",
+    "checkout": "docker.io/adiprerepa/boutique-checkout:latest",
+    "recommend": "docker.io/adiprerepa/boutique-recommendation:latest",
+}
+
+def update_first_container_image(deployment_name, new_image):
+    # Get the current deployment
+    deployment = apps_v1.read_namespaced_deployment(deployment_name, namespace)
+
+    # Update the image of the first container
+    if deployment.spec.template.spec.containers:
+        deployment.spec.template.spec.containers[0].image = new_image
+        # Apply the update
+        apps_v1.patch_namespaced_deployment(deployment_name, namespace, deployment)
+        print(f"Updated deployment '{deployment_name}' to image '{new_image}' for the first container")
+    else:
+        print(f"No containers found in deployment '{deployment_name}'")
+
+def main():
+    # List all deployments in the namespace
+    deployments = apps_v1.list_namespaced_deployment(namespace)
+
+    for deployment in deployments.items:
+        deployment_name = deployment.metadata.name
+        for prefix, new_image in image_map.items():
+            if deployment_name.startswith(prefix):
+                update_first_container_image(deployment_name, new_image)
+                break
+
+if __name__ == "__main__":
+    main()
+

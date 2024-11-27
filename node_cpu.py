@@ -1,10 +1,22 @@
 import paramiko
 import matplotlib.pyplot as plt
 import time
+import threading
 from datetime import datetime, timedelta
 import subprocess
 
-def collect_cpu_utilization(region_to_node, username, duration, filename):
+
+def start_node_cpu_monitoring(region_to_node, duration, filename, username="gangmuk", results_csv='cpu_utilization.csv'):
+    # Run the collect_cpu_utilization function in a separate thread
+    monitoring_thread = threading.Thread(
+        target=collect_cpu_utilization, args=(region_to_node, username, duration, filename), kwargs={'results_csv': results_csv}
+    )
+    monitoring_thread.daemon = True
+    monitoring_thread.start()
+    return monitoring_thread
+
+
+def collect_cpu_utilization(region_to_node, username, duration, filename, results_csv='cpu_utilization.csv'):
     # Set up SSH clients
     ssh_clients = {}
     for region, nodes in region_to_node.items():
@@ -37,8 +49,8 @@ def collect_cpu_utilization(region_to_node, username, duration, filename):
     end_time = start_time + timedelta(seconds=duration)
     
     while datetime.now() < end_time:
-        current_time = datetime.now().strftime("%H:%M:%S")
-        timestamps.append(current_time)
+        elapsed_time = (datetime.now() - start_time).total_seconds()
+        timestamps.append(elapsed_time)
 
         # Collect and aggregate data by region
         for region, nodes in region_to_node.items():
@@ -85,7 +97,7 @@ def collect_cpu_utilization(region_to_node, username, duration, filename):
     unique_labels = dict(zip(labels, handles))
     plt.legend(unique_labels.values(), unique_labels.keys(), loc="upper left")
 
-    plt.xlabel("Time")
+    plt.xlabel("Seconds Elapsed")
     plt.ylabel("CPU Utilization (%)")
     plt.title("CPU Utilization by Region and Loadgen-Node Over Time")
     plt.xticks(rotation=45)
@@ -94,6 +106,13 @@ def collect_cpu_utilization(region_to_node, username, duration, filename):
     # Save the plot as a PDF
     plt.savefig(filename, format="pdf")
     print(f"CPU utilization graph saved as {filename}")
+    # save to CSV File
+    import csv
+    with open(results_csv, mode='w') as file:
+        writer = csv.writer(file)
+        writer.writerow(['Seconds Elapsed'] + list(cpu_data.keys()))
+        for i in range(len(timestamps)):
+            writer.writerow([timestamps[i]] + [cpu_data[region][i] for region in cpu_data])
 
 # Example usage:
 # region_to_node = {

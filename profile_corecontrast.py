@@ -488,13 +488,13 @@ def main():
 
     workloads = {}
 
-    for rps in range(180, 170, 10):
+    for rps in range(25, 600, 50):
         workloads[f"ws-{rps}"] = {
             "west": {
                 "singlecore": [(0, rps)],
             },
         }
-    for rps in range(1500, 2500, 100):
+    for rps in range(300, 1701, 200):
         workloads[f"wm-{rps}"] = {
             "west": {
                 "multicore": [(0, rps)],

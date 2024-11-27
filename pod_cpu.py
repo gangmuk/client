@@ -1,6 +1,7 @@
 import time
 import threading
 import matplotlib.pyplot as plt
+import csv
 from kubernetes import client, config
 from datetime import datetime, timedelta
 from kubernetes.client import CustomObjectsApi
@@ -74,6 +75,17 @@ def graph_pod_cpu_utilization(deployments, regions, namespace, duration, pdf_fil
                     print(f"Error fetching pods for deployment {deployment}: {e}")
 
         time.sleep(interval)
+
+    # Save CPU metrics to CSV
+    csv_file = pdf_file + ".csv"
+    with open(csv_file, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        # Write header
+        writer.writerow(["Timestamp"] + list(cpu_data.keys()))
+        # Write data rows
+        for i, timestamp in enumerate(timestamps):
+            row = [timestamp] + [cpu_data[deployment_key][i] if i < len(cpu_data[deployment_key]) else '' for deployment_key in cpu_data.keys()]
+            writer.writerow(row)
 
     # Plotting the CPU utilization, with separate lines for each deployment-region combination
     plt.figure(figsize=(10, 6))

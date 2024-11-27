@@ -10,7 +10,7 @@ def plot_weight_vs_counter(df, latency_df, output_pdf, src_cid, request_type, ti
     # Filter the DataFrame based on the specified src_cid and request_type
     filtered_df = df[
         (df['src_svc'] == 'sslateingress') &
-        (df['dst_svc'] == 'corecontrast') &
+        (df['dst_svc'] == 'frontend') &
         (df['src_cid'] == src_cid) &
         (df['request_type'] == request_type)
     ]

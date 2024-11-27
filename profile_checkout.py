@@ -23,13 +23,20 @@ import signal
 import json
 import traceback
 import utils as utils
-from node_cpu import start_node_cpu_monitoring
+from node_cpu import collect_cpu_utilization
 from pod_cpu import graph_pod_cpu_utilization
 
 CLOUDLAB_CONFIG_XML="/users/gangmuk/projects/slate-benchmark/config.xml"
-network_interface = "enp1s0f0"
+network_interface = "eno1"
 
-
+def start_node_cpu_monitoring(region_to_node, duration, filename, username="gangmuk"):
+    # Run the collect_cpu_utilization function in a separate thread
+    monitoring_thread = threading.Thread(
+        target=collect_cpu_utilization, args=(region_to_node, username, duration, filename)
+    )
+    monitoring_thread.daemon = True
+    monitoring_thread.start()
+    return monitoring_thread
 
 def start_pod_cpu_monitoring(deployments, regions, namespace, duration, filename):
     # Run the graph_pod_cpu_utilization function in a separate thread
@@ -390,21 +397,58 @@ def main():
     if len(sys.argv) < 3:
         print("Usage: python run_wrk.py <dir_name>\nexit...")
         exit()
-
     
+    limit = "0m"
+    if len(sys.argv) == 4:
+        limit = sys.argv[3]
+    utils.check_all_pods_are_ready()  
+    
+    
+    
+    if limit == "0m":
+        remove_cpu_limits_from_deployments()
+    else:
+        set_resource_limit(limit)
+    
+    
+    print(f"Resource limit set to {limit} for all deployments in the default namespace.")
     CONFIG = {}
     CONFIG['background_noise'] =  background_noise
     CONFIG['traffic_segmentation'] = 1
     
+    
+    '''
+    # Three replicas
+    # CPU: Intel(R) Xeon(R) CPU E5-2660 v2 @ 2.20GHz
+
+    ## Based on average latency
+    # checkoutcart: 800
+    # addtocart: 2400
+    # setcurrency: 2700
+    # emptycart: 2400
+
+    ## Based on average latency
+    # checkoutcart: 700
+    # addtocart: 2000
+    # setcurrency: 2700
+    # emptycart: 2400
+
+    '''
+    
+    # capacity_list = [700, 1000, 1500] # assuming workload is mix of different request types
+    # waterfall_capacity_set = {700, 1500} # assuming workload is mix of different request types
+    # waterfall_capacity_set = {700, 1000, 1500} # assuming workload is mix of different request types
+    waterfall_capacity_set = {700}
+    # waterfall_capacity_set = {700, 1000}
     degree = 2
     
-    # mode = "profile"
-    mode = "runtime"
-    # routing_rule_list = ["LOCAL"]
+    mode = "profile"
+    # mode = "runtime"
+    routing_rule_list = ["LOCAL"]
     # routing_rule_list = ["SLATE-without-jumping", "SLATE-with-jumping-global", "SLATE-with-jumping-local"]
     # routing_rule_list = ["SLATE-without-jumping"]
+    # routing_rule_list = ["SLATE-with-jumping-global"]
     # routing_rule_list = ["SLATE-with-jumping-global", "SLATE-without-jumping"]
-    routing_rule_list = ["SLATE-with-jumping-global"]
 
     # routing_rule_list = ["WATERFALL2"]
     
@@ -440,26 +484,16 @@ def main():
     method = "POST"
     total_num_services = 2
 
-    workloads = { 
-        "w50": {
+
+
+    workloads = {}
+
+    for rps in range(100, 1000, 100):
+        workloads[f"checkout-{rps}"] = {
             "west": {
-                "singlecore": [(0, 600)],
-                "multicore": [(0, 400)],
+                "checkout": [(0, rps)],
             },
-            "east": {
-                "singlecore": [(0, 25)],
-                "multicore": [(0, 700)],
-            },
-            # "central": {
-            #     "singlecore": [(0, 50)],
-            #     "multicore": [(0, 200)],
-            # },
-            # "south": {
-            #     "singlecore": [(0, 50)],
-            #     "multicore": [(0, 200)],
-            # },
         }
-    }
 
     def construct_dur_list(workload_list, experiment_length):
         """
@@ -477,10 +511,7 @@ def main():
 
     for name, w in workloads.items():
         hillclimb_interval = 30
-        experiment_dur = 60*20
-        # actual normalization: 4
-        # CPU-based normalization: 1/4
-        multicore_in_singlecore = 1/4
+        experiment_dur = 60*2
         normalization_dict = {
             "sslateingress@POST@/singlecore": {
                 "sslateingress@POST@/multicore": 1,
@@ -489,15 +520,15 @@ def main():
                 "sslateingress@POST@/singlecore": 1,
             },
             "corecontrast@POST@/singlecore": {
-                "corecontrast@POST@/multicore": multicore_in_singlecore,
+                "corecontrast@POST@/multicore": 1,
             },
             "corecontrast@POST@/multicore": {
-                "corecontrast@POST@/singlecore": 1/multicore_in_singlecore,
-            }
+                "corecontrast@POST@/singlecore": 1,
+            },
         }
         
         experiment = utils.Experiment()
-        req_type = "singlecore"
+        req_type = "singlecore" if name.startswith("ws") else "multicore"
         experiment.normalization = normalization_dict
         experiment.workload_raw = w
         experiment.set_hillclimb_interval(hillclimb_interval)
@@ -512,7 +543,7 @@ def main():
         # it needs to be a whole number, and the idea is to have a similar number of requests traced for every rps value.
         # for rps values 100 - 500, trace all of requests
         # from there, it decreases proportionally
-        experiment.hash_mod = 100000
+        experiment.hash_mod = 2
         experiment_name = f"{req_type}-{name}"
         experiment.set_name(experiment_name)
         experiment_list.append(experiment)
@@ -525,23 +556,23 @@ def main():
     region_to_node = {
         "us-west-1": ["node1"],
         "us-east-1": ["node2"],
-        # "us-central-1": ["node3"],
-        # "us-south-1": ["node4"]
+        "us-central-1": ["node3"],
+        "us-south-1": ["node4"]
     }
     
     region_latencies = {
         "us-west-1": {
-            # "us-central-1": 15,
-            # "us-south-1": 20,
+            "us-central-1": 15,
+            "us-south-1": 20,
             "us-east-1": 33,
         },
-        # "us-east-1": {
-        #     "us-south-1": 15,
-        #     "us-central-1": 20,
-        # },
-        # "us-central-1": {
-        #     "us-south-1": 10,
-        # }
+        "us-east-1": {
+            "us-south-1": 15,
+            "us-central-1": 20,
+        },
+        "us-central-1": {
+            "us-south-1": 10,
+        }
     }
     #####################################
     
@@ -626,8 +657,7 @@ def main():
             output_dir = f"{sys_arg_dir_name}/{experiment.name}/{routing_rule}"
             utils.start_background_noise(node_dict, CONFIG['background_noise'], victimize_node="node1", victimize_cpu=CONFIG['background_noise'])
             update_wasm_env_var("default", "slate-wasm-plugin", "TRACING_HASH_MOD", str(experiment.hash_mod))
-            utils.restart_deploy(deploy=["slate-controller"])
-            # utils.restart_deploy(deploy=["corecontrast-us-west-1", "sslateingress-us-west-1", "corecontrast-us-east-1", "sslateingress-us-east-1"])
+            utils.restart_deploy(deploy=["slate-controller", "corecontrast-us-west-1", "sslateingress-us-west-1"])
             update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-central-1")
             update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-south-1")
             update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-east-1")
@@ -674,8 +704,8 @@ def main():
                     print(f"injecting delay: {delay}ms at {point} seconds")
                 r2n = copy.deepcopy(region_to_node)
                 r2n['ingress'] = ['node5']
-                start_node_cpu_monitoring(r2n, sum(workload.duration), f"{output_dir}/node_cpu_util.pdf", results_csv=f"{output_dir}/node_cpu_util.csv")
-                start_pod_cpu_monitoring(["corecontrast"], ["us-west-1", "us-east-1"], "default", sum(workload.duration), f"{output_dir}/pod_cpu_util.pdf")
+                start_node_cpu_monitoring(r2n, sum(workload.duration), f"{output_dir}/node_cpu_util.pdf")
+                start_pod_cpu_monitoring(["corecontrast"], ["us-west-1"], "default", sum(workload.duration), f"{output_dir}/pod_cpu_util.pdf")
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 future_list = list()
                 for workload in experiment.workloads:
@@ -705,6 +735,48 @@ def main():
                 print(f"mode: {mode} is not supported")
                 assert False
             
+
+            utils.run_command(f"mkdir -p {output_dir}/client-all")
+            utils.run_command(f"touch {output_dir}/client-all/client.req.latency.0.csv")
+            utils.run_command(f"touch {output_dir}/client-all/client.req.count.0.csv")
+            utils.run_command(f"touch {output_dir}/client-all/client.req.failure.count.0.csv")
+            utils.run_command(f"touch {output_dir}/client-all/client.req.client.req.success.count.0.csv")
+            
+            if os.path.isdir(f"/users/gangmuk/projects/client/{output_dir}/client-west"):
+                utils.run_command(f"cat {output_dir}/client-west/client.req.latency.0.csv >> {output_dir}/client-all/client.req.latency.0.csv")
+                utils.run_command(f"cat {output_dir}/client-west/client.req.latency.0.csv >> {output_dir}/client-all/client.req.count.0.csv")
+                utils.run_command(f"cat {output_dir}/client-west/client.req.latency.0.csv >> {output_dir}/client-all/client.req.failure.count.0.csv")
+                utils.run_command(f"cat {output_dir}/client-west/client.req.latency.0.csv >> {output_dir}/client-all/client.req.success.count.0.csv")
+            else:
+                print(f"client-west does not exist in {output_dir}. skip plotting")
+                
+            if os.path.isdir(f"/users/gangmuk/projects/client/{output_dir}/client-east"):
+                utils.run_command(f"cat {output_dir}/client-east/client.req.latency.0.csv >> {output_dir}/client-all/client.req.latency.0.csv")
+                utils.run_command(f"cat {output_dir}/client-east/client.req.latency.0.csv >> {output_dir}/client-all/client.req.count.0.csv")
+                utils.run_command(f"cat {output_dir}/client-east/client.req.latency.0.csv >> {output_dir}/client-all/client.req.failure.count.0.csv")
+                utils.run_command(f"cat {output_dir}/client-east/client.req.latency.0.csv >> {output_dir}/client-all/client.req.success.count.0.csv")
+            else:
+                print(f"client-east does not exist in {output_dir}. skip plotting")
+            
+            if os.path.isdir(f"/users/gangmuk/projects/client/{output_dir}/client-south"):
+                utils.run_command(f"cat {output_dir}/client-south/client.req.latency.0.csv >> {output_dir}/client-all/client.req.latency.0.csv")
+                utils.run_command(f"cat {output_dir}/client-south/client.req.latency.0.csv >> {output_dir}/client-all/client.req.count.0.csv")
+                utils.run_command(f"cat {output_dir}/client-south/client.req.latency.0.csv >> {output_dir}/client-all/client.req.failure.count.0.csv")
+                utils.run_command(f"cat {output_dir}/client-south/client.req.latency.0.csv >> {output_dir}/client-all/client.req.success.count.0.csv")
+            else:
+                print(f"client-east south not exist in {output_dir}. skip plotting")
+
+            if os.path.isdir(f"/users/gangmuk/projects/client/{output_dir}/client-central"):
+                utils.run_command(f"cat {output_dir}/client-central/client.req.latency.0.csv >> {output_dir}/client-all/client.req.latency.0.csv")
+                utils.run_command(f"cat {output_dir}/client-central/client.req.latency.0.csv >> {output_dir}/client-all/client.req.count.0.csv")
+                utils.run_command(f"cat {output_dir}/client-central/client.req.latency.0.csv >> {output_dir}/client-all/client.req.failure.count.0.csv")
+                utils.run_command(f"cat {output_dir}/client-central/client.req.latency.0.csv >> {output_dir}/client-all/client.req.success.count.0.csv")
+            else:
+                print(f"client-central does not exist in {output_dir}. skip plotting")
+                
+            # utils.run_command(f"python fast_plot.py --data_dir {output_dir}")
+                
+            # if routing_rule.startswith("SLATE-with-jumping") and os.path.exists(f"{output_dir}/SLATE-with-jumping-global-jumping_routing_history.csv"):
             if mode == "runtime":
                 utils.run_command(f"python plot_gc_jumping.py {output_dir}/{routing_rule}-jumping_routing_history.csv {output_dir}/{routing_rule}-jumping_latency.csv {output_dir}/routing_rule_plots",required=False)
                 utils.run_command(f"python plot_region_latency.py {output_dir}/{routing_rule}-region_jumping_latency.csv {output_dir}/region_jumping_latency.pdf",required=False)
@@ -715,7 +787,6 @@ def main():
             utils.run_command(f"python plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/endpoint_rps_corecontrast.pdf corecontrast",required=False)
             utils.run_command(f"python plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/endpoint_rps_corecontrast-singlecore.pdf corecontrast corecontrast@POST@/singlecore",required=False)
             utils.run_command(f"python plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/endpoint_rps_corecontrast-multicore.pdf corecontrast corecontrast@POST@/multicore",required=False)
-            utils.run_command(f"python plot_vegeta.py {output_dir}/latency_results/")
                 # utils.run_command(f"python plot_gc_jumping ")
 
 
@@ -738,9 +809,9 @@ def main():
 
             # savelogs(output_dir, services=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-central-1"])
             save_controller_logs(output_dir)
-            # utils.restart_deploy(deploy=["slate-controller", "corecontrast-us-west-1", "sslateingress-us-west-1"])
+            utils.restart_deploy(deploy=["slate-controller", "corecontrast-us-west-1", "sslateingress-us-west-1"])
     for node in node_dict:
-        utils.run_command(f"ssh gangmuk@{node_dict[node]['hostname']} sudo tc qdisc del dev {network_interface} root", required=False, print_error=False)
+        utils.run_command(f"ssh gangmuk@{node_dict[node]['hostname']} sudo tc qdisc del dev eno1 root", required=False, print_error=False)
         print(f"delete tc qdisc rule in {node_dict[node]['hostname']}")
             
 if __name__ == "__main__":
