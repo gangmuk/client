@@ -4,13 +4,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import subprocess
 import time
+from concurrent.futures import ThreadPoolExecutor
 
 color = {"west": "blue", "central": "green", "east": "brown", "south": "orange"}
 
+
 def encode_binary_to_csv(input_bin, output_csv):
-    if os.path.exists(output_csv):
-        print(f"CSV file {output_csv} already exists. Skipping conversion.")
-        return
+    """Convert a binary file to CSV using Vegeta, if not already converted."""
+    # if os.path.exists(output_csv):
+    #     print(f"CSV file {output_csv} already exists. Skipping conversion.")
+    #     return
     print(f"Converting {input_bin} to {output_csv}...")
     try:
         with open(output_csv, "w") as outfile:
@@ -24,15 +27,53 @@ def encode_binary_to_csv(input_bin, output_csv):
         print(f"Error converting {input_bin} to CSV. Ensure Vegeta is installed.")
         sys.exit(1)
 
+def convert_binaries_to_csv_parallel(input_dir):
+    """Convert all binary files in the input directory to CSV in parallel."""
+    binary_files = [
+        (os.path.join(input_dir, bin_file), f"{input_dir}/{bin_file}.csv")
+        for bin_file in os.listdir(input_dir) if bin_file.endswith(".results.bin")
+    ]
+    print(f"Found {len(binary_files)} binary files to process.")
+    with ThreadPoolExecutor() as executor:
+        executor.map(lambda args: encode_binary_to_csv(*args), binary_files)
 
-def csv_to_df(csv_file, cluster):
+
+def csv_to_df(csv_file, cluster, usecols=None, dtypes=None):
     """Load a CSV file into a DataFrame with appropriate column names."""
     column_names = [
-        "Timestamp", "HTTP Status", "Request Latency", "Bytes Out", "Bytes In", "Error", "Base64 Body", "Attack Name", "Sequence Number", "Method", "URL", "Headers"
+        "Timestamp", "HTTP Status", "Request Latency", "Bytes Out", "Bytes In", 
+        "Error", "Base64 Body", "Attack Name", "Sequence Number", "Method", "URL", "Headers"
     ]
-    df = pd.read_csv(csv_file, header=None, names=column_names)
+    df = pd.read_csv(csv_file, header=None, names=column_names, usecols=usecols, dtype=dtypes)
     df["Cluster"] = cluster
     return df
+
+
+def load_csv_parallel(args):
+    """Helper function to load a single CSV file (for parallel execution)."""
+    csv_file, cluster, usecols, dtypes = args
+    return csv_to_df(csv_file, cluster, usecols=usecols, dtypes=dtypes)
+
+def load_and_merge_csvs_parallel(input_dir):
+    """Load and merge all CSV files in the input directory using parallel processing."""
+    usecols = ["Timestamp", "HTTP Status", "Request Latency"]  # Load only necessary columns
+    dtypes = {
+        "Timestamp": "int64",
+        "HTTP Status": "category",
+        "Request Latency": "float64",
+    }
+    csv_files = []
+    for csv_file in [f for f in os.listdir(input_dir) if f.endswith(".results.bin.csv")]:
+        cluster = csv_file.split(".")[-4]
+        if cluster not in ["west", "central", "east", "south"]:
+            print(f"Error: Cluster name {cluster} is not valid.")
+            continue
+        csv_files.append((f"{input_dir}/{csv_file}", cluster, usecols, dtypes))
+    with ThreadPoolExecutor() as executor:
+        dfs = list(executor.map(load_csv_parallel, csv_files))
+    merged_df = pd.concat(dfs, ignore_index=True)
+    print(f"Parallel csv_to_df and concat: {int(time.time() - ts)} seconds")
+    return merged_df
 
 
 def plot_latency_and_load(merged_df, input_dir):
@@ -120,23 +161,12 @@ if __name__ == "__main__":
         sys.exit(1)
 
     ts = time.time()
-    output_csv = {}
-    for bin_file in [f for f in os.listdir(input_dir) if f.endswith(".results.bin")]:
-        input_bin = os.path.join(input_dir, bin_file)
-        output_csv = f"{input_dir}/{bin_file}.csv"
-        encode_binary_to_csv(input_bin, output_csv)
-    print(f"encode_binary_to_csv: {int(time.time() - ts)}")
-    
-    merged_df = pd.DataFrame()
+    convert_binaries_to_csv_parallel(input_dir)
+    print(f"parallel encode_binary_to_csv: {int(time.time() - ts)}")
+
     ts = time.time()
-    for csv_file in [f for f in os.listdir(input_dir) if f.endswith(".results.bin.csv")]:
-        cluster = csv_file.split(".")[-4]
-        if cluster not in ["west", "central", "east", "south"]:
-            print(f"Error: Cluster name {cluster} is not valid.")
-            break
-        temp_df = csv_to_df(f"{input_dir}/{csv_file}", cluster)
-        merged_df = pd.concat([merged_df, temp_df])
-    print(f"csv_to_df and concat: {int(time.time() - ts)}")
+    merged_df = load_and_merge_csvs_parallel(input_dir)
+    print(f"parellel csv_to_df and concat: {int(time.time() - ts)}")
     
     ts = time.time()
     plot_latency_and_load(merged_df, input_dir)
