@@ -1,5 +1,6 @@
 import os
 import subprocess
+import json
 from datetime import datetime
 from kubernetes import client, config
 import math
@@ -457,7 +458,7 @@ def add_latency_rules(src_host, interface, dst_node_ip, delay):
     run_command(f'ssh gangmuk@{src_host} sudo tc filter add dev {interface} protocol ip parent 1:0 prio 1 u32 match ip dst {dst_node_ip} flowid {class_id}')
 
 
-def start_background_noise(node_dict, cpu_noise=30, victimize_node="", victimize_cpu=0):
+def start_background_noise(node_dict, cpu_noise=0, victimize_node="", victimize_cpu=0):
     for node in node_dict:
         if node == "node0":
             print("[NOTE]SKIP start_background_noise in node0. node0 is control plane node")
@@ -651,7 +652,7 @@ def write_client_yaml_with_config(default_yaml_file: str, yaml_file: str, worklo
 
         yaml_data['clients'][0]['method'] = workload.method
         yaml_data['clients'][0]['path'] = workload.path
-        yaml_data['clients'][0]['rq_timeout'] = '5s'
+        yaml_data['clients'][0]['rq_timeout'] = '2s'
         yaml_data['stats_output_folder'] = output_dir
     except Exception as e:
         print(f"ERROR: {e}")
@@ -673,14 +674,53 @@ def run_newer_generation_client(workload, output_dir):
     run_command(f"./client --config={client_yaml_file}")
 
 
+# def run_vegeta(workload, output_dir):
+#     for i in range(len(workload.rps)):
+#         print(f"start {workload.req_type} RPS {workload.rps[i]} to {workload.cluster} cluster for {workload.duration[i]}s")
+        
+#         cmd_1 = f"echo '{workload.method} {workload.endpoint}{workload.path}' | ./vegeta attack -rate={workload.rps[i]} -duration={workload.duration[i]}s -timeout=5s"
+        
+#         headers = ""
+#         for key, value in workload.hdrs.items():
+#             headers += f" -header='{key}: {value}'"
+        
+#         cmd_2 = f" -header='x-slate-destination: {workload.cluster}' | ./vegeta report -type='hdrplot' > {output_dir}/{workload.name}-{workload.rps[i]}-{workload.duration[i]}.output"
+        
+#         cmd = cmd_1 + headers + cmd_2
+#         run_command(cmd)
+
+
 def run_vegeta(workload, output_dir):
     for i in range(len(workload.rps)):
         print(f"start {workload.req_type} RPS {workload.rps[i]} to {workload.cluster} cluster for {workload.duration[i]}s")
-        cmd = f"echo '{workload.method} {workload.endpoint}{workload.path}' | ./vegeta attack -rate={workload.rps[i]} -duration={workload.duration[i]}s"
+        
+        cmd_1 = f"echo '{workload.method} {workload.endpoint}{workload.path}' | ./vegeta attack -rate={workload.rps[i]} -duration={workload.duration[i]}s -timeout=5s"
+        
+        headers = ""
         for key, value in workload.hdrs.items():
-            cmd += f" -header='{key}: {value}'"
-        cmd += f" -header='x-slate-destination: {workload.cluster}'"
-        cmd += f" | ./vegeta report > {output_dir}/{workload.name}-{workload.rps[i]}-{workload.duration[i]}.txt"
-        # print(f"cmd: {cmd}")
-        print(f"Vegeta cluster: {workload.cluster}, req_type: {workload.req_type}, rps: {workload.rps[i]}, duration: {workload.duration[i]}s")
+            headers += f" -header='{key}: {value}'"
+        
+        cmd_2 = f" -header='x-slate-destination: {workload.cluster}'"
+        cmd_3 = f"| tee {output_dir}/{workload.rps[i]}RPS-{workload.duration[i]}s.{workload.req_type}.{workload.cluster}.results.bin | ./vegeta report"
+        
+        cmd = cmd_1 + headers + cmd_2 + cmd_3
         run_command(cmd)
+        
+        # echo 'POST http://node5.slate-gm.istio-pg0.cloudlab.umass.edu:32048/cart/checkout?email=fo%40bar.com&street_address=405&zip_code=945&city=Fremont&state=CA&country=USA&credit_card_number=5555555555554444&credit_card_expiration_month=12&credit_card_expiration_year=2025&credit_card_cvv=222' | ./vegeta attack -rate=100 -duration=10s -timeout=5s -header='x-slate-destination: south' | tee results.bin | ./vegeta report
+
+
+def extract_latencies(json_file, output_dir, rps, duration):
+    with open(json_file, "r") as f:
+        records = []
+        for line in f:
+            data = json.loads(line)
+            latency = int(data["latency"]) / 1_000_000  # Convert latency to milliseconds
+            timestamp = data["timestamp"]  # ISO 8601 format
+            status_code = data["code"]  # HTTP status code
+            records.append((timestamp, latency, status_code))
+    output_csv = f"{output_dir}/latencies-{rps}-{duration}.csv"
+    with open(output_csv, "w") as f:
+        f.write("Timestamp,Latency(ms),StatusCode\n")
+        for record in records:
+            f.write(f"{record[0]},{record[1]:.3f},{record[2]}\n")
+    print(f"Saved detailed request metrics to {output_csv}")

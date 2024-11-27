@@ -54,12 +54,11 @@ def preprocess_data(args, x_, y_, xstart, total_duration):
 
 # Main plotting function
 total_load = {}
+total_failure = {}
+
 def plot_data(cluster_data_dir, cluster, ax1, ax2, plt):
-    
     # Stats dump interval so we can calculate rates.
     stats_dump_interval = 1.0
-    
-    
     def load_all_csvs(data_dir, filenames):
         data = {}
         for filename in filenames:
@@ -68,7 +67,6 @@ def plot_data(cluster_data_dir, cluster, ax1, ax2, plt):
                 print(f"File {path} does not exist.")
                 data[filename] = ([], [])
                 continue
-
             try:
                 with open(path, 'r') as csvfile:
                     reader = csv.reader(csvfile, delimiter=',')
@@ -106,20 +104,6 @@ def plot_data(cluster_data_dir, cluster, ax1, ax2, plt):
     failure_x, failure_y = csv_data["client.req.failure.count.0.csv"]
     timeout_x, timeout_y = csv_data["client.req.timeout.0.csv"]
     timeout_origin_x, timeout_origin_y = csv_data["client.req.timeout_origin.0.csv"]
-    
-    # # Read data from CSV files
-    # in_rq_rate_x, in_rq_rate_y = xy_from_csv("client.rps.0.csv", cluster_data_dir)
-    # out_rq_rate_x, out_rq_rate_y = xy_from_csv("client.req.count.0.csv", cluster_data_dir)
-    # retry_rate_x, retry_rate_y = xy_from_csv("client.req.retry.count.0.csv", cluster_data_dir)
-    # rq_latency_x, rq_latency_y = xy_from_csv("client.req.latency.0.csv", cluster_data_dir)
-    # success_x, _ = xy_from_csv("client.req.success_hist.0.csv", cluster_data_dir)
-    # goodput_x, goodput_y = xy_from_csv("client.req.success.count.0.csv", cluster_data_dir)
-    # # goodput_y = [y / stats_dump_interval for y in goodput_y]
-    # failure_x, failure_y = xy_from_csv("client.req.failure.count.0.csv", cluster_data_dir)
-    # timeout_x, timeout_y = xy_from_csv("client.req.timeout.0.csv", cluster_data_dir)
-    # timeout_origin_x, timeout_origin_y = xy_from_csv("client.req.timeout_origin.0.csv", cluster_data_dir)
-    
-   
 
     # Determine x-axis limits
     all_x_values = in_rq_rate_x + out_rq_rate_x + rq_latency_x + goodput_x + failure_x + timeout_x + timeout_origin_x
@@ -204,9 +188,10 @@ def plot_data(cluster_data_dir, cluster, ax1, ax2, plt):
 
     # Plot offered load, goodput, failure, and retries
     ax2.plot(adjusted_goodput_x, goodput_y, label=f"Goodput-{cluster}", linestyle='-', color=color_dict[cluster])
-    ax2.plot(adjusted_failure_x, failure_y, label=f"Failure-{cluster}", linestyle='--', color='black', alpha=0.5)
-    ax2.plot(adjusted_in_rq_rate_x, in_rq_rate_y, label=f"Load-{cluster}", linestyle=':', color=color_dict[cluster], alpha=0.7, marker='o', markersize=3, markerfacecolor='none')
+    ax2.plot(adjusted_failure_x, failure_y, label=f"Failure-{cluster}", linestyle='--', color=color_dict[cluster], alpha=0.5, marker='x', markersize=8, markeredgewidth=2)
+    ax2.plot(adjusted_in_rq_rate_x, in_rq_rate_y, label=f"Load-{cluster}", linestyle=':', color=color_dict[cluster], alpha=0.8, marker='o', markersize=5, markerfacecolor='none')
     total_load[cluster] = list(in_rq_rate_y)
+    total_failure[cluster] = list(failure_y)
     # ax2.plot(adjusted_retry_rate_x, retry_rate_y, color="cyan", label=f"Retries-{cluster}", marker='x', linestyle=linestyle)
     
     # ax2.plot(adjusted_failure_x, failure_and_success_y, label=f"success + failure-{cluster}", linestyle=linestyle)
@@ -228,7 +213,7 @@ def plot_data(cluster_data_dir, cluster, ax1, ax2, plt):
     #     bbox=dict(facecolor='white', alpha=0.5)
     # )
     
-    return adjusted_in_rq_rate_x, total_duration
+    return adjusted_in_rq_rate_x, adjusted_failure_x, total_duration
 
 def plot_cdf(cluster_data_dir, cluster, plt):
     # Read latency data along with timestamps
@@ -298,7 +283,7 @@ if __name__ == "__main__":
     clusters = ["west", "east", "central", "south"]
     for cluster in clusters:
         if os.path.exists(f"{args.data_dir}/client-{cluster}"):
-            adjusted_in_rq_rate_x, total_duration = plot_data(f"{args.data_dir}/client-{cluster}", cluster, ax1, ax2, plt)
+            adjusted_in_rq_rate_x, adjusted_failure_x, total_duration = plot_data(f"{args.data_dir}/client-{cluster}", cluster, ax1, ax2, plt)
     # total_duration = 500
     
     for cluster in total_load:
@@ -309,7 +294,15 @@ if __name__ == "__main__":
     if len(adjusted_in_rq_rate_x) != len(aggregated_total_load):
         adjusted_in_rq_rate_x = adjusted_in_rq_rate_x[:min(len(adjusted_in_rq_rate_x), len(aggregated_total_load))]
         aggregated_total_load = aggregated_total_load[:min(len(adjusted_in_rq_rate_x), len(aggregated_total_load))]
+    
+    # ############################################################
+    # aggregated_failure = []
+    # for i in range(min([len(failure_y) for failure_y in [failure_y for failure_y in total_failure]])):
+    #     aggregated_failure.append(total_failure["west"][i] + total_failure["east"][i] + total_failure["central"][i] + total_failure["south"][i])
+    # ############################################################
+
     ax2.plot(adjusted_in_rq_rate_x, aggregated_total_load, label=f"Total Load", linestyle='-', color="black")
+    # ax2.plot(adjusted_failure_x, aggregated_failure, label=f"Total failure", linestyle='-', color="gray", marker='x', markersize=6)
     
     ax1.set_xlabel('Time (s)', fontsize=22)
     ax1.set_ylabel('Latency (ms)', fontsize=22)
@@ -318,7 +311,7 @@ if __name__ == "__main__":
     ax1.set_xlim([args.clip_front, (total_duration - args.clip_end)])
     ax1.set_ylim(bottom=0)
     # ax1.set_ylim([0, max(rq_latency_y) * 1.05])
-    ax1.legend(fontsize=10, loc='upper right')
+    ax1.legend(fontsize=12, loc='upper right')
     
     ax2.set_xlabel('Time (s)', fontsize=22)
     ax2.set_ylabel('Load', fontsize=22)
@@ -328,7 +321,7 @@ if __name__ == "__main__":
     # ax2.set_xlim([0, max(total_load["west"])*1.01])
     ax2.set_ylim(bottom=0)
     ax2.grid(True)
-    ax2.legend(fontsize=8, ncol=4, loc='upper center', bbox_to_anchor=(0.5, 1.20), borderaxespad=0)
+    ax2.legend(fontsize=12, ncol=4, loc='upper center', bbox_to_anchor=(0.5, 1.45), borderaxespad=0)
     
     plt.tight_layout()
     

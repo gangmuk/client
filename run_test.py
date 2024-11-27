@@ -278,7 +278,7 @@ def update_virtualservice_latency_k8s(virtualservice_name: str, namespace: str, 
 
     if not updated:
         print(f"update_virtualservice_latency_k8s, 2 No latency settings found in the VirtualService {region} '{virtualservice_name}' to update.")
-        return
+        assert False
 
     # Apply the updated VirtualService back to the cluster
     api.patch_namespaced_custom_object(
@@ -411,7 +411,8 @@ def parse_inject_delay(inject_delay_str):
 def main():
     argparser = argparse.ArgumentParser(description="Run a benchmark experiment")
     argparser.add_argument("--dir_name", type=str, help="Directory name to store the experiment results", required=True)
-    argparser.add_argument("--background_noise", type=int, default=0, help="Background noise level (in %)")
+    argparser.add_argument("--background_noise", type=int, default=0,help="Background noise level (in %)")
+    argparser.add_argument("--degree", type=int, default=2, help="degree of the polynomial")
     argparser.add_argument("--mode", type=str, help="Mode of operation (profile or runtime)", required=True)
     argparser.add_argument("--routing_rule", type=str, default="SLATE-with-jumping-global", help="Routing rule to apply", choices=["LOCAL", "SLATE-without-jumping", "SLATE-with-jumping-global", "SLATE-with-jumping-local", "WATERFALL2"])
     argparser.add_argument("--duration",    type=int, nargs='+', required=True)
@@ -466,7 +467,6 @@ def main():
     # waterfall_capacity_set = {700, 1000, 1500} # assuming workload is mix of different request types
     waterfall_capacity_set = {700}
     # waterfall_capacity_set = {700, 1000}
-    degree = 1
     mode = args.mode
     routing_rule_list = [args.routing_rule]
     onlineboutique_path = {
@@ -491,12 +491,14 @@ def main():
     
 
     if os.path.exists(args.rps_file):
+        print(f"args.rps_file: {args.rps_file} exists")
         with open(args.rps_file, 'r') as file:
             reader = csv.reader(file)
             for row in reader:
                 values = list(map(int, row))  # Convert values to integers
                 rps_list = values  # Assuming a single row
-        rps_list = [x*3 for x in rps_list]
+        rps_multiplied = 3
+        rps_list = [x*rps_multiplied for x in rps_list]
         args.west_rps = rps_list
         args.east_rps = random.sample(rps_list, len(rps_list))
         args.south_rps = random.sample(rps_list, len(rps_list))
@@ -512,7 +514,11 @@ def main():
                 args.south_rps[i] = args.south_rps[i] * max_rps_threshold // total_rps
                 new_total_rps = args.west_rps[i] + args.east_rps[i] + args.central_rps[i] + args.south_rps[i]
                 print(f"new_total_rps: {new_total_rps}, new_rps: args.west_rps[{i}]: {args.west_rps[i]}, args.east_rps[{i}]: {args.east_rps[i]}, args.central_rps[{i}]: {args.central_rps[i]}, args.south_rps[{i}]: {args.south_rps[i]}")
-        args.duration = [10] * len(rps_list)
+        # args.duration = [30] * len(rps_list)
+        args.duration = [30] * len(rps_list)
+    else:
+        print(f"args.rps_file: {args.rps_file} does not exist")
+        print(f"Will use the provided rps values (args.west_rps, args.east_rps, args.central_rps, args.south_rps)")
     total_rps = 0
     total_rps = [args.west_rps[i] + args.east_rps[i] + args.central_rps[i] + args.south_rps[i] for i in range(len(args.west_rps))]
     max_total_rps = max(total_rps)
@@ -634,6 +640,7 @@ def main():
         utils.delete_tc_rule_in_client(network_interface, node_dict)
         if mode == "runtime":
             utils.apply_all_tc_rule(network_interface, inter_cluster_latency, node_dict)
+            # a=1
         else:
             print("Skip apply_all_tc_rule in profile mode")
 
@@ -646,14 +653,19 @@ def main():
             CONFIG[f"inter_cluster_latency,{dst_region},{src_region}"] = inter_cluster_latency[src_node][dst_node]
     CONFIG["benchmark_name"] = benchmark_name
     CONFIG["total_num_services"] = total_num_services
-    CONFIG["degree"] = degree
+    CONFIG["degree"] = args.degree
     CONFIG["load_coef_flag"] = args.load_config
     # utils.restart_deploy(deploy=["slate-controller"])
     # utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-west-1"])
     for experiment in experiment_list:
         for routing_rule in routing_rule_list:
             output_dir = f"{args.dir_name}/{experiment.name}/bg{args.background_noise}/{routing_rule}"
-            utils.start_background_noise(node_dict, CONFIG['background_noise'], victimize_node="node1", victimize_cpu=CONFIG['background_noise'])
+            if args.background_noise > 0:
+                utils.start_background_noise(node_dict, args.background_noise, victimize_node="node1", victimize_cpu=args.background_noise)
+
+                ## Additional noisy neighbor
+                # call_with_delay(30, utils.start_background_noise, node_dict, 0, victimize_node="node1", victimize_cpu=20)
+            
             update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-central-1")
             update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-south-1")   
             print(f"mode: {mode}")
@@ -699,8 +711,8 @@ def main():
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 future_list = list()
                 for workload in experiment.workloads:
-                    # future_list.append(executor.submit(utils.run_vegeta, workload, output_dir))
-                    future_list.append(executor.submit(utils.run_newer_generation_client, workload, output_dir))
+                    future_list.append(executor.submit(utils.run_vegeta, workload, output_dir))
+                    # future_list.append(executor.submit(utils.run_newer_generation_client, workload, output_dir))
                     time.sleep(0.1)
                 for future in concurrent.futures.as_completed(future_list):
                     print(future.result())
@@ -737,18 +749,17 @@ def main():
                             src_in_pod = f"/app/{file}"
                             dst_in_host = f"{output_dir}/{file}"
                             utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
-                            
                             if f"{output_dir}/jumping_latency.csv" in os.listdir(output_dir):
-                                utils.run_command(f"python plot_script/plot_gc_jumping.py {output_dir}/jumping_routing_history.csv {output_dir}/jumping_latency.csv {output_dir}/central-ruleset-jumping.pdf {output_dir}/south-ruleset-jumping.pdf",required=False)
+                                utils.run_command(f"python {os.getcwd()}/plot_script/plot_gc_jumping.py {output_dir}/jumping_routing_history.csv {output_dir}/jumping_latency.csv {output_dir}/central-ruleset-jumping.pdf {output_dir}/south-ruleset-jumping.pdf",required=False)
                             if f"{output_dir}/region_jumping_latency.csv" in os.listdir(output_dir):
-                                utils.run_command(f"python plot_script/plot_region_latency.py {output_dir}/region_jumping_latency.csv {output_dir}/region_jumping_latency.pdf",required=False)
+                                utils.run_command(f"python {os.getcwd()}/plot_script/plot_region_latency.py {output_dir}/region_jumping_latency.csv {output_dir}/region_jumping_latency.pdf",required=False)
                             else:
-                                print(f"python plot_script/plot_region_latency")
+                                print(f"python {os.getcwd()}/plot_script/plot_region_latency")
             else:
                 print(f"mode: {mode} is not supported")
                 assert False
             # if routing_rule.startswith("SLATE-with-jumping") and os.path.exists(f"{output_dir}/SLATE-with-jumping-global-jumping_routing_history.csv"):
-            utils.run_command(f"python plot_script/fast_plot.py --data_dir {output_dir}", required=False)
+            utils.run_command(f"python {os.getcwd()}/plot_script/fast_plot.py --data_dir {output_dir}", required=False)
             # utils.pkill_background_noise(node_dict)
             # savelogs(output_dir, services=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-central-1"])
             save_controller_logs(output_dir)
