@@ -561,7 +561,7 @@ class Experiment:
             exit()
         self.workload_names.add(workload.name)
         self.workloads.append(workload)
-        print(f"Added {workload.name} workload")
+        print(f"Added workload: {workload.cluster}, {workload.req_type}, {workload.rps}, {workload.duration}")
         
     def print_experiment(self):
         print(f"Experiment Name: {self.name}")
@@ -690,9 +690,9 @@ def run_newer_generation_client(workload, output_dir):
 #         run_command(cmd)
 
 
-def run_vegeta(workload, output_dir):
+def run_vegeta(workload, output_dir, idx):
     for i in range(len(workload.rps)):
-        print(f"start {workload.req_type} RPS {workload.rps[i]} to {workload.cluster} cluster for {workload.duration[i]}s")
+        print(f"start-{idx}, {workload.req_type} RPS {workload.rps[i]} to {workload.cluster} cluster for {workload.duration[i]}s")
         
         cmd_1 = f"echo '{workload.method} {workload.endpoint}{workload.path}' | ./vegeta attack -rate={workload.rps[i]} -duration={workload.duration[i]}s -timeout=5s"
         
@@ -701,7 +701,7 @@ def run_vegeta(workload, output_dir):
             headers += f" -header='{key}: {value}'"
         
         cmd_2 = f" -header='x-slate-destination: {workload.cluster}'"
-        cmd_3 = f"| tee {output_dir}/{workload.rps[i]}RPS-{workload.duration[i]}s.{workload.req_type}.{workload.cluster}.results.bin | ./vegeta report"
+        cmd_3 = f"| tee {output_dir}/{idx}-{workload.rps[i]}RPS-{workload.duration[i]}s.{workload.req_type}.{workload.cluster}.results.bin | ./vegeta report"
         
         cmd = cmd_1 + headers + cmd_2 + cmd_3
         run_command(cmd)

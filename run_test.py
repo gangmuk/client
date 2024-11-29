@@ -414,12 +414,8 @@ def main():
     argparser.add_argument("--background_noise", type=int, default=0,help="Background noise level (in %)")
     argparser.add_argument("--degree", type=int, default=2, help="degree of the polynomial")
     argparser.add_argument("--mode", type=str, help="Mode of operation (profile or runtime)", required=True)
-    argparser.add_argument("--routing_rule", type=str, default="SLATE-with-jumping-global", help="Routing rule to apply", choices=["LOCAL", "SLATE-without-jumping", "SLATE-with-jumping-global", "SLATE-with-jumping-local", "WATERFALL2"])
-    argparser.add_argument("--duration",    type=int, nargs='+', required=True)
-    argparser.add_argument("--west_rps",    type=int, nargs='+', help="RPS for the west cluster", required=True)
-    argparser.add_argument("--east_rps",    type=int, nargs='+', help="RPS for the east cluster", required=True)
-    argparser.add_argument("--central_rps", type=int, nargs='+', help="RPS for the central cluster", required=True)
-    argparser.add_argument("--south_rps",   type=int, nargs='+', help="RPS for the south cluster", required=True)
+    argparser.add_argument("--routing_rule", type=str, default="SLATE-with-jumping-global", help="Routing rule to apply", choices=["LOCAL", "SLATE-without-jumping", "SLATE-with-jumping-global", "SLATE-with-jumping-global-continuous-profiling", "SLATE-with-jumping-local", "WATERFALL2"])
+    argparser.add_argument("--duration",    type=int, default=10, required=True)
     argparser.add_argument("--req_type", type=str, default="checkoutcart", help="Request type to test")
     argparser.add_argument("--slatelog", type=str, help="Path to the slatelog file", required=True)
     argparser.add_argument("--coefficient_file", type=str, help="Path to the coefficient_file", required=True)
@@ -489,75 +485,49 @@ def main():
     hillclimb_interval = 30
     experiment.set_hillclimb_interval(hillclimb_interval)
     
-
-    if os.path.exists(args.rps_file):
-        print(f"args.rps_file: {args.rps_file} exists")
-        with open(args.rps_file, 'r') as file:
-            reader = csv.reader(file)
-            for row in reader:
-                values = list(map(int, row))  # Convert values to integers
-                rps_list = values  # Assuming a single row
-        rps_multiplied = 3
-        rps_list = [x*rps_multiplied for x in rps_list]
-        args.west_rps = rps_list
-        args.east_rps = random.sample(rps_list, len(rps_list))
-        args.south_rps = random.sample(rps_list, len(rps_list))
-        args.central_rps = random.sample(rps_list, len(rps_list))
-        max_rps_threshold = 2000
-        for i in range(len(args.west_rps)):
-            total_rps = args.west_rps[i] + args.east_rps[i] + args.central_rps[i] + args.south_rps[i]
-            if total_rps > max_rps_threshold:
-                print(f"total_rps: {total_rps} > {max_rps_threshold}, args.west_rps[{i}]: {args.west_rps[i]}, args.east_rps[{i}]: {args.east_rps[i]}, args.central_rps[{i}]: {args.central_rps[i]}, args.south_rps[{i}]: {args.south_rps[i]}")
-                args.west_rps[i] = args.west_rps[i] * max_rps_threshold // total_rps
-                args.east_rps[i] = args.east_rps[i] * max_rps_threshold // total_rps
-                args.central_rps[i] = args.central_rps[i] * max_rps_threshold // total_rps
-                args.south_rps[i] = args.south_rps[i] * max_rps_threshold // total_rps
-                new_total_rps = args.west_rps[i] + args.east_rps[i] + args.central_rps[i] + args.south_rps[i]
-                print(f"new_total_rps: {new_total_rps}, new_rps: args.west_rps[{i}]: {args.west_rps[i]}, args.east_rps[{i}]: {args.east_rps[i]}, args.central_rps[{i}]: {args.central_rps[i]}, args.south_rps[{i}]: {args.south_rps[i]}")
-        # args.duration = [30] * len(rps_list)
-        args.duration = [30] * len(rps_list)
-    else:
+    if not os.path.exists(args.rps_file):
         print(f"args.rps_file: {args.rps_file} does not exist")
-        print(f"Will use the provided rps values (args.west_rps, args.east_rps, args.central_rps, args.south_rps)")
-    total_rps = 0
-    total_rps = [args.west_rps[i] + args.east_rps[i] + args.central_rps[i] + args.south_rps[i] for i in range(len(args.west_rps))]
-    max_total_rps = max(total_rps)
-    min_total_rps = min(total_rps)
-    print(f"args.rps_file: {args.rps_file}")
-    print(f"args.west_rps: {args.west_rps}")
-    print(f"args.east_rps: {args.east_rps}")
-    print(f"args.central_rps: {args.central_rps}")
-    print(f"args.south_rps: {args.south_rps}")
-    print(f"args.duration: {args.duration}")
-    print(f"mean rps: {sum(args.west_rps)/len(args.west_rps)}")
-    print(f"max rps: {max(args.west_rps)}")
-    print(f"min rps: {min(args.west_rps)}")
-    print(f"median rps: {np.median(args.west_rps)}")
-    print(f"min_total_rps: {min_total_rps}")
-    print(f"max_total_rps: {max_total_rps}")
-    # return
-
+        assert False
+    import pandas as pd
+    rps_df = pd.read_csv(args.rps_file, header=None, names=["request_type", "rps"])
+    rps_multiplied = 3
+    rps_df["rps"] = rps_df["rps"] * rps_multiplied
+    rps_df["west_rps"] = rps_df["rps"]
+    rps_df["east_rps"] = rps_df.sample(frac=1)["rps"].reset_index(drop=True)
+    rps_df["central_rps"] = rps_df.sample(frac=1)["rps"].reset_index(drop=True)
+    rps_df["south_rps"] = rps_df.sample(frac=1)["rps"].reset_index(drop=True)
+    rps_df["duration"] = args.duration
+    max_rps_threshold = 2000
+    rps_df["west_rps"] = rps_df["west_rps"].apply(lambda x: x if x < max_rps_threshold else max_rps_threshold)
+    rps_df["east_rps"] = rps_df["east_rps"].apply(lambda x: x if x < max_rps_threshold else max_rps_threshold)
+    rps_df["central_rps"] = rps_df["central_rps"].apply(lambda x: x if x < max_rps_threshold else max_rps_threshold)
+    rps_df["south_rps"] = rps_df["south_rps"].apply(lambda x: x if x < max_rps_threshold else max_rps_threshold)
+    rps_df["total_rps"] = rps_df["west_rps"] + rps_df["east_rps"] + rps_df["central_rps"] + rps_df["south_rps"]
+    
+    rps_df.to_csv(f"rps.csv", index=False)
+    
     igw_host = utils.run_command("kubectl get nodes | grep 'node5' | awk '{print $1}'")[1]
     igw_nodeport = utils.run_command("kubectl get svc istio-ingressgateway -n istio-system -o=json | jq '.spec.ports[] | select(.name==\"http2\") | .nodePort'")[1]
     experiment_endpoint = f"http://{igw_host}:{igw_nodeport}"
     
-    if sum(args.west_rps) > 0:
-        experiment.add_workload(utils.Workload(cluster="west", req_type=args.req_type, rps=args.west_rps, duration=args.duration, method=method, path=onlineboutique_path[args.req_type], endpoint=experiment_endpoint))
-    if sum(args.east_rps) > 0:
-        experiment.add_workload(utils.Workload(cluster="east", req_type=args.req_type, rps=args.east_rps, duration=args.duration, method=method, path=onlineboutique_path[args.req_type], endpoint=experiment_endpoint))
-    if sum(args.central_rps) > 0:
-        experiment.add_workload(utils.Workload(cluster="central", req_type=args.req_type, rps=args.central_rps, duration=args.duration, method=method, path=onlineboutique_path[args.req_type], endpoint=experiment_endpoint))
-    if sum(args.south_rps) > 0:
-        experiment.add_workload(utils.Workload(cluster="south", req_type=args.req_type, rps=args.south_rps, duration=args.duration, method=method, path=onlineboutique_path[args.req_type], endpoint=experiment_endpoint))
+    for request_type in rps_df["request_type"].unique():
+        temp_df = rps_df[rps_df["request_type"] == request_type]
+        if temp_df["west_rps"].sum() > 0:
+            experiment.add_workload(utils.Workload(cluster="west", req_type=request_type, rps=temp_df["west_rps"].to_list(), duration=temp_df["duration"].to_list(), method=method, path=onlineboutique_path[request_type], endpoint=experiment_endpoint))
+        if temp_df["east_rps"].sum() > 0:
+            experiment.add_workload(utils.Workload(cluster="east", req_type=request_type, rps=temp_df["east_rps"].to_list(), duration=temp_df["duration"].to_list(), method=method, path=onlineboutique_path[request_type], endpoint=experiment_endpoint))
+        if temp_df["central_rps"].sum() > 0:
+            experiment.add_workload(utils.Workload(cluster="central", req_type=request_type, rps=temp_df["central_rps"].to_list(), duration=temp_df["duration"].to_list(), method=method, path=onlineboutique_path[request_type], endpoint=experiment_endpoint))
+        if temp_df["south_rps"].sum() > 0:
+            experiment.add_workload(utils.Workload(cluster="south", req_type=request_type, rps=temp_df["south_rps"].to_list(), duration=temp_df["duration"].to_list(), method=method, path=onlineboutique_path[request_type], endpoint=experiment_endpoint))
         
-        
-    # west_rps_str = ",".join(map(str, args.west_rps))
-    # east_rps_str = ",".join(map(str, args.east_rps))
-    # central_rps_str = ",".join(map(str, args.central_rps))
-    # south_rps_str = ",".join(map(str, args.south_rps))
+    # west_rps_str = ",".join(map(str, west_rps))
+    # east_rps_str = ",".join(map(str, east_rps))
+    # central_rps_str = ",".join(map(str, central_rps))
+    # south_rps_str = ",".join(map(str, south_rps))
     # experiment_name = f"{args.req_type}-W{west_rps_str}-E{east_rps_str}-C{central_rps_str}-S{south_rps_str}"
     
-    experiment_name = f"exp-{args.req_type}"
+    experiment_name = f"exp-{','.join(rps_df['request_type'].unique())}"
     experiment.set_name(experiment_name)
     experiment_list.append(experiment)
     #### Four clusters
@@ -608,24 +578,19 @@ def main():
         for n in nodes:
             node_to_region[n] = region
     
-    # GCP, OR, SLC, IOW, SC
-    # Collect all unique regions
     all_regions = set(region_latencies.keys())
     for region in region_latencies:
         all_regions.update(region_latencies[region].keys())
-    # ensure symmetry
     for region in all_regions:
         if region not in region_latencies:
             region_latencies[region] = {}
         for other_region in all_regions:
             if other_region not in region_latencies[region]:
                 if region == other_region:
-                    region_latencies[region][other_region] = 0  # latency to self is zero
+                    region_latencies[region][other_region] = 0
                 elif other_region in region_latencies and region in region_latencies[other_region]:
-                    # Copy the reverse latency if it exists
                     region_latencies[region][other_region] = region_latencies[other_region][region]
                 else:
-                    # Initialize to None if no data is available in either direction
                     region_latencies[region][other_region] = None
     
     inter_cluster_latency = {node: {} for region in region_to_node for node in region_to_node[region]}
@@ -666,8 +631,6 @@ def main():
                 ## Additional noisy neighbor
                 # call_with_delay(30, utils.start_background_noise, node_dict, 0, victimize_node="node1", victimize_cpu=20)
             
-            update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-central-1")
-            update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-south-1")   
             print(f"mode: {mode}")
             print(f"routing_rule: {routing_rule}")
             utils.check_all_pods_are_ready()
@@ -705,15 +668,17 @@ def main():
             if mode == "runtime":
                 for (point, delay, targetregion) in inject_delay:
                     print(f"update_virtualservice_latency_k8s, will inject delay: {delay}ms in {point} seconds to {targetregion}")
-                    call_with_delay(point, update_virtualservice_latency_k8s, "checkoutservice-vs", "default", f"{delay}ms", targetregion)
+                    call_with_delay(point, update_virtualservice_latency_k8s, "shippingservice-vs", "default", f"{delay}ms", targetregion)
                     print(f"update_virtualservice_latency_k8s, Delay injected: {delay}ms at {point} seconds")
             # start_node_cpu_monitoring(region_to_node, sum(workload.duration), f"{output_dir}/node_cpu_util.pdf")
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 future_list = list()
+                run_idx = 0
                 for workload in experiment.workloads:
-                    future_list.append(executor.submit(utils.run_vegeta, workload, output_dir))
+                    future_list.append(executor.submit(utils.run_vegeta, workload, output_dir, run_idx))
                     # future_list.append(executor.submit(utils.run_newer_generation_client, workload, output_dir))
                     time.sleep(0.1)
+                    run_idx += 1
                 for future in concurrent.futures.as_completed(future_list):
                     print(future.result())
             print("All clients have completed.")
@@ -743,23 +708,25 @@ def main():
                         src_in_pod = f"/app/{file}"
                         dst_in_host = f"{output_dir}/{routing_rule}-{file}"
                         utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
-                    if routing_rule == "SLATE-with-jumping-global":
-                        flist = ["hillclimbing_distribution_history.csv", "global_hillclimbing_distribution_history.csv", "jumping_routing_history.csv", "jumping_latency.csv", "region_jumping_latency.csv", "continuously_profiled_traces.csv", "continuous_coef_dict.csv", "body_traces.csv", "body.csv", "body2.csv", "body3.csv"]
-                        for file in flist:
-                            src_in_pod = f"/app/{file}"
-                            dst_in_host = f"{output_dir}/{file}"
-                            utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
-                            if f"{output_dir}/jumping_latency.csv" in os.listdir(output_dir):
-                                utils.run_command(f"python {os.getcwd()}/plot_script/plot_gc_jumping.py {output_dir}/jumping_routing_history.csv {output_dir}/jumping_latency.csv {output_dir}/central-ruleset-jumping.pdf {output_dir}/south-ruleset-jumping.pdf",required=False)
-                            if f"{output_dir}/region_jumping_latency.csv" in os.listdir(output_dir):
-                                utils.run_command(f"python {os.getcwd()}/plot_script/plot_region_latency.py {output_dir}/region_jumping_latency.csv {output_dir}/region_jumping_latency.pdf",required=False)
-                            else:
-                                print(f"python {os.getcwd()}/plot_script/plot_region_latency")
+                    # if routing_rule == "SLATE-with-jumping-global":
+                    flist = ["hillclimbing_distribution_history.csv", "global_hillclimbing_distribution_history.csv", "jumping_routing_history.csv", "jumping_latency.csv", "region_jumping_latency.csv", "continuously_profiled_traces.csv", "continuous_coef_dict.csv", "body_traces.csv", "body.csv", "body2.csv", "body3.csv"]
+                    for file in flist:
+                        src_in_pod = f"/app/{file}"
+                        dst_in_host = f"{output_dir}/{file}"
+                        utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
+                        if f"{output_dir}/jumping_latency.csv" in os.listdir(output_dir):
+                            utils.run_command(f"python {os.getcwd()}/plot_script/plot_gc_jumping.py {output_dir}/jumping_routing_history.csv {output_dir}/jumping_latency.csv {output_dir}/central-ruleset-jumping.pdf {output_dir}/south-ruleset-jumping.pdf",required=False)
+                        if f"{output_dir}/region_jumping_latency.csv" in os.listdir(output_dir):
+                            utils.run_command(f"python {os.getcwd()}/plot_script/plot_region_latency.py {output_dir}/region_jumping_latency.csv {output_dir}/region_jumping_latency.pdf",required=False)
+                        else:
+                            print(f"python {os.getcwd()}/plot_script/plot_region_latency")
             else:
                 print(f"mode: {mode} is not supported")
                 assert False
             # if routing_rule.startswith("SLATE-with-jumping") and os.path.exists(f"{output_dir}/SLATE-with-jumping-global-jumping_routing_history.csv"):
             utils.run_command(f"python {os.getcwd()}/plot_script/fast_plot.py --data_dir {output_dir}", required=False)
+            utils.run_command(f"python {os.getcwd()}/plot_script/plot-vegeta.py {output_dir}", required=False)
+            
             # utils.pkill_background_noise(node_dict)
             # savelogs(output_dir, services=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-central-1"])
             save_controller_logs(output_dir)
