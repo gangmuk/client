@@ -10,20 +10,37 @@ color = {"west": "violet", "central": "green", "east": "brown", "south": "orange
 
 
 def encode_binary_to_csv(input_bin, output_csv):
-    if os.path.exists(output_csv):
-        # print(f"CSV file {output_csv} already exists. Skipping conversion.")
-        return
+    # if os.path.exists(output_csv):
+    #     print(f"CSV file {output_csv} already exists. Skipping conversion.")
+    #     return
     print(f"Converting {input_bin} to {output_csv}...")
     try:
+        # Step 1: Encode binary to CSV using Vegeta
         with open(output_csv, "w") as outfile:
-            subprocess.run(
-                ["vegeta", "encode", "--to", "csv", input_bin],
-                stdout=outfile,
-                check=True
-            )
+            subprocess.run(["vegeta", "encode", "--to", "csv", input_bin], stdout=outfile, check=True)
         print(f"Created CSV file: {output_csv}")
+        
+        # Step 2: Remove the last column from the CSV
+        temp_csv = f"{output_csv}.tmp"
+        with open(output_csv, "r") as infile, open(temp_csv, "w", newline="") as outfile:
+            reader = csv.reader(infile)
+            writer = csv.writer(outfile)
+            for row in reader:
+                # Exclude the last column
+                writer.writerow(row[:-1])
+        
+        # Replace the original CSV with the modified version
+        os.replace(temp_csv, output_csv)
+        print(f"Removed the last column and updated CSV file: {output_csv}")
+
+        # Step 3: Delete the original binary file
+        subprocess.run(["rm", input_bin])
+        print(f"Deleted original vegeta binary file: {input_bin}")
     except subprocess.CalledProcessError:
         print(f"Error converting {input_bin} to CSV. Ensure Vegeta is installed.")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Unexpected error: {e}")
         sys.exit(1)
 
 def convert_binaries_to_csv_parallel(input_dir):
@@ -39,7 +56,7 @@ def convert_binaries_to_csv_parallel(input_dir):
 def csv_to_df(csv_file, cluster, usecols=None, dtypes=None):
     column_names = [
         "Timestamp", "HTTP Status", "Request Latency", "Bytes Out", "Bytes In", 
-        "Error", "Base64 Body", "Attack Name", "Sequence Number", "Method", "URL", "Headers"
+        "Error", "Base64 Body", "Attack Name", "Sequence Number", "Method", "URL"
     ]
     df = pd.read_csv(csv_file, header=None, names=column_names, usecols=usecols, dtype=dtypes)
     df["Cluster"] = cluster
@@ -89,7 +106,7 @@ def plot_latency_and_load(merged_df, input_dir, per_cluster=False):
             df_cluster = merged_df[merged_df["Cluster"] == cluster]
             print(f"Cluster: {cluster}")
             aggregated = df_cluster.groupby(["Time (s)"]).agg(RPS=("Time (s)", "count"), AvgLatency=("Request Latency (ms)", "mean")).reset_index()
-            ax1.plot(aggregated["Time (s)"], aggregated["RPS"], label=f"RPS-{cluster}", color=color[cluster], linewidth=1, linestyle=":")
+            ax1.plot(aggregated["Time (s)"], aggregated["RPS"], label=f"RPS-{cluster}", color=color[cluster], linewidth=2, linestyle="--")
             # ax2.scatter(df_cluster["Start Time (s)"], df_cluster["Request Latency (ms)"], label=f"Individual Request Latency-{cluster}", color=color[cluster], alpha=0.05, zorder=1)
             ax2.plot(aggregated["Time (s)"], aggregated["AvgLatency"], label=f"Average Latency (ms)-{cluster}",color=color[cluster], linewidth=1.5, marker="^", markersize=0)
             max_average_latency = max(max_average_latency, aggregated["AvgLatency"].max())
@@ -132,7 +149,7 @@ def plot_latency_and_load_for_all_subdir(merged_df_list, input_dir):
             df_cluster = merged_df[merged_df["Cluster"] == cluster]
             print(f"Cluster: {cluster}")
             aggregated = df_cluster.groupby(["Time (s)"]).agg(RPS=("Time (s)", "count"), AvgLatency=("Request Latency (ms)", "mean")).reset_index()
-            ax1.plot(aggregated["Time (s)"], aggregated["RPS"], label=f"RPS-{cluster}-{subdir_name}", color=color[cluster], linewidth=1, linestyle=":")
+            ax1.plot(aggregated["Time (s)"], aggregated["RPS"], label=f"RPS-{cluster}-{subdir_name}", color=color[cluster], linewidth=1.5, linestyle="--")
             ax2.plot(aggregated["Time (s)"], aggregated["AvgLatency"], label=f"Avg Latency (ms)-{cluster}-{subdir_name}", color=color[cluster], linewidth=1.5, marker="^", markersize=0)
             max_average_latency = max(max_average_latency, aggregated["AvgLatency"].max())
             
@@ -165,7 +182,7 @@ def plot_latency_and_load_for_all_subdir(merged_df_list, input_dir):
         ax2.plot(
             aggregated["Time (s)"],
             aggregated["AvgLatency"],
-            label=f"Avg Latency (ms)-{subdir_name}",
+            label=f"Avg latency-{subdir_name}",
             linewidth=1,
             alpha=0.8,
         )
@@ -184,7 +201,7 @@ def plot_latency_and_load_for_all_subdir(merged_df_list, input_dir):
     
     ax1.set_ylim(bottom=0)
     ax1.set_xlim(left=0)
-    ax2.set_ylim(bottom=0)
+    ax2.set_ylim(bottom=0, top=5000)
 
     # Add title and grid
     plt.title("Load (RPS) and Latency for All Clusters", fontsize=20)

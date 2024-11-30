@@ -5,25 +5,58 @@ import matplotlib.pyplot as plt
 import subprocess
 import time
 from concurrent.futures import ThreadPoolExecutor
+import csv
 
 color = {"west": "violet", "central": "green", "east": "brown", "south": "orange"}
 
 
+# def encode_binary_to_csv(input_bin, output_csv):
+#     if os.path.exists(output_csv):
+#         print(f"CSV file {output_csv} already exists. Skipping conversion.")
+#         return
+#     print(f"Converting {input_bin} to {output_csv}...")
+#     try:
+#         with open(output_csv, "w") as outfile:
+#             subprocess.run(["vegeta", "encode", "--to", "csv", input_bin], stdout=outfile, check=True)
+#         print(f"Created CSV file: {output_csv}")
+#         subprocess.run(["rm", input_bin])
+#         print(f"Deleted original vegeta binary file: {input_bin}")
+#     except subprocess.CalledProcessError:
+#         print(f"Error converting {input_bin} to CSV. Ensure Vegeta is installed.")
+#         sys.exit(1)
+
 def encode_binary_to_csv(input_bin, output_csv):
-    if os.path.exists(output_csv):
-        print(f"CSV file {output_csv} already exists. Skipping conversion.")
-        return
+    # if os.path.exists(output_csv):
+    #     print(f"CSV file {output_csv} already exists. Skipping conversion.")
+    #     return
     print(f"Converting {input_bin} to {output_csv}...")
     try:
+        # Step 1: Encode binary to CSV using Vegeta
         with open(output_csv, "w") as outfile:
-            subprocess.run(
-                ["vegeta", "encode", "--to", "csv", input_bin],
-                stdout=outfile,
-                check=True
-            )
+            subprocess.run(["vegeta", "encode", "--to", "csv", input_bin], stdout=outfile, check=True)
         print(f"Created CSV file: {output_csv}")
+        
+        # Step 2: Remove the last column from the CSV
+        temp_csv = f"{output_csv}.tmp"
+        with open(output_csv, "r") as infile, open(temp_csv, "w", newline="") as outfile:
+            reader = csv.reader(infile)
+            writer = csv.writer(outfile)
+            for row in reader:
+                # Exclude the last column
+                writer.writerow(row[:-1])
+        
+        # Replace the original CSV with the modified version
+        os.replace(temp_csv, output_csv)
+        print(f"Removed the last column and updated CSV file: {output_csv}")
+
+        # Step 3: Delete the original binary file
+        subprocess.run(["rm", input_bin])
+        print(f"Deleted original vegeta binary file: {input_bin}")
     except subprocess.CalledProcessError:
         print(f"Error converting {input_bin} to CSV. Ensure Vegeta is installed.")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Unexpected error: {e}")
         sys.exit(1)
 
 def convert_binaries_to_csv_parallel(input_dir):
@@ -39,7 +72,7 @@ def convert_binaries_to_csv_parallel(input_dir):
 def csv_to_df(csv_file, cluster, usecols=None, dtypes=None):
     column_names = [
         "Timestamp", "HTTP Status", "Request Latency", "Bytes Out", "Bytes In", 
-        "Error", "Base64 Body", "Attack Name", "Sequence Number", "Method", "URL", "Headers"
+        "Error", "Base64 Body", "Attack Name", "Sequence Number", "Method", "URL"
     ]
     df = pd.read_csv(csv_file, header=None, names=column_names, usecols=usecols, dtype=dtypes)
     df["Cluster"] = cluster
@@ -65,11 +98,9 @@ def load_and_merge_csvs_parallel(input_dir):
             print(f"Error: Cluster name {cluster} is not valid.")
             continue
         csv_files.append((f"{input_dir}/{csv_file}", cluster, usecols, dtypes))
-    print(f"csv_files: {csv_files}")
     with ThreadPoolExecutor() as executor:
         dfs = list(executor.map(load_csv_parallel, csv_files))
     merged_df = pd.concat(dfs, ignore_index=True)
-    print(f"Parallel csv_to_df and concat: {int(time.time() - ts)} seconds")
     return merged_df
 
 
@@ -81,7 +112,7 @@ def plot_latency_and_load(merged_df, input_dir, per_cluster=False):
     merged_df["Start Time (s)"] = (merged_df["Timestamp"] - merged_df["Timestamp"].min()) / 1e9
     merged_df["Time (s)"] = merged_df["Start Time (s)"].astype(int)
     rps_per_second = merged_df.groupby(["Cluster", "Time (s)"]).size()
-    merged_df["RPS"] = merged_df["Time (s)"].map(rps_per_second)
+    merged_df.loc[:, "RPS"] = merged_df["Time (s)"].map(rps_per_second)
     max_average_latency = 0
     fig, ax1 = plt.subplots(figsize=(12, 6))
     ax2 = ax1.twinx()
@@ -133,11 +164,11 @@ def plot_latency_and_load_for_all_subdir(merged_df_list, input_dir):
         # west only
         merged_df = merged_df[merged_df["Cluster"] == "west"]
         
-        merged_df["Request Latency (ms)"] = merged_df["Request Latency"] / 1e6
-        merged_df["Start Time (s)"] = (merged_df["Timestamp"] - merged_df["Timestamp"].min()) / 1e9
-        merged_df["Time (s)"] = merged_df["Start Time (s)"].astype(int)
+        merged_df.loc[:, "Request Latency (ms)"] = merged_df["Request Latency"] / 1e6
+        merged_df.loc[:, "Start Time (s)"] = (merged_df["Timestamp"] - merged_df["Timestamp"].min()) / 1e9
+        merged_df.loc[:, "Time (s)"] = merged_df["Start Time (s)"].astype(int)
         rps_per_second = merged_df.groupby(["Cluster", "Time (s)"]).size()
-        merged_df["RPS"] = merged_df["Time (s)"].map(rps_per_second)
+        merged_df.loc[:, "RPS"] = merged_df["Time (s)"].map(rps_per_second)
 
         aggregated = merged_df.groupby(["Time (s)"]).agg(
             RPS=("Time (s)", "count"),
@@ -216,7 +247,7 @@ def plot_latency_cdf(merged_df_list, input_dir):
     plt.grid()
     plt.legend(loc="lower right", fontsize=14)
     plt.xlim(left=0)
-    plt.xlim(right=1000)
+    # plt.xlim(right=1000)
     print(f"cropped x-axis to 0-1000 ms")
     plt.ylim(bottom=0, top=1.01)
     plt.tight_layout()
@@ -230,31 +261,21 @@ def plot_latency_cdf(merged_df_list, input_dir):
     print("*" * 30)
 
 if __name__ == "__main__":
-    # input_dir = "/users/gangmuk/projects/client/gangmuk-test/exp-checkoutcart/bg30/SLATE-with-jumping-global-13/"
-    # or
-    # input_dir = "/users/gangmuk/projects/client/gangmuk-test/exp-checkoutcart/bg30"
-
     input_dir = sys.argv[1]
     if not os.path.isdir(input_dir):
         print(f"Error: {input_dir} is not a valid directory.")
         sys.exit(1)
-
-    ts = time.time()
-    convert_binaries_to_csv_parallel(input_dir)
-    print(f"parallel encode_binary_to_csv: {int(time.time() - ts)}")
-
-    ts = time.time()
     merged_df_list = {}
     for subdir in os.listdir(input_dir):
         subdir_path = os.path.join(input_dir, subdir)
         print(f"input_dir: {input_dir}")
         print(f"subdir_path: {subdir_path}")
         if os.path.isdir(subdir_path):
+            convert_binaries_to_csv_parallel(subdir_path)
             merged_df = load_and_merge_csvs_parallel(subdir_path)
             plot_latency_and_load(merged_df, subdir_path, per_cluster=False)
             temp = subdir_path.split("/")[-1]
             merged_df_list[temp] = merged_df
-    
     
     # plot_all_latency_and_load(merged_df, subdir_path, per_cluster=False)
     plot_latency_cdf(merged_df_list, input_dir)

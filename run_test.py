@@ -492,20 +492,26 @@ def main():
     rps_df = pd.read_csv(args.rps_file, header=None, names=["request_type", "rps"])
     rps_multiplied = 3
     rps_df["rps"] = rps_df["rps"] * rps_multiplied
+    unique_request_types = rps_df["request_type"].unique()
+    new_rows = pd.DataFrame({"request_type": unique_request_types, "rps": 50})
+    rps_df = pd.concat([new_rows, rps_df], ignore_index=True)
     rps_df["west_rps"] = rps_df["rps"]
-    rps_df["east_rps"] = rps_df.sample(frac=1)["rps"].reset_index(drop=True)
-    rps_df["central_rps"] = rps_df.sample(frac=1)["rps"].reset_index(drop=True)
-    rps_df["south_rps"] = rps_df.sample(frac=1)["rps"].reset_index(drop=True)
+    rps_df["east_rps"] = rps_df.sample(frac=1, random_state=1111)["rps"].reset_index(drop=True)
+    rps_df["central_rps"] = rps_df.sample(frac=1, random_state=2222)["rps"].reset_index(drop=True)
+    rps_df["south_rps"] = rps_df.sample(frac=1, random_state=3333)["rps"].reset_index(drop=True)
     rps_df["duration"] = args.duration
-    max_rps_threshold = 2000
-    rps_df["west_rps"] = rps_df["west_rps"].apply(lambda x: x if x < max_rps_threshold else max_rps_threshold)
-    rps_df["east_rps"] = rps_df["east_rps"].apply(lambda x: x if x < max_rps_threshold else max_rps_threshold)
-    rps_df["central_rps"] = rps_df["central_rps"].apply(lambda x: x if x < max_rps_threshold else max_rps_threshold)
-    rps_df["south_rps"] = rps_df["south_rps"].apply(lambda x: x if x < max_rps_threshold else max_rps_threshold)
     rps_df["total_rps"] = rps_df["west_rps"] + rps_df["east_rps"] + rps_df["central_rps"] + rps_df["south_rps"]
+    max_rps = 3000
+    exceeds_limit = rps_df["total_rps"] > max_rps
+    scale_factor = np.where(exceeds_limit, max_rps / rps_df["total_rps"], 1.0)
+    rps_df["west_rps"] = (rps_df["west_rps"] * scale_factor).round().astype(int)
+    rps_df["east_rps"] = (rps_df["east_rps"] * scale_factor + 10).round().astype(int)
+    rps_df["central_rps"] = (rps_df["central_rps"] * scale_factor + 30).round().astype(int)
+    rps_df["south_rps"] = (rps_df["south_rps"] * scale_factor + 50).round().astype(int)
+    rps_df["total_rps"] = (rps_df["west_rps"] + rps_df["east_rps"] + rps_df["central_rps"] + rps_df["south_rps"])
     
-    rps_df.to_csv(f"rps.csv", index=False)
-    
+    rps_df.to_csv("rps.csv")
+
     igw_host = utils.run_command("kubectl get nodes | grep 'node5' | awk '{print $1}'")[1]
     igw_nodeport = utils.run_command("kubectl get svc istio-ingressgateway -n istio-system -o=json | jq '.spec.ports[] | select(.name==\"http2\") | .nodePort'")[1]
     experiment_endpoint = f"http://{igw_host}:{igw_nodeport}"
@@ -527,7 +533,8 @@ def main():
     # south_rps_str = ",".join(map(str, south_rps))
     # experiment_name = f"{args.req_type}-W{west_rps_str}-E{east_rps_str}-C{central_rps_str}-S{south_rps_str}"
     
-    experiment_name = f"exp-{','.join(rps_df['request_type'].unique())}"
+    temp = args.rps_file.split("/")[-1].split(".")[0]
+    experiment_name = f"{temp}-{','.join(rps_df['request_type'].unique())}"
     experiment.set_name(experiment_name)
     experiment_list.append(experiment)
     #### Four clusters
@@ -601,11 +608,11 @@ def main():
                     inter_cluster_latency[src_node][dst_node] = region_latencies[src_region][dst_region]
     pprint(inter_cluster_latency)
     # utils.pkill_background_noise(node_dict)
+    
     if mode == "runtime":
         utils.delete_tc_rule_in_client(network_interface, node_dict)
         if mode == "runtime":
             utils.apply_all_tc_rule(network_interface, inter_cluster_latency, node_dict)
-            # a=1
         else:
             print("Skip apply_all_tc_rule in profile mode")
 
@@ -636,6 +643,7 @@ def main():
             utils.check_all_pods_are_ready()
             output_dir = utils.create_dir(output_dir)
             print(f"**** output_dir: {output_dir}")
+            rps_df.to_csv(f"{output_dir}/workload.csv", index=False)
             utils.create_dir(f"{output_dir}/resource_alloc")
             utils.create_dir(f"{output_dir}/resource_usage")
             for workload in experiment.workloads:
@@ -673,12 +681,9 @@ def main():
             # start_node_cpu_monitoring(region_to_node, sum(workload.duration), f"{output_dir}/node_cpu_util.pdf")
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 future_list = list()
-                run_idx = 0
                 for workload in experiment.workloads:
-                    future_list.append(executor.submit(utils.run_vegeta, workload, output_dir, run_idx))
+                    future_list.append(executor.submit(utils.run_vegeta, workload, output_dir))
                     # future_list.append(executor.submit(utils.run_newer_generation_client, workload, output_dir))
-                    time.sleep(0.1)
-                    run_idx += 1
                 for future in concurrent.futures.as_completed(future_list):
                     print(future.result())
             print("All clients have completed.")
@@ -703,7 +708,7 @@ def main():
                 utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
             elif mode == "runtime":
                 if "WATERFALL" in routing_rule or "SLATE" in routing_rule:
-                    other_file_list = ["coefficient.csv", "routing_history.csv"] # "constraint.csv", "variable.csv", "network_df.csv", "compute_df.csv"
+                    other_file_list = ["coefficient.csv", "routing_history.csv", "constraint.csv", "variable.csv", "network_df.csv", "compute_df.csv"]
                     for file in other_file_list:
                         src_in_pod = f"/app/{file}"
                         dst_in_host = f"{output_dir}/{routing_rule}-{file}"
