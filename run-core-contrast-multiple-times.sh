@@ -1,12 +1,13 @@
 #!/bin/bash
 
 
-python run_corecontrast.py 30 corecontrast-test-take22
-python run_corecontrast.py 30 corecontrast-test-take23
-python run_corecontrast.py 30 corecontrast-test-take24
-python run_corecontrast.py 30 corecontrast-test-take25
-python run_corecontrast.py 30 corecontrast-test-take26
-python run_corecontrast.py 30 corecontrast-test-take27
-python run_corecontrast.py 30 corecontrast-test-take28
-python run_corecontrast.py 30 corecontrast-test-take29
-python run_corecontrast.py 30 corecontrast-test-take30
+python run_corecontrast.py 30 corecontrast-test-take50
+python run_corecontrast.py 30 corecontrast-test-take51
+python run_corecontrast.py 30 corecontrast-test-take52
+python run_corecontrast.py 30 corecontrast-test-take53
+python run_corecontrast.py 30 corecontrast-test-take54
+python run_corecontrast.py 30 corecontrast-test-take55
+python run_corecontrast.py 30 corecontrast-test-take56
+python run_corecontrast.py 30 corecontrast-test-take57
+python run_corecontrast.py 30 corecontrast-test-take58
+python run_corecontrast.py 30 corecontrast-test-take59

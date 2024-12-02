@@ -46,6 +46,7 @@ def cleanup_on_crash():
     print("Cleaning up resources...")
     utils.delete_tc_rule_in_client(network_interface, node_dict)
     utils.pkill_background_noise(node_dict)
+    utils.restart_deploy(deploy=["slate-controller"])
     
 # Signal handler
 def signal_handler(signum, frame):
@@ -403,8 +404,8 @@ def main():
     # routing_rule_list = ["LOCAL"]
     # routing_rule_list = ["SLATE-without-jumping", "SLATE-with-jumping-global", "SLATE-with-jumping-local"]
     # routing_rule_list = ["SLATE-without-jumping"]
-    # routing_rule_list = ["SLATE-with-jumping-global", "SLATE-without-jumping"]
-    routing_rule_list = ["SLATE-with-jumping-global"]
+    routing_rule_list = ["SLATE-with-jumping-global", "SLATE-without-jumping"]
+    # routing_rule_list = ["SLATE-with-jumping-global"]
 
     # routing_rule_list = ["WATERFALL2"]
     
@@ -442,14 +443,24 @@ def main():
 
     workloads = { 
         "w50": {
-            "west": {
-                "singlecore": [(0, 600)],
-                "multicore": [(0, 400)],
+            # "west": {
+            #     "singlecore": [(0, 200)],
+            #     "multicore": [(0, 400)],
+            # },
+            # "east": {
+            #     "singlecore": [(0, 200)],
+            #     "multicore": [(0, 400)],
+            # },
+            
+             "west": {
+                "singlecore": [(0, 200)],
+                "multicore": [(0, 800)],
             },
             "east": {
-                "singlecore": [(0, 25)],
-                "multicore": [(0, 700)],
+                "singlecore": [(0, 200)],
+                "multicore": [(0, 400)],
             },
+            
             # "central": {
             #     "singlecore": [(0, 50)],
             #     "multicore": [(0, 200)],
@@ -477,7 +488,7 @@ def main():
 
     for name, w in workloads.items():
         hillclimb_interval = 30
-        experiment_dur = 60*20
+        experiment_dur = 60*5
         # actual normalization: 4
         # CPU-based normalization: 1/4
         multicore_in_singlecore = 1/4
@@ -616,7 +627,6 @@ def main():
     CONFIG["load_coef_flag"] = 1
     
     
-    utils.restart_deploy(deploy=["slate-controller"])
     
     # utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-west-1"])
     
@@ -626,7 +636,7 @@ def main():
             output_dir = f"{sys_arg_dir_name}/{experiment.name}/{routing_rule}"
             utils.start_background_noise(node_dict, CONFIG['background_noise'], victimize_node="node1", victimize_cpu=CONFIG['background_noise'])
             update_wasm_env_var("default", "slate-wasm-plugin", "TRACING_HASH_MOD", str(experiment.hash_mod))
-            utils.restart_deploy(deploy=["slate-controller"])
+            # utils.restart_deploy(deploy=["slate-controller"])
             # utils.restart_deploy(deploy=["corecontrast-us-west-1", "sslateingress-us-west-1", "corecontrast-us-east-1", "sslateingress-us-east-1"])
             update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-central-1")
             update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-south-1")
@@ -721,8 +731,11 @@ def main():
 
             '''end of one set of experiment'''
             
+            utils.restart_deploy(deploy=["slate-controller"])
+            
             ## restart slate-controller            
             ## add to cart restart
+            
             # utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=["sslateingress", "frontend", "productcatalogservice", "cartservice"], regions=["us-west-1"])
             
             ## checkout cart restart
