@@ -26,6 +26,7 @@ import utils as utils
 import argparse
 import csv
 import random
+import pandas as pd
 
 random.seed(1234)
 
@@ -33,6 +34,7 @@ CLOUDLAB_CONFIG_XML="/users/gangmuk/projects/slate-benchmark/config.xml"
 network_interface = "eno1"
 
 def start_node_cpu_monitoring(region_to_node, duration, filename, username="gangmuk"):
+    print("Starting node CPU monitoring...")
     # Run the collect_cpu_utilization function in a separate thread
     monitoring_thread = threading.Thread(
         target=collect_cpu_utilization, args=(region_to_node, username, duration, filename)
@@ -407,11 +409,52 @@ def parse_inject_delay(inject_delay_str):
         result.append((int(parts[0]), int(parts[1]), parts[2].strip("'\"")))
     return result
 
+## smoothing rps
+def smooth_rps(df, window):
+    df["west_rps"] = df["west_rps"].rolling(window=window, min_periods=1).mean().round().astype(int)
+    df["east_rps"] = df["east_rps"].rolling(window=window, min_periods=1).mean().round().astype(int)
+    df["central_rps"] = df["central_rps"].rolling(window=window, min_periods=1).mean().round().astype(int)
+    df["south_rps"] = df["south_rps"].rolling(window=window, min_periods=1).mean().round().astype(int)
+    return df
+
+def smooth_rps_with_duration(df, max_gap=100):
+    new_rows = []
+    for i in range(len(df) - 1):
+        current_row = df.iloc[i].copy()
+        next_row = df.iloc[i + 1].copy()
+        total_rps_diff = next_row["total_rps"] - current_row["total_rps"]
+        steps = abs(total_rps_diff) // max_gap
+        
+        if steps > 0:
+            step_size = max_gap if total_rps_diff > 0 else -max_gap
+            duration_step = math.floor(current_row["duration"] / (steps + 1))
+            remaining_duration = current_row["duration"] - (duration_step * steps)
+            
+            for step in range(steps):
+                intermediate_row = current_row.copy()
+                factor = (step + 1) / (steps + 1)
+                intermediate_row["west_rps"] = round(current_row["west_rps"] + (next_row["west_rps"] - current_row["west_rps"]) * factor)
+                intermediate_row["east_rps"] = round(current_row["east_rps"] + (next_row["east_rps"] - current_row["east_rps"]) * factor)
+                intermediate_row["central_rps"] = round(current_row["central_rps"] + (next_row["central_rps"] - current_row["central_rps"]) * factor)
+                intermediate_row["south_rps"] = round(current_row["south_rps"] + (next_row["south_rps"] - current_row["south_rps"]) * factor)
+                intermediate_row["total_rps"] = intermediate_row["west_rps"] + intermediate_row["east_rps"] + intermediate_row["central_rps"] + intermediate_row["south_rps"]
+                intermediate_row["duration"] = duration_step
+                new_rows.append(intermediate_row)
+            
+            # Assign remaining duration to the last step
+            current_row["duration"] = remaining_duration
+        
+        new_rows.append(current_row)
+    
+    new_rows.append(df.iloc[-1])  # Add the last row
+    return pd.DataFrame(new_rows)
+
 
 def main():
     argparser = argparse.ArgumentParser(description="Run a benchmark experiment")
     argparser.add_argument("--dir_name", type=str, help="Directory name to store the experiment results", required=True)
     argparser.add_argument("--background_noise", type=int, default=0,help="Background noise level (in %)")
+    argparser.add_argument("--victim_background_noise", type=int, default=0,help="Background noise level (in %)")
     argparser.add_argument("--degree", type=int, default=2, help="degree of the polynomial")
     argparser.add_argument("--mode", type=str, help="Mode of operation (profile or runtime)", required=True)
     argparser.add_argument("--routing_rule", type=str, default="SLATE-with-jumping-global", help="Routing rule to apply", choices=["LOCAL", "SLATE-without-jumping", "SLATE-with-jumping-global", "SLATE-with-jumping-global-continuous-profiling", "SLATE-with-jumping-local", "WATERFALL2"])
@@ -443,6 +486,7 @@ def main():
     print(f"Resource limit set to {limit} for all deployments in the default namespace.")
     CONFIG = {}
     CONFIG['background_noise'] =  args.background_noise
+    CONFIG['victim_background_noise'] = args.victim_background_noise
     CONFIG['traffic_segmentation'] = 1
     '''
     # Three replicas
@@ -463,7 +507,7 @@ def main():
     # waterfall_capacity_set = {700, 1000, 1500} # assuming workload is mix of different request types
     waterfall_capacity_set = {700}
     # waterfall_capacity_set = {700, 1000}
-    mode = args.mode
+    
     routing_rule_list = [args.routing_rule]
     onlineboutique_path = {
         "addtocart": "/cart?product_id=OLJCESPC7Z&quantity=5",
@@ -488,30 +532,61 @@ def main():
     if not os.path.exists(args.rps_file):
         print(f"args.rps_file: {args.rps_file} does not exist")
         assert False
-    import pandas as pd
-    rps_df = pd.read_csv(args.rps_file, header=None, names=["request_type", "rps"])
-    rps_multiplied = 3
-    rps_df["rps"] = rps_df["rps"] * rps_multiplied
-    unique_request_types = rps_df["request_type"].unique()
-    new_rows = pd.DataFrame({"request_type": unique_request_types, "rps": 50})
-    rps_df = pd.concat([new_rows, rps_df], ignore_index=True)
-    rps_df["west_rps"] = rps_df["rps"]
-    rps_df["east_rps"] = rps_df.sample(frac=1, random_state=1111)["rps"].reset_index(drop=True)
-    rps_df["central_rps"] = rps_df.sample(frac=1, random_state=2222)["rps"].reset_index(drop=True)
-    rps_df["south_rps"] = rps_df.sample(frac=1, random_state=3333)["rps"].reset_index(drop=True)
-    rps_df["duration"] = args.duration
-    rps_df["total_rps"] = rps_df["west_rps"] + rps_df["east_rps"] + rps_df["central_rps"] + rps_df["south_rps"]
-    max_rps = 3000
-    exceeds_limit = rps_df["total_rps"] > max_rps
-    scale_factor = np.where(exceeds_limit, max_rps / rps_df["total_rps"], 1.0)
-    rps_df["west_rps"] = (rps_df["west_rps"] * scale_factor).round().astype(int)
-    rps_df["east_rps"] = (rps_df["east_rps"] * scale_factor + 10).round().astype(int)
-    rps_df["central_rps"] = (rps_df["central_rps"] * scale_factor + 30).round().astype(int)
-    rps_df["south_rps"] = (rps_df["south_rps"] * scale_factor + 50).round().astype(int)
-    rps_df["total_rps"] = (rps_df["west_rps"] + rps_df["east_rps"] + rps_df["central_rps"] + rps_df["south_rps"])
+    # rps_df = pd.read_csv(args.rps_file, header=None, names=["request_type", "rps"])
+    # if args.mode == "runtime":
+    #     rps_multiplied = 6
+    #     rps_df["rps"] = rps_df["rps"] * rps_multiplied
+    #     rps_df["west_rps"] = rps_df["rps"].sample(frac=1, random_state=0).values
+    #     rps_df["east_rps"] = rps_df["rps"].sample(frac=1, random_state=1).values
+    #     rps_df["central_rps"] = rps_df["rps"].sample(frac=1, random_state=2).values
+    #     rps_df["south_rps"] = rps_df["rps"].sample(frac=1, random_state=4).values
+    #     rps_df["duration"] = args.duration  # Set duration
+    #     rps_df.drop(columns=["rps"], inplace=True)
+    # else:
+    #     rps_df["west_rps"] = rps_df["rps"]
+    #     rps_df["east_rps"] = 0
+    #     rps_df["central_rps"] = 0
+    #     rps_df["south_rps"] = 0
+    #     rps_df["duration"] = args.duration
     
+    # if args.mode == "runtime":
+    #     unique_request_types = rps_df["request_type"].unique()
+    #     new_rows = pd.DataFrame({"west_rps": 50, "east_rps":50, "central_rps":50, "south_rps":50, "request_type": unique_request_types, "duration": 60})
+    #     rps_df = pd.concat([new_rows, rps_df], ignore_index=True)
+        
+    #     rps_df["total_rps"] = rps_df["west_rps"] + rps_df["east_rps"] + rps_df["central_rps"] + rps_df["south_rps"]
+    #     max_rps = 7000
+    #     for index, row in rps_df.iterrows():
+    #         if row["total_rps"] > max_rps:
+    #             rps_df.at[index, "west_rps"] = row["west_rps"] * max_rps / row["total_rps"]
+    #             rps_df.at[index, "east_rps"] = row["east_rps"] * max_rps / row["total_rps"]
+    #             rps_df.at[index, "central_rps"] = row["central_rps"] * max_rps / row["total_rps"]
+    #             rps_df.at[index, "south_rps"] = row["south_rps"] * max_rps / row["total_rps"]
+    #     exceeds_limit = rps_df["total_rps"] > max_rps
+    #     scale_factor = np.where(exceeds_limit, max_rps / rps_df["total_rps"], 1.0)
+    #     print(f"scale_factor: {scale_factor}")
+    #     rps_df["west_rps"] = (rps_df["west_rps"] * scale_factor).round().astype(int)
+    #     rps_df["east_rps"] = (rps_df["east_rps"] * scale_factor).round().astype(int)
+    #     rps_df["central_rps"] = (rps_df["central_rps"] * scale_factor).round().astype(int)
+    #     rps_df["south_rps"] = (rps_df["south_rps"] * scale_factor).round().astype(int)
+    #     # rps_df = smooth_rps(rps_df, window=3)
+    #     rps_df["total_rps"] = (rps_df["west_rps"] + rps_df["east_rps"] + rps_df["central_rps"] + rps_df["south_rps"])
+        
+    # ##############################################
+    # ##### adit
+    # # rps_df["west_rps"] = 300
+    # # rps_df["east_rps"] = 300
+    # # rps_df["central_rps"] = 300
+    # # rps_df["south_rps"] = 300
+    # # rps_df["duration"] = 60
+    # ##############################################
+    
+    
+    rps_df = pd.read_csv("rps.csv")
+    if "total_rps" not in rps_df.columns:
+        rps_df["total_rps"] = rps_df["west_rps"] + rps_df["east_rps"] + rps_df["central_rps"] + rps_df["south_rps"]
+    # rps_df = smooth_rps_with_duration(rps_df, max_gap=200)
     rps_df.to_csv("rps.csv")
-
     igw_host = utils.run_command("kubectl get nodes | grep 'node5' | awk '{print $1}'")[1]
     igw_nodeport = utils.run_command("kubectl get svc istio-ingressgateway -n istio-system -o=json | jq '.spec.ports[] | select(.name==\"http2\") | .nodePort'")[1]
     experiment_endpoint = f"http://{igw_host}:{igw_nodeport}"
@@ -609,14 +684,13 @@ def main():
     pprint(inter_cluster_latency)
     # utils.pkill_background_noise(node_dict)
     
-    if mode == "runtime":
+    if args.mode == "runtime":
         utils.delete_tc_rule_in_client(network_interface, node_dict)
-        if mode == "runtime":
-            utils.apply_all_tc_rule(network_interface, inter_cluster_latency, node_dict)
-        else:
-            print("Skip apply_all_tc_rule in profile mode")
+        utils.apply_all_tc_rule(network_interface, inter_cluster_latency, node_dict)
+    else:
+        print("Skip apply_all_tc_rule in profile args.mode")
 
-    CONFIG["mode"] = mode
+    CONFIG["mode"] = args.mode
     for src_node in inter_cluster_latency:
         for dst_node in inter_cluster_latency[src_node]:
             src_region = node_to_region[src_node]
@@ -633,12 +707,11 @@ def main():
         for routing_rule in routing_rule_list:
             output_dir = f"{args.dir_name}/{experiment.name}/bg{args.background_noise}/{routing_rule}"
             if args.background_noise > 0:
-                utils.start_background_noise(node_dict, args.background_noise, victimize_node="node1", victimize_cpu=args.background_noise)
-
+                utils.start_background_noise(node_dict, args.background_noise, victimize_node="node1", victimize_cpu=args.victim_background_noise)
                 ## Additional noisy neighbor
                 # call_with_delay(30, utils.start_background_noise, node_dict, 0, victimize_node="node1", victimize_cpu=20)
             
-            print(f"mode: {mode}")
+            print(f"mode: {args.mode}")
             print(f"routing_rule: {routing_rule}")
             utils.check_all_pods_are_ready()
             output_dir = utils.create_dir(output_dir)
@@ -662,10 +735,10 @@ def main():
             utils.file_write_env_file(CONFIG)
             utils.file_write_config_file(CONFIG, f"{output_dir}/experiment-config.txt")
             utils.kubectl_cp_from_host_to_slate_controller_pod("env.txt", "/app/env.txt")
-            if mode == "runtime":
+            if args.mode == "runtime":
                 utils.kubectl_cp_from_host_to_slate_controller_pod(args.coefficient_file, "/app/coef.csv")
                 utils.kubectl_cp_from_host_to_slate_controller_pod(args.e2e_coef_file, "/app/e2e-coef.csv")
-                utils.kubectl_cp_from_host_to_slate_controller_pod(args.slatelog, "/app/trace.csv")
+            utils.kubectl_cp_from_host_to_slate_controller_pod(args.slatelog, "/app/trace.csv")
                 
             print(f"starting experiment at {datetime.now()}, expected to finish at {datetime.now() + timedelta(seconds=sum(workload.duration))}")
             
@@ -673,12 +746,14 @@ def main():
             # return
             # time.sleep(120)
             
-            if mode == "runtime":
-                for (point, delay, targetregion) in inject_delay:
-                    print(f"update_virtualservice_latency_k8s, will inject delay: {delay}ms in {point} seconds to {targetregion}")
-                    call_with_delay(point, update_virtualservice_latency_k8s, "shippingservice-vs", "default", f"{delay}ms", targetregion)
-                    print(f"update_virtualservice_latency_k8s, Delay injected: {delay}ms at {point} seconds")
-            # start_node_cpu_monitoring(region_to_node, sum(workload.duration), f"{output_dir}/node_cpu_util.pdf")
+            if args.mode == "runtime":
+                # for (point, delay, targetregion) in inject_delay:
+                #     if int(delay) > 0:
+                #         print(f"update_virtualservice_latency_k8s, will inject delay: {delay}ms in {point} seconds to {targetregion}")
+                #         call_with_delay(point, update_virtualservice_latency_k8s, "checkoutservice-vs", "default", f"{delay}ms", targetregion)
+                #         print(f"update_virtualservice_latency_k8s, Delay injected: {delay}ms at {point} seconds")
+                print("GANGMUK: manually injected...")
+            start_node_cpu_monitoring(region_to_node, sum(workload.duration), f"{output_dir}/node_cpu_util.pdf")
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 future_list = list()
                 for workload in experiment.workloads:
@@ -702,11 +777,18 @@ def main():
             os.makedirs(dst_directory_in_host, exist_ok=True)
             utils.kubectl_cp_from_slate_controller_to_host(src_directory_in_pod, dst_directory_in_host)    
             
-            if mode == "profile":
+            if args.mode == "profile":
                 src_in_pod = "/app/trace_string.csv"
                 dst_in_host = f"{output_dir}/trace.slatelog"
                 utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
-            elif mode == "runtime":
+                src_in_pod = "/app/global_stitched_df.csv"
+                dst_in_host = f"{output_dir}/global_stitched_df.csv"
+                utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
+                src_in_pod = "/app/coefficient.csv"
+                dst_in_host = f"{output_dir}/coefficient.csv"
+                utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
+                
+            elif args.mode == "runtime":
                 if "WATERFALL" in routing_rule or "SLATE" in routing_rule:
                     other_file_list = ["coefficient.csv", "routing_history.csv", "constraint.csv", "variable.csv", "network_df.csv", "compute_df.csv"]
                     for file in other_file_list:
@@ -719,19 +801,39 @@ def main():
                         src_in_pod = f"/app/{file}"
                         dst_in_host = f"{output_dir}/{file}"
                         utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
-                        if f"{output_dir}/jumping_latency.csv" in os.listdir(output_dir):
-                            utils.run_command(f"python {os.getcwd()}/plot_script/plot_gc_jumping.py {output_dir}/jumping_routing_history.csv {output_dir}/jumping_latency.csv {output_dir}/central-ruleset-jumping.pdf {output_dir}/south-ruleset-jumping.pdf",required=False)
-                        if f"{output_dir}/region_jumping_latency.csv" in os.listdir(output_dir):
-                            utils.run_command(f"python {os.getcwd()}/plot_script/plot_region_latency.py {output_dir}/region_jumping_latency.csv {output_dir}/region_jumping_latency.pdf",required=False)
-                        else:
-                            print(f"python {os.getcwd()}/plot_script/plot_region_latency")
             else:
-                print(f"mode: {mode} is not supported")
+                print(f"args.mode: {args.mode} is not supported")
                 assert False
+                
+            src_in_pod = "/app/df_incomplete_traces-1.csv"
+            dst_in_host = f"{output_dir}/df_incomplete_traces-1.csv"
+            utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
+            src_in_pod = "/app/df_incomplete_traces-2.csv"
+            dst_in_host = f"{output_dir}/df_incomplete_traces-2.csv"
+            utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
+            src_in_pod = "/app/df_incomplete_traces-2.csv"
+            dst_in_host = f"{output_dir}/df_new_traces.csv"
+            utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
+            src_in_pod = "/app/body.csv"
+            dst_in_host = f"{output_dir}/body.csv"
+            utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
+            src_in_pod = "/app/temp.csv"
+            dst_in_host = f"{output_dir}/temp.csv"
+            utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
+            
+            
             # if routing_rule.startswith("SLATE-with-jumping") and os.path.exists(f"{output_dir}/SLATE-with-jumping-global-jumping_routing_history.csv"):
             utils.run_command(f"python {os.getcwd()}/plot_script/fast_plot.py --data_dir {output_dir}", required=False)
             utils.run_command(f"python {os.getcwd()}/plot_script/plot-vegeta.py {output_dir}", required=False)
-            
+            try:
+                if not os.path.exists(f"{output_dir}/routing_rule_plots"):
+                    os.makedirs(f"{output_dir}/routing_rule_plots")
+            except:
+                print("except. anyway mkdir routing_rule_plots")
+                os.makedirs(f"{output_dir}/routing_rule_plots")
+                pass
+            utils.run_command(f"python {os.getcwd()}/plot_script/plot_gc_jumping.py {output_dir}/jumping_routing_history.csv {output_dir}/jumping_latency.csv {output_dir}/routing_rule_plots",required=False)
+            utils.run_command(f"python {os.getcwd()}/plot_script/plot_region_latency.py {output_dir}/region_jumping_latency.csv {output_dir}/region_jumping_latency.pdf",required=False)
             # utils.pkill_background_noise(node_dict)
             # savelogs(output_dir, services=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-central-1"])
             save_controller_logs(output_dir)

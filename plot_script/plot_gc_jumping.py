@@ -9,8 +9,6 @@ def plot_weight_vs_counter(df, latency_df, output_pdf, src_cid, request_type, ti
     """
     # Filter the DataFrame based on the specified src_cid and request_type
     filtered_df = df[
-        (df['src_svc'] == 'sslateingress') &
-        (df['dst_svc'] == 'frontend') &
         (df['src_cid'] == src_cid) &
         (df['request_type'] == request_type)
     ]
@@ -63,10 +61,10 @@ def plot_weight_vs_counter(df, latency_df, output_pdf, src_cid, request_type, ti
     plt.close()
     print(f"Plot saved to {output_pdf}")
 
-def extract_request_type(endpoint):
+def extract_request_type(endpoint, src_svc, dst_svc):
     """
-    Extracts the request type from the endpoint string.
-    Example: 'corecontrast@POST@/singlecore' -> 'post-singlecore'
+    Extracts the request type from the endpoint string, including source and destination services.
+    Example: 'corecontrast@POST@/singlecore' -> 'corecontrast-frontend-post-singlecore'
     """
     try:
         parts = endpoint.split('@')
@@ -74,7 +72,7 @@ def extract_request_type(endpoint):
             return "unknown"
         method = parts[1].lower()
         path = parts[2].strip('/').replace('/', '-')
-        return f"{method}-{path}"
+        return f"{src_svc}-{dst_svc}-{method}-{path}"
     except Exception as e:
         print(f"Error extracting request type from endpoint '{endpoint}': {e}")
         return "unknown"
@@ -111,7 +109,7 @@ def main():
     df.reset_index(drop=True, inplace=True)
 
     # Extract request types from 'dst_endpoint'
-    df['request_type'] = df['dst_endpoint'].apply(extract_request_type)
+    df['request_type'] = df.apply(lambda row: extract_request_type(row['dst_endpoint'], row['src_svc'], row['dst_svc']), axis=1)
 
     # Detect unique regions from 'src_cid'
     regions = df['src_cid'].unique()

@@ -44,8 +44,8 @@ profiling = True
 trace_str = list()
 # x_feature = "num_inflight_dict"
 x_feature = "rps_dict"
-target_y = "xt" # exclusive time
-# target_y = "rt" # response time
+# target_y = "xt" # exclusive time
+target_y = "rt" # response time
 
 '''
 cluster_to_cid and cid_to_cluster should be deprecated
@@ -71,7 +71,6 @@ def fit_mm1_model(data, y_col_name, svc_name, ep_str, cid, directory):
     df['utilization-'+x_col] = df['utilization-'+x_col] / df['utilization-'+x_col].max()
     u_ = df['utilization-'+x_col]
     y_ = df[y_col_name]
-    print(f"len(u): {len(u_)}, len(y_): {len(y_)}")
     if np.isinf(u_).any() or np.isnan(u_).any():
         print("Infinite or NaN values found in 'u'")
     # plt.scatter(u_, y_, color='blue', alpha=0.1, label='Data')
@@ -84,17 +83,13 @@ def fit_mm1_model(data, y_col_name, svc_name, ep_str, cid, directory):
         amplified_a = a * 1
         return (amplified_a) / (1*constant - u)+b
     popt, pcov = curve_fit(mm1_model, u_, y_, maxfev=10000)
-    print(f"popt = {popt}")
     # u_plot = np.linspace(min(u_), max(u_)*constant * 0.99, 100)  # Avoid division by zero at u=1
     u_plot = np.linspace(min(u_), max(u_)*constant, 100)  # Avoid division by zero at u=1
     y_plot = mm1_model(u_plot, *popt)
-    # print(f"u_plot: {u_plot}")
-    # print(f"y_plot: {y_plot}")
     norm_u_plot = u_plot*max_rps
     #plt.plot(norm_u_plot, y_plot, 'r-', label=f'MM1 Fit: $\\frac{{a}}{{c-u}}+b$,a={popt[0]}, c={u_.max()*constant}, b={popt[1]}')
     plt.plot(norm_u_plot, y_plot, 'r-', label=f'MM1 Fit: $\\frac{{a}}{{c-u}}+b$\n$a={popt[0]:.2f}, c={(u_.max()*constant):.2f}, b={popt[1]:.2f}$')
     # plt.plot(u_plot, y_plot, 'r-', label=f'MM1 Fit: $\\frac{{a}}{{1-u}}$, a={popt[0]:.2f}')
-    plt.ylim(0, 500)
     plt.xlabel('Utilization (u_)')
     plt.ylabel(y_col_name + " ms")
     plt.title(f'{ep_str} in {cid}')
@@ -104,12 +99,62 @@ def fit_mm1_model(data, y_col_name, svc_name, ep_str, cid, directory):
     plt.savefig(pdf_fn)
     plt.show()
     # Output the model parameters and where the plot was saved
-    print(f"Model parameters: a = {popt}")
-    print(f"Output plot saved as: {pdf_fn}")
     # Return model parameters as a dictionary if needed
     return {'a': popt[0]}
 
 
+def fit_polynomial_regression_with_fixed_intercept(data, y_col_name, svc_name, ep_str, cid, directory, degree):
+    global target_y
+    degree_list = [degree]
+    plt.figure()
+    df = pd.DataFrame(data)
+    x_colnames = [x for x in df.columns if x != y_col_name]
+    X = df[x_colnames].values  # Convert to numpy array for easier manipulation
+    y = df[y_col_name].values  # Convert to numpy array for consistency
+
+    # Set the fixed intercept
+    fixed_intercept = 1
+
+    # Adjust y to account for the fixed intercept
+    y_adjusted = y - fixed_intercept
+
+    plt.scatter(X, y, color='red', alpha=0.1, label='Data')
+
+    for degree in degree_list:
+        # Prepare polynomial features without intercept
+        X_transformed = X**degree  # Exclude the intercept term in X_transformed
+
+        # Fit the model without intercept
+        model = LinearRegression(fit_intercept=False)
+        model.fit(X_transformed, y_adjusted)  # Fit adjusted y
+
+        # Display coefficients (only slope(s))
+        feature_names = x_colnames.copy()
+        print(f"svc_name,{svc_name}, model.coef_, {model.coef_}")
+        coefficients = pd.Series(model.coef_, index=feature_names)
+
+        # Plot predictions
+        X_plot = np.linspace(X.min(), X.max(), 100).reshape(-1, 1)
+        X_plot_transformed = X_plot**degree
+        y_plot = model.predict(X_plot_transformed) + fixed_intercept  # Add the fixed intercept back
+
+        label = f'${model.coef_[0]} \cdot x^{degree} + {fixed_intercept}$'
+        plt.plot(X_plot, y_plot, linewidth=1, label=label)
+    
+    # plt.ylim(0, 500)
+    plt.ylim(0, max(y)*1.1)
+    plt.xlabel(x_colnames[0])  # Assuming only one feature for X
+    plt.ylabel(f"{y_col_name} (ms)")
+    plt.title(f'{ep_str} in {cid} fixed intercept')
+    plt.legend()
+
+    pdf_fn = f"{directory}/latency-{svc_name}-poly-d{degree}-{target_y}-fixedintercept.pdf"
+    plt.savefig(pdf_fn)
+    print(f"**output: {pdf_fn}")
+    plt.show()
+
+    print(f"model coef coefficients, {coefficients}")
+    return coefficients.to_dict()
 
 def fit_polynomial_regression(data, y_col_name, svc_name, ep_str, cid, directory, degree):
     global target_y
@@ -125,7 +170,6 @@ def fit_polynomial_regression(data, y_col_name, svc_name, ep_str, cid, directory
         model = LinearRegression(fit_intercept=False)
         model.fit(X_transformed, y)
         feature_names = x_colnames.copy() + ['intercept']
-        print(f"svc_name,{svc_name}, model.coef_, {model.coef_}")
         coefficients = pd.Series(model.coef_, index=feature_names)
         X_plot = np.linspace(X.min(), X.max(), 100).reshape(-1, 1)
         X_plot_transformed = np.hstack((X_plot**degree, np.ones(X_plot.shape)))
@@ -133,18 +177,104 @@ def fit_polynomial_regression(data, y_col_name, svc_name, ep_str, cid, directory
         label = f'${model.coef_[0]} \cdot x^{degree} + {model.coef_[1]}$'
         plt.plot(X_plot, y_plot, linewidth=1, label=label)
         print(f"plt.plot, degree: {degree}")
-    plt.ylim(0, 500)
+    plt.ylim(0, max(y)*1.1)
     plt.xlabel(x_feature)
     plt.ylabel(y_col_name +" ms")
     plt.title(f'{ep_str} in {cid}')
     plt.legend()
     # pdf_fn = f"{directory}/latency-{x_feature}-{svc_name}.pdf"
-    pdf_fn = f"{directory}/latency-{svc_name}-poly-{target_y}.pdf"
+    pdf_fn = f"{directory}/latency-{svc_name}-poly-d{degree}-{target_y}.pdf"
     plt.savefig(pdf_fn)
     print(f"**output: {pdf_fn}")
     plt.show()
-    print(f"model coef coefficients, {coefficients}")
+    # print(f"model coef coefficients, {coefficients}")
     return coefficients.to_dict()
+
+
+
+# def fit_exponential_regression(data, y_col_name, svc_name, ep_str, cid, directory):
+#     global target_y
+#     plt.figure()
+#     df = pd.DataFrame(data)
+#     x_colnames = [x for x in df.columns if x != y_col_name]
+#     X = df[x_colnames].values.flatten()
+#     y = df[y_col_name].values
+#     fixed_intercept = 1
+#     def exponential_func(x, a, b):
+#         return a * np.exp(b * x) + fixed_intercept
+#     params, _ = curve_fit(exponential_func, X, y, maxfev=10000)
+#     a, b = params
+#     plt.scatter(X, y, color='red', alpha=0.1, label='Data')
+#     X_plot = np.linspace(X.min(), X.max(), 100)
+#     y_plot = exponential_func(X_plot, a, b)
+#     plt.plot(X_plot, y_plot, label=f'${a:.2f} \\cdot e^{{{b:.2f} \\cdot x}} + {fixed_intercept}$', linewidth=2)
+#     plt.ylim(0, max(y) * 1.1)
+#     plt.xlabel(x_colnames[0])
+#     plt.ylabel(f"{y_col_name} (ms)")
+#     plt.title(f'{ep_str} in {cid}')
+#     plt.legend()
+#     pdf_fn = f"{directory}/latency-{svc_name}-exp-{target_y}.pdf"
+#     plt.savefig(pdf_fn)
+#     plt.show()
+#     return {'a': a, 'b': b}
+
+
+from scipy.optimize import curve_fit
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def fit_exponential_regression(data, y_col_name, svc_name, ep_str, cid, directory):
+    global target_y
+    plt.figure()
+    df = pd.DataFrame(data)
+    x_colnames = [x for x in df.columns if x != y_col_name]
+    X = df[x_colnames].values.flatten()
+    y = df[y_col_name].values
+
+    # Scale X to [0, 1]
+    X_min, X_max = X.min(), X.max()
+    X_scaled = (X - X_min) / (X_max - X_min)
+
+    fixed_intercept = 1
+
+    def exponential_func(x, a, b):
+        return a * np.exp(np.clip(b * x, -50, 50)) + fixed_intercept
+
+    try:
+        params, _ = curve_fit(
+            exponential_func,
+            X_scaled,
+            y,
+            bounds=([0, 0], [np.inf, np.inf]),  # Bounds for a and b
+            maxfev=10000
+        )
+    except RuntimeError as e:
+        print(f"Curve fitting failed: {e}")
+        return None
+
+    a, b = params
+
+    plt.scatter(X, y, color='red', alpha=0.1, label='Data')
+    X_plot = np.linspace(0, 1, 100)
+    y_plot = exponential_func(X_plot, a, b)
+    plt.plot(
+        X_min + X_plot * (X_max - X_min),
+        y_plot,
+        label=f'${a:.2f} \\cdot e^{{{b:.2f} \\cdot x}} + {fixed_intercept}$',
+        linewidth=2,
+    )
+    plt.ylim(0, max(y) * 1.1)
+    plt.xlabel(x_colnames[0])
+    plt.ylabel(f"{y_col_name} (ms)")
+    plt.title(f'{ep_str} in {cid}')
+    plt.legend()
+    pdf_fn = f"{directory}/latency-{svc_name}-exp-{target_y}.pdf"
+    plt.savefig(pdf_fn)
+    plt.show()
+    return {'a': a, 'b': b}
+
+
 
 
 def train_latency_function_with_trace(model, traces, directory, degree):
@@ -166,7 +296,7 @@ def train_latency_function_with_trace(model, traces, directory, degree):
                 ep_df = cid_svc_df[cid_svc_df["endpoint_str"]==ep_str]
                 # Data preparation: load(X) and latency(y) 
                 data = dict()
-                for index, row in ep_df.iterrows():
+                for _, row in ep_df.iterrows():
                     flag = False
                     for key, val in row[x_feature].items(): # x_feature: rps_dict
                         # key: ep_str, val: rps
@@ -177,13 +307,8 @@ def train_latency_function_with_trace(model, traces, directory, degree):
                     if flag == True:
                         if "latency" not in data:
                             data["latency"] = list()
-                            
                         if len(row[x_feature]) == 1:
                             data["latency"].append(row[target_y])
-                            # if xt:
-                            #     data["latency"].append(row["xt"])
-                            # else:
-                            #     data["latency"].append(row["rt"])
                         else:
                             print(f"ERROR: len(row[{x_feature}]) != 1: {len(row[x_feature])}")
                             print(f"row[{x_feature}]: {row[x_feature]}")
@@ -201,8 +326,11 @@ def train_latency_function_with_trace(model, traces, directory, degree):
                     assert False
                 if model == "poly":
                     coef_dict[svc_name][ep_str] = fit_polynomial_regression(data, "latency", svc_name, ep_str, cid, directory, degree)
+                    # coef_dict[svc_name][ep_str] = fit_polynomial_regression_with_fixed_intercept(data, "latency", svc_name, ep_str, cid, directory, degree)
                 elif model == "mm1":
                     coef_dict[svc_name][ep_str] = fit_mm1_model(data, "latency", svc_name, ep_str, cid, directory)
+                elif model == "exp":
+                    coef_dict[svc_name][ep_str] = fit_exponential_regression(data, "latency", svc_name, ep_str, cid, directory)
                 else:
                     print(f"ERROR: model: {model}")
                     assert False
@@ -409,7 +537,6 @@ if __name__ == "__main__":
     sampled_trace_id = sample(trace_id, sample_size)
     
     sampled_df = df[df['trace_id'].isin(sampled_trace_id)]
-    sampled_df.to_csv("sampled_df.csv")
     print("Output sampled_df.csv")
     
     trace_span_counts = sampled_df.groupby('trace_id').size()
@@ -417,7 +544,6 @@ if __name__ == "__main__":
     print(f"max(trace_span_counts): {max(trace_span_counts)}")
     trace_ids_with_four_spans = trace_span_counts[trace_span_counts == required_num_endpoint].index
     filtered_df = sampled_df[sampled_df['trace_id'].isin(trace_ids_with_four_spans)]
-    filtered_df.to_csv("filtered_df.csv")
     print(f"len(filtered_df): {len(filtered_df)}")
     print("Output filtered_df.csv")
     service_list = filtered_df['svc_name'].unique().tolist()
@@ -440,25 +566,29 @@ if __name__ == "__main__":
         print(f"len(stitched_traces[{cid}]): {len(stitched_traces[cid])}")
     
     stitched_df = tst.trace_to_df(stitched_traces)
-    stitched_df.to_csv(f"stitched_df-{subdir}.csv")
-    print(f"Output stitched_df-{subdir}.csv")
+    
+    """exp"""
+    poly_coef_dict = train_latency_function_with_trace("exp", stitched_traces, directory, degree=None)
+    
 
-    degree = 2 # NOTE
+    """poly"""
+    degree = 2
     poly_coef_dict = train_latency_function_with_trace("poly", stitched_traces, directory, degree)
     print("-"*80)
-    multiplied_by_one_fn = f"{directory}/poly-coef_multiplied_by_one-{subdir}.csv"
+    multiplied_by_one_fn = f"{directory}/poly-d{degree}-{target_y}-coef.csv"
     with open(multiplied_by_one_fn, "w") as f:
         for svc_name in poly_coef_dict:
             for ep_str in poly_coef_dict[svc_name]:
                 for feature in poly_coef_dict[svc_name][ep_str]:
-                    print(f'poly_coef_dict,{svc_name},{ep_str},{feature},{poly_coef_dict[svc_name][ep_str][feature]}')
+                    # print(f'poly_coef_dict,{svc_name},{ep_str},{feature},{poly_coef_dict[svc_name][ep_str][feature]}')
                     f.write(f'{svc_name},{ep_str},{feature},{poly_coef_dict[svc_name][ep_str][feature]}\n')
     print("-"*80)
     print(f"Output: {multiplied_by_one_fn}")
     
+    """mm1"""
     mm1_coef_dict = train_latency_function_with_trace("mm1", stitched_traces, directory, degree=None)
     print("-"*80)
-    multiplied_by_one_fn = f"{directory}/mm1-coef_multiplied_by_one-{subdir}.csv"
+    multiplied_by_one_fn = f"{directory}/mm1-{target_y}-coef.csv"
     with open(multiplied_by_one_fn, "w") as f:
         for svc_name in mm1_coef_dict:
             for ep_str in mm1_coef_dict[svc_name]:
@@ -467,12 +597,6 @@ if __name__ == "__main__":
                     f.write(f'{svc_name},{ep_str},{feature},{mm1_coef_dict[svc_name][ep_str][feature]}\n')
     print("-"*80)
     print(f"Output: {multiplied_by_one_fn}")
-    
-    print("num all trace ", len(df['trace_id'].unique()))
-    print("num sampled trace", len(sampled_df['trace_id'].unique()))
-    print("num filtered trace", len(filtered_df['trace_id'].unique()))
-    print("num stitched trace", len(stitched_df['trace_id'].unique()))
-    
     
     ''' Define how you want to replicate '''
     new_cluster_dict = dict()
@@ -492,7 +616,7 @@ if __name__ == "__main__":
         df_all = pd.concat([df_all, new_df])
     df_all.sort_values(by=['cluster_id', 'trace_id'], inplace=True)
     
-    output_fn = "replicated-"
+    output_fn = f"replicated-{target_y}-"
     for nc in new_cluster_dict:
         cluster_id_first_ch = nc.split('-')[1][0]
         output_fn += f"{cluster_id_first_ch}-"

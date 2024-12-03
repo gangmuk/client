@@ -10,47 +10,21 @@ import csv
 color = {"west": "violet", "central": "green", "east": "brown", "south": "orange"}
 
 
-# def encode_binary_to_csv(input_bin, output_csv):
-#     if os.path.exists(output_csv):
-#         print(f"CSV file {output_csv} already exists. Skipping conversion.")
-#         return
-#     print(f"Converting {input_bin} to {output_csv}...")
-#     try:
-#         with open(output_csv, "w") as outfile:
-#             subprocess.run(["vegeta", "encode", "--to", "csv", input_bin], stdout=outfile, check=True)
-#         print(f"Created CSV file: {output_csv}")
-#         subprocess.run(["rm", input_bin])
-#         print(f"Deleted original vegeta binary file: {input_bin}")
-#     except subprocess.CalledProcessError:
-#         print(f"Error converting {input_bin} to CSV. Ensure Vegeta is installed.")
-#         sys.exit(1)
-
 def encode_binary_to_csv(input_bin, output_csv):
-    # if os.path.exists(output_csv):
-    #     print(f"CSV file {output_csv} already exists. Skipping conversion.")
-    #     return
+    if os.path.exists(output_csv):
+        print(f"CSV file {output_csv} already exists. Skipping conversion.")
+        return
     print(f"Converting {input_bin} to {output_csv}...")
     try:
-        # Step 1: Encode binary to CSV using Vegeta
         with open(output_csv, "w") as outfile:
             subprocess.run(["vegeta", "encode", "--to", "csv", input_bin], stdout=outfile, check=True)
         print(f"Created CSV file: {output_csv}")
-        
-        # Step 2: Remove the last column from the CSV
-        temp_csv = f"{output_csv}.tmp"
-        with open(output_csv, "r") as infile, open(temp_csv, "w", newline="") as outfile:
-            reader = csv.reader(infile)
-            writer = csv.writer(outfile)
-            for row in reader:
-                # Exclude the last column
-                writer.writerow(row[:-1])
-        
-        # Replace the original CSV with the modified version
-        os.replace(temp_csv, output_csv)
-        print(f"Removed the last column and updated CSV file: {output_csv}")
-
-        # Step 3: Delete the original binary file
-        subprocess.run(["rm", input_bin])
+        df = pd.read_csv(output_csv, header=None)
+        if df.shape[1] == 12:
+            df = df.iloc[:, :-1]  # Drop the last column
+        df.to_csv(output_csv, index=False, header=False)
+        print(f"Processed CSV file with conditional column removal: {output_csv}")
+        os.remove(input_bin)
         print(f"Deleted original vegeta binary file: {input_bin}")
     except subprocess.CalledProcessError:
         print(f"Error converting {input_bin} to CSV. Ensure Vegeta is installed.")
@@ -74,7 +48,14 @@ def csv_to_df(csv_file, cluster, usecols=None, dtypes=None):
         "Timestamp", "HTTP Status", "Request Latency", "Bytes Out", "Bytes In", 
         "Error", "Base64 Body", "Attack Name", "Sequence Number", "Method", "URL"
     ]
-    df = pd.read_csv(csv_file, header=None, names=column_names, usecols=usecols, dtype=dtypes)
+    try:
+        df = pd.read_csv(csv_file, header=None, names=column_names, usecols=usecols, dtype=dtypes)
+    except (FileNotFoundError, pd.errors.EmptyDataError) as e:
+        print(f"Error reading CSV file {csv_file}: {e}")
+        return None
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        return None
     df["Cluster"] = cluster
     return df
 
@@ -159,11 +140,7 @@ def plot_latency_and_load_for_all_subdir(merged_df_list, input_dir):
     avg_latencies = {}
 
     for subdir_name, merged_df in merged_df_list.items():
-        # Process data for plotting
-        
-        # west only
-        merged_df = merged_df[merged_df["Cluster"] == "west"]
-        
+        # merged_df = merged_df[merged_df["Cluster"] == "west"]
         merged_df.loc[:, "Request Latency (ms)"] = merged_df["Request Latency"] / 1e6
         merged_df.loc[:, "Start Time (s)"] = (merged_df["Timestamp"] - merged_df["Timestamp"].min()) / 1e9
         merged_df.loc[:, "Time (s)"] = merged_df["Start Time (s)"].astype(int)
@@ -190,13 +167,14 @@ def plot_latency_and_load_for_all_subdir(merged_df_list, input_dir):
         # )
 
         # Plot average latency on the second y-axis
-        ax2.plot(
-            aggregated["Time (s)"],
-            aggregated["AvgLatency"],
-            label=f"Avg Latency (ms)-{subdir_name}",
-            linewidth=1,
-            alpha=0.8,
-        )
+        # ax2.plot(
+        #     aggregated["Time (s)"],
+        #     aggregated["AvgLatency"],
+        #     label=f"Latency (ms)-{subdir_name}",
+        #     linewidth=1,
+        #     alpha=0.8,
+        # )
+        ax2.scatter(aggregated["Time (s)"], aggregated["AvgLatency"], label=f"Latency-{subdir_name}", marker="x", s=10)
 
     # Add labels and legends
     ax1.set_xlabel("Time (s)", fontsize=16)
@@ -232,15 +210,27 @@ def plot_latency_and_load_for_all_subdir(merged_df_list, input_dir):
 def plot_latency_cdf(merged_df_list, input_dir):
     plt.figure(figsize=(8, 7))
     avg_latencies = {}
+    p50_latencies = {}
+    p90_latencies = {}
+    p99_latencies = {}
+    p999_latencies = {}
     for subdir_name, merged_df in merged_df_list.items():
         latencies = merged_df["Request Latency (ms)"].sort_values()
         cdf = latencies.rank(method='max').div(len(latencies))
         avg_latencies[subdir_name] = latencies.mean()
+        p50_latencies[subdir_name] = latencies.quantile(0.5)
+        p90_latencies[subdir_name] = latencies.quantile(0.9)
+        p99_latencies[subdir_name] = latencies.quantile(0.99)
+        p999_latencies[subdir_name] = latencies.quantile(0.999)
         plt.plot(latencies, cdf, label=f"{subdir_name}", linewidth=2)
     
     for subdir_name, avg_latency in avg_latencies.items():
         print(f"{subdir_name} avg lat: {avg_latency:.2f} ms")
-        # plt.text(avg_latency, f"{subdir_name} avg lat: {avg_latency:.2f} ms", fontsize=12)
+        print(f"{subdir_name} p50 lat: {p50_latencies[subdir_name]:.2f} ms")
+        # print(f"{subdir_name} p90 lat: {p90_latencies[subdir_name]:.2f} ms")
+        print(f"{subdir_name} p99 lat: {p99_latencies[subdir_name]:.2f} ms")
+        # print(f"{subdir_name} p999 lat: {p999_latencies[subdir_name]:.2f} ms")
+
     plt.xlabel("Latency (ms)", fontsize=16)
     plt.ylabel("CDF", fontsize=16)
     plt.title("CDF of Average Latency", fontsize=20)
@@ -259,13 +249,18 @@ def plot_latency_cdf(merged_df_list, input_dir):
     print("*" * 30)
     print(f"**** Saving CDF plot to {output_plot}")
     print("*" * 30)
-
+    
+    
+    
 if __name__ == "__main__":
     input_dir = sys.argv[1]
     if not os.path.isdir(input_dir):
         print(f"Error: {input_dir} is not a valid directory.")
         sys.exit(1)
+    
     merged_df_list = {}
+    high_latency_counts = {}
+
     for subdir in os.listdir(input_dir):
         subdir_path = os.path.join(input_dir, subdir)
         print(f"input_dir: {input_dir}")
@@ -276,7 +271,18 @@ if __name__ == "__main__":
             plot_latency_and_load(merged_df, subdir_path, per_cluster=False)
             temp = subdir_path.split("/")[-1]
             merged_df_list[temp] = merged_df
+
+            # Count high latency requests (> 5 seconds)
+            high_latency_count = merged_df[merged_df["Request Latency"] > 5000 * 1e6].shape[0]  # Convert to nanoseconds
+            high_latency_counts[temp] = high_latency_count
     
-    # plot_all_latency_and_load(merged_df, subdir_path, per_cluster=False)
+    # Print a summary of high latency counts
+    print("*"*50)
+    print("Summary of High Latency Request Counts (> 5 seconds):")
+    for subdir, count in high_latency_counts.items():
+        print(f"{subdir}: {count}")
+    print("*"*50)
+    
+    # Plot CDF and combined latency/load plots
     plot_latency_cdf(merged_df_list, input_dir)
     plot_latency_and_load_for_all_subdir(merged_df_list, input_dir)
