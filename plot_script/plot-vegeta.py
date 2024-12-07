@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os
 import sys
 import pandas as pd
@@ -6,6 +8,7 @@ import subprocess
 import time
 from concurrent.futures import ThreadPoolExecutor
 import pandas as pd
+from matplotlib.ticker import MultipleLocator
 
 color = {"west": "violet", "central": "green", "east": "brown", "south": "orange"}
 
@@ -272,11 +275,14 @@ def plot_latency_and_load_for_all_subdir(merged_df_list, input_dir):
     
     ax1.set_ylim(bottom=0)
     ax1.set_xlim(left=0)
-    ax2.set_ylim(bottom=0, top=5000)
+    ax2.set_ylim(bottom=0)
+    ax2.set_ylim(top=2000)
 
     # Add title and grid
+    ax2.yaxis.set_major_locator(MultipleLocator(100))
+    ax2.grid(axis="y", which="major", linestyle="-", alpha=0.5)
     plt.title(f"{input_dir.split('/')[-2:]}", fontsize=20)
-    plt.grid()
+    # plt.grid()
     plt.tight_layout()
 
     # Save the plot

@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os
 import re
 import pandas as pd
@@ -88,15 +90,15 @@ def process_subdirectories(base_dir):
     results = []
     for sub_dir in [os.path.join(base_dir, d) for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]:
         total_success, total_failure, total_throughput, weighted_success_ratio, avg_latency, avg_latency_99, avg_latency_2 = calculate_success_failure_throughput_and_latency(sub_dir)
+            # "Weighted Success Ratio (%)": weighted_success_ratio,
+            # "Average Latency 2 (ms)": avg_latency_2
         results.append({
             "Directory": os.path.basename(sub_dir),
-            "Total Success": total_success,
-            "Total Failure": total_failure,
-            "Total Throughput (RPS)": total_throughput,
-            "Weighted Success Ratio (%)": weighted_success_ratio,
-            "Average Latency (ms)": avg_latency,
-            "99th Percentile Latency (ms)": avg_latency_99,
-            "Average Latency 2 (ms)": avg_latency_2
+            "# Success": total_success,
+            "# Failure": total_failure,
+            "Tput (RPS)": int(total_throughput),
+            "Avg Lat (ms)": int(avg_latency),
+            "99tt (ms)": int(avg_latency_99),
         })
     return results
 

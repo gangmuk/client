@@ -444,7 +444,6 @@ def restart_deploy(deploy=[], replicated_deploy=[], exclude=[], regions=[]):
     except client.ApiException as e:
         print("Exception when calling AppsV1Api->list_namespaced_deployment: %s\n" % e)
         
-    check_all_pods_are_ready()
     print(f"restart deploy is done, duration: {time.time() - ts}")
 
 def add_latency_rules(src_host, interface, dst_node_ip, delay):
@@ -708,7 +707,7 @@ def run_vegeta(workload, output_dir):
         
         # echo 'POST http://node5.slate-gm.istio-pg0.cloudlab.umass.edu:32048/cart/checkout?email=fo%40bar.com&street_address=405&zip_code=945&city=Fremont&state=CA&country=USA&credit_card_number=5555555555554444&credit_card_expiration_month=12&credit_card_expiration_year=2025&credit_card_cvv=222' | ./vegeta attack -rate=2000 -duration=10s -timeout=5s -header='x-slate-destination: west' | tee vegeta-test.results.bin | ./vegeta report > vegeta_stats.txt
         
-        print(f"vegeta cmd: {cmd}")
+        # print(f"vegeta cmd: {cmd}")
         run_command(cmd)
         
         # echo 'POST http://node5.slate-gm.istio-pg0.cloudlab.umass.edu:32048/cart/checkout?email=fo%40bar.com&street_address=405&zip_code=945&city=Fremont&state=CA&country=USA&credit_card_number=5555555555554444&credit_card_expiration_month=12&credit_card_expiration_year=2025&credit_card_cvv=222' | ./vegeta attack -rate=100 -duration=10s -timeout=5s -header='x-slate-destination: south' | tee results.bin | ./vegeta report
@@ -729,3 +728,18 @@ def extract_latencies(json_file, output_dir, rps, duration):
         for record in records:
             f.write(f"{record[0]},{record[1]:.3f},{record[2]}\n")
     print(f"Saved detailed request metrics to {output_csv}")
+
+
+def run_stress(c, vm, vm_bytes, start_in_seconds, duration, node_dict, target_node):
+    time.sleep(start_in_seconds)
+    # run_command(f"ssh gangmuk@{node_dict[node]['hostname']} 'nohup /users/gangmuk/projects/slate-benchmark/background-noise/background-noise -cpu={nodenoise} > /dev/null 2>&1 &'", nonblock=False)
+    full_cmd = f"ssh gangmuk@{node_dict[target_node]['hostname']} 'nohup stress -c {c} --vm {vm} --vm-bytes {vm_bytes}M --timeout {duration} > /dev/null 2>&1 &'"
+    print(f"run_stress cmd: {full_cmd}")
+    run_command(full_cmd, nonblock=False)
+    
+    
+def pkill_stress(node_dict):
+    for node in node_dict:
+        pkill_command = 'pkill -f stress'
+        run_command(f"ssh gangmuk@{node_dict[node]['hostname']} {pkill_command}", required=False, print_error=False)
+        print(f"{pkill_command} in {node_dict[node]['hostname']}")

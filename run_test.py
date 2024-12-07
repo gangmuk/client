@@ -27,8 +27,10 @@ import argparse
 import csv
 import random
 import pandas as pd
-
-random.seed(1234)
+from kubernetes import client, config
+from pod_cpu import graph_pod_cpu_utilization, start_pod_cpu_monitoring
+import set_cpu_limit_us_west_1
+# random.seed(1234)
 
 CLOUDLAB_CONFIG_XML="/users/gangmuk/projects/slate-benchmark/config.xml"
 network_interface = "eno1"
@@ -50,7 +52,9 @@ def cleanup_on_crash():
     print("Cleaning up resources...")
     utils.delete_tc_rule_in_client(network_interface, node_dict)
     utils.pkill_background_noise(node_dict)
+    utils.pkill_stress(node_dict)
     utils.run_command(f"kubectl rollout restart deploy slate-controller")
+    remove_cpu_limits_from_deployments()
     
 # Signal handler
 def signal_handler(signum, frame):
@@ -164,7 +168,7 @@ def remove_cpu_limits_from_deployments(namespace='default'):
             if container.resources is not None:
                 container.resources = None
                 updated = True
-                print(f"Setting resources to None for container {container.name} in deployment {deployment.metadata.name}")
+                # print(f"Setting resources to None for container {container.name} in deployment {deployment.metadata.name}")
 
         # Update the deployment if we modified the resources
         if updated:
@@ -189,7 +193,7 @@ def remove_cpu_limits_from_deployments(namespace='default'):
                 namespace=namespace, 
                 body=body
             )
-            print(f"Updated deployment {deployment.metadata.name}")
+            # print(f"Updated deployment {deployment.metadata.name}")
 
 def save_controller_logs(dir: str):
     # Ensure the directory exists
@@ -409,45 +413,105 @@ def parse_inject_delay(inject_delay_str):
         result.append((int(parts[0]), int(parts[1]), parts[2].strip("'\"")))
     return result
 
-## smoothing rps
-def smooth_rps(df, window):
-    df["west_rps"] = df["west_rps"].rolling(window=window, min_periods=1).mean().round().astype(int)
-    df["east_rps"] = df["east_rps"].rolling(window=window, min_periods=1).mean().round().astype(int)
-    df["central_rps"] = df["central_rps"].rolling(window=window, min_periods=1).mean().round().astype(int)
-    df["south_rps"] = df["south_rps"].rolling(window=window, min_periods=1).mean().round().astype(int)
-    return df
+# ## smoothing rps
+# def smooth_rps(df, window):
+#     df["west_rps"] = df["west_rps"].rolling(window=window, min_periods=1).mean().round().astype(int)
+#     df["east_rps"] = df["east_rps"].rolling(window=window, min_periods=1).mean().round().astype(int)
+#     df["central_rps"] = df["central_rps"].rolling(window=window, min_periods=1).mean().round().astype(int)
+#     df["south_rps"] = df["south_rps"].rolling(window=window, min_periods=1).mean().round().astype(int)
+#     return df
 
-def smooth_rps_with_duration(df, max_gap=100):
-    new_rows = []
-    for i in range(len(df) - 1):
-        current_row = df.iloc[i].copy()
-        next_row = df.iloc[i + 1].copy()
-        total_rps_diff = next_row["total_rps"] - current_row["total_rps"]
-        steps = abs(total_rps_diff) // max_gap
-        
-        if steps > 0:
-            step_size = max_gap if total_rps_diff > 0 else -max_gap
-            duration_step = math.floor(current_row["duration"] / (steps + 1))
-            remaining_duration = current_row["duration"] - (duration_step * steps)
-            
-            for step in range(steps):
-                intermediate_row = current_row.copy()
-                factor = (step + 1) / (steps + 1)
-                intermediate_row["west_rps"] = round(current_row["west_rps"] + (next_row["west_rps"] - current_row["west_rps"]) * factor)
-                intermediate_row["east_rps"] = round(current_row["east_rps"] + (next_row["east_rps"] - current_row["east_rps"]) * factor)
-                intermediate_row["central_rps"] = round(current_row["central_rps"] + (next_row["central_rps"] - current_row["central_rps"]) * factor)
-                intermediate_row["south_rps"] = round(current_row["south_rps"] + (next_row["south_rps"] - current_row["south_rps"]) * factor)
-                intermediate_row["total_rps"] = intermediate_row["west_rps"] + intermediate_row["east_rps"] + intermediate_row["central_rps"] + intermediate_row["south_rps"]
-                intermediate_row["duration"] = duration_step
-                new_rows.append(intermediate_row)
-            
-            # Assign remaining duration to the last step
-            current_row["duration"] = remaining_duration
-        
-        new_rows.append(current_row)
-    
-    new_rows.append(df.iloc[-1])  # Add the last row
-    return pd.DataFrame(new_rows)
+
+def smooth_rps(dataframe, interval=10):
+    smoothed_data = []
+    for i in range(len(dataframe) - 1):
+        start_row = dataframe.iloc[i]
+        end_row = dataframe.iloc[i + 1]
+        steps = int(start_row['duration'] // interval)
+        for step in range(steps):
+            t = step / steps
+            new_row = {
+                "west_rps": round((1 - t) * start_row['west_rps'] + t * end_row['west_rps']),
+                "east_rps": round((1 - t) * start_row['east_rps'] + t * end_row['east_rps']),
+                "central_rps": round((1 - t) * start_row['central_rps'] + t * end_row['central_rps']),
+                "south_rps": round((1 - t) * start_row['south_rps'] + t * end_row['south_rps']),
+                "request_type": start_row['request_type'],
+                "duration": int(interval),
+                "total_rps": round((1 - t) * start_row['total_rps'] + t * end_row['total_rps'])
+            }
+            smoothed_data.append(new_row)
+    last_row = dataframe.iloc[-1]
+    smoothed_data.append({
+        "west_rps": int(last_row['west_rps']),
+        "east_rps": int(last_row['east_rps']),
+        "central_rps": int(last_row['central_rps']),
+        "south_rps": int(last_row['south_rps']),
+        "request_type": last_row['request_type'],
+        "duration": int(interval),
+        "total_rps": int(last_row['total_rps'])
+    })
+    return pd.DataFrame(smoothed_data)
+
+
+
+def set_cpu_limit_for_a_cluster(cpu_limit, cluster):
+    config.load_kube_config()
+    api_instance = client.AppsV1Api()
+    deployments = api_instance.list_deployment_for_all_namespaces()
+    for deployment in deployments.items:
+        if deployment.metadata.name.endswith(f'-us-{cluster}-1'):
+            body = {
+                "spec": {
+                    "template": {
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": deployment.spec.template.spec.containers[0].name,
+                                    "resources": {
+                                        "limits": {"cpu": cpu_limit}
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+            api_instance.patch_namespaced_deployment(
+                name=deployment.metadata.name,
+                namespace=deployment.metadata.namespace,
+                body=body
+            )
+
+
+def remove_cpu_limits():
+    config.load_kube_config()
+    api_instance = client.AppsV1Api()
+    deployments = api_instance.list_deployment_for_all_namespaces()
+    for deployment in deployments.items:
+        body = {
+            "spec": {
+                "template": {
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": deployment.spec.template.spec.containers[0].name,
+                                "resources": {
+                                    "limits": {"cpu": None}
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+        api_instance.patch_namespaced_deployment(
+            name=deployment.metadata.name,
+            namespace=deployment.metadata.namespace,
+            body=body
+        )
+
+
+
 
 
 def main():
@@ -463,12 +527,15 @@ def main():
     argparser.add_argument("--slatelog", type=str, help="Path to the slatelog file", required=True)
     argparser.add_argument("--coefficient_file", type=str, help="Path to the coefficient_file", required=True)
     argparser.add_argument("--rps_file", type=str, help="Path to the rps_file", default="")
+    argparser.add_argument("--cpu_limit", type=str, help="cpu_limit", default="")
     argparser.add_argument("--e2e_coef_file", type=str, help="Path to the e2e_coef_file", required=True)
     argparser.add_argument("--load_config", type=int, default=0, help="Load coefficient flag")
     argparser.add_argument("--max_num_trace", type=int, default=0, help="max number of traces per each load bucket")
     argparser.add_argument("--load_bucket_size", type=int, default=0, help="the size of each load bucket. 'load_bucket = (rps*num_pod-(load_bucket_size//2))//(load_bucket_size) + 1'")
     argparser.add_argument("--inject_delay", type=str, help="List of tuples for injection delays (delay, time, region).")
     args = argparser.parse_args()
+    
+    utils.check_all_pods_are_ready()  
     
     inject_delay = parse_inject_delay(args.inject_delay)
     print("Parsed inject_delay:", inject_delay)
@@ -478,7 +545,6 @@ def main():
     limit = "0m"
     if len(sys.argv) == 4:
         limit = sys.argv[3]
-    utils.check_all_pods_are_ready()  
     if limit == "0m":
         remove_cpu_limits_from_deployments()
     else:
@@ -534,7 +600,7 @@ def main():
         assert False
     # rps_df = pd.read_csv(args.rps_file, header=None, names=["request_type", "rps"])
     # if args.mode == "runtime":
-    #     rps_multiplied = 6
+    #     rps_multiplied = 5
     #     rps_df["rps"] = rps_df["rps"] * rps_multiplied
     #     rps_df["west_rps"] = rps_df["rps"].sample(frac=1, random_state=0).values
     #     rps_df["east_rps"] = rps_df["rps"].sample(frac=1, random_state=1).values
@@ -555,7 +621,7 @@ def main():
     #     rps_df = pd.concat([new_rows, rps_df], ignore_index=True)
         
     #     rps_df["total_rps"] = rps_df["west_rps"] + rps_df["east_rps"] + rps_df["central_rps"] + rps_df["south_rps"]
-    #     max_rps = 7000
+    #     max_rps = 5000
     #     for index, row in rps_df.iterrows():
     #         if row["total_rps"] > max_rps:
     #             rps_df.at[index, "west_rps"] = row["west_rps"] * max_rps / row["total_rps"]
@@ -581,12 +647,14 @@ def main():
     # # rps_df["duration"] = 60
     # ##############################################
     
+    # set_cpu_limit_for_a_cluster("2100m", "west")
     
-    rps_df = pd.read_csv("rps.csv")
+    rps_df = pd.read_csv(args.rps_file)
     if "total_rps" not in rps_df.columns:
         rps_df["total_rps"] = rps_df["west_rps"] + rps_df["east_rps"] + rps_df["central_rps"] + rps_df["south_rps"]
-    # rps_df = smooth_rps_with_duration(rps_df, max_gap=200)
-    rps_df.to_csv("rps.csv")
+    # rps_df = smooth_rps(rps_df)
+    # rps_df.to_csv("rps.csv", index=False)
+    
     igw_host = utils.run_command("kubectl get nodes | grep 'node5' | awk '{print $1}'")[1]
     igw_nodeport = utils.run_command("kubectl get svc istio-ingressgateway -n istio-system -o=json | jq '.spec.ports[] | select(.name==\"http2\") | .nodePort'")[1]
     experiment_endpoint = f"http://{igw_host}:{igw_nodeport}"
@@ -612,6 +680,8 @@ def main():
     experiment_name = f"{temp}-{','.join(rps_df['request_type'].unique())}"
     experiment.set_name(experiment_name)
     experiment_list.append(experiment)
+    
+    
     #### Four clusters
     region_to_node = {
         "us-west-1": ["node1"],
@@ -683,6 +753,7 @@ def main():
                     inter_cluster_latency[src_node][dst_node] = region_latencies[src_region][dst_region]
     pprint(inter_cluster_latency)
     # utils.pkill_background_noise(node_dict)
+    # utils.pkill_stress(node_dict)
     
     if args.mode == "runtime":
         utils.delete_tc_rule_in_client(network_interface, node_dict)
@@ -701,16 +772,16 @@ def main():
     CONFIG["total_num_services"] = total_num_services
     CONFIG["degree"] = args.degree
     CONFIG["load_coef_flag"] = args.load_config
-    # utils.restart_deploy(deploy=["slate-controller"])
-    # utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-west-1"])
     for experiment in experiment_list:
         for routing_rule in routing_rule_list:
-            output_dir = f"{args.dir_name}/{experiment.name}/bg{args.background_noise}/{routing_rule}"
+            output_dir = f"{args.dir_name}/{experiment.name}/bg{args.background_noise}/{routing_rule}-vbg{args.victim_background_noise}-{args.rps_file}-{args.cpu_limit}-{random.randint(0, 100)}"
             if args.background_noise > 0:
-                utils.start_background_noise(node_dict, args.background_noise, victimize_node="node1", victimize_cpu=args.victim_background_noise)
-                ## Additional noisy neighbor
-                # call_with_delay(30, utils.start_background_noise, node_dict, 0, victimize_node="node1", victimize_cpu=20)
-            
+                utils.start_background_noise(node_dict, args.background_noise, victimize_node="node1", victimize_cpu=args.background_noise)
+            if args.victim_background_noise == 1:
+                total_duration = rps_df["duration"].sum()
+                print(f"total_duration: {total_duration}")
+                call_with_delay(10, utils.run_stress, c=20, vm=10, vm_bytes=256, start_in_seconds=1, duration=total_duration+60, node_dict=node_dict, target_node="node1")
+                
             print(f"mode: {args.mode}")
             print(f"routing_rule: {routing_rule}")
             utils.check_all_pods_are_ready()
@@ -732,6 +803,7 @@ def main():
             CONFIG["output_dir"] = output_dir
             CONFIG["max_num_trace"] = args.max_num_trace
             CONFIG["load_bucket_size"] = args.load_bucket_size
+            CONFIG["inject_delay"] = args.inject_delay
             utils.file_write_env_file(CONFIG)
             utils.file_write_config_file(CONFIG, f"{output_dir}/experiment-config.txt")
             utils.kubectl_cp_from_host_to_slate_controller_pod("env.txt", "/app/env.txt")
@@ -741,19 +813,48 @@ def main():
             utils.kubectl_cp_from_host_to_slate_controller_pod(args.slatelog, "/app/trace.csv")
                 
             print(f"starting experiment at {datetime.now()}, expected to finish at {datetime.now() + timedelta(seconds=sum(workload.duration))}")
-            
             ## init only
-            # return
-            # time.sleep(120)
-            
             if args.mode == "runtime":
-                # for (point, delay, targetregion) in inject_delay:
-                #     if int(delay) > 0:
-                #         print(f"update_virtualservice_latency_k8s, will inject delay: {delay}ms in {point} seconds to {targetregion}")
-                #         call_with_delay(point, update_virtualservice_latency_k8s, "checkoutservice-vs", "default", f"{delay}ms", targetregion)
-                #         print(f"update_virtualservice_latency_k8s, Delay injected: {delay}ms at {point} seconds")
+                for (point, delay, targetregion) in inject_delay:
+                    if int(delay) > 0:
+                        print(f"update_virtualservice_latency_k8s, will inject delay: {delay}ms in {point} seconds to {targetregion}")
+                        call_with_delay(point, update_virtualservice_latency_k8s, "checkoutservice-vs", "default", f"{delay}ms", targetregion)
+                        print(f"update_virtualservice_latency_k8s, Delay injected: {delay}ms at {point} seconds")
+                    else:
+                        call_with_delay(0, update_virtualservice_latency_k8s, "checkoutservice-vs", "default", "1ms", targetregion)
+                
                 print("GANGMUK: manually injected...")
             start_node_cpu_monitoring(region_to_node, sum(workload.duration), f"{output_dir}/node_cpu_util.pdf")
+
+            if args.cpu_limit != "":
+                print(f"args.cpu_limit: {args.cpu_limit}")
+                try:
+                    limit_list = args.cpu_limit.split(",")
+                    for limit in limit_list:
+                        target_deploy = limit.split(":")[0]
+                        cpu_limit = limit.split(":")[1]
+                        target_cluster = limit.split(":")[2]
+                        print(f"target_deploy: {target_deploy}, cpu_limit: {cpu_limit}")
+                        if args.rps_file == "rps-1.csv":
+                            delay_for_limit = 130
+                        elif args.rps_file == "rps-2.csv":
+                            delay_for_limit = 600
+                        elif args.rps_file == "rps-3.csv":
+                            delay_for_limit = 1200
+                        else:
+                            delay_for_limit = 120
+                        call_with_delay(delay_for_limit, set_cpu_limit_us_west_1.set_cpu_limit, deploy=target_deploy, cpu_limit=cpu_limit, cluster=target_cluster)
+                except Exception as e:
+                    print(f"error: {e}")
+                    print(f"args.cpu_limit: {args.cpu_limit} is not in the correct format")
+                    print("Skip set_cpu_limit")
+            else:
+                print("Skip set_cpu_limit")
+            
+            start_pod_cpu_monitoring(["checkoutservice"], ["us-west-1", "us-central-1", "us-south-1", "us-east-1"], "default", sum(workload.duration), f"{output_dir}/checkout_pod_cpu_util.pdf")
+            
+            #####################################################################################
+            #####################################################################################
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 future_list = list()
                 for workload in experiment.workloads:
@@ -762,7 +863,12 @@ def main():
                 for future in concurrent.futures.as_completed(future_list):
                     print(future.result())
             print("All clients have completed.")
-            ############################################################################
+            #####################################################################################
+            #####################################################################################
+            
+            utils.pkill_background_noise(node_dict)
+            utils.pkill_stress(node_dict)
+
             flist = ["/app/endpoint_rps_history.csv", "/app/error.log"]
             for src_in_pod in flist:
                 dst_in_host = f'{output_dir}/{routing_rule}-{src_in_pod.split("/")[-1]}'
@@ -825,19 +931,20 @@ def main():
             # if routing_rule.startswith("SLATE-with-jumping") and os.path.exists(f"{output_dir}/SLATE-with-jumping-global-jumping_routing_history.csv"):
             utils.run_command(f"python {os.getcwd()}/plot_script/fast_plot.py --data_dir {output_dir}", required=False)
             utils.run_command(f"python {os.getcwd()}/plot_script/plot-vegeta.py {output_dir}", required=False)
-            try:
-                if not os.path.exists(f"{output_dir}/routing_rule_plots"):
-                    os.makedirs(f"{output_dir}/routing_rule_plots")
-            except:
-                print("except. anyway mkdir routing_rule_plots")
-                os.makedirs(f"{output_dir}/routing_rule_plots")
-                pass
-            utils.run_command(f"python {os.getcwd()}/plot_script/plot_gc_jumping.py {output_dir}/jumping_routing_history.csv {output_dir}/jumping_latency.csv {output_dir}/routing_rule_plots",required=False)
-            utils.run_command(f"python {os.getcwd()}/plot_script/plot_region_latency.py {output_dir}/region_jumping_latency.csv {output_dir}/region_jumping_latency.pdf",required=False)
-            # utils.pkill_background_noise(node_dict)
+            utils.run_command(f"python plot_script/plot_gc_jumping.py {output_dir}/jumping_routing_history.csv {output_dir}/jumping_latency.csv {output_dir}/routing_rule_plots",required=False)
+            utils.run_command(f"python plot_script/plot_region_latency.py {output_dir}/region_jumping_latency.csv {output_dir}/region_jumping_latency.pdf",required=False)
+            utils.run_command(f"python plot_script/plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/endpoint_rps.pdf",required=False)
+            utils.run_command(f"python plot_script/plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/sslateingress_endpoint_rps.pdf sslateingress",required=False)
+            utils.run_command(f"python plot_script/plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/frontend_endpoint_rps.pdf frontend",required=False)
+
+            set_cpu_limit_us_west_1.remove_cpu_limits_from_deployments()
+        
             # savelogs(output_dir, services=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-central-1"])
             save_controller_logs(output_dir)
-            # utils.restart_deploy(deploy=["slate-controller"])
+            
+            time.sleep(10)
+            utils.run_command(f"mv {output_dir} /dev/shm/")
+            utils.restart_deploy(deploy=["slate-controller", "sslateingress-us-west-1", "sslateingress-us-east-1", "sslateingress-us-central-1", "sslateingress-us-south-1", "frontend-us-west-1", "frontend-us-east-1", "frontend-us-central-1", "frontend-us-south-1"])
             print(f"output_dir: {output_dir}")
     for node in node_dict:
         utils.run_command(f"ssh gangmuk@{node_dict[node]['hostname']} sudo tc qdisc del dev eno1 root", required=False, print_error=False)

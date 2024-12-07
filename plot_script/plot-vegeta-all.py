@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os
 import sys
 import pandas as pd
@@ -191,6 +193,7 @@ def plot_latency_and_load_for_all_subdir(merged_df_list, input_dir):
     ax1.set_ylim(bottom=0)
     ax1.set_xlim(left=0)
     ax2.set_ylim(bottom=0)
+    ax2.set_ylim(top=1000)
 
     # Add title and grid
     plt.title("Load (RPS) and Latency for All Clusters", fontsize=20)
