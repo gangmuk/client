@@ -5,6 +5,7 @@ def remove_cpu_limits_from_deployments(namespace='default'):
     config.load_kube_config()
     v1_apps = client.AppsV1Api()
     deployments = v1_apps.list_namespaced_deployment(namespace=namespace)
+    print(f"Removing CPU limits from deployments in namespace {namespace}")
     for deployment in deployments.items:
         updated = False  # Flag to check if we modified the deployment
         for container in deployment.spec.template.spec.containers:
@@ -40,6 +41,7 @@ def set_cpu_limit(deploy, cpu_limit, cluster):
     config.load_kube_config()
     api_instance = client.AppsV1Api()
     deployments = api_instance.list_deployment_for_all_namespaces()
+    print(f"set_cpu_limit: {deploy} {cpu_limit} {cluster}")
     for deployment in deployments.items:
         if cluster in deployment.metadata.name and deploy in deployment.metadata.name:
             body = {

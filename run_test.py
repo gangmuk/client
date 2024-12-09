@@ -35,6 +35,8 @@ import set_cpu_limit_us_west_1
 CLOUDLAB_CONFIG_XML="/users/gangmuk/projects/slate-benchmark/config.xml"
 network_interface = "eno1"
 
+output_dir = "ASDF-ASDF"
+
 def start_node_cpu_monitoring(region_to_node, duration, filename, username="gangmuk"):
     print("Starting node CPU monitoring...")
     # Run the collect_cpu_utilization function in a separate thread
@@ -50,6 +52,7 @@ def start_node_cpu_monitoring(region_to_node, duration, filename, username="gang
 # # Execute this function to clean up resources in case of a crash
 def cleanup_on_crash():
     print("Cleaning up resources...")
+    save_controller_logs(output_dir)
     utils.delete_tc_rule_in_client(network_interface, node_dict)
     utils.pkill_background_noise(node_dict)
     utils.pkill_stress(node_dict)
@@ -386,7 +389,7 @@ def get_sha256_of_file(url):
 
 def call_with_delay(delay, func, *args, **kwargs):
     def wrapper():
-        time.sleep(delay)
+        time.sleep(int(delay))
         func(*args, **kwargs)
     t = threading.Thread(target=wrapper)
     t.daemon = True
@@ -533,6 +536,7 @@ def main():
     argparser.add_argument("--max_num_trace", type=int, default=0, help="max number of traces per each load bucket")
     argparser.add_argument("--load_bucket_size", type=int, default=0, help="the size of each load bucket. 'load_bucket = (rps*num_pod-(load_bucket_size//2))//(load_bucket_size) + 1'")
     argparser.add_argument("--inject_delay", type=str, help="List of tuples for injection delays (delay, time, region).")
+    argparser.add_argument("--capacity", type=str, help="capacity for waterfall2")
     args = argparser.parse_args()
     
     utils.check_all_pods_are_ready()  
@@ -545,10 +549,10 @@ def main():
     limit = "0m"
     if len(sys.argv) == 4:
         limit = sys.argv[3]
-    if limit == "0m":
-        remove_cpu_limits_from_deployments()
-    else:
-        set_resource_limit(limit)
+    # if limit == "0m":
+    #     remove_cpu_limits_from_deployments()
+    # else:
+    #     set_resource_limit(limit)
     print(f"Resource limit set to {limit} for all deployments in the default namespace.")
     CONFIG = {}
     CONFIG['background_noise'] =  args.background_noise
@@ -650,10 +654,9 @@ def main():
     # set_cpu_limit_for_a_cluster("2100m", "west")
     
     rps_df = pd.read_csv(args.rps_file)
-    if "total_rps" not in rps_df.columns:
-        rps_df["total_rps"] = rps_df["west_rps"] + rps_df["east_rps"] + rps_df["central_rps"] + rps_df["south_rps"]
-    # rps_df = smooth_rps(rps_df)
-    # rps_df.to_csv("rps.csv", index=False)
+    rps_df["total_rps"] = rps_df["west_rps"] + rps_df["east_rps"] + rps_df["central_rps"] + rps_df["south_rps"]
+    rps_df.to_csv("rps.csv", index=False)
+    return
     
     igw_host = utils.run_command("kubectl get nodes | grep 'node5' | awk '{print $1}'")[1]
     igw_nodeport = utils.run_command("kubectl get svc istio-ingressgateway -n istio-system -o=json | jq '.spec.ports[] | select(.name==\"http2\") | .nodePort'")[1]
@@ -691,60 +694,35 @@ def main():
     }
     region_latencies = {
         "us-west-1": {
+            "us-west-1": 0,
             "us-central-1": 15,
             "us-south-1": 20,
             "us-east-1": 33,
         },
         "us-east-1": {
+            "us-east-1": 0,
+            "us-west-1": 33, ##### 33
             "us-south-1": 15,
             "us-central-1": 20,
         },
         "us-central-1": {
+            "us-central-1": 0,
+            "us-west-1": 15, ###### 15
             "us-south-1": 10,
+            "us-east-1": 20,
+        }, 
+        "us-south-1": {
+            "us-south-1": 0,
+            "us-central-1": 10,
+            "us-west-1": 20, ###### 20
+            "us-east-1": 15,
         }
     }
-    
-    #### Two clusters
-    # region_to_node = {
-    #     "us-west-1": ["node1"],
-    #     "us-east-1": ["node2"],
-    # }
-    
-    # region_latencies = {
-    #     "us-west-1": {
-    #         "us-east-1": 33,
-    #     }
-    # }
-
-    ## One clusters
-    # region_to_node = {
-    #     "us-west-1": ["node1"],
-    # }
-    
-    # region_latencies = {
-    #     "us-west-1": {}
-    # }
     
     node_to_region = {}
     for region, nodes in region_to_node.items():
         for n in nodes:
             node_to_region[n] = region
-    
-    all_regions = set(region_latencies.keys())
-    for region in region_latencies:
-        all_regions.update(region_latencies[region].keys())
-    for region in all_regions:
-        if region not in region_latencies:
-            region_latencies[region] = {}
-        for other_region in all_regions:
-            if other_region not in region_latencies[region]:
-                if region == other_region:
-                    region_latencies[region][other_region] = 0
-                elif other_region in region_latencies and region in region_latencies[other_region]:
-                    region_latencies[region][other_region] = region_latencies[other_region][region]
-                else:
-                    region_latencies[region][other_region] = None
-    
     inter_cluster_latency = {node: {} for region in region_to_node for node in region_to_node[region]}
     for src_region, src_nodes in region_to_node.items():
         for src_node in src_nodes:
@@ -752,15 +730,17 @@ def main():
                 for dst_node in dst_nodes:
                     inter_cluster_latency[src_node][dst_node] = region_latencies[src_region][dst_region]
     pprint(inter_cluster_latency)
-    # utils.pkill_background_noise(node_dict)
-    # utils.pkill_stress(node_dict)
-    
     if args.mode == "runtime":
         utils.delete_tc_rule_in_client(network_interface, node_dict)
+        # fault_inter_cluster_latency = copy.deepcopy(inter_cluster_latency)
+        # for src, dsts in inter_cluster_latency.items():
+        #     for dst in dsts:
+        #         if dst == "node1": # west
+        #             fault_inter_cluster_latency[src][dst] += 300 # fault in tc
+        # pprint(fault_inter_cluster_latency)
         utils.apply_all_tc_rule(network_interface, inter_cluster_latency, node_dict)
     else:
         print("Skip apply_all_tc_rule in profile args.mode")
-
     CONFIG["mode"] = args.mode
     for src_node in inter_cluster_latency:
         for dst_node in inter_cluster_latency[src_node]:
@@ -768,13 +748,9 @@ def main():
             dst_region = node_to_region[dst_node]
             CONFIG[f"inter_cluster_latency,{src_region},{dst_region}"] = inter_cluster_latency[src_node][dst_node]
             CONFIG[f"inter_cluster_latency,{dst_region},{src_region}"] = inter_cluster_latency[src_node][dst_node]
-    CONFIG["benchmark_name"] = benchmark_name
-    CONFIG["total_num_services"] = total_num_services
-    CONFIG["degree"] = args.degree
-    CONFIG["load_coef_flag"] = args.load_config
     for experiment in experiment_list:
         for routing_rule in routing_rule_list:
-            output_dir = f"{args.dir_name}/{experiment.name}/bg{args.background_noise}/{routing_rule}-vbg{args.victim_background_noise}-{args.rps_file}-{args.cpu_limit}-{random.randint(0, 100)}"
+            output_dir = f"{args.dir_name}/{experiment.name}/bg{args.background_noise}/{routing_rule}-cap-{args.capacity}-{random.randint(0, 1000)}"
             if args.background_noise > 0:
                 utils.start_background_noise(node_dict, args.background_noise, victimize_node="node1", victimize_cpu=args.background_noise)
             if args.victim_background_noise == 1:
@@ -792,18 +768,30 @@ def main():
             utils.create_dir(f"{output_dir}/resource_usage")
             for workload in experiment.workloads:
                 CONFIG[f"RPS,{workload.cluster},{workload.req_type}"] = ",".join(map(str, workload.rps))
+            CONFIG["benchmark_name"] = benchmark_name
+            CONFIG["total_num_services"] = total_num_services
+            CONFIG["degree"] = args.degree
+            CONFIG["load_coef_flag"] = args.load_config
             CONFIG["routing_rule"] = routing_rule
-            CONFIG["capacity"] = 0
+            CONFIG["capacity"] = args.capacity
             CONFIG["hillclimb_interval"] = experiment.hillclimb_interval
             CONFIG['path'] = workload.path
             CONFIG['method'] = workload.method
             CONFIG["req_type"] = workload.req_type
             CONFIG["cluster"] = workload.cluster
-            CONFIG["duration"] = workload.duration
+            # CONFIG["duration"] = workload.duration
             CONFIG["output_dir"] = output_dir
             CONFIG["max_num_trace"] = args.max_num_trace
             CONFIG["load_bucket_size"] = args.load_bucket_size
             CONFIG["inject_delay"] = args.inject_delay
+            CONFIG["cpu_limit"] = args.cpu_limit
+            CONFIG["background_noise"] = args.background_noise
+            CONFIG["victim_background_noise"] = args.victim_background_noise
+            CONFIG["slatelog(trace)"] = args.slatelog
+            CONFIG["coefficient_file"] = args.coefficient_file
+            CONFIG["e2e_coef_file"] = args.e2e_coef_file
+            CONFIG["load_config"] = args.load_config
+            CONFIG["rps_file"] = args.rps_file
             utils.file_write_env_file(CONFIG)
             utils.file_write_config_file(CONFIG, f"{output_dir}/experiment-config.txt")
             utils.kubectl_cp_from_host_to_slate_controller_pod("env.txt", "/app/env.txt")
@@ -816,16 +804,11 @@ def main():
             ## init only
             if args.mode == "runtime":
                 for (point, delay, targetregion) in inject_delay:
-                    if int(delay) > 0:
-                        print(f"update_virtualservice_latency_k8s, will inject delay: {delay}ms in {point} seconds to {targetregion}")
-                        call_with_delay(point, update_virtualservice_latency_k8s, "checkoutservice-vs", "default", f"{delay}ms", targetregion)
-                        print(f"update_virtualservice_latency_k8s, Delay injected: {delay}ms at {point} seconds")
-                    else:
-                        call_with_delay(0, update_virtualservice_latency_k8s, "checkoutservice-vs", "default", "1ms", targetregion)
-                
-                print("GANGMUK: manually injected...")
+                    if int(delay) == 0:
+                        delay = 1
+                    call_with_delay(point, update_virtualservice_latency_k8s, "checkoutservice-vs", "default", f"{delay}ms", targetregion)
+                    print(f"update_virtualservice_latency_k8s, Delay injected: {delay}ms at {point} seconds")                
             start_node_cpu_monitoring(region_to_node, sum(workload.duration), f"{output_dir}/node_cpu_util.pdf")
-
             if args.cpu_limit != "":
                 print(f"args.cpu_limit: {args.cpu_limit}")
                 try:
@@ -834,15 +817,8 @@ def main():
                         target_deploy = limit.split(":")[0]
                         cpu_limit = limit.split(":")[1]
                         target_cluster = limit.split(":")[2]
-                        print(f"target_deploy: {target_deploy}, cpu_limit: {cpu_limit}")
-                        if args.rps_file == "rps-1.csv":
-                            delay_for_limit = 130
-                        elif args.rps_file == "rps-2.csv":
-                            delay_for_limit = 600
-                        elif args.rps_file == "rps-3.csv":
-                            delay_for_limit = 1200
-                        else:
-                            delay_for_limit = 120
+                        delay_for_limit = int(limit.split(":")[3])
+                        print(f"Going to set_cpu_limit, {target_cluster}, {target_deploy}, cpu limit: {cpu_limit} in {delay_for_limit}s")
                         call_with_delay(delay_for_limit, set_cpu_limit_us_west_1.set_cpu_limit, deploy=target_deploy, cpu_limit=cpu_limit, cluster=target_cluster)
                 except Exception as e:
                     print(f"error: {e}")
@@ -850,6 +826,7 @@ def main():
                     print("Skip set_cpu_limit")
             else:
                 print("Skip set_cpu_limit")
+            
             
             start_pod_cpu_monitoring(["checkoutservice"], ["us-west-1", "us-central-1", "us-south-1", "us-east-1"], "default", sum(workload.duration), f"{output_dir}/checkout_pod_cpu_util.pdf")
             
