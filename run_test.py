@@ -656,7 +656,6 @@ def main():
     rps_df = pd.read_csv(args.rps_file)
     rps_df["total_rps"] = rps_df["west_rps"] + rps_df["east_rps"] + rps_df["central_rps"] + rps_df["south_rps"]
     rps_df.to_csv("rps.csv", index=False)
-    return
     
     igw_host = utils.run_command("kubectl get nodes | grep 'node5' | awk '{print $1}'")[1]
     igw_nodeport = utils.run_command("kubectl get svc istio-ingressgateway -n istio-system -o=json | jq '.spec.ports[] | select(.name==\"http2\") | .nodePort'")[1]
@@ -825,7 +824,8 @@ def main():
                     print(f"args.cpu_limit: {args.cpu_limit} is not in the correct format")
                     print("Skip set_cpu_limit")
             else:
-                print("Skip set_cpu_limit")
+                print("CPU limit is empty")
+                remove_cpu_limits_from_deployments()
             
             
             start_pod_cpu_monitoring(["checkoutservice"], ["us-west-1", "us-central-1", "us-south-1", "us-east-1"], "default", sum(workload.duration), f"{output_dir}/checkout_pod_cpu_util.pdf")

@@ -53,5 +53,8 @@ if __name__ == "__main__":
     output_pdf = sys.argv[2]
     service_filter = sys.argv[3] if len(sys.argv) > 3 else None
     endpoint_filter = sys.argv[4] if len(sys.argv) > 4 else None
-    
-    plot_rps(input_csv, output_pdf, service_filter, endpoint_filter)
+    try:
+        plot_rps(input_csv, output_pdf, service_filter, endpoint_filter)
+    except Exception as e:
+        print(f"plot_endpoint_rps.py, Error: {e}")
+        

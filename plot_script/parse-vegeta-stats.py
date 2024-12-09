@@ -98,7 +98,7 @@ def process_subdirectories(base_dir):
             "# Failure": total_failure,
             "Tput (RPS)": int(total_throughput),
             "Avg Lat (ms)": int(avg_latency),
-            "99tt (ms)": int(avg_latency_99),
+            "p99 (ms)": int(avg_latency_99),
         })
     return results
 

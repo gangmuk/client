@@ -1,1 +1,0 @@
-,cluster_id,svc_name,method,path,trace_id,span_id,parent_span_id,st,et,rt,xt,ct,call_size,inflight_dict,rps_dict

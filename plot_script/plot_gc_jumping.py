@@ -28,8 +28,16 @@ def plot_weight_vs_counter(df, latency_df, output_pdf, src_cid, request_type, ti
     filtered_df = filtered_df.dropna(subset=['counter', 'weight'])
     latency_df = latency_df.dropna(subset=['counter', 'latency'])
 
-    # Resample the latency data to match the density of the counter values in the filtered data
-    latency_df = latency_df.set_index('counter').reindex(filtered_df['counter'].unique(), method='nearest').reset_index()
+    # Create a function to find nearest latency value
+    def find_nearest_latency(counter_value):
+        return latency_df.iloc[(latency_df['counter'] - counter_value).abs().argsort()[0]]['latency']
+
+    # Create a new column with matched latency values
+    counter_values = filtered_df['counter'].unique()
+    matched_latencies = pd.DataFrame({
+        'counter': counter_values,
+        'latency': [find_nearest_latency(c) for c in counter_values]
+    })
 
     # Group by 'dst_cid'
     grouped = filtered_df.groupby('dst_cid')
@@ -51,7 +59,8 @@ def plot_weight_vs_counter(df, latency_df, output_pdf, src_cid, request_type, ti
 
     # Plot latency on secondary axis
     ax2 = ax1.twinx()
-    ax2.plot(latency_df['counter'], latency_df['latency'], color='r', linestyle=':', label='Latency')
+    ax2.plot(matched_latencies['counter'], matched_latencies['latency'], 
+            color='r', linestyle=':', label='Latency')
     ax2.set_ylabel('Latency')
     ax2.legend(loc='upper right', bbox_to_anchor=(1.15, 1))
 
@@ -124,7 +133,6 @@ def main():
     # Iterate over each region and request type to generate plots
     for region in regions:
         for request_type in request_types:
-            # Generate a safe filename by replacing any problematic characters
             print(f"Generating plot for region '{region}' with request type '{request_type}'")
             safe_request_type = request_type.replace('/', '-').replace('@', '-')
             output_pdf = os.path.join(

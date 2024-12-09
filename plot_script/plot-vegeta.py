@@ -276,7 +276,7 @@ def plot_latency_and_load_for_all_subdir(merged_df_list, input_dir):
     ax1.set_ylim(bottom=0)
     ax1.set_xlim(left=0)
     ax2.set_ylim(bottom=0)
-    ax2.set_ylim(top=2000)
+    # ax2.set_ylim(top=2000)
 
     # Add title and grid
     ax2.yaxis.set_major_locator(MultipleLocator(100))
@@ -319,8 +319,8 @@ def plot_latency_cdf(merged_df_list, input_dir):
     plt.grid()
     plt.legend(loc="lower right", fontsize=14)
     plt.xlim(left=0)
-    plt.xlim(right=1000)
-    print(f"cropped x-axis to 0-1000 ms")
+    # plt.xlim(right=1000)
+    # print(f"cropped x-axis to 0-1000 ms")
     plt.ylim(bottom=0, top=1.01)
     plt.tight_layout()
     

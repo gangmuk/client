@@ -74,7 +74,7 @@ def load_and_merge_csvs_parallel(input_dir):
         "Request Latency": "float64",
     }
     csv_files = []
-    print(f"input_dir: {input_dir}")
+    # print(f"input_dir: {input_dir}")
     for csv_file in [f for f in os.listdir(input_dir) if f.endswith(".results.bin.csv")]:
         cluster = csv_file.split(".")[-4]
         if cluster not in ["west", "central", "east", "south"]:
@@ -176,14 +176,34 @@ def plot_latency_and_load_for_all_subdir(merged_df_list, input_dir):
         #     linewidth=1,
         #     alpha=0.8,
         # )
-        ax2.scatter(aggregated["Time (s)"], aggregated["AvgLatency"], label=f"Latency-{subdir_name}", marker="x", s=10)
+        print(f"subdir_name: {subdir_name}")
+        if "WATERFALL" in subdir_name:
+            mk = "x"
+            routing_rule = "WATERFALL"
+            print(f"{subdir_name}, marker={mk}")
+        elif "without" in subdir_name:
+            mk = "o"
+            routing_rule = "SLATE /wo LAPA, /wo CP"
+            print(f"{subdir_name}, marker={mk}")
+        elif "SLATE-with-jumping-global" in subdir_name and "continuous" not in subdir_name:
+            mk = "D"
+            routing_rule = "SLATE /w LAPA, /wo CP"
+            print(f"{subdir_name}, marker={mk}")
+        elif "SLATE-with-jumping-global-continuous" in subdir_name:
+            mk = "*"
+            routing_rule = "SLATE"
+            print(f"{subdir_name}, marker={mk}")
+        else:
+            print(f"ERROR: Unknown ROUTING_RULE in subdir: {subdir_name}")
+        ax2.scatter(aggregated["Time (s)"], aggregated["AvgLatency"], label=f"{subdir_name}", marker=mk, s=20)
+        # , facecolors='none', edgecolors=color[routing_rule])
 
     # Add labels and legends
     ax1.set_xlabel("Time (s)", fontsize=16)
-    ax1.set_ylabel("Requests Per Second (RPS)", fontsize=16, color="blue")
-    ax2.set_ylabel("Average Latency (ms)", fontsize=16, color="orange")
-    ax1.tick_params(axis="y", labelcolor="blue")
-    ax2.tick_params(axis="y", labelcolor="orange")
+    # ax1.set_ylabel("Requests Per Second (RPS)", fontsize=16, color="black")
+    ax2.set_ylabel("Average Latency (ms)", fontsize=16, color="black")
+    ax1.tick_params(axis="y", labelcolor="black")
+    ax2.tick_params(axis="y", labelcolor="black")
 
     # Add legends for both axes
     lines1, labels1 = ax1.get_legend_handles_labels()
@@ -193,7 +213,7 @@ def plot_latency_and_load_for_all_subdir(merged_df_list, input_dir):
     ax1.set_ylim(bottom=0)
     ax1.set_xlim(left=0)
     ax2.set_ylim(bottom=0)
-    ax2.set_ylim(top=1000)
+    # ax2.set_ylim(top=1000)
 
     # Add title and grid
     plt.title("Load (RPS) and Latency for All Clusters", fontsize=20)
@@ -230,9 +250,9 @@ def plot_latency_cdf(merged_df_list, input_dir):
     for subdir_name, avg_latency in avg_latencies.items():
         print(f"{subdir_name} avg lat: {avg_latency:.2f} ms")
         print(f"{subdir_name} p50 lat: {p50_latencies[subdir_name]:.2f} ms")
-        # print(f"{subdir_name} p90 lat: {p90_latencies[subdir_name]:.2f} ms")
+        print(f"{subdir_name} p90 lat: {p90_latencies[subdir_name]:.2f} ms")
         print(f"{subdir_name} p99 lat: {p99_latencies[subdir_name]:.2f} ms")
-        # print(f"{subdir_name} p999 lat: {p999_latencies[subdir_name]:.2f} ms")
+        print(f"{subdir_name} p999 lat: {p999_latencies[subdir_name]:.2f} ms")
 
     plt.xlabel("Latency (ms)", fontsize=16)
     plt.ylabel("CDF", fontsize=16)
@@ -247,6 +267,9 @@ def plot_latency_cdf(merged_df_list, input_dir):
     
     output_plot = f"{input_dir}/latency_cdf.png"
     plt.savefig(output_plot, dpi=300)
+    # save pdf
+    output_pdf = f"{input_dir}/latency_cdf.pdf"
+    plt.savefig(output_pdf, format='pdf')
     plt.close()
     
     print("*" * 30)
@@ -266,8 +289,8 @@ if __name__ == "__main__":
 
     for subdir in os.listdir(input_dir):
         subdir_path = os.path.join(input_dir, subdir)
-        print(f"input_dir: {input_dir}")
-        print(f"subdir_path: {subdir_path}")
+        # print(f"input_dir: {input_dir}")
+        # print(f"subdir_path: {subdir_path}")
         if os.path.isdir(subdir_path):
             convert_binaries_to_csv_parallel(subdir_path)
             merged_df = load_and_merge_csvs_parallel(subdir_path)
