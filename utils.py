@@ -16,6 +16,7 @@ import atexit
 import signal
 import traceback
 import yaml
+import json
 
 def run_command_and_print(command, required=True, print_error=True, nonblock=False):
     """Run shell command and return its output, with real-time stdout streaming"""
@@ -455,8 +456,8 @@ def add_latency_rules(src_host, interface, dst_node_ip, delay):
     handle_id = delay
     run_command(f'ssh gangmuk@{src_host} sudo tc class add dev {interface} parent 1: classid {class_id} htb rate 100mbit', required=False, print_error=False)
     run_command(f'ssh gangmuk@{src_host} sudo tc qdisc add dev {interface} parent {class_id} handle {handle_id}: netem delay {delay}ms', required=False, print_error=False)
-    run_command(f'ssh gangmuk@{src_host} sudo tc filter add dev {interface} protocol ip parent 1:0 prio 1 u32 match ip dst {dst_node_ip} flowid {class_id}')
-
+    # Modified to use correct action syntax
+    run_command(f'ssh gangmuk@{src_host} sudo tc filter add dev {interface} protocol ip parent 1:0 prio 1 u32 match ip dst {dst_node_ip} action gact ok flowid {class_id}')
 
 def start_background_noise(node_dict, cpu_noise=30, victimize_node="", victimize_cpu=0):
     for node in node_dict:
@@ -496,6 +497,150 @@ def pkill_background_noise(node_dict):
         run_command(f"ssh gangmuk@{node_dict[node]['hostname']} {pkill_command}", required=False, print_error=False)
         print(f"{pkill_command} in {node_dict[node]['hostname']}")
         
+
+def ip_to_hex(ip):
+    """Convert IP address to hex format as shown in tc output"""
+    try:
+        # Convert each octet to hex and concatenate
+        return ''.join([hex(int(x))[2:].zfill(2) for x in ip.split('.')])
+    except:
+        return None
+
+def get_tc_byte_counts(interface, node_dict, inter_cluster_latency):
+    """Gets current byte counts between all node pairs"""
+    byte_counts = {}
+    
+    # First create IP to node mapping
+    ip_to_node = {node_dict[node]['ipaddr']: node for node in node_dict}
+    hex_to_node = {ip_to_hex(node_dict[node]['ipaddr']): node for node in node_dict}
+    
+    for src_node in inter_cluster_latency:
+        src_host = node_dict[src_node]['hostname']
+        byte_counts[src_node] = {}
+        
+        cmd = f"ssh gangmuk@{src_host} sudo tc -s filter show dev {interface} parent 1:"
+        success, result = run_command(cmd, required=False, print_error=False)
+        
+        if not success:
+            continue
+
+        current_dst = None
+        for line in result.split('\n'):
+            # Look for matches in the filter rules
+            if "match" in line:
+                hex_ip = line.split()[1].split('/')[0]  # Get the hex IP from the match line
+                if hex_ip in hex_to_node:
+                    current_dst = hex_to_node[hex_ip]
+            
+            # Look for byte counts
+            if current_dst and "Sent" in line and "bytes" in line:
+                try:
+                    # Parse the "Sent X bytes Y pkt" line
+                    parts = line.strip().split()
+                    bytes_sent = int(parts[1])
+                    byte_counts[src_node][current_dst] = bytes_sent
+                except (IndexError, ValueError) as e:
+                    print(f"Error parsing stats for {src_node}->{current_dst}: {e}")
+    
+    return byte_counts
+
+def calculate_egress_costs(before_counts, after_counts, node_to_region):
+    """Calculates egress costs based on byte count differences"""
+    
+    # AWS egress costs per GB between regions
+    EGRESS_COSTS = {
+        "us-west-1": {
+            "us-east-1": 0.02,
+            "us-central-1": 0.02,
+            "us-south-1": 0.02
+        },
+        "us-east-1": {
+            "us-west-1": 0.02,
+            "us-central-1": 0.02,
+            "us-south-1": 0.02
+        },
+        "us-central-1": {
+            "us-west-1": 0.02,
+            "us-east-1": 0.02,
+            "us-south-1": 0.02
+        },
+        "us-south-1": {
+            "us-west-1": 0.02,
+            "us-east-1": 0.02,
+            "us-central-1": 0.02
+        }
+    }
+    
+    costs = {}
+    for src_node in before_counts:
+        src_region = node_to_region[src_node]
+        costs[src_region] = {}
+        
+        for dst_node in before_counts[src_node]:
+            dst_region = node_to_region[dst_node]
+            
+            # Skip if same region
+            if src_region == dst_region:
+                continue
+                
+            # Calculate bytes transferred
+            before = before_counts[src_node].get(dst_node, 0)
+            after = after_counts[src_node].get(dst_node, 0)
+            bytes_transferred = after - before
+            
+            # Convert to GB
+            gb_transferred = bytes_transferred / (1024 ** 3)
+            
+            # Calculate cost
+            if src_region in EGRESS_COSTS and dst_region in EGRESS_COSTS[src_region]:
+                cost_per_gb = EGRESS_COSTS[src_region][dst_region]
+                costs[src_region][dst_region] = gb_transferred * cost_per_gb
+    
+    return costs
+
+def print_and_save_egress_costs(costs, output_file=None):
+    """
+    Print a formatted summary of egress costs and optionally save to a JSON file.
+    Returns the total egress cost.
+    """
+    total_cost = 0
+    
+    print("\nEgress Cost Summary:")
+    print("-" * 50)
+    
+    # Print costs for each region
+    for source_region in costs:
+        region_total = sum(costs[source_region].values())
+        total_cost += region_total
+        
+        print(f"\n{source_region}:")
+        if not costs[source_region]:  # Empty dict
+            print("  No egress traffic")
+        else:
+            for dest_region, cost in costs[source_region].items():
+                print(f"  → {dest_region}: ${cost:.2f}")
+            print(f"  Region Total: ${region_total:.2f}")
+            
+    print("-" * 50)
+    print(f"Total Egress Cost: ${total_cost:.2f}")
+    
+    # Save to JSON if output file specified
+    if output_file:
+        summary = {
+            "region_costs": costs,
+            "region_totals": {
+                region: sum(costs[region].values())
+                for region in costs
+            },
+            "total_cost": total_cost
+        }
+        
+        with open(output_file, 'w') as f:
+            json.dump(summary, f, indent=2)
+        print(f"\nCost summary saved to {output_file}")
+    
+    return total_cost
+
 def apply_all_tc_rule(interface, inter_cluster_latency, node_dict):
         for src_node in inter_cluster_latency:
             src_host = node_dict[src_node]['hostname']
@@ -607,7 +752,7 @@ def update_wasm_env_var(namespace, plugin_name, hillclimbing_key, hillclimbing_v
                    
 # One workload means one client. One client means one request type and a list of RPS & Duration>.
 class Workload:
-    def __init__(self, cluster: str, req_type: str, rps: list, duration: list, method: str, path: str, hdrs: dict = {}, endpoint=""):
+    def __init__(self, cluster: str, req_type: str, rps: list, duration: list, method: str, path: str, hdrs: dict = {}, endpoint="", vegeta_per="1s"):
         self.cluster = cluster
         self.req_type = req_type
         self.rps = rps
@@ -618,6 +763,7 @@ class Workload:
         self.name = f"{cluster}-{req_type}"
         # self.name = f"{cluster}-{req_type}-{rps}"
         self.endpoint = endpoint
+        self.vegeta_per = vegeta_per
         if len(rps) != len(duration):
             print(f"ERROR: rps and duration length mismatch")
             print(f"rps: {rps}")
@@ -674,14 +820,38 @@ def run_newer_generation_client(workload, output_dir):
     run_command(f"./client --config={client_yaml_file}")
 
 
+# def run_vegeta(workload, output_dir):
+#     run_command(f"mkdir -p {output_dir}/latency_results")
+#     for i in range(len(workload.rps)):
+#         print(f"start {workload.req_type} RPS {workload.rps[i]} to {workload.cluster} cluster for {workload.duration[i]}s")
+#         cmd = f"echo '{workload.method} {workload.endpoint}{workload.path}' | ./vegeta attack -connections 1000000 -workers 10000 -max-connections 10000000000 -rate={workload.rps[i]}/{workload.vegeta_per} -duration={workload.duration[i]}s"
+#         for key, value in workload.hdrs.items():
+#             cmd += f" -header='{key}: {value}'"
+#         cmd += f" -header='x-slate-destination: {workload.cluster}'"
+#         cmd += f" | tee {output_dir}/latency_results/{workload.name}-{workload.rps[i]}-{workload.duration[i]}.bin | ./vegeta report > {output_dir}/latency_results/{workload.name}-{workload.rps[i]}-{workload.duration[i]}.txt"
+#         print(f"cmd: {cmd}")
+#         run_command(cmd)
+
 def run_vegeta(workload, output_dir):
-    run_command(f"mkdir -p {output_dir}/latency_results")
     for i in range(len(workload.rps)):
-        print(f"start {workload.req_type} RPS {workload.rps[i]} to {workload.cluster} cluster for {workload.duration[i]}s")
-        cmd = f"echo '{workload.method} {workload.endpoint}{workload.path}' | ./vegeta attack -connections 1000000 -workers 10000 -max-connections 10000000000 -rate={workload.rps[i]} -duration={workload.duration[i]}s"
+        print(f"start-{i}, {workload.req_type} RPS {workload.rps[i]} to {workload.cluster} cluster for {workload.duration[i]}s")
+        
+        # cmd_1 = f"echo '{workload.method} {workload.endpoint}{workload.path}' | ./vegeta attack -rate={workload.rps[i]} -duration={workload.duration[i]}s -timeout=5s"
+        cmd_1 = f"echo '{workload.method} {workload.endpoint}{workload.path}' | ./vegeta attack -rate={workload.rps[i]}/{workload.vegeta_per} -duration={workload.duration[i]}s"
+        
+        headers = ""
         for key, value in workload.hdrs.items():
-            cmd += f" -header='{key}: {value}'"
-        cmd += f" -header='x-slate-destination: {workload.cluster}'"
-        cmd += f" | tee {output_dir}/latency_results/{workload.name}-{workload.rps[i]}-{workload.duration[i]}.bin | ./vegeta report > {output_dir}/latency_results/{workload.name}-{workload.rps[i]}-{workload.duration[i]}.txt"
-        print(f"cmd: {cmd}")
+            headers += f" -header='{key}: {value}'"
+        
+        cmd_2 = f" -header='x-slate-destination: {workload.cluster}'"
+        cmd_3 = f"| tee {output_dir}/{i}-{workload.rps[i]}RPS-{workload.duration[i]}s.{workload.req_type}.{workload.cluster}.results.bin | ./vegeta report > {output_dir}/{i}-{workload.rps[i]}RPS-{workload.duration[i]}s.{workload.req_type}.{workload.cluster}.stats.txt"
+        
+        cmd = cmd_1 + headers + cmd_2 + cmd_3
+        
+        # echo 'POST http://node5.slate-gm.istio-pg0.cloudlab.umass.edu:32048/cart/checkout?email=fo%40bar.com&street_address=405&zip_code=945&city=Fremont&state=CA&country=USA&credit_card_number=5555555555554444&credit_card_expiration_month=12&credit_card_expiration_year=2025&credit_card_cvv=222' | ./vegeta attack -rate=2000 -duration=10s -timeout=5s -header='x-slate-destination: west' | tee vegeta-test.results.bin | ./vegeta report > vegeta_stats.txt
+        
+        print(f"vegeta cmd: {cmd}")
         run_command(cmd)
+        
+        # echo 'POST http://node5.slate-gm.istio-pg0.cloudlab.umass.edu:32048/cart/checkout?email=fo%40bar.com&street_address=405&zip_code=945&city=Fremont&state=CA&country=USA&credit_card_number=5555555555554444&credit_card_expiration_month=12&credit_card_expiration_year=2025&credit_card_cvv=222' | ./vegeta attack -rate=100 -duration=10s -timeout=5s -header='x-slate-destination: south' | tee results.bin | ./vegeta report
+

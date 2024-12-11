@@ -24,9 +24,10 @@ import traceback
 import utils as utils
 from node_cpu import collect_cpu_utilization
 from pod_cpu import graph_pod_cpu_utilization
+import egress
 
 CLOUDLAB_CONFIG_XML="/users/gangmuk/projects/slate-benchmark/config.xml"
-network_interface = "enp1s0f0"
+network_interface = "eno1"
 
 def start_node_cpu_monitoring(region_to_node, duration, filename, username="gangmuk"):
     # Run the collect_cpu_utilization function in a separate thread
@@ -50,6 +51,7 @@ def start_pod_cpu_monitoring(deployments, regions, namespace, duration, filename
 # # Execute this function to clean up resources in case of a crash
 def cleanup_on_crash():
     print("Cleaning up resources...")
+    utils.restart_deploy(deploy=["slate-controller"])
     utils.delete_tc_rule_in_client(network_interface, node_dict)
     utils.pkill_background_noise(node_dict)
     
@@ -364,6 +366,20 @@ def change_jumping_mode(local=False):
     else:
         update_wasm_plugin_image("default", "slate-wasm-plugin", "ghcr.io/adiprerepa/slate-plugin:latest")
 
+def enrich_normalization(norm_dict):
+    """
+    Enrich the normalization dict with all the inverses.
+    """
+    for key in list(norm_dict.keys()):
+        for subkey in list(norm_dict[key].keys()):
+            # Check if the value under norm_dict[key][subkey] is a number
+            if isinstance(norm_dict[key][subkey], (int, float)):
+                # Add inverse to the subkey if not already present
+                if subkey not in norm_dict:
+                    norm_dict[subkey] = dict()
+                # Create the inverse
+                norm_dict[subkey][key] = 1 / norm_dict[key][subkey]
+    return norm_dict
 
 def get_sha256_of_file(url):
     # Send a GET request to the file URL
@@ -411,7 +427,7 @@ def main():
     # routing_rule_list = ["LOCAL"]
     # routing_rule_list = ["SLATE-without-jumping", "SLATE-with-jumping-global", "SLATE-with-jumping-local"]
     # routing_rule_list = ["SLATE-without-jumping"]
-    routing_rule_list = ["SLATE-without-jumping", "SLATE-with-jumping-global"]
+    routing_rule_list = ["SLATE-with-jumping-global", "SLATE-without-jumping"]
     # routing_rule_list = ["WATERFALL2"]
     
     onlineboutique_path = {
@@ -439,26 +455,94 @@ def main():
     #     print(f"req_type: {req_type} is not supported")
     #     assert False
     
-    workloads = { 
+    # workloads = {
+    #     "w50": {
+    #         "west": {
+    #             "checkoutcart": [
+    #                 (0, 50), (120, 48), (420, 1512), (720, 168),
+    #                 (1020, 264), (1320, 924), (1620, 868)
+    #             ]
+    #         },
+    #         "central": {
+    #             "checkoutcart": [
+    #                 (0, 80), (120, 954), (420, 310), (720, 1198),
+    #                 (1020, 1226), (1320, 462), (1620, 834)
+    #             ]
+    #         },
+    #         "south": {
+    #             "checkoutcart": [
+    #                 (0, 100), (120, 314), (420, 446), (720, 938),
+    #                 (1020, 598), (1320, 306), (1620, 98)
+    #             ]
+    #         },
+    #         "east": {
+    #             "checkoutcart": [
+    #                 (0, 60), (120, 1206), (420, 966), (720, 442),
+    #                 (1020, 1178), (1320, 406), (1620, 1142)
+    #             ]
+    #         }
+    #     }
+    # }
+    workloads = {
         "w50": {
             "west": {
-                "checkoutcart": [(0,400)],
-                "addtocart": [(0, 100)],
+                # "checkoutcart": [(0, 50), (60, 400), (360, 1200)],
+                "checkoutcart": [(0, 870)],
+                # "addtocart": [(0, 500)],
+                # "emptycart": [(0, 100)]
             },
             "central": {
-                "checkoutcart": [(0, 200)],
-                "addtocart": [(0, 100)],
+                # "checkoutcart": [(0, 50), (60, 800), (360, 700)],
+                "checkoutcart": [(0, 828)],
+                # "addtocart": [(0, 2500)],
+                # "emptycart": [(0, 1)]
             },
-            # "central": {
-            #     "singlecore": [(0, 50)],
-            #     "multicore": [(0, 200)],
-            # },
-            # "south": {
-            #     "singlecore": [(0, 50)],
-            #     "multicore": [(0, 200)],
-            # },
+            "east": {
+            #     "checkoutcart": [(0, 50), (60, 1300), (360, 800)],
+                "checkoutcart": [(0, 1142)],
+
+            # #     "multicore": [(0, 200)],
+            },
+            "south": {
+            #     "checkoutcart": [(0, 50), (60, 600), (360, 500)],
+                "checkoutcart": [(0, 232)],
+
+
+            # #     "multicore": [(0, 200)],
+            },
         }
     }
+    vegeta_per = {
+        # "central": {
+        #     "emptycart": "30s"
+        # }
+    }
+
+
+    # workloads = {
+    #     "w50": {
+    #         "west": {
+    #             "checkoutcart": [
+    #                 (0, 50), (120, 900)
+    #             ]
+    #         },
+    #         "central": {
+    #             "checkoutcart": [
+    #                 (0, 80), (120, 100)
+    #             ]
+    #         },
+    #         "south": {
+    #             "checkoutcart": [
+    #                 (0, 100), (120, 100)
+    #             ]
+    #         },
+    #         "east": {
+    #             "checkoutcart": [
+    #                 (0, 60), (120, 100)
+    #             ]
+    #         }
+    #     }
+    # }
 
     
     def construct_dur_list(workload_list, experiment_length):
@@ -477,22 +561,24 @@ def main():
 
     for name, w in workloads.items():
         hillclimb_interval = 30
-        experiment_dur = 60*7.5
+        experiment_dur = 180
         # actual normalization: 4
         # CPU-based normalization: 1/4
         normalization_dict = {
-            "sslateingress@POST@/cart/checkout": {
-                "sslateingress@POST@/cart": 1,
-            },
-            "frontend@POST@/cart/checkout": {
-                "frontend@POST@/cart": 1.45,
-            },
-            "cartservice@POST@/hipstershop.CartService/GetCart": {
-                "cartservice@POST@/hipstershop.CartService/AddItem": 1.423,
-            },
+            # "sslateingress@POST@/cart/checkout": {
+            #     "sslateingress@POST@/cart": 1, # 3.12
+            # },
+            # "frontend@POST@/cart/checkout": {
+            #     "frontend@POST@/cart": 1,
+            # },
+            # "cartservice@POST@/hipstershop.CartService/GetCart": {
+            #     "cartservice@POST@/hipstershop.CartService/AddItem": 10,
+            # },
         }
+        normalization_dict = enrich_normalization(normalization_dict)
         
         experiment = utils.Experiment()
+        
         experiment.normalization = normalization_dict
         experiment.workload_raw = w
         experiment.set_hillclimb_interval(hillclimb_interval)
@@ -501,9 +587,10 @@ def main():
                 # rps_list is the second element of the tuple in the list
                 rps_list = [rps for start, rps in w[region][req_type]]
                 experiment.add_workload(utils.Workload(cluster=region, req_type=req_type, rps=rps_list, duration=construct_dur_list(w[region][req_type], experiment_dur),
-                                                        method=method, path=onlineboutique_path[req_type], hdrs={}, endpoint=experiment_endpoint))
+                                                        method=method, path=onlineboutique_path[req_type], hdrs={}, endpoint=experiment_endpoint, vegeta_per=vegeta_per.get(region, {}).get(req_type, "1s")))
         experiment.hash_mod = 5
         experiment_name = f"{req_type}-{name}"
+        experiment.set_injected_delay([(1, 300, "us-west-1")])
         experiment.set_name(experiment_name)
         experiment_list.append(experiment)
     ####################################################################
@@ -514,24 +601,24 @@ def main():
     #### Four clusters
     region_to_node = {
         "us-west-1": ["node1"],
-        # "us-east-1": ["node2"],
+        "us-east-1": ["node2"],
         "us-central-1": ["node3"],
-        # "us-south-1": ["node4"]
+        "us-south-1": ["node4"]
     }
     
     region_latencies = {
         "us-west-1": {
             "us-central-1": 15,
-            # "us-south-1": 20,
-            # "us-east-1": 33,
+            "us-south-1": 20,
+            "us-east-1": 33,
         },
-        # "us-east-1": {
-        #     "us-south-1": 15,
-        #     "us-central-1": 20,
-        # },
-        # "us-central-1": {
-        #     "us-south-1": 10,
-        # }
+        "us-east-1": {
+            "us-south-1": 15,
+            "us-central-1": 20,
+        },
+        "us-central-1": {
+            "us-south-1": 10,
+        }
     }
     #####################################
     
@@ -629,6 +716,9 @@ def main():
             print(f"**** output_dir: {output_dir}")
             for workload in experiment.workloads:
                 CONFIG[f"RPS,{workload.cluster},{workload.req_type}"] = ",".join(map(str, workload.rps))
+            for src, dst in experiment.normalization.items():
+                for dst_key, dst_val in dst.items():
+                    CONFIG[f"normalization,{src},{dst_key}"] = dst_val
             CONFIG["routing_rule"] = routing_rule
             CONFIG["capacity"] = 0
             CONFIG["hillclimb_interval"] = experiment.hillclimb_interval
@@ -647,11 +737,11 @@ def main():
                 utils.kubectl_cp_from_host_to_slate_controller_pod("e2e-poly-coef_multiplied_by_one-checkout-profile-30bg.csv", "/app/e2e-coef.csv")
                 slatelog = f"{benchmark_name}-trace.csv"
                 utils.kubectl_cp_from_host_to_slate_controller_pod(slatelog, "/app/trace.csv")
-                t=5
-                print(f"sleep for {t} seconds to wait for the training to be done in global controller")
-                for i in range(t):
-                    time.sleep(1)
-                    print(f"start in {t-i} seconds")
+                # t=5
+                # print(f"sleep for {t} seconds to wait for the training to be done in global controller")
+                # for i in range(t):
+                #     time.sleep(1)
+                #     print(f"start in {t-i} seconds")
             
             
             ############################################################################
@@ -663,7 +753,10 @@ def main():
                     call_with_delay(point, update_virtualservice_latency_k8s, "checkoutservice-vs", "default", f"{delay}ms", targetregion)
                     print(f"injecting delay: {delay}ms at {point} seconds")
                 start_node_cpu_monitoring(region_to_node, sum(workload.duration), f"{output_dir}/node_cpu_util.pdf")
-                start_pod_cpu_monitoring(["frontend", "checkoutservice", "cartservice"], ["us-west-1", "us-east-1"], "default", sum(workload.duration), f"{output_dir}/pod_cpu_util.pdf")
+                start_pod_cpu_monitoring(["frontend"], ["us-west-1", "us-central-1", "us-south-1", "us-east-1"], "default", sum(workload.duration), f"{output_dir}/frontend_pod_cpu_util.pdf")
+                start_pod_cpu_monitoring(["checkoutservice"], ["us-west-1", "us-central-1", "us-south-1", "us-east-1"], "default", sum(workload.duration), f"{output_dir}/checkout_pod_cpu_util.pdf")
+            initial_byte_counts = utils.get_tc_byte_counts(network_interface, node_dict, inter_cluster_latency)
+            print(f"initial_byte_counts: {initial_byte_counts}")
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 future_list = list()
                 for workload in experiment.workloads:
@@ -672,6 +765,7 @@ def main():
                 for future in concurrent.futures.as_completed(future_list):
                     print(future.result())
             print("All clients have completed.")
+            final_byte_counts = utils.get_tc_byte_counts(network_interface, node_dict, inter_cluster_latency)
             ############################################################################
             ############################################################################
             
@@ -701,14 +795,16 @@ def main():
             if mode == "runtime":
                 utils.run_command(f"python plot_gc_jumping.py {output_dir}/{routing_rule}-jumping_routing_history.csv {output_dir}/{routing_rule}-jumping_latency.csv {output_dir}/routing_rule_plots",required=False)
                 utils.run_command(f"python plot_region_latency.py {output_dir}/{routing_rule}-region_jumping_latency.csv {output_dir}/region_jumping_latency.pdf",required=False)
+            utils.run_command(f"python plot_vegeta.py {output_dir}", required=False)
             utils.run_command(f"python plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/endpoint_rps.pdf",required=False)
             utils.run_command(f"python plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/endpoint_rps_sslateingress.pdf sslateingress",required=False)
             utils.run_command(f"python plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/endpoint_rps_corecontrast.pdf frontend",required=False)
            # utils.run_command(f"python fast_plot_all.py --data_dir {output_dir}",required=False)
             # utils.run_command(f"python fast_plot.py --data_dir {output_dir}",required=False)
                 # utils.run_command(f"python plot_gc_jumping ")
-            utils.run_command(f"python plot_vegeta.py {output_dir}/latency_results/")
-
+            costs = utils.calculate_egress_costs(initial_byte_counts, final_byte_counts, node_to_region)
+            print(f"costs: {costs}")
+            utils.print_and_save_egress_costs(costs, f"{output_dir}/egress_costs.json")
 
             '''end of one set of experiment'''
             
@@ -725,7 +821,7 @@ def main():
         # if experiment_name.startswith("addtocart"):
         #     utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=["sslateingress", "frontend", "productcatalogservice", "cartservice"], regions=["us-west-1"])
         # else:
-            utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-west-1", "us-central-1"])  
+            # utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-west-1", "us-central-1"])  
 
             # savelogs(output_dir, services=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-central-1"])
             save_controller_logs(output_dir)

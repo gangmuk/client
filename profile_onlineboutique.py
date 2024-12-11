@@ -22,6 +22,7 @@ import atexit
 import signal
 import traceback
 import utils as utils
+from pod_cpu import start_pod_cpu_monitoring
 from node_cpu import start_node_cpu_monitoring
 
 CLOUDLAB_CONFIG_XML="/users/gangmuk/projects/slate-benchmark/config.xml"
@@ -424,16 +425,23 @@ def main():
 
     workloads = {}
 
-    for rps in range(700, 901, 50):
-        workloads[f"wc-{rps}"] = {
+    # for rps in range(300, 800, 200):
+    #     workloads[f"wc-{rps}"] = {
+    #         "west": {
+    #             "checkoutcart": [(0, rps)],
+    #         },
+    #     }
+    # for rps in range(1000, 3000, 500):
+    #     workloads[f"wa-{rps}"] = {
+    #         "west": {
+    #             "addtocart": [(0, rps)],
+    #         },
+    #     }
+
+    for rps in range(100, 3000, 500):
+        workloads[f"we-{rps}"] = {
             "west": {
-                "checkoutcart": [(0, rps)],
-            },
-        }
-    for rps in range(1700, 2400, 200):
-        workloads[f"wa-{rps}"] = {
-            "west": {
-                "addtocart": [(0, rps)],
+                "emptycart": [(0, rps)],
             },
         }
 
@@ -441,7 +449,7 @@ def main():
         hillclimb_interval = 30
         experiment_dur = 60*2
         experiment = utils.Experiment()
-        req_type = "checkoutcart" if name.startswith("wc") else "addtocart"
+        req_type = "checkoutcart" if name.startswith("wc") else "addtocart" if name.startswith("wa") else "emptycart"
         experiment.workload_raw = w
         method = "POST"
         experiment.set_hillclimb_interval(hillclimb_interval)
@@ -604,6 +612,7 @@ def main():
                     call_with_delay(point, update_virtualservice_latency_k8s, "checkoutservice-vs", "default", f"{delay}ms", targetregion)
                     print(f"injecting delay: {delay}ms at {point} seconds")
             start_node_cpu_monitoring(region_to_node, sum(workload.duration), f"{output_dir}/node_cpu_util.pdf", results_csv=f"{output_dir}/node_cpu_util.csv")
+            start_pod_cpu_monitoring(["sslateingress", "frontend", "checkoutservice", "cartservice"], ["us-west-1"], "default", sum(workload.duration), f"{output_dir}/pod_cpu_util.pdf")
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 future_list = list()
                 for workload in experiment.workloads:

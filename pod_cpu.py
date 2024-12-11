@@ -6,6 +6,15 @@ from kubernetes import client, config
 from datetime import datetime, timedelta
 from kubernetes.client import CustomObjectsApi
 
+def start_pod_cpu_monitoring(deployments, regions, namespace, duration, filename):
+    # Run the graph_pod_cpu_utilization function in a separate thread
+    monitoring_thread = threading.Thread(
+        target=graph_pod_cpu_utilization, args=(deployments, regions, namespace, duration, filename)
+    )
+    monitoring_thread.daemon = True
+    monitoring_thread.start()
+    return monitoring_thread
+
 def graph_pod_cpu_utilization(deployments, regions, namespace, duration, pdf_file, interval=5):
     """
     Collects CPU utilization of all pods for the given deployments over the specified duration and graphs it.
