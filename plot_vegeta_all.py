@@ -81,6 +81,7 @@ def load_and_merge_csvs_parallel(input_dir):
             print(f"Error: Cluster name {cluster} is not valid.")
             continue
         csv_files.append((f"{input_dir}/{csv_file}", cluster, usecols, dtypes))
+    print(f"Found {len(csv_files)} CSV files to process.")
     with ThreadPoolExecutor() as executor:
         dfs = list(executor.map(load_csv_parallel, csv_files))
     merged_df = pd.concat(dfs, ignore_index=True)

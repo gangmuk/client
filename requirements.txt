@@ -1,0 +1,6 @@
+kubernetes
+matplotlib
+numpy
+paramiko
+requests
+

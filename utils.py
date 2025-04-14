@@ -855,3 +855,31 @@ def run_vegeta(workload, output_dir):
         
         # echo 'POST http://node5.slate-gm.istio-pg0.cloudlab.umass.edu:32048/cart/checkout?email=fo%40bar.com&street_address=405&zip_code=945&city=Fremont&state=CA&country=USA&credit_card_number=5555555555554444&credit_card_expiration_month=12&credit_card_expiration_year=2025&credit_card_cvv=222' | ./vegeta attack -rate=100 -duration=10s -timeout=5s -header='x-slate-destination: south' | tee results.bin | ./vegeta report
 
+def run_vegeta_go(workload, output_dir, max_id=1, query_param="record_id"):
+    for i in range(len(workload.rps)):
+        print(f"start-{i}, {workload.req_type} RPS {workload.rps[i]} to {workload.cluster} cluster for {workload.duration[i]}s")
+
+        out_bin = f"{output_dir}/{i}-{workload.rps[i]}RPS-{workload.duration[i]}s.{workload.req_type}.{workload.cluster}.results.bin"
+        out_txt = f"{output_dir}/{i}-{workload.rps[i]}RPS-{workload.duration[i]}s.{workload.req_type}.{workload.cluster}.stats.txt"
+
+        # Merge headers
+        headers = workload.hdrs.copy()
+        headers["x-slate-destination"] = workload.cluster
+        headers_str = ",".join([f"{k}:{v}" for k, v in headers.items()])
+
+        cmd = [
+            "./vegeta_runner",
+            f"-method={workload.method}",
+            f"-url={workload.endpoint}",     # e.g., http://node5...
+            f"-path={workload.path}",        # e.g., /getRecord
+            f"-query-param={query_param}",   # configurable!
+            f"-max-id={max_id}",
+            f"-headers={headers_str}",
+            f"-rps={workload.rps[i]}",
+            f"-duration={workload.duration[i]}",
+            f"-outbin={out_bin}",
+            f"-outtxt={out_txt}"
+        ]
+
+        print("Running:", " ".join(cmd))
+        subprocess.run(cmd, check=True)

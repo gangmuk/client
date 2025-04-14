@@ -206,6 +206,7 @@ def train_latency_function_with_trace(model, traces, directory, degree):
                     coef_dict[svc_name][ep_str] = fit_polynomial_regression(data, "latency", svc_name, ep_str, cid, directory, degree)
                 elif model == "mm1":
                     coef_dict[svc_name][ep_str] = fit_mm1_model(data, "latency", svc_name, ep_str, cid, directory)
+                    print(f"coef_dict[svc_name][ep_str]: {coef_dict[svc_name][ep_str]}")
                 else:
                     print(f"ERROR: model: {model}")
                     assert False
