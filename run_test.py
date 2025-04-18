@@ -28,7 +28,7 @@ import csv
 import random
 import pandas as pd
 from kubernetes import client, config
-from pod_cpu import graph_pod_cpu_utilization, start_pod_cpu_monitoring
+# from pod_cpu import graph_pod_cpu_utilization, start_pod_cpu_monitoring
 import set_cpu_limit_us_west_1
 # random.seed(1234)
 
@@ -36,6 +36,7 @@ CLOUDLAB_CONFIG_XML="/users/gangmuk/projects/slate-benchmark/config.xml"
 network_interface = "eno1"
 
 output_dir = "ASDF-ASDF"
+FULL_TEST_PATH=False
 
 def start_node_cpu_monitoring(region_to_node, duration, filename, username="gangmuk"):
     print("Starting node CPU monitoring...")
@@ -286,7 +287,7 @@ def update_virtualservice_latency_k8s(virtualservice_name: str, namespace: str, 
                     updated = True
 
     if not updated:
-        print(f"update_virtualservice_latency_k8s, 2 No latency settings found in the VirtualService {region} '{virtualservice_name}' to update.")
+        print(f"Error: update_virtualservice_latency_k8s, 2 No latency settings found in the VirtualService {region} '{virtualservice_name}' to update.")
         assert False
 
     # Apply the updated VirtualService back to the cluster
@@ -436,8 +437,8 @@ def smooth_rps(dataframe, interval=10):
             new_row = {
                 "west_rps": round((1 - t) * start_row['west_rps'] + t * end_row['west_rps']),
                 "east_rps": round((1 - t) * start_row['east_rps'] + t * end_row['east_rps']),
-                "central_rps": round((1 - t) * start_row['central_rps'] + t * end_row['central_rps']),
-                "south_rps": round((1 - t) * start_row['south_rps'] + t * end_row['south_rps']),
+                # "central_rps": round((1 - t) * start_row['central_rps'] + t * end_row['central_rps']),
+                # "south_rps": round((1 - t) * start_row['south_rps'] + t * end_row['south_rps']),
                 "request_type": start_row['request_type'],
                 "duration": int(interval),
                 "total_rps": round((1 - t) * start_row['total_rps'] + t * end_row['total_rps'])
@@ -447,8 +448,8 @@ def smooth_rps(dataframe, interval=10):
     smoothed_data.append({
         "west_rps": int(last_row['west_rps']),
         "east_rps": int(last_row['east_rps']),
-        "central_rps": int(last_row['central_rps']),
-        "south_rps": int(last_row['south_rps']),
+        # "central_rps": int(last_row['central_rps']),
+        # "south_rps": int(last_row['south_rps']),
         "request_type": last_row['request_type'],
         "duration": int(interval),
         "total_rps": int(last_row['total_rps'])
@@ -524,7 +525,15 @@ def main():
     argparser.add_argument("--victim_background_noise", type=int, default=0,help="Background noise level (in %)")
     argparser.add_argument("--degree", type=int, default=2, help="degree of the polynomial")
     argparser.add_argument("--mode", type=str, help="Mode of operation (profile or runtime)", required=True)
-    argparser.add_argument("--routing_rule", type=str, default="SLATE-with-jumping-global", help="Routing rule to apply", choices=["LOCAL", "SLATE-without-jumping", "SLATE-with-jumping-global", "SLATE-with-jumping-global-continuous-profiling", "SLATE-with-jumping-local", "WATERFALL2"])
+    argparser.add_argument("--routing_rule", type=str, default="SLATE-with-jumping-global", help="Routing rule to apply", choices=["LOCAL", \
+                        "WATERFALL2", \
+                        "SLATE-with-jumping-local", \
+                        "SLATE-without-jumping", \
+                        "SLATE-with-jumping-global-with-optimizer-without-continuous-profiling", \
+                        "SLATE-with-jumping-global-with-optimizer-with-continuous-profiling", \
+                        "SLATE-with-jumping-global-without-optimizer-without-continuous-profiling", \
+                        "SLATE-with-jumping-global-without-optimizer-with-continuous-profiling", \
+                                    ])
     argparser.add_argument("--duration",    type=int, default=10, required=True)
     argparser.add_argument("--req_type", type=str, default="checkoutcart", help="Request type to test")
     argparser.add_argument("--slatelog", type=str, help="Path to the slatelog file", required=True)
@@ -654,23 +663,28 @@ def main():
     # set_cpu_limit_for_a_cluster("2100m", "west")
     
     rps_df = pd.read_csv(args.rps_file)
-    rps_df["total_rps"] = rps_df["west_rps"] + rps_df["east_rps"] + rps_df["central_rps"] + rps_df["south_rps"]
-    rps_df.to_csv("rps.csv", index=False)
     
-    igw_host = utils.run_command("kubectl get nodes | grep 'node5' | awk '{print $1}'")[1]
+    # rps_df["total_rps"] = rps_df["west_rps"] + rps_df["east_rps"] + rps_df["central_rps"] + rps_df["south_rps"]
+    # rps_df.to_csv("rps.csv", index=False)
+    
+    igw_host = utils.run_command("kubectl get nodes | grep 'node3' | awk '{print $1}'")[1]
     igw_nodeport = utils.run_command("kubectl get svc istio-ingressgateway -n istio-system -o=json | jq '.spec.ports[] | select(.name==\"http2\") | .nodePort'")[1]
     experiment_endpoint = f"http://{igw_host}:{igw_nodeport}"
     
     for request_type in rps_df["request_type"].unique():
         temp_df = rps_df[rps_df["request_type"] == request_type]
-        if temp_df["west_rps"].sum() > 0:
-            experiment.add_workload(utils.Workload(cluster="west", req_type=request_type, rps=temp_df["west_rps"].to_list(), duration=temp_df["duration"].to_list(), method=method, path=onlineboutique_path[request_type], endpoint=experiment_endpoint))
-        if temp_df["east_rps"].sum() > 0:
-            experiment.add_workload(utils.Workload(cluster="east", req_type=request_type, rps=temp_df["east_rps"].to_list(), duration=temp_df["duration"].to_list(), method=method, path=onlineboutique_path[request_type], endpoint=experiment_endpoint))
-        if temp_df["central_rps"].sum() > 0:
-            experiment.add_workload(utils.Workload(cluster="central", req_type=request_type, rps=temp_df["central_rps"].to_list(), duration=temp_df["duration"].to_list(), method=method, path=onlineboutique_path[request_type], endpoint=experiment_endpoint))
-        if temp_df["south_rps"].sum() > 0:
-            experiment.add_workload(utils.Workload(cluster="south", req_type=request_type, rps=temp_df["south_rps"].to_list(), duration=temp_df["duration"].to_list(), method=method, path=onlineboutique_path[request_type], endpoint=experiment_endpoint))
+        for region in ["west", "east", "central", "south"]:
+            if f"{region}_rps" in temp_df and temp_df[f"{region}_rps"].sum() > 0:
+                experiment.add_workload(utils.Workload(cluster=region, req_type=request_type, rps=temp_df[f"{region}_rps"].to_list(), duration=temp_df["duration"].to_list(), method=method, path=onlineboutique_path[request_type], endpoint=experiment_endpoint))
+                print(f"Adding workload for {region} with rps: {temp_df[f'{region}_rps'].to_list()} and duration: {temp_df['duration'].to_list()}")
+        # if "west_rps" in temp_df and temp_df["west_rps"].sum() > 0:
+        #     experiment.add_workload(utils.Workload(cluster="west", req_type=request_type, rps=temp_df["west_rps"].to_list(), duration=temp_df["duration"].to_list(), method=method, path=onlineboutique_path[request_type], endpoint=experiment_endpoint))
+        # if "east_rps" in temp_df and temp_df["east_rps"].sum() > 0:
+        #     experiment.add_workload(utils.Workload(cluster="east", req_type=request_type, rps=temp_df["east_rps"].to_list(), duration=temp_df["duration"].to_list(), method=method, path=onlineboutique_path[request_type], endpoint=experiment_endpoint))
+        # if "central_rps" in temp_df and temp_df["central_rps"].sum() > 0:
+        #     experiment.add_workload(utils.Workload(cluster="central", req_type=request_type, rps=temp_df["central_rps"].to_list(), duration=temp_df["duration"].to_list(), method=method, path=onlineboutique_path[request_type], endpoint=experiment_endpoint))
+        # if "south_rps" in temp_df and temp_df["south_rps"].sum() > 0:
+        #     experiment.add_workload(utils.Workload(cluster="south", req_type=request_type, rps=temp_df["south_rps"].to_list(), duration=temp_df["duration"].to_list(), method=method, path=onlineboutique_path[request_type], endpoint=experiment_endpoint))
         
     # west_rps_str = ",".join(map(str, west_rps))
     # east_rps_str = ",".join(map(str, east_rps))
@@ -688,34 +702,34 @@ def main():
     region_to_node = {
         "us-west-1": ["node1"],
         "us-east-1": ["node2"],
-        "us-central-1": ["node3"],
-        "us-south-1": ["node4"]
+        # "us-central-1": ["node3"],
+        # "us-south-1": ["node4"]
     }
     region_latencies = {
         "us-west-1": {
             "us-west-1": 0,
-            "us-central-1": 15,
-            "us-south-1": 20,
+            # "us-central-1": 15,
+            # "us-south-1": 20,
             "us-east-1": 33,
         },
         "us-east-1": {
             "us-east-1": 0,
             "us-west-1": 33, ##### 33
-            "us-south-1": 15,
-            "us-central-1": 20,
+            # "us-south-1": 15,
+            # "us-central-1": 20,
         },
-        "us-central-1": {
-            "us-central-1": 0,
-            "us-west-1": 15, ###### 15
-            "us-south-1": 10,
-            "us-east-1": 20,
-        }, 
-        "us-south-1": {
-            "us-south-1": 0,
-            "us-central-1": 10,
-            "us-west-1": 20, ###### 20
-            "us-east-1": 15,
-        }
+        # "us-central-1": {
+        #     "us-central-1": 0,
+        #     "us-west-1": 15, ###### 15
+        #     "us-south-1": 10,
+        #     "us-east-1": 20,
+        # }, 
+        # "us-south-1": {
+        #     "us-south-1": 0,
+        #     "us-central-1": 10,
+        #     "us-west-1": 20, ###### 20
+        #     "us-east-1": 15,
+        # }
     }
     
     node_to_region = {}
@@ -730,14 +744,15 @@ def main():
                     inter_cluster_latency[src_node][dst_node] = region_latencies[src_region][dst_region]
     pprint(inter_cluster_latency)
     if args.mode == "runtime":
-        utils.delete_tc_rule_in_client(network_interface, node_dict)
-        # fault_inter_cluster_latency = copy.deepcopy(inter_cluster_latency)
-        # for src, dsts in inter_cluster_latency.items():
-        #     for dst in dsts:
-        #         if dst == "node1": # west
-        #             fault_inter_cluster_latency[src][dst] += 300 # fault in tc
-        # pprint(fault_inter_cluster_latency)
-        utils.apply_all_tc_rule(network_interface, inter_cluster_latency, node_dict)
+        if FULL_TEST_PATH:
+            utils.delete_tc_rule_in_client(network_interface, node_dict)
+            # fault_inter_cluster_latency = copy.deepcopy(inter_cluster_latency)
+            # for src, dsts in inter_cluster_latency.items():
+            #     for dst in dsts:
+            #         if dst == "node1": # west
+            #             fault_inter_cluster_latency[src][dst] += 300 # fault in tc
+            # pprint(fault_inter_cluster_latency)
+            utils.apply_all_tc_rule(network_interface, inter_cluster_latency, node_dict)
     else:
         print("Skip apply_all_tc_rule in profile args.mode")
     CONFIG["mode"] = args.mode
@@ -750,8 +765,9 @@ def main():
     for experiment in experiment_list:
         for routing_rule in routing_rule_list:
             output_dir = f"{args.dir_name}/{experiment.name}/bg{args.background_noise}/{routing_rule}-cap-{args.capacity}-{random.randint(0, 1000)}"
-            if args.background_noise > 0:
-                utils.start_background_noise(node_dict, args.background_noise, victimize_node="node1", victimize_cpu=args.background_noise)
+            if FULL_TEST_PATH:
+                if args.background_noise > 0:
+                    utils.start_background_noise(node_dict, args.background_noise, victimize_node="node1", victimize_cpu=args.background_noise)
             if args.victim_background_noise == 1:
                 total_duration = rps_df["duration"].sum()
                 print(f"total_duration: {total_duration}")
@@ -800,13 +816,17 @@ def main():
             utils.kubectl_cp_from_host_to_slate_controller_pod(args.slatelog, "/app/trace.csv")
                 
             print(f"starting experiment at {datetime.now()}, expected to finish at {datetime.now() + timedelta(seconds=sum(workload.duration))}")
+            
+            ###################################################################3
             ## init only
-            if args.mode == "runtime":
-                for (point, delay, targetregion) in inject_delay:
-                    if int(delay) == 0:
-                        delay = 1
-                    call_with_delay(point, update_virtualservice_latency_k8s, "checkoutservice-vs", "default", f"{delay}ms", targetregion)
-                    print(f"update_virtualservice_latency_k8s, Delay injected: {delay}ms at {point} seconds")                
+            # if args.mode == "runtime":
+            #     for (point, delay, targetregion) in inject_delay:
+            #         if int(delay) == 0:
+            #             delay = 1
+            #         call_with_delay(point, update_virtualservice_latency_k8s, "checkoutservice-vs", "default", f"{delay}ms", targetregion)
+            #         print(f"update_virtualservice_latency_k8s, Delay injected: {delay}ms at {point} seconds")
+            ###################################################################3
+            
             start_node_cpu_monitoring(region_to_node, sum(workload.duration), f"{output_dir}/node_cpu_util.pdf")
             if args.cpu_limit != "":
                 print(f"args.cpu_limit: {args.cpu_limit}")
@@ -828,7 +848,7 @@ def main():
                 remove_cpu_limits_from_deployments()
             
             
-            start_pod_cpu_monitoring(["checkoutservice"], ["us-west-1", "us-central-1", "us-south-1", "us-east-1"], "default", sum(workload.duration), f"{output_dir}/checkout_pod_cpu_util.pdf")
+            # start_pod_cpu_monitoring(["checkoutservice"], ["us-west-1", "us-central-1", "us-south-1", "us-east-1"], "default", sum(workload.duration), f"{output_dir}/checkout_pod_cpu_util.pdf")
             
             #####################################################################################
             #####################################################################################
@@ -921,7 +941,8 @@ def main():
             
             time.sleep(10)
             utils.run_command(f"mv {output_dir} /dev/shm/")
-            utils.restart_deploy(deploy=["slate-controller", "sslateingress-us-west-1", "sslateingress-us-east-1", "sslateingress-us-central-1", "sslateingress-us-south-1", "frontend-us-west-1", "frontend-us-east-1", "frontend-us-central-1", "frontend-us-south-1"])
+            # utils.restart_deploy(deploy=["slate-controller", "sslateingress-us-west-1", "sslateingress-us-east-1", "sslateingress-us-central-1", "sslateingress-us-south-1", "frontend-us-west-1", "frontend-us-east-1", "frontend-us-central-1", "frontend-us-south-1"])
+            utils.restart_deploy(deploy=["slate-controller", "sslateingress-us-west-1", "sslateingress-us-east-1", "sslateingress-us-south-1", "frontend-us-west-1", "frontend-us-east-1", "frontend-us-south-1"])
             print(f"output_dir: {output_dir}")
     for node in node_dict:
         utils.run_command(f"ssh gangmuk@{node_dict[node]['hostname']} sudo tc qdisc del dev eno1 root", required=False, print_error=False)

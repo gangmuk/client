@@ -54,7 +54,7 @@ def encode_binary_to_csv(input_bin, output_csv):
     try:
         # Step 1: Encode binary to CSV using Vegeta
         with open(output_csv, "w") as outfile:
-            subprocess.run(["vegeta", "encode", "--to", "csv", input_bin], stdout=outfile, check=True)
+            subprocess.run(["/users/gangmuk/projects/client/vegeta", "encode", "--to", "csv", input_bin], stdout=outfile, check=True)
         print(f"Created CSV file: {output_csv}")
 
         # Step 2: Remove the last column only if the number of columns is twelve
@@ -166,8 +166,8 @@ def plot_per_cluster_latency_and_load(merged_df, cluster, input_dir):
     plt.title("Individual Latency, Load (RPS), and Average Latency Over Time")
     plt.grid()
     plt.tight_layout()
-    output_plot = f"{input_dir}/vegeta-latency-{cluster}.png"
-    plt.savefig(output_plot, dpi=300)
+    output_plot = f"{input_dir}/vegeta-latency-{cluster}.pdf"
+    plt.savefig(output_plot)
     print("*" * 30)
     print(f"Saving plot to {output_plot}")
     print("*" * 30)
@@ -196,8 +196,8 @@ def plot_latency_and_load(merged_df, input_dir):
     plt.title("Individual Latency, Load (RPS), and Average Latency Over Time")
     plt.grid()
     plt.tight_layout()
-    output_plot = f"{input_dir}/vegeta-latency.png"
-    plt.savefig(output_plot, dpi=300)
+    output_plot = f"{input_dir}/vegeta-latency.pdf"
+    plt.savefig(output_plot)
     print("*" * 30)
     print(f"Saving plot to {output_plot}")
     print("*" * 30)
@@ -279,15 +279,15 @@ def plot_latency_and_load_for_all_subdir(merged_df_list, input_dir):
     # ax2.set_ylim(top=2000)
 
     # Add title and grid
-    ax2.yaxis.set_major_locator(MultipleLocator(100))
+    # ax2.yaxis.set_major_locator(MultipleLocator(100))
     ax2.grid(axis="y", which="major", linestyle="-", alpha=0.5)
     plt.title(f"{input_dir.split('/')[-2:]}", fontsize=20)
     # plt.grid()
     plt.tight_layout()
 
     # Save the plot
-    output_plot = f"{input_dir}/all_clusters_latency_and_load_twins.png"
-    plt.savefig(output_plot, dpi=300)
+    output_plot = f"{input_dir}/all_clusters_latency_and_load_twins.pdf"
+    plt.savefig(output_plot)
     print("*" * 30)
     print(f"Saving combined plot to {output_plot}")
     print("*" * 30)
@@ -324,8 +324,8 @@ def plot_latency_cdf(merged_df_list, input_dir):
     plt.ylim(bottom=0, top=1.01)
     plt.tight_layout()
     
-    output_plot = f"{input_dir}/latency_cdf.png"
-    plt.savefig(output_plot, dpi=300)
+    output_plot = f"{input_dir}/latency_cdf.pdf"
+    plt.savefig(output_plot)
     plt.close()
     
     print("*" * 30)

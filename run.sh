@@ -1,11 +1,13 @@
 #!/bin/bash
 
-dir="/users/gangmuk/projects/client/coefficient-and-complete-trace/Xeon-E5-2660-rs630-bg30/vegeta"
-slatelog=${dir}/replicated-xt-e-c-s-trace.csv
+# dir="/users/gangmuk/projects/client/coefficient-and-complete-trace/Xeon-E5-2660-rs630-bg30/vegeta"
+# slatelog=${dir}/replicated-xt-e-c-s-trace.csv
+dir="/users/gangmuk/projects/client/coefficient-and-complete-trace/c8220/bg30"
+slatelog=${dir}/replicated-e-trace-one-trace.csv
 mode="runtime"
 load_config=1
 duration=120
-dir_name="all-four-experiment"
+dir_name="test-gangmuk"
 
 e2e_coef_file=${dir}/poly-rt-coef.csv
 coefficient_file=${dir}/poly-xt-coef.csv
@@ -14,9 +16,11 @@ delay_injected=(0)
 
 # routing_rules=("SLATE-with-jumping-global-continuous-profiling" "SLATE-without-jumping" "SLATE-with-jumping-global" "WATERFALL2")
 
-routing_rules=("SLATE-with-jumping-global")
+# routing_rules=("SLATE-with-jumping-global-with-optimizer-without-continuous-profiling")
+routing_rules=("SLATE-with-jumping-global-without-optimizer-without-continuous-profiling")
 rps_file_list=("rps.csv")
-cpu_limits=("checkoutservice:200m:south:130")
+# cpu_limits=("checkoutservice:200m:south:130")
+cpu_limits=("")
 capacities=("1500")
 
 for rps_file in "${rps_file_list[@]}"; do

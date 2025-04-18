@@ -705,6 +705,7 @@ def run_vegeta(workload, output_dir):
         
         cmd = cmd_1 + headers + cmd_2 + cmd_3
         
+        print(f"vegeta cmd: {cmd}")
         # echo 'POST http://node5.slate-gm.istio-pg0.cloudlab.umass.edu:32048/cart/checkout?email=fo%40bar.com&street_address=405&zip_code=945&city=Fremont&state=CA&country=USA&credit_card_number=5555555555554444&credit_card_expiration_month=12&credit_card_expiration_year=2025&credit_card_cvv=222' | ./vegeta attack -rate=2000 -duration=10s -timeout=5s -header='x-slate-destination: west' | tee vegeta-test.results.bin | ./vegeta report > vegeta_stats.txt
         
         # print(f"vegeta cmd: {cmd}")

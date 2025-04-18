@@ -19,7 +19,7 @@ def encode_binary_to_csv(input_bin, output_csv):
     print(f"Converting {input_bin} to {output_csv}...")
     try:
         with open(output_csv, "w") as outfile:
-            subprocess.run(["vegeta", "encode", "--to", "csv", input_bin], stdout=outfile, check=True)
+            subprocess.run(["/users/gangmuk/projects/client/vegeta", "encode", "--to", "csv", input_bin], stdout=outfile, check=True)
         print(f"Created CSV file: {output_csv}")
         df = pd.read_csv(output_csv, header=None)
         if df.shape[1] == 12:
