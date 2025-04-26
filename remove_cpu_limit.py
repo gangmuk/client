@@ -19,7 +19,7 @@ def remove_cpu_limits_from_deployments(namespace='default'):
             if container.resources is not None:
                 container.resources = None
                 updated = True
-                print(f"Setting resources to None for container {container.name} in deployment {deployment.metadata.name}")
+                # print(f"Setting resources to None for container {container.name} in deployment {deployment.metadata.name}")
 
         # Update the deployment if we modified the resources
         if updated:

@@ -1,8 +1,0 @@
-sslateingress,sslateingress@POST@/cart,sslateingress@POST@/cart,0.00018776196796424862
-sslateingress,sslateingress@POST@/cart,intercept,0.3860903815765377
-productcatalogservice,productcatalogservice@POST@/hipstershop.ProductCatalogService/GetProduct,productcatalogservice@POST@/hipstershop.ProductCatalogService/GetProduct,8.615254007909692e-05
-productcatalogservice,productcatalogservice@POST@/hipstershop.ProductCatalogService/GetProduct,intercept,0.5525037464531448
-frontend,frontend@POST@/cart,frontend@POST@/cart,0.0045256398988576495
-frontend,frontend@POST@/cart,intercept,-43.399977135053994
-cartservice,cartservice@POST@/hipstershop.CartService/AddItem,cartservice@POST@/hipstershop.CartService/AddItem,5.221675986287695e-05
-cartservice,cartservice@POST@/hipstershop.CartService/AddItem,intercept,4.773953723898128

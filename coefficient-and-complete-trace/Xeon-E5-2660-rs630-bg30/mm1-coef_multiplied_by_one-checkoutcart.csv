@@ -1,8 +1,0 @@
-cartservice,cartservice@POST@/hipstershop.CartService/GetCart,a,1.296640185002541
-emailservice,emailservice@POST@/hipstershop.EmailService/SendOrderConfirmation,a,0.992396114493801
-paymentservice,paymentservice@POST@/hipstershop.PaymentService/Charge,a,1.0083129382316727
-frontend,frontend@POST@/cart/checkout,a,18.555908905583124
-recommendationservice,recommendationservice@POST@/hipstershop.RecommendationService/ListRecommendations,a,4.016290213887213
-checkoutservice,checkoutservice@POST@/hipstershop.CheckoutService/PlaceOrder,a,33.20452266825938
-sslateingress,sslateingress@POST@/cart/checkout,a,4.614811509137408
-shippingservice,shippingservice@POST@/hipstershop.ShippingService/ShipOrder,a,0.6029866509829049

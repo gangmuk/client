@@ -1,9 +1,0 @@
-west_rps,east_rps,central_rps,south_rps,request_type,duration,total_rps
-50,60,80,100,checkoutcart,30,290
-248,1206,954,314,checkoutcart,120,2522
-1312,966,310,446,checkoutcart,120,2834
-580,358,1290,930,checkoutcart,120,3158
-938,442,1198,213,checkoutcart,120,2746
-924,406,462,306,checkoutcart,120,2098
-868,1142,834,98,checkoutcart,120,2942
-1070,534,372,1134,checkoutcart,120,3010
