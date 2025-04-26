@@ -683,6 +683,8 @@ class Experiment:
         self.hash_mod = 1
         self.normalization = dict()
         self.workload_raw = dict()
+        self.jumping_interval = 30
+        self.jumping_warm_start = 3
         
     def set_name(self, name):
         self.name = name
@@ -752,7 +754,8 @@ def update_wasm_env_var(namespace, plugin_name, hillclimbing_key, hillclimbing_v
                    
 # One workload means one client. One client means one request type and a list of RPS & Duration>.
 class Workload:
-    def __init__(self, cluster: str, req_type: str, rps: list, duration: list, method: str, path: str, hdrs: dict = {}, endpoint="", vegeta_per="1s"):
+    def __init__(self, cluster: str, req_type: str, rps: list, duration: list, method: str, path: str, hdrs: dict = {}, endpoint="", vegeta_per="1s",
+                 start_id=0, num_ids=1):
         self.cluster = cluster
         self.req_type = req_type
         self.rps = rps
@@ -764,6 +767,8 @@ class Workload:
         # self.name = f"{cluster}-{req_type}-{rps}"
         self.endpoint = endpoint
         self.vegeta_per = vegeta_per
+        self.start_id = start_id
+        self.num_ids = num_ids
         if len(rps) != len(duration):
             print(f"ERROR: rps and duration length mismatch")
             print(f"rps: {rps}")
@@ -855,7 +860,7 @@ def run_vegeta(workload, output_dir):
         
         # echo 'POST http://node5.slate-gm.istio-pg0.cloudlab.umass.edu:32048/cart/checkout?email=fo%40bar.com&street_address=405&zip_code=945&city=Fremont&state=CA&country=USA&credit_card_number=5555555555554444&credit_card_expiration_month=12&credit_card_expiration_year=2025&credit_card_cvv=222' | ./vegeta attack -rate=100 -duration=10s -timeout=5s -header='x-slate-destination: south' | tee results.bin | ./vegeta report
 
-def run_vegeta_go(workload, output_dir, max_id=1, query_param="record_id"):
+def run_vegeta_go(workload, output_dir, start_id=0, num_ids=1, query_param="record_id"):
     for i in range(len(workload.rps)):
         print(f"start-{i}, {workload.req_type} RPS {workload.rps[i]} to {workload.cluster} cluster for {workload.duration[i]}s")
 
@@ -870,10 +875,11 @@ def run_vegeta_go(workload, output_dir, max_id=1, query_param="record_id"):
         cmd = [
             "./vegeta_runner",
             f"-method={workload.method}",
-            f"-url={workload.endpoint}",     # e.g., http://node5...
-            f"-path={workload.path}",        # e.g., /getRecord
-            f"-query-param={query_param}",   # configurable!
-            f"-max-id={max_id}",
+            f"-url={workload.endpoint}",
+            f"-path={workload.path}",
+            f"-query-param={query_param}",
+            f"-start-id={start_id}",
+            f"-num-ids={num_ids}",
             f"-headers={headers_str}",
             f"-rps={workload.rps[i]}",
             f"-duration={workload.duration[i]}",

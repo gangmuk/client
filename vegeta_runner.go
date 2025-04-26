@@ -34,7 +34,8 @@ func main() {
 	baseURL := flag.String("url", "", "Base URL (e.g. http://host:port)")
 	path := flag.String("path", "/getRecord", "Path to request (no trailing slash)")
 	queryParam := flag.String("query-param", "id", "Query parameter name for ID injection")
-	maxID := flag.Int("max-id", 1000, "Max record ID before wraparound")
+	startID := flag.Int("start-id", 0, "Starting ID value")
+	numIDs := flag.Int("num-ids", 1000, "Number of unique IDs to use before wrapping")
 	headersStr := flag.String("headers", "", "Comma-separated headers (key1:val1,key2:val2)")
 	rps := flag.Int("rps", 100, "Requests per second")
 	duration := flag.Int("duration", 10, "Duration in seconds")
@@ -53,7 +54,7 @@ func main() {
 
 	var counter int
 	targeter := func(t *vegeta.Target) error {
-		id := (counter % *maxID) + 1
+		id := *startID + (counter % *numIDs)
 		t.Method = *method
 		t.URL = fmt.Sprintf("%s%s?%s=%d", *baseURL, *path, *queryParam, id)
 		t.Header = headers

@@ -59,7 +59,7 @@ stats_mutex = Lock()
 cluster_pcts = {}
 
 
-def fit_mm1_model(data, y_col_name, svc_name, ep_str, cid, directory):
+def fit_mm1_model(data, y_col_name, svc_name, ep_str, cid, directory, multiplier=1.05):
     plt.figure()
     df = pd.DataFrame(data)
     x_colnames = [x for x in df.columns if x != y_col_name]
@@ -69,48 +69,198 @@ def fit_mm1_model(data, y_col_name, svc_name, ep_str, cid, directory):
         print(f"Fit the function each endpoint separately")
         assert False
     x_col = x_colnames[0]
+    max_rps = df[x_col].max()
+    
+    ###################################
+    ## original
     df['utilization-'+x_col] = df[x_col]
     df['utilization-'+x_col] = df['utilization-'+x_col] / df['utilization-'+x_col].max()
+    ###################################
+    ## new
+    # capacity_estimate = max_rps * 0.95 
+    # df['utilization-'+x_col] = df[x_col] / capacity_estimate
+    ###################################
+    
     u_ = df['utilization-'+x_col]
     y_ = df[y_col_name]
     print(f"len(u): {len(u_)}, len(y_): {len(y_)}")
     if np.isinf(u_).any() or np.isnan(u_).any():
         print("Infinite or NaN values found in 'u'")
     # plt.scatter(u_, y_, color='blue', alpha=0.1, label='Data')
-    max_rps = df[x_col].max()
     print(f"max_rps: {max_rps}")
     norm_u_ = u_*max_rps
     plt.scatter(norm_u_, y_, color='red', alpha=0.1, label='Data')
-    constant = 1.08
+    ###################################
+    ## original
     def mm1_model(u, a, b):
         amplified_a = a * 1
-        return (amplified_a) / (1*constant - u)+b
+        return (amplified_a) / (1*multiplier - u)+b
+    ###################################
+    ## new
+    # def mm1_model(u, a, c, b):
+    #     return a / (c - u) + b
+    ###################################
+    
+    ###################################
+    ## original
     popt, pcov = curve_fit(mm1_model, u_, y_, maxfev=10000)
+    ###################################
+    ## new
+    # p0 = [0.8, 1.0, 0.2]  # Initial guesses for a, c, b
+    # popt, pcov = curve_fit(mm1_model, u_, y_, p0=p0, maxfev=10000)
+    # a, c, b = popt
+    ###################################
     print(f"popt = {popt}")
-    # u_plot = np.linspace(min(u_), max(u_)*constant * 0.99, 100)  # Avoid division by zero at u=1
-    u_plot = np.linspace(min(u_), max(u_)*constant, 100)  # Avoid division by zero at u=1
+    ###################################
+    ## original
+    u_plot = np.linspace(min(u_), max(u_)*multiplier, 100)  # Avoid division by zero at u=1
+    ###################################
+    ## new
+    # u_plot = np.linspace(min(u_), 0.99*c, 100)
+    ###################################
     y_plot = mm1_model(u_plot, *popt)
-    # print(f"u_plot: {u_plot}")
-    # print(f"y_plot: {y_plot}")
     norm_u_plot = u_plot*max_rps
-    #plt.plot(norm_u_plot, y_plot, 'r-', label=f'MM1 Fit: $\\frac{{a}}{{c-u}}+b$,a={popt[0]}, c={u_.max()*constant}, b={popt[1]}')
-    plt.plot(norm_u_plot, y_plot, 'b-', label=f'MM1 Fit: $\\frac{{a}}{{c-u}}+b$\n$a={popt[0]:.2f}, c={(u_.max()*constant):.2f}, b={popt[1]:.2f}$')
-    # plt.plot(u_plot, y_plot, 'r-', label=f'MM1 Fit: $\\frac{{a}}{{1-u}}$, a={popt[0]:.2f}')
+    
+    ###################################
+    ## original
+    c = u_.max()*multiplier
+    plt.plot(norm_u_plot, y_plot, 'b-', label=f'MM1 Fit: $\\frac{{a}}{{c-u}}+b$\n$a={popt[0]:.2f}, c={c:.2f}, b={popt[1]:.2f}$')
+    ###################################
+    ## new
+    # rps_plot = u_plot * capacity_estimate
+    # plt.plot(rps_plot, y_plot, 'b-', label=f'MM1 Fit: $\\frac{{a}}{{c-u}}+b$\n$a={a:.2f}, c={c:.2f}, b={b:.2f}$')
+    ###################################
+    
     plt.xlabel('Utilization (u_)')
     plt.ylabel(y_col_name + " ms")
     plt.title(f'{ep_str} in {cid}')
     plt.legend()
     plt.ylim(0, ylim)
     # plt.ylim(0, max(y_)*1.1)
-    pdf_fn = f"{directory}/mm1-{svc_name}-{target_y}.pdf"
+    plt.xlim(0, 1000)
+    pdf_fn = f"{directory}/mm1-c{c:.2f}-{svc_name}-{target_y}.pdf"
     plt.savefig(pdf_fn)
     plt.show()
     # Output the model parameters and where the plot was saved
+    ###################################
+    ## original
     print(f"Model parameters: a = {popt}")
+    ###################################
+    ## new
+    # print(f"Model parameters: a={a:.2f}, c={c:.2f}, b={b:.2f}")
+    ###################################
     print(f"Output plot saved as: {pdf_fn}")
     # Return model parameters as a dictionary if needed
-    return {'a': popt[0]}
+    
+    return {'a': popt[0], 'b': popt[1]}
 
+
+def revised_fit_mm1_model(data, y_col_name, svc_name, ep_str, cid, directory):
+    plt.figure(figsize=(10, 6))
+    df = pd.DataFrame(data)
+    x_colnames = [x for x in df.columns if x != y_col_name]
+    
+    if len(x_colnames) > 1:
+        print(f"ERROR: {svc_name} service has more than one endpoint")
+        print(f"Fit the function each endpoint separately")
+        assert False
+    
+    x_col = x_colnames[0]
+    max_rps = df[x_col].max()
+    print(f"max_rps: {max_rps}")
+    
+    # For MM1 model, we'll work with the actual RPS values
+    rps = df[x_col]
+    latency = df[y_col_name]
+    
+    # Plot the data
+    plt.scatter(rps, latency, color='red', alpha=0.1, label='Data')
+    
+    # Define MM1 model with RPS instead of utilization
+    def mm1_model(rps, a, capacity, b):
+        return a / (capacity - rps) + b
+    
+    # Set bounds carefully
+    # Lower bounds: small positive values, capacity > max_rps
+    # Upper bounds: reasonable upper limits
+    capacity_min = max_rps * 1.01  # Capacity must be > max observed RPS
+    capacity_max = max_rps * 1.5   # But not unreasonably high
+    
+    bounds = ([0.001, capacity_min, 0.001], [100.0, capacity_max, 50.0])
+    
+    # Initial parameter guesses - MUST be within bounds
+    # Start with reasonable estimates within the bounds
+    a_init = 10.0  # Moderate value for scale parameter
+    capacity_init = max_rps * 1.05  # Slightly above max_rps
+    b_init = 1.0   # Small base latency
+    
+    # Ensure capacity_init is within bounds
+    capacity_init = min(max(capacity_init, capacity_min), capacity_max)
+    
+    p0 = [a_init, capacity_init, b_init]
+    
+    print(f"Initial guesses: a={p0[0]}, capacity={p0[1]}, b={p0[2]}")
+    print(f"Bounds: lower={bounds[0]}, upper={bounds[1]}")
+    
+    # Fit the model
+    try:
+        # First try with robust method
+        popt, pcov = curve_fit(
+            mm1_model, rps, latency, 
+            p0=p0,
+            bounds=bounds,
+            method='trf',
+            max_nfev=10000
+        )
+        a, capacity, b = popt
+        print(f"Fitted parameters: a={a:.2f}, capacity={capacity:.2f}, b={b:.2f}")
+    except Exception as e:
+        print(f"Robust fitting failed: {e}")
+        try:
+            # Fallback to simpler method
+            popt, pcov = curve_fit(mm1_model, rps, latency, p0=p0, bounds=bounds, maxfev=10000)
+            a, capacity, b = popt
+            print(f"Simple fitting succeeded: a={a:.2f}, capacity={capacity:.2f}, b={b:.2f}")
+        except Exception as e:
+            print(f"All fitting methods failed: {e}")
+            # Use initial guesses as fallback
+            a, capacity, b = p0
+            print(f"Using initial estimates: a={a:.2f}, capacity={capacity:.2f}, b={b:.2f}")
+    
+    # Create data points for the fitted model curve
+    rps_plot = np.linspace(0, capacity * 0.99, 100)  # Stay safely below capacity
+    latency_model = mm1_model(rps_plot, a, capacity, b)
+    
+    # Plot the model
+    plt.plot(rps_plot, latency_model, 'b-', linewidth=2,
+             label=f'MM1 Fit: $\\frac{{a}}{{c-u}}+b$\n$a={a:.2f}, c={capacity:.2f}, b={b:.2f}$')
+    
+    # Add vertical line at estimated capacity
+    plt.axvline(x=capacity, color='green', linestyle='--', alpha=0.7,
+               label=f'Estimated Capacity: {capacity:.1f} RPS')
+    
+    plt.xlabel('RPS')
+    plt.ylabel(f'{y_col_name} ms')
+    plt.title(f'{ep_str} in {cid}')
+    plt.legend()
+    
+    # Use ylim if defined, otherwise scale automatically
+    if 'ylim' in globals():
+        plt.ylim(0, ylim)
+    else:
+        plt.ylim(0, max(latency) * 1.1)
+    
+    plt.xlim(0, 1000)
+    plt.grid(True, alpha=0.3)
+    
+    pdf_fn = f"{directory}/revised-mm1-{svc_name}-{target_y}.pdf"
+    plt.savefig(pdf_fn)
+    plt.show()
+    
+    print(f"Model parameters: a={a:.2f}, capacity={capacity:.2f}, b={b:.2f}")
+    print(f"Output plot saved as: {pdf_fn}")
+    
+    return {'a': a, 'capacity': capacity, 'b': b}
 
 
 def fit_polynomial_regression(data, y_col_name, svc_name, ep_str, cid, directory, degree):
@@ -205,7 +355,11 @@ def train_latency_function_with_trace(model, traces, directory, degree):
                 if model == "poly":
                     coef_dict[svc_name][ep_str] = fit_polynomial_regression(data, "latency", svc_name, ep_str, cid, directory, degree)
                 elif model == "mm1":
-                    coef_dict[svc_name][ep_str] = fit_mm1_model(data, "latency", svc_name, ep_str, cid, directory)
+                    # multipliers = [1.05, 1.1, 1.2]
+                    multipliers = [1.05]
+                    for multiplier in multipliers:
+                        coef_dict[svc_name][ep_str] = fit_mm1_model(data, "latency", svc_name, ep_str, cid, directory, multiplier)
+                    # coef_dict[svc_name][ep_str] = revised_fit_mm1_model(data, "latency", svc_name, ep_str, cid, directory)
                     print(f"coef_dict[svc_name][ep_str]: {coef_dict[svc_name][ep_str]}")
                 else:
                     print(f"ERROR: model: {model}")
@@ -380,9 +534,15 @@ if __name__ == "__main__":
     
     columns = ["cluster_id","svc_name","method","path","trace_id","span_id","parent_span_id","st","et","rt","xt","ct","call_size","inflight_dict","rps_dict"]
     
-    merged_trace_file_name = merge_files(directory, "trace.slatelog", columns)
-    print(f"* Output, merged_trace_file_name: {merged_trace_file_name}")
-    # merged_trace_file_name = "mergedtrace.slatelog"
+    
+    ##########################
+    # merged_trace_file_name = merge_files(directory, "trace.slatelog", columns)
+    # print(f"* Output, merged_trace_file_name: {merged_trace_file_name}")
+    ##########################
+    ## skip file merge step, use existing file.
+    merged_trace_file_name = "merged-trace.slatelog"
+    ##########################
+    
     ts = time.time()
     # line_index_to_remove = 797046
     # line_index_to_remove = 229902
@@ -447,19 +607,23 @@ if __name__ == "__main__":
     stitched_df.to_csv(f"stitched_df-{subdir}.csv")
     print(f"Output stitched_df-{subdir}.csv")
 
-    degree = 2 # NOTE
-    poly_coef_dict = train_latency_function_with_trace("poly", stitched_traces, directory, degree)
-    print("-"*80)
-    multiplied_by_one_fn = f"{directory}/poly-coef_multiplied_by_one-{subdir}.csv"
-    with open(multiplied_by_one_fn, "w") as f:
-        for svc_name in poly_coef_dict:
-            for ep_str in poly_coef_dict[svc_name]:
-                for feature in poly_coef_dict[svc_name][ep_str]:
-                    print(f'poly_coef_dict,{svc_name},{ep_str},{feature},{poly_coef_dict[svc_name][ep_str][feature]}')
-                    f.write(f'{svc_name},{ep_str},{feature},{poly_coef_dict[svc_name][ep_str][feature]}\n')
-    print("-"*80)
-    print(f"Output: {multiplied_by_one_fn}")
+    ###############################
+    ## skip polynomial regression
+    # degree = 2 # NOTE
+    # poly_coef_dict = train_latency_function_with_trace("poly", stitched_traces, directory, degree)
+    # print("-"*80)
+    # multiplied_by_one_fn = f"{directory}/poly-coef_multiplied_by_one-{subdir}.csv"
+    # with open(multiplied_by_one_fn, "w") as f:
+    #     for svc_name in poly_coef_dict:
+    #         for ep_str in poly_coef_dict[svc_name]:
+    #             for feature in poly_coef_dict[svc_name][ep_str]:
+    #                 print(f'poly_coef_dict,{svc_name},{ep_str},{feature},{poly_coef_dict[svc_name][ep_str][feature]}')
+    #                 f.write(f'{svc_name},{ep_str},{feature},{poly_coef_dict[svc_name][ep_str][feature]}\n')
+    # print("-"*80)
+    # print(f"Output: {multiplied_by_one_fn}")
     
+    ###############################
+    ## mm1
     mm1_coef_dict = train_latency_function_with_trace("mm1", stitched_traces, directory, degree=None)
     print("-"*80)
     multiplied_by_one_fn = f"{directory}/mm1-coef_multiplied_by_one-{subdir}.csv"

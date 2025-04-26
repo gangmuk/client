@@ -28,6 +28,7 @@ import egress
 
 CLOUDLAB_CONFIG_XML="/users/gangmuk/projects/slate-benchmark/config.xml"
 network_interface = "eno1"
+FAST_TEST = False
 
 def start_node_cpu_monitoring(region_to_node, duration, filename, username="gangmuk"):
     # Run the collect_cpu_utilization function in a separate thread
@@ -354,6 +355,46 @@ def update_hillclimbing_value(namespace, plugin_name, hillclimbing_key, hillclim
     )
     print(f"HILLCLIMBING key {hillclimbing_key} value updated to {hillclimbing_value} in WasmPlugin '{plugin_name}'.")
 
+from kubernetes import client, config
+
+def set_env_vars_in_deployment(deployment_name, namespace, env_vars: dict):
+    """
+    Set or update multiple environment variables in a Kubernetes deployment.
+
+    :param deployment_name: Name of the deployment
+    :param namespace: Kubernetes namespace
+    :param env_vars: Dictionary of environment variables to set {key: value}
+    """
+    # Load Kubernetes config (from default kubeconfig or in-cluster config)
+    config.load_kube_config()
+
+    api = client.AppsV1Api()
+
+    # Get current deployment
+    deployment = api.read_namespaced_deployment(name=deployment_name, namespace=namespace)
+
+    for container in deployment.spec.template.spec.containers:
+        if container.env is None:
+            container.env = []
+
+        # Create a map of current env vars for quick lookup
+        current_env = {env.name: env for env in container.env}
+
+        for key, value in env_vars.items():
+            if key in current_env:
+                current_env[key].value = value
+            else:
+                container.env.append(client.V1EnvVar(name=key, value=value))
+
+    # Patch the deployment
+    api.patch_namespaced_deployment(
+        name=deployment_name,
+        namespace=namespace,
+        body=deployment
+    )
+
+    print(f"Updated env vars {list(env_vars.keys())} in deployment {deployment_name}")
+
 
 def change_jumping_mode(local=False):
     file_loc = "https://raw.githubusercontent.com/ServiceLayerNetworking/slate-wasm-bootstrap/main/slate_service.wasm"
@@ -413,6 +454,12 @@ def main():
         print("Usage: python run_wrk.py <dir_name>\nexit...")
         exit()
     
+    westCacheStart = 0
+    southCacheStart = 100
+    if len(sys.argv) == 5:
+        westCacheStart = int(sys.argv[3])
+        southCacheStart = int(sys.argv[4])
+    
     CONFIG = {}
     CONFIG['background_noise'] =  background_noise
     CONFIG['traffic_segmentation'] = 1
@@ -421,13 +468,18 @@ def main():
     experiment_endpoint = f"http://{igw_host}:{igw_nodeport}"
 
     degree = 2
+    # degree = 111 # mm1
+    # degree = 222 # mm1 approximated with piecewise linear function
+    # degree = 333 # mm1 approximated with piecewise linear function and also with load shedding variable
     
     # mode = "profile"
     mode = "runtime"
     # routing_rule_list = ["LOCAL"]
     # routing_rule_list = ["SLATE-without-jumping", "SLATE-with-jumping-global", "SLATE-with-jumping-local"]
     # routing_rule_list = ["SLATE-without-jumping"]
-    routing_rule_list = ["SLATE-with-jumping-global"]
+    # routing_rule_list = ["SLATE-with-jumping-global"]
+    routing_rule_list = ["SLATE-without-jumping","SLWTE-with-jumping-global"]
+
     # routing_rule_list = ["WATERFALL2"]
     
     onlineboutique_path = {
@@ -445,33 +497,47 @@ def main():
     total_num_services = 2
  
     workloads = {
-        "w100": {
+        "w100c500e1200s100": {
             "west": {
                 # "checkoutcart": [(0, 50), (60, 400), (360, 1200)],
-                "getRecord": [(0, 10)],
+                "getRecord": [(0, 100)],
                 # "addtocart": [(0, 500)],
                 # "emptycart": [(0, 100)]
             },
             "central": {
                 # "checkoutcart": [(0, 50), (60, 800), (360, 700)],
-                "getRecord": [(0, 10)],
+                "getRecord": [(0, 1150)],
                 # "addtocart": [(0, 2500)],
                 # "emptycart": [(0, 1)]
             },
             "east": {
             #     "checkoutcart": [(0, 50), (60, 1300), (360, 800)],
-                "getRecord": [(0, 1200)],
+                "getRecord": [(0, 300)],
 
             # #     "multicore": [(0, 200)],
             },
             "south": {
             #     "checkoutcart": [(0, 50), (60, 600), (360, 500)],
-                "getRecord": [(0, 10)],
+                "getRecord": [(0, 100)],
 
 
             # #     "multicore": [(0, 200)],
             },
         }
+    }
+    cachespace = {
+        "west": {
+            "getRecord": (westCacheStart, 100),
+        },
+        "central": {
+            "getRecord": (0, 100),
+        },
+        "east": {
+            "getRecord": (200, 100),
+        },
+        "south": {
+            "getRecord": (southCacheStart, 100),
+        },
     }
     vegeta_per = {
         # "central": {
@@ -508,9 +574,11 @@ def main():
                 dur_list.append(workload_list[i+1][0] - start)
         return dur_list
 
-    for name, w in workloads.items():
-        hillclimb_interval = 30
-        experiment_dur = 180
+    for name, w_ in workloads.items():
+        jumping_interval = 15
+        jumping_warm_start = 2
+
+        experiment_dur = 60*3
         # actual normalization: 4
         # CPU-based normalization: 1/4
         normalization_dict = {
@@ -529,14 +597,18 @@ def main():
         experiment = utils.Experiment()
         
         experiment.normalization = normalization_dict
-        experiment.workload_raw = w
-        experiment.set_hillclimb_interval(hillclimb_interval)
-        for region in w:
-            for req_type in w[region]:
+        experiment.workload_raw = w_
+        experiment.jumping_interval = jumping_interval
+        experiment.jumping_warm_start = jumping_warm_start
+        for region in w_:
+            for req_type in w_[region]:
                 # rps_list is the second element of the tuple in the list
-                rps_list = [rps for start, rps in w[region][req_type]]
-                experiment.add_workload(utils.Workload(cluster=region, req_type=req_type, rps=rps_list, duration=construct_dur_list(w[region][req_type], experiment_dur),
-                                                        method=method, path=onlineboutique_path[req_type], hdrs={}, endpoint=experiment_endpoint, vegeta_per=vegeta_per.get(region, {}).get(req_type, "1s")))
+                rps_list = [rps for start, rps in w_[region][req_type]]
+                workload = utils.Workload(cluster=region, req_type=req_type, rps=rps_list, duration=construct_dur_list(w_[region][req_type], experiment_dur),
+                                                        method=method, path=onlineboutique_path[req_type], hdrs={}, endpoint=experiment_endpoint, vegeta_per=vegeta_per.get(region, {}).get(req_type, "1s"))
+                workload.start_id = cachespace[region][req_type][0]
+                workload.num_ids = cachespace[region][req_type][1]
+                experiment.add_workload(workload)
         experiment.hash_mod = 5
         experiment_name = f"{req_type}-{name}"
         # experiment.set_injected_delay([(1, 300, "us-west-1")])
@@ -557,33 +629,32 @@ def main():
     
     region_latencies = {
         "us-west-1": {
-            "us-central-1": 15,
-            "us-south-1": 20,
-            "us-east-1": 33,
+            "us-central-1": 30,
+            "us-south-1": 200,
+            "us-east-1": 330,
         },
         "us-east-1": {
-            "us-south-1": 15,
-            "us-central-1": 20,
+            "us-south-1": 150,
+            "us-central-1": 200,
         },
         "us-central-1": {
-            "us-south-1": 10,
+            "us-south-1": 30,
         }
     }
-    #####################################
-    
-    #####################################
-    #### Two clusters
-    # region_to_node = {
-    #     "us-west-1": ["node1"],
-    #     "us-east-1": ["node2"],
-    # }
-    
     # region_latencies = {
     #     "us-west-1": {
+    #         "us-central-1": 15,
+    #         "us-south-1": 20,
     #         "us-east-1": 33,
+    #     },
+    #     "us-east-1": {
+    #         "us-south-1": 15,
+    #         "us-central-1": 20,
+    #     },
+    #     "us-central-1": {
+    #         "us-south-1": 10,
     #     }
     # }
-    #####################################
     
     node_to_region = {}
     for region, nodes in region_to_node.items():
@@ -619,15 +690,16 @@ def main():
     print("inter_cluster_latency")
     pprint(inter_cluster_latency)
     
-    utils.pkill_background_noise(node_dict)
+    if not FAST_TEST:
+        utils.pkill_background_noise(node_dict)
 
 
     if mode == "runtime":
-        utils.delete_tc_rule_in_client(network_interface, node_dict)
-        if mode == "runtime":
+        if not FAST_TEST:
+            utils.delete_tc_rule_in_client(network_interface, node_dict)
             utils.apply_all_tc_rule(network_interface, inter_cluster_latency, node_dict)
-        else:
-            print("Skip apply_all_tc_rule in profile mode")
+    else:
+        print("Skip apply_all_tc_rule in profile mode")
 
     CONFIG["mode"] = mode
     for src_node in inter_cluster_latency:
@@ -642,27 +714,54 @@ def main():
     CONFIG["load_coef_flag"] = 1
     
     
-    utils.restart_deploy(deploy=["slate-controller"])
+    if not FAST_TEST:
+        # Restart slate-controller before starting experiment
+        utils.restart_deploy(deploy=["slate-controller"])
     
     # utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-west-1"])
     
     
     for experiment in experiment_list:
         for routing_rule in routing_rule_list:
-            output_dir = f"{sys_arg_dir_name}/{experiment.name}/{routing_rule}"
-            utils.start_background_noise(node_dict, CONFIG['background_noise'], victimize_node="node1", victimize_cpu=CONFIG['background_noise'])
+            if not FAST_TEST:
+                utils.start_background_noise(node_dict, CONFIG['background_noise'], victimize_node="node1", victimize_cpu=CONFIG['background_noise'])
 
             # update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-central-1")
             # update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-south-1")
             # update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-east-1")
             # update_virtualservice_latency_k8s("checkoutservice-vs", "default", f"1ms", "us-west-1")
+            
+            output_dir = f"{sys_arg_dir_name}/{experiment.name}/{routing_rule}"
             print(f"mode: {mode}")
             print(f"routing_rule: {routing_rule}")
+            set_env_vars_in_deployment(
+                "slate-controller",
+                "default",
+                {
+                    "JUMPING_INTERVAL_SECONDS": str(experiment.jumping_interval),
+                    "JUMPING_WARM_START_THRESH": str(experiment.jumping_warm_start)
+                }
+            )
             utils.check_all_pods_are_ready()
             utils.create_dir(output_dir)
             utils.create_dir(f"{output_dir}/resource_alloc")
             utils.create_dir(f"{output_dir}/resource_usage")
+            utils.create_dir(f"{output_dir}/cachewarmup")
             print(f"**** output_dir: {output_dir}")
+
+            print("Warming caches...")
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                future_list = list()
+                for workload in experiment.workloads:
+                    wcopy = copy.deepcopy(workload)
+                    wcopy.rps = [100]
+                    wcopy.duration = [10]
+                    future_list.append(executor.submit(utils.run_vegeta_go, wcopy, f"{output_dir}/cachewarmup", start_id=wcopy.start_id, num_ids=wcopy.num_ids))
+                    time.sleep(0.1)
+                for future in concurrent.futures.as_completed(future_list):
+                    print(future.result())
+            print("Caches warmed up.")
+
             for workload in experiment.workloads:
                 CONFIG[f"RPS,{workload.cluster},{workload.req_type}"] = ",".join(map(str, workload.rps))
             for src, dst in experiment.normalization.items():
@@ -703,14 +802,15 @@ def main():
                     call_with_delay(point, update_virtualservice_latency_k8s, "recordservice-vs", "default", f"{delay}ms", targetregion)
                     print(f"injecting delay: {delay}ms at {point} seconds")
                 start_node_cpu_monitoring(region_to_node, sum(workload.duration), f"{output_dir}/node_cpu_util.pdf")
-                start_pod_cpu_monitoring(["frontend"], ["us-west-1", "us-central-1", "us-south-1", "us-east-1"], "default", sum(workload.duration), f"{output_dir}/frontend_pod_cpu_util.pdf")
-                start_pod_cpu_monitoring(["recordservice"], ["us-west-1", "us-central-1", "us-south-1", "us-east-1"], "default", sum(workload.duration), f"{output_dir}/record_pod_cpu_util.pdf")
+                start_pod_cpu_monitoring(["sslateingress"], ["us-west-1", "us-central-1", "us-south-1", "us-east-1"], "default", sum(workload.duration), f"{output_dir}/frontend_pod_cpu_util.pdf")
+                start_pod_cpu_monitoring(["record-service"], ["us-west-1", "us-central-1", "us-south-1", "us-east-1"], "default", sum(workload.duration), f"{output_dir}/record_pod_cpu_util.pdf")
             initial_byte_counts = utils.get_tc_byte_counts(network_interface, node_dict, inter_cluster_latency)
             print(f"initial_byte_counts: {initial_byte_counts}")
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 future_list = list()
                 for workload in experiment.workloads:
-                    future_list.append(executor.submit(utils.run_vegeta_go, workload, output_dir))
+                    future_list.append(executor.submit(utils.run_vegeta_go, workload, output_dir, start_id=workload.start_id, num_ids=workload.num_ids))
+                    # future_list.append(executor.submit(utils.run_vegeta, workload, output_dir))
                     time.sleep(0.1)
                 for future in concurrent.futures.as_completed(future_list):
                     print(future.result())
@@ -730,7 +830,7 @@ def main():
                 utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
             elif mode == "runtime":
                 if "WATERFALL" in routing_rule or "SLATE" in routing_rule:
-                    other_file_list = ["coefficient.csv", "routing_history.csv", "jumping_routing_history.csv", "jumping_latency.csv", "region_jumping_latency.csv"] # "constraint.csv", "variable.csv", "network_df.csv", "compute_df.csv"
+                    other_file_list = ["coefficient.csv", "routing_history.csv", "jumping_routing_history.csv", "jumping_latency.csv", "region_jumping_latency.csv", "expected_vs_actual_perf.csv"] # "constraint.csv", "variable.csv", "network_df.csv", "compute_df.csv"
                     for file in other_file_list:
                         src_in_pod = f"/app/{file}"
                         dst_in_host = f"{output_dir}/{routing_rule}-{file}"
@@ -743,12 +843,17 @@ def main():
                 
             # if routing_rule.startswith("SLATE-with-jumping") and os.path.exists(f"{output_dir}/SLATE-with-jumping-global-jumping_routing_history.csv"):
             if mode == "runtime":
-                utils.run_command(f"python plot_gc_jumping.py {output_dir}/{routing_rule}-jumping_routing_history.csv {output_dir}/{routing_rule}-jumping_latency.csv {output_dir}/routing_rule_plots",required=False)
+                utils.run_command(f"python plot_gc_jumping.py {output_dir}/{routing_rule}-jumping_routing_history.csv {output_dir}/{routing_rule}-jumping_latency.csv {output_dir}/jumping_routing_rule_plots",required=False)
+                utils.run_command(f"python plot_gc_jumping_paper.py {output_dir}/{routing_rule}-jumping_routing_history.csv {output_dir}/{routing_rule}-jumping_latency.csv {output_dir}/jumping_routing_rule_plots_paper",required=False)
+
                 utils.run_command(f"python plot_region_latency.py {output_dir}/{routing_rule}-region_jumping_latency.csv {output_dir}/region_jumping_latency.pdf",required=False)
-            utils.run_command(f"python plot_vegeta.py {output_dir}", required=False)
+                if routing_rule == "SLATE-with-jumping-global":
+                    utils.run_command(f"python plot_gc_jumping.py {output_dir}/{routing_rule}-routing_history.csv {output_dir}/{routing_rule}-jumping_latency.csv {output_dir}/optimizer_routing_rule_plots",required=False)
+            utils.run_command(f"python plot_script_from_main_branch/plot-vegeta-all.py {output_dir}", required=False)
             utils.run_command(f"python plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/endpoint_rps.pdf",required=False)
             utils.run_command(f"python plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/endpoint_rps_sslateingress.pdf sslateingress",required=False)
-            utils.run_command(f"python plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/endpoint_rps_corecontrast.pdf frontend",required=False)
+            utils.run_command(f"python plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/endpoint_rps_corecontrast.pdf record-service",required=False)
+            utils.run_command(f"python plot_expected_vs_actual.py {output_dir}/{routing_rule}-expected_vs_actual_perf.csv {output_dir}/expected_vs_actual_perf",required=False)
            # utils.run_command(f"python fast_plot_all.py --data_dir {output_dir}",required=False)
             # utils.run_command(f"python fast_plot.py --data_dir {output_dir}",required=False)
                 # utils.run_command(f"python plot_gc_jumping ")
@@ -764,7 +869,7 @@ def main():
             
             ## checkout cart restart
             # utils.restart_deploy(deploy=["slate-controller"], replicated_deploy=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-west-1"])
-            utils.restart_deploy(replicated_deploy=["sslateingress", "record-service"], regions=["us-west-1"])
+            # utils.restart_deploy(replicated_deploy=["sslateingress", "record-service"], regions=["us-west-1"])
             utils.pkill_background_noise(node_dict)
             
             
@@ -776,6 +881,8 @@ def main():
             # savelogs(output_dir, services=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-central-1"])
             save_controller_logs(output_dir)
             utils.restart_deploy(deploy=["slate-controller"])
+            
+    # utils.run_command(f"python plot_script_from_main_branch/plot-vegeta-all.py {sys_arg_dir_name}", required=False)
     for node in node_dict:
         utils.run_command(f"ssh gangmuk@{node_dict[node]['hostname']} sudo tc qdisc del dev {network_interface} root", required=False, print_error=False)
         print(f"delete tc qdisc rule in {node_dict[node]['hostname']}")
