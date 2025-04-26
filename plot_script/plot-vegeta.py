@@ -276,7 +276,7 @@ def plot_latency_and_load_for_all_subdir(merged_df_list, input_dir):
     ax1.set_ylim(bottom=0)
     ax1.set_xlim(left=0)
     ax2.set_ylim(bottom=0)
-    # ax2.set_ylim(top=2000)
+    ax2.set_ylim(top=1000)
 
     # Add title and grid
     # ax2.yaxis.set_major_locator(MultipleLocator(100))
@@ -348,8 +348,8 @@ if __name__ == "__main__":
         merged_df.groupby(["Cluster", "Time (s)"]).size()
         rps_per_second = merged_df.groupby(["Cluster", "Time (s)"]).size()
         merged_df["RPS"] = merged_df["Time (s)"].map(rps_per_second) 
-        for cluster in merged_df["Cluster"].unique():
-            plot_per_cluster_latency_and_load(merged_df, cluster, input_dir)
+        # for cluster in merged_df["Cluster"].unique():
+        #     plot_per_cluster_latency_and_load(merged_df, cluster, input_dir)
         # plot_latency_and_load(merged_df, input_dir)
         temp = input_dir.split("/")[-1]
         merged_df_list[temp] = merged_df

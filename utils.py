@@ -392,44 +392,158 @@ def are_all_pods_ready(namespace='default'):
     config.load_kube_config()
     v1 = client.CoreV1Api()
     pods = v1.list_namespaced_pod(namespace)
-    all_pods_ready = True
+    
     for pod in pods.items:
+        # Skip if pod is terminating
         if pod.metadata.deletion_timestamp is not None:
-            all_pods_ready = False
-            break  # Pod is terminating, so not all pods are ready
-        if pod.status.phase != 'Running' and pod.status.phase != 'Evicted':
-            all_pods_ready = False
-            break
-        if pod.status.conditions is None:
-            all_pods_ready = False
-            break
-        ready_condition_found = False
-        for condition in pod.status.conditions:
-            if condition.type == 'Ready':
-                ready_condition_found = True
-                if condition.status != 'True':
-                    all_pods_ready = False
-                    break  # Break out of the inner loop
-        if not ready_condition_found:
-            all_pods_ready = False
-            break
-    return all_pods_ready
+            return False
+            
+        # Check all containers are ready against total containers
+        if pod.status.container_statuses:
+            ready_containers = sum(1 for container in pod.status.container_statuses if container.ready)
+            total_containers = len(pod.status.container_statuses)
+            
+            # If not all containers are ready, the pod is not ready
+            if ready_containers != total_containers:
+                return False
+        else:
+            # If container statuses are not available, the pod is not ready
+            return False
+            
+        # Check pod phase as a backup check
+        if pod.status.phase != 'Running':
+            return False
+            
+        # Check ready condition as another backup
+        if pod.status.conditions:
+            ready_condition = next((condition for condition in pod.status.conditions 
+                                   if condition.type == 'Ready'), None)
+            if not ready_condition or ready_condition.status != 'True':
+                return False
+                
+    return True
 
-def check_all_pods_are_ready():
-    ts1  = time.time()                
+def check_all_pods_are_ready(namespace='default'):
+    ts1 = time.time()
+    not_ready_pods = {}  # Dictionary to track not ready pods and their timestamps
+    
     while True:
         ts2 = time.time()
-        if are_all_pods_ready():
+        
+        # Check if all pods are ready
+        if are_all_pods_ready(namespace):
             break
-        print(f"Waiting for all pods to be ready, {int(time.time()-ts1)} seconds has passed")
+            
+        # Get list of not ready pods and their deployments
+        current_not_ready = get_not_ready_pods_with_deployments(namespace)
+        current_time = time.time()
+        
+        # Update tracking dictionary with new not ready pods
+        for pod_name, deployment in current_not_ready.items():
+            if pod_name not in not_ready_pods:
+                not_ready_pods[pod_name] = {
+                    'deployment': deployment,
+                    'first_seen': current_time
+                }
+        
+        # Check for pods that have been not ready for more than 30 seconds
+        pods_to_restart = {}
+        for pod_name, data in list(not_ready_pods.items()):
+            # If pod is now ready, remove from tracking
+            if pod_name not in current_not_ready:
+                not_ready_pods.pop(pod_name)
+                continue
+                
+            # If pod has been not ready for more than 30 seconds
+            if current_time - data['first_seen'] > 30:
+                deployment = data['deployment']
+                if deployment not in pods_to_restart:
+                    pods_to_restart[deployment] = []
+                pods_to_restart[deployment].append(pod_name)
+                
+        # Restart deployments for pods that have been not ready for too long
+        for deployment, pods in pods_to_restart.items():
+            print(f"Pods {', '.join(pods)} not ready for more than 30 seconds. Restarting deployment {deployment}")
+            subprocess.run(["kubectl", "rollout", "restart", "deploy", deployment, "-n", namespace])
+            
+            # Remove restarted pods from tracking
+            for pod in pods:
+                not_ready_pods.pop(pod)
+        
+        print(f"Waiting for all pods to be ready, {int(time.time()-ts1)} seconds has passed: {not_ready_pods}")
+        
+        # Sleep logic
         sl = time.time() - ts2
         if sl <= 0:
             continue
         time.sleep(sl)
+        
     print("All pods are ready")
 
+# Helper function to get not ready pods and their deployment names
+def get_not_ready_pods_with_deployments(namespace='default'):
+    config.load_kube_config()
+    v1 = client.CoreV1Api()
+    pods = v1.list_namespaced_pod(namespace)
+    
+    not_ready_pods = {}
+    
+    for pod in pods.items:
+        # Check if pod is not ready
+        is_ready = True
+        
+        # Check if pod is terminating
+        if pod.metadata.deletion_timestamp is not None:
+            is_ready = False
+        
+        # Check if all containers are ready
+        elif pod.status.container_statuses:
+            ready_containers = sum(1 for container in pod.status.container_statuses if container.ready)
+            total_containers = len(pod.status.container_statuses)
+            
+            if ready_containers != total_containers:
+                is_ready = False
+        else:
+            is_ready = False
+            
+        # If pod is not ready, add it to our dictionary
+        if not is_ready:
+            pod_name = pod.metadata.name
+            deployment_name = get_deployment_for_pod(pod, namespace)
+            if deployment_name:
+                not_ready_pods[pod_name] = deployment_name
+                
+    return not_ready_pods
+
+# Helper function to get deployment name for a pod
+def get_deployment_for_pod(pod, namespace='default'):
+    # Extract deployment name from owner references
+    if pod.metadata.owner_references:
+        for owner_ref in pod.metadata.owner_references:
+            if owner_ref.kind == "ReplicaSet":
+                # Get the ReplicaSet to find its owner Deployment
+                rs_name = owner_ref.name
+                config.load_kube_config()
+                apps_v1 = client.AppsV1Api()
+                
+                try:
+                    rs = apps_v1.read_namespaced_replica_set(name=rs_name, namespace=namespace)
+                    
+                    # Find the Deployment owner of this ReplicaSet
+                    if rs.metadata.owner_references:
+                        for rs_owner in rs.metadata.owner_references:
+                            if rs_owner.kind == "Deployment":
+                                return rs_owner.name
+                except client.exceptions.ApiException:
+                    pass
+    
+    # Alternatively, try to get deployment from pod labels (common convention)
+    if pod.metadata.labels and 'app' in pod.metadata.labels:
+        return pod.metadata.labels['app']
+        
+    return None
+
 def restart_deploy(deploy=[], replicated_deploy=[], exclude=[], regions=[]):
-    print("start restart deploy")
     ts = time.time()
     config.load_kube_config()
     api_instance = client.AppsV1Api()
@@ -443,8 +557,6 @@ def restart_deploy(deploy=[], replicated_deploy=[], exclude=[], regions=[]):
                 run_command(f"kubectl rollout restart deploy {deployment.metadata.name} ")
     except client.ApiException as e:
         print("Exception when calling AppsV1Api->list_namespaced_deployment: %s\n" % e)
-        
-    print(f"restart deploy is done, duration: {time.time() - ts}")
 
 def add_latency_rules(src_host, interface, dst_node_ip, delay):
     if delay == 0:

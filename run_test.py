@@ -36,7 +36,7 @@ CLOUDLAB_CONFIG_XML="/users/gangmuk/projects/slate-benchmark/config.xml"
 network_interface = "eno1"
 
 output_dir = "ASDF-ASDF"
-FULL_TEST_PATH=False
+FULL_TEST_PATH=True
 
 def start_node_cpu_monitoring(region_to_node, duration, filename, username="gangmuk"):
     print("Starting node CPU monitoring...")
@@ -437,8 +437,8 @@ def smooth_rps(dataframe, interval=10):
             new_row = {
                 "west_rps": round((1 - t) * start_row['west_rps'] + t * end_row['west_rps']),
                 "east_rps": round((1 - t) * start_row['east_rps'] + t * end_row['east_rps']),
-                # "central_rps": round((1 - t) * start_row['central_rps'] + t * end_row['central_rps']),
-                # "south_rps": round((1 - t) * start_row['south_rps'] + t * end_row['south_rps']),
+                "central_rps": round((1 - t) * start_row['central_rps'] + t * end_row['central_rps']),
+                "south_rps": round((1 - t) * start_row['south_rps'] + t * end_row['south_rps']),
                 "request_type": start_row['request_type'],
                 "duration": int(interval),
                 "total_rps": round((1 - t) * start_row['total_rps'] + t * end_row['total_rps'])
@@ -448,14 +448,13 @@ def smooth_rps(dataframe, interval=10):
     smoothed_data.append({
         "west_rps": int(last_row['west_rps']),
         "east_rps": int(last_row['east_rps']),
-        # "central_rps": int(last_row['central_rps']),
-        # "south_rps": int(last_row['south_rps']),
+        "central_rps": int(last_row['central_rps']),
+        "south_rps": int(last_row['south_rps']),
         "request_type": last_row['request_type'],
         "duration": int(interval),
         "total_rps": int(last_row['total_rps'])
     })
     return pd.DataFrame(smoothed_data)
-
 
 
 def set_cpu_limit_for_a_cluster(cpu_limit, cluster):
@@ -515,9 +514,6 @@ def remove_cpu_limits():
         )
 
 
-
-
-
 def main():
     argparser = argparse.ArgumentParser(description="Run a benchmark experiment")
     argparser.add_argument("--dir_name", type=str, help="Directory name to store the experiment results", required=True)
@@ -525,15 +521,23 @@ def main():
     argparser.add_argument("--victim_background_noise", type=int, default=0,help="Background noise level (in %)")
     argparser.add_argument("--degree", type=int, default=2, help="degree of the polynomial")
     argparser.add_argument("--mode", type=str, help="Mode of operation (profile or runtime)", required=True)
-    argparser.add_argument("--routing_rule", type=str, default="SLATE-with-jumping-global", help="Routing rule to apply", choices=["LOCAL", \
-                        "WATERFALL2", \
-                        "SLATE-with-jumping-local", \
-                        "SLATE-without-jumping", \
-                        "SLATE-with-jumping-global-with-optimizer-without-continuous-profiling", \
-                        "SLATE-with-jumping-global-with-optimizer-with-continuous-profiling", \
-                        "SLATE-with-jumping-global-without-optimizer-without-continuous-profiling", \
-                        "SLATE-with-jumping-global-without-optimizer-with-continuous-profiling", \
-                                    ])
+    argparser.add_argument("--routing_rule", type=str, default="SLATE-with-jumping-global", help="Routing rule to apply", choices=[\
+                                "LOCAL", \
+                                "SLATE-with-jumping-local", \
+                                "SLATE-without-jumping", \
+                                
+                                "SLATE-with-jumping-global-with-optimizer-with-continuous-profiling", \
+                                "SLATE-with-jumping-global-with-optimizer-without-continuous-profiling", \
+                                "SLATE-without-jumping-global-with-optimizer-without-continuous-profiling", \
+                                
+                                "SLATE-with-jumping-global-without-optimizer-without-continuous-profiling-init-with-multi-region-routing", \
+                                "SLATE-with-jumping-global-without-optimizer-without-continuous-profiling-init-with-optimizer", \
+                                
+                                "SLATE-without-jumping-global-with-optimizer-only-once-without-continuous-profiling", \
+                                "SLATE-without-jumping-global-without-optimizer-without-continuous-profiling-init-multi-region-routing-only-once", \
+                                
+                                "WATERFALL2", \
+                                ])
     argparser.add_argument("--duration",    type=int, default=10, required=True)
     argparser.add_argument("--req_type", type=str, default="checkoutcart", help="Request type to test")
     argparser.add_argument("--slatelog", type=str, help="Path to the slatelog file", required=True)
@@ -667,7 +671,7 @@ def main():
     # rps_df["total_rps"] = rps_df["west_rps"] + rps_df["east_rps"] + rps_df["central_rps"] + rps_df["south_rps"]
     # rps_df.to_csv("rps.csv", index=False)
     
-    igw_host = utils.run_command("kubectl get nodes | grep 'node3' | awk '{print $1}'")[1]
+    igw_host = utils.run_command("kubectl get nodes | grep 'node5' | awk '{print $1}'")[1]
     igw_nodeport = utils.run_command("kubectl get svc istio-ingressgateway -n istio-system -o=json | jq '.spec.ports[] | select(.name==\"http2\") | .nodePort'")[1]
     experiment_endpoint = f"http://{igw_host}:{igw_nodeport}"
     
@@ -675,7 +679,13 @@ def main():
         temp_df = rps_df[rps_df["request_type"] == request_type]
         for region in ["west", "east", "central", "south"]:
             if f"{region}_rps" in temp_df and temp_df[f"{region}_rps"].sum() > 0:
-                experiment.add_workload(utils.Workload(cluster=region, req_type=request_type, rps=temp_df[f"{region}_rps"].to_list(), duration=temp_df["duration"].to_list(), method=method, path=onlineboutique_path[request_type], endpoint=experiment_endpoint))
+                experiment.add_workload(\
+                    utils.Workload(cluster=region, \
+                                    req_type=request_type, \
+                                    rps=temp_df[f"{region}_rps"].to_list(), \
+                                    duration=temp_df["duration"].to_list(), \
+                                    method=method, path=onlineboutique_path[request_type], \
+                                    endpoint=experiment_endpoint))
                 print(f"Adding workload for {region} with rps: {temp_df[f'{region}_rps'].to_list()} and duration: {temp_df['duration'].to_list()}")
         # if "west_rps" in temp_df and temp_df["west_rps"].sum() > 0:
         #     experiment.add_workload(utils.Workload(cluster="west", req_type=request_type, rps=temp_df["west_rps"].to_list(), duration=temp_df["duration"].to_list(), method=method, path=onlineboutique_path[request_type], endpoint=experiment_endpoint))
@@ -685,7 +695,7 @@ def main():
         #     experiment.add_workload(utils.Workload(cluster="central", req_type=request_type, rps=temp_df["central_rps"].to_list(), duration=temp_df["duration"].to_list(), method=method, path=onlineboutique_path[request_type], endpoint=experiment_endpoint))
         # if "south_rps" in temp_df and temp_df["south_rps"].sum() > 0:
         #     experiment.add_workload(utils.Workload(cluster="south", req_type=request_type, rps=temp_df["south_rps"].to_list(), duration=temp_df["duration"].to_list(), method=method, path=onlineboutique_path[request_type], endpoint=experiment_endpoint))
-        
+    
     # west_rps_str = ",".join(map(str, west_rps))
     # east_rps_str = ",".join(map(str, east_rps))
     # central_rps_str = ",".join(map(str, central_rps))
@@ -702,34 +712,34 @@ def main():
     region_to_node = {
         "us-west-1": ["node1"],
         "us-east-1": ["node2"],
-        # "us-central-1": ["node3"],
-        # "us-south-1": ["node4"]
+        "us-central-1": ["node3"],
+        "us-south-1": ["node4"]
     }
     region_latencies = {
         "us-west-1": {
             "us-west-1": 0,
-            # "us-central-1": 15,
-            # "us-south-1": 20,
+            "us-central-1": 15,
+            "us-south-1": 20,
             "us-east-1": 33,
         },
         "us-east-1": {
             "us-east-1": 0,
             "us-west-1": 33, ##### 33
-            # "us-south-1": 15,
-            # "us-central-1": 20,
+            "us-south-1": 15,
+            "us-central-1": 20,
         },
-        # "us-central-1": {
-        #     "us-central-1": 0,
-        #     "us-west-1": 15, ###### 15
-        #     "us-south-1": 10,
-        #     "us-east-1": 20,
-        # }, 
-        # "us-south-1": {
-        #     "us-south-1": 0,
-        #     "us-central-1": 10,
-        #     "us-west-1": 20, ###### 20
-        #     "us-east-1": 15,
-        # }
+        "us-central-1": {
+            "us-central-1": 0,
+            "us-west-1": 15, ###### 15
+            "us-south-1": 10,
+            "us-east-1": 20,
+        }, 
+        "us-south-1": {
+            "us-south-1": 0,
+            "us-central-1": 10,
+            "us-west-1": 20, ###### 20
+            "us-east-1": 15,
+        }
     }
     
     node_to_region = {}
@@ -764,7 +774,9 @@ def main():
             CONFIG[f"inter_cluster_latency,{dst_region},{src_region}"] = inter_cluster_latency[src_node][dst_node]
     for experiment in experiment_list:
         for routing_rule in routing_rule_list:
-            output_dir = f"{args.dir_name}/{experiment.name}/bg{args.background_noise}/{routing_rule}-cap-{args.capacity}-{random.randint(0, 1000)}"
+            # for (point, delay, targetregion) in inject_delay:
+            delay_str = f"{inject_delay[0][1]}-{inject_delay[0][2]}"
+            output_dir = f"./{args.dir_name}/{experiment.name}/bg{args.background_noise}/{routing_rule}-delay-{delay_str}cap-{args.capacity}-{random.randint(0, 1000)}"
             if FULL_TEST_PATH:
                 if args.background_noise > 0:
                     utils.start_background_noise(node_dict, args.background_noise, victimize_node="node1", victimize_cpu=args.background_noise)
@@ -779,8 +791,6 @@ def main():
             output_dir = utils.create_dir(output_dir)
             print(f"**** output_dir: {output_dir}")
             rps_df.to_csv(f"{output_dir}/workload.csv", index=False)
-            utils.create_dir(f"{output_dir}/resource_alloc")
-            utils.create_dir(f"{output_dir}/resource_usage")
             for workload in experiment.workloads:
                 CONFIG[f"RPS,{workload.cluster},{workload.req_type}"] = ",".join(map(str, workload.rps))
             CONFIG["benchmark_name"] = benchmark_name
@@ -814,19 +824,13 @@ def main():
                 utils.kubectl_cp_from_host_to_slate_controller_pod(args.coefficient_file, "/app/coef.csv")
                 utils.kubectl_cp_from_host_to_slate_controller_pod(args.e2e_coef_file, "/app/e2e-coef.csv")
             utils.kubectl_cp_from_host_to_slate_controller_pod(args.slatelog, "/app/trace.csv")
-                
             print(f"starting experiment at {datetime.now()}, expected to finish at {datetime.now() + timedelta(seconds=sum(workload.duration))}")
-            
-            ###################################################################3
-            ## init only
-            # if args.mode == "runtime":
-            #     for (point, delay, targetregion) in inject_delay:
-            #         if int(delay) == 0:
-            #             delay = 1
-            #         call_with_delay(point, update_virtualservice_latency_k8s, "checkoutservice-vs", "default", f"{delay}ms", targetregion)
-            #         print(f"update_virtualservice_latency_k8s, Delay injected: {delay}ms at {point} seconds")
-            ###################################################################3
-            
+            if args.mode == "runtime":
+                for (point, delay, targetregion) in inject_delay:
+                    if int(delay) == 0:
+                        delay = 1
+                    call_with_delay(point, update_virtualservice_latency_k8s, "checkoutservice-vs", "default", f"{delay}ms", targetregion)
+                    print(f"update_virtualservice_latency_k8s, Delay injected: {delay}ms at {point} seconds")
             start_node_cpu_monitoring(region_to_node, sum(workload.duration), f"{output_dir}/node_cpu_util.pdf")
             if args.cpu_limit != "":
                 print(f"args.cpu_limit: {args.cpu_limit}")
@@ -852,13 +856,86 @@ def main():
             
             #####################################################################################
             #####################################################################################
+            # with concurrent.futures.ThreadPoolExecutor() as executor:
+            #     future_list = list()
+            #     for workload in experiment.workloads:
+            #         future_list.append(executor.submit(utils.run_vegeta, workload, output_dir))
+            #         # future_list.append(executor.submit(utils.run_newer_generation_client, workload, output_dir))
+            #     for future in concurrent.futures.as_completed(future_list):
+            #         print(future.result())
+            # print("All clients have completed.")
+            #####################################################################################
+            #####################################################################################
+            workloads_by_type = {}
+            for workload in experiment.workloads:
+                req_type = workload.req_type
+                if req_type not in workloads_by_type:
+                    workloads_by_type[req_type] = []
+                workloads_by_type[req_type].append(workload)
+
+            print(f"Found {len(workloads_by_type)} request types: {', '.join(workloads_by_type.keys())}")
+
+            # Function to run all workloads of a particular request type
+            def run_request_type_workloads(req_type, workloads):
+                print(f"Processing request type '{req_type}' with {len(workloads)} workloads")
+                
+                # This assumes workloads are already in the order they should be executed
+                # and that workloads for the same line (same regions) are grouped together
+                
+                # Group workloads by their position in the list
+                # Assuming workloads from the same line are consecutive in the list
+                workload_groups = []
+                current_group = []
+                current_duration = None
+                
+                for workload in workloads:
+                    # If this is a new group or the duration changes, start a new group
+                    if not current_group or workload.duration != current_duration:
+                        if current_group:
+                            workload_groups.append(current_group)
+                        current_group = [workload]
+                        current_duration = workload.duration
+                    else:
+                        current_group.append(workload)
+                
+                # Add the last group if it exists
+                if current_group:
+                    workload_groups.append(current_group)
+                
+                # Process each group sequentially
+                results = []
+                for i, group in enumerate(workload_groups):
+                    print(f"Processing line group {i+1}/{len(workload_groups)} for '{req_type}' with {len(group)} regions")
+                    
+                    # Run all workloads in this group concurrently
+                    group_futures = []
+                    with concurrent.futures.ThreadPoolExecutor() as group_executor:
+                        for workload in group:
+                            group_future = group_executor.submit(utils.run_vegeta, workload, output_dir)
+                            group_futures.append(group_future)
+                        
+                        # Wait for all workloads in this group to complete
+                        for group_future in concurrent.futures.as_completed(group_futures):
+                            result = group_future.result()
+                            results.append(result)
+                    
+                    print(f"Completed line group {i+1}/{len(workload_groups)} for '{req_type}'")
+                
+                return f"Completed all workloads for request type '{req_type}'"
+
+            # Execute different request types in parallel
             with concurrent.futures.ThreadPoolExecutor() as executor:
-                future_list = list()
-                for workload in experiment.workloads:
-                    future_list.append(executor.submit(utils.run_vegeta, workload, output_dir))
-                    # future_list.append(executor.submit(utils.run_newer_generation_client, workload, output_dir))
-                for future in concurrent.futures.as_completed(future_list):
-                    print(future.result())
+                futures = []
+                for req_type, workloads in workloads_by_type.items():
+                    future = executor.submit(run_request_type_workloads, req_type, workloads)
+                    futures.append(future)
+                
+                for future in concurrent.futures.as_completed(futures):
+                    try:
+                        print(future.result())
+                    except Exception as e:
+                        print(f"Error executing workloads: {e}")
+
             print("All clients have completed.")
             #####################################################################################
             #####################################################################################
@@ -872,9 +949,9 @@ def main():
                 utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host, required=False)
                 # utils.run_command(f"python plot_rps.py {dst_in_host}")
             
-            print(f"output_dir: {output_dir}")
-            if os.path.exists(os.path.join(output_dir, "latency_curve")):
-                utils.run_command(f"rm -r {output_dir}/latency_curve", required=False)
+            # print(f"output_dir: {output_dir}")
+            # if os.path.exists(os.path.join(output_dir, "latency_curve")):
+            #     utils.run_command(f"rm -r {output_dir}/latency_curve", required=False)
             src_directory_in_pod = "/app/poly"
             dst_directory_in_host = f"{output_dir}/latency_curve"
             os.makedirs(dst_directory_in_host, exist_ok=True)
@@ -899,7 +976,7 @@ def main():
                         dst_in_host = f"{output_dir}/{routing_rule}-{file}"
                         utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
                     # if routing_rule == "SLATE-with-jumping-global":
-                    flist = ["hillclimbing_distribution_history.csv", "global_hillclimbing_distribution_history.csv", "jumping_routing_history.csv", "jumping_latency.csv", "region_jumping_latency.csv", "continuously_profiled_traces.csv", "continuous_coef_dict.csv", "body_traces.csv", "body.csv", "body2.csv", "body3.csv"]
+                    flist = ["jumping_routing_history.csv", "jumping_latency.csv", "region_jumping_latency.csv", "continuous_coef_dict.csv"]
                     for file in flist:
                         src_in_pod = f"/app/{file}"
                         dst_in_host = f"{output_dir}/{file}"
@@ -908,41 +985,32 @@ def main():
                 print(f"args.mode: {args.mode} is not supported")
                 assert False
                 
-            src_in_pod = "/app/df_incomplete_traces-1.csv"
-            dst_in_host = f"{output_dir}/df_incomplete_traces-1.csv"
-            utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
-            src_in_pod = "/app/df_incomplete_traces-2.csv"
-            dst_in_host = f"{output_dir}/df_incomplete_traces-2.csv"
-            utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
-            src_in_pod = "/app/df_incomplete_traces-2.csv"
-            dst_in_host = f"{output_dir}/df_new_traces.csv"
-            utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
-            src_in_pod = "/app/body.csv"
-            dst_in_host = f"{output_dir}/body.csv"
-            utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
-            src_in_pod = "/app/temp.csv"
-            dst_in_host = f"{output_dir}/temp.csv"
-            utils.kubectl_cp_from_slate_controller_to_host(src_in_pod, dst_in_host)
-            
-            
             # if routing_rule.startswith("SLATE-with-jumping") and os.path.exists(f"{output_dir}/SLATE-with-jumping-global-jumping_routing_history.csv"):
-            utils.run_command(f"python {os.getcwd()}/plot_script/fast_plot.py --data_dir {output_dir}", required=False)
+            # utils.run_command(f"python {os.getcwd()}/plot_script/fast_plot.py --data_dir {output_dir}", required=False)
             utils.run_command(f"python {os.getcwd()}/plot_script/plot-vegeta.py {output_dir}", required=False)
             utils.run_command(f"python plot_script/plot_gc_jumping.py {output_dir}/jumping_routing_history.csv {output_dir}/jumping_latency.csv {output_dir}/routing_rule_plots",required=False)
-            utils.run_command(f"python plot_script/plot_region_latency.py {output_dir}/region_jumping_latency.csv {output_dir}/region_jumping_latency.pdf",required=False)
+            # utils.run_command(f"python plot_script/plot_region_latency.py {output_dir}/region_jumping_latency.csv {output_dir}/region_jumping_latency.pdf",required=False)
             utils.run_command(f"python plot_script/plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/endpoint_rps.pdf",required=False)
             utils.run_command(f"python plot_script/plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/sslateingress_endpoint_rps.pdf sslateingress",required=False)
             utils.run_command(f"python plot_script/plot_endpoint_rps.py {output_dir}/{routing_rule}-endpoint_rps_history.csv {output_dir}/frontend_endpoint_rps.pdf frontend",required=False)
 
-            set_cpu_limit_us_west_1.remove_cpu_limits_from_deployments()
+            # set_cpu_limit_us_west_1.remove_cpu_limits_from_deployments()
         
             # savelogs(output_dir, services=['currencyservice', 'emailservice', 'cartservice', 'shippingservice', 'paymentservice', 'productcatalogservice','recommendationservice','frontend','sslateingress','checkoutservice'], regions=["us-central-1"])
             save_controller_logs(output_dir)
             
             time.sleep(10)
-            utils.run_command(f"mv {output_dir} /dev/shm/")
-            # utils.restart_deploy(deploy=["slate-controller", "sslateingress-us-west-1", "sslateingress-us-east-1", "sslateingress-us-central-1", "sslateingress-us-south-1", "frontend-us-west-1", "frontend-us-east-1", "frontend-us-central-1", "frontend-us-south-1"])
-            utils.restart_deploy(deploy=["slate-controller", "sslateingress-us-west-1", "sslateingress-us-east-1", "sslateingress-us-south-1", "frontend-us-west-1", "frontend-us-east-1", "frontend-us-south-1"])
+            utils.run_command(f"cp -r {output_dir} /dev/shm/")
+            utils.restart_deploy(deploy=["slate-controller", \
+                                        "sslateingress-us-west-1", \
+                                        "sslateingress-us-east-1", \
+                                        "sslateingress-us-central-1", \
+                                        "sslateingress-us-south-1", \
+                                        "frontend-us-west-1", \
+                                        "frontend-us-east-1", \
+                                        "frontend-us-central-1", \
+                                        "frontend-us-south-1"])
+            
             print(f"output_dir: {output_dir}")
     for node in node_dict:
         utils.run_command(f"ssh gangmuk@{node_dict[node]['hostname']} sudo tc qdisc del dev eno1 root", required=False, print_error=False)

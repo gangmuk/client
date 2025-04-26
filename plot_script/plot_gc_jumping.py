@@ -64,7 +64,7 @@ def plot_weight_vs_counter(df, latency_df, output_pdf, src_cid, request_type, ti
     ax2.set_ylabel('Latency')
     ax2.legend(loc='upper right', bbox_to_anchor=(1.15, 1))
 
-    plt.title(f'Time vs Weight for {src_cid} [{request_type}] (Ruleset {title_suffix})')
+    plt.title(f'{src_cid} [{request_type}] (Ruleset {title_suffix})')
     plt.tight_layout()
     plt.savefig(output_pdf, bbox_inches='tight')
     plt.close()
