@@ -17,6 +17,9 @@ import signal
 import traceback
 import yaml
 import json
+import threading
+import csv
+import matplotlib.pyplot as plt
 
 def run_command_and_print(command, required=True, print_error=True, nonblock=False):
     """Run shell command and return its output, with real-time stdout streaming"""
@@ -65,7 +68,6 @@ def run_command_and_print(command, required=True, print_error=True, nonblock=Fal
         else:
             return False, e.output.decode('utf-8').strip()
 
-import subprocess
 
 def run_command(command, required=True, print_error=True, nonblock=False):
     """Run shell command and return its output or process handle.
@@ -782,7 +784,7 @@ class Workload:
         print(f"rps: {self.rps}")
         print(f"duration: {self.duration}s")
         
-import yaml
+
 
 def write_client_yaml_with_config(default_yaml_file: str, yaml_file: str, workload, output_dir: str):
     with open(default_yaml_file, 'r') as file:
@@ -889,3 +891,4 @@ def run_vegeta_go(workload, output_dir, start_id=0, num_ids=1, query_param="reco
 
         print("Running:", " ".join(cmd))
         subprocess.run(cmd, check=True)
+        

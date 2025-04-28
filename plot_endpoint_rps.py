@@ -22,7 +22,7 @@ def plot_rps(input_csv, output_pdf, service_filter=None, endpoint_filter=None):
     df['region_endpoint'] = df['region'] + " - " + df['endpoint']
     
     # Pivot the data for plotting
-    pivot_df = df.pivot(index='counter', columns='region_endpoint', values='rps')
+    pivot_df = df.pivot_table(index='counter', columns='region_endpoint', values='rps', aggfunc='mean')
     
     # Plot the data
     plt.figure(figsize=(12, 8))

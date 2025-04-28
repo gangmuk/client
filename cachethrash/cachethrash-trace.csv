@@ -1,0 +1,11 @@
+us-central-1,record-service,GET,/getRecord,000094fe47b52cee55a41569fd1691fa,d5f2ce979d52194f,55a41569fd1691fa,1.0,3.0,2.0,2.0,2.0,-1,record-service@GET@/getRecord:0|,record-service@GET@/getRecord:701|
+us-central-1,sslateingress,GET,/getRecord,000094fe47b52cee55a41569fd1691fa,55a41569fd1691fa,nan,0.0,4.0,4.0,2.0,4.0,-1,sslateingress@GET@/getRecord:0|,sslateingress@GET@/getRecord:701|
+
+us-west-1,record-service,GET,/getRecord,000094fe47b52cee55a41569fd1691fa,d5f2ce979d52194f,55a41569fd1691fa,1.0,3.0,2.0,2.0,2.0,-1,record-service@GET@/getRecord:0|,record-service@GET@/getRecord:701|
+us-west-1,sslateingress,GET,/getRecord,000094fe47b52cee55a41569fd1691fa,55a41569fd1691fa,nan,0.0,4.0,4.0,2.0,4.0,-1,sslateingress@GET@/getRecord:0|,sslateingress@GET@/getRecord:701|
+
+us-east-1,record-service,GET,/getRecord,000094fe47b52cee55a41569fd1691fa,d5f2ce979d52194f,55a41569fd1691fa,1.0,3.0,2.0,2.0,2.0,-1,record-service@GET@/getRecord:0|,record-service@GET@/getRecord:701|
+us-east-1,sslateingress,GET,/getRecord,000094fe47b52cee55a41569fd1691fa,55a41569fd1691fa,nan,0.0,4.0,4.0,2.0,4.0,-1,sslateingress@GET@/getRecord:0|,sslateingress@GET@/getRecord:701|
+
+us-south-1,record-service,GET,/getRecord,000094fe47b52cee55a41569fd1691fa,d5f2ce979d52194f,55a41569fd1691fa,1.0,3.0,2.0,2.0,2.0,-1,record-service@GET@/getRecord:0|,record-service@GET@/getRecord:701|
+us-south-1,sslateingress,GET,/getRecord,000094fe47b52cee55a41569fd1691fa,55a41569fd1691fa,nan,0.0,4.0,4.0,2.0,4.0,-1,sslateingress@GET@/getRecord:0|,sslateingress@GET@/getRecord:701|
